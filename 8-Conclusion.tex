@@ -1,0 +1,30 @@
+\Chapter{Conclusion and future work}\label{sec:Conclusion}
+
+
+\section{Conclusion}
+
+In this thesis, we tackled few contributions that are applying some techniques on Q-matrices and assessing model fit with synthetic vs. real data which is the main contribution of this research . In this chapter, we summarize the results, conclusions, and possible future works.
+
+Let us return to the conjecture that the comparison of real vs.\ synthetic data can help determine whether a specific skill model corresponds to the ground truth of some data set.  This is a complex question but some hints are given in the results.  
+
+A clear finding is that the synthetic data sets have very distinct performance patterns, showing sharp differences across models.  In that respect, synthetic data do have a distinct patterns or specifically distinct positions in performance space.  And none of the real data sets display the sharp differences found in all but one of the data sets, namely the data generated from the NMF additive model.  
+
+The Fraction data sets do display a similar pattern of performances across different subsets of items, different number of skills (latent factors), and different variants of the models as expressed by variations in the Q-matrices. Only when the Q-matrix has the property of a single skill per item do we observe a very different performance vector for the models that depend on the Q-matrix (NMF conjunctive, DINA, NMF additive, and DINO).  The other models are not affected (expected, POKS and IRT).  Therefore, in the domain of skills modeling, we find evidence that data from a common source does have correlated performance vectors as long as the models do not have large formal differences.
+
+%That said, even though the Vomlel data is within the same domain as the Fraction data, namely arithmetic, the performance signature of the Q-matrix dependent models display two very different patterns.  This could be attributed to the Q-matrices involved (although both are multiple skills and therefore the difference is not due to the formal property of single skill per item), but other factors could also be involved such as sensitivity to other variables.
+
+%Therefore, we do find evidence to support the claim that the relative performance of the different skills modeling approaches create signatures over data sets.  And although the current findings are still exploratory and require further investigations, the evidence so far yields some confidence that these signatures carry the potential to provide evidence about the ground truth.
+
+%The other findings of this research is the stability of the signature over different data generation parameters. The result of changing these parameters show that the pattern stays still over different parameters for datasets with same skills assessment model. Some variables such as sample size do not have tangible effect on the signature but some are shifting the signature upward or downward. In general the pattern stays almost correlated to the basic signature for a model. To make a comprehensive comparison we introduced a measure of similarity which is finding the nearest neighbor in the space of performances based on correlation. The result shows that the those dataset (among datasets with different set of data generation parameters) are very highly correlated and those that share basic concepts such as DINA and NMF conjunctive also shows good correlation over their performances since they share a conjunctive model of Q-matrix in their model. Therefore, a dataset can be described with a model and a set of contextual parameters.
+
+%To summarize the difference between our experiment and \cite{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \cite{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics.
+
+%The most important finding of this research is that the best performer is not necessarily the best fit for a dataset. Our results on the accuracy of two methods on the classification of dataset to their underlying model shows that on different condition of data generation parameters only $73\%$ of the cases are correctly classified based on the best performer model. Whiles considering the nearest neighbor signature on the basis of correlation results in $90\%$ of correct classification. This shows the effect of data generation parameters on the best performer and also the stability of the signature on different sets of data generation parameters.
+
+
+
+\section{Future Work}
+
+%Further studies with real and simulated data are clearly needed.  For example, we would like to know what is the mapping accuracy degradation when an incorrect number of skills are modelled.  And, naturally, a study with real data is necessary to establish if the approach is reliable in practice.
+
+%The other contribution on this field is to consider different items with different models in a test result. Also there are different methods to generate the synthetic datasets which could effect the signature. In general we can extend this method to other fields of study. Defining some predictors and testing the predictive performance of a dataset with different variables can result this signature which can assess a model fit.

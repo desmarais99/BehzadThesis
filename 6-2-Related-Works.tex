@@ -1,0 +1,133 @@
+\Chapter{MODEL FITTING AND SIMULATED DATA}\label{sec:RelatedWorks}
+
+\section{Model Fitting}
+Model fitting is the task of selecting a statistical model for a given data from a set of candidate models. Both data and the set of candidate models can involve the design of experiments that the data collected is well-suited to the problem of model selection or the candidate models best describe the data among a large number of models. Generally Model fitting consists three steps :
+\begin{itemize}
+\item Prediction : that takes a set of parameters and returns a predicted dataset 
+\item Error function : that gives a measure to represent the difference between the data and the model's prediction for a given set of parameters 
+\item Minimizing the error function : finding a set of parameters that minimize the error function 
+\end{itemize}
+The best fit is the model that is most likely to have generated the data.
+
+\subsection{Approaches}
+
+The simplest way to address the first step is providing the predictive performance accuracy which is a basis for comparing models. Models with higher predictive accuracy yield more useful predictions and are more likely to provide an accurate description of the ground truth. Cross validation is also a straight forward and easy to understand approach for estimating predictive performance. In this research we used 10 fold cross validation to get the predictive accuracy.
+
+\subsection{Measures}
+There are different measures to represent the degree of similarity in step two and this is usually either the sums of squared error (SSE) or maximum likelihood. Model fitting is also called as an optimization method where each model in the set of candidate model optimized the error function (usually likelihood function) to find the best fitting model.
+
+Other measures such as Euclidean distance, cosine and correlation can also be used as a error function to compare the data and the model's prediction. The best fitting parameters can depend strongly on your choice of error function. In our study we use both 0/1 loss function as an error function and correlation as a measure of similarity.
+
+The maximum likelihood function selects a set of values for the model parameters that maximizes the likelihood function which also maximizes the agreement of the selected model with the observed data. Likelihood function is also called inverse probability which is a function of the parameters of a statistical model. This allows us to fit many different types of models.
+%“Probability is used when describing a function of the outcome given a fixed parameter value. For example, if a coin is flipped 10 times and it is a fair coin, what is the probability of it landing heads-up every time? Likelihood is used when describing a function of a parameter given an outcome. For example, if a coin is flipped 10 times and it has landed heads-up 10 times, what is the likelihood that the coin is fair?”
+
+In some context the variables can be hold constant while fitting. In this case the fitting function should preform with a subset of parameters. For example in the context of educational data mining the Q-matrix is known as a parameter which is defined by an expert. Suppose that you know the Q-matrix and we just want to let the other parameters (such as skills mastery matrix) vary. We do this by only listing ``skills mastery matrix'' as a free parameter to fit.
+
+The notion of \textit{goodness of fit} represents how well a model can account for observed data.  For example, student test results can be accounted for by the ability of each student, and by the difficulty of each question, its discriminative factor, and by a guessing factor.  This is the basis of the 3-parameter logistic model IRT-3PL \cite{bakerKim2004}.  Given some training data to estimate the model parameters, and a partial observation of a test data set, held out responses can be ``predicted''.  The difference between the predicted and the actual responses represents the residual error, which is considered a measure of the goodness of fit.  And the lower the goodness of fit, the closer is the model considered to the ground thruth.
+
+A number of factors can affect the amount of residual error.  The capacity of an algorithm to estimate the model parameters for a given data set is often critical.  Local optima, biases, and large variance can result in estimates that are far from the best ones~\cite{hastie2005elements}.  Models themselves can yield widely different performances under different circumstances.  Some are more robust under small data sets.  Typically, complex models will require large data sets, but can sometimes lead to much better performance than simpler ones if they are fit for the data.
+
+For these reasons, a model may be ``fit to the data'', and yet it may underperform compared to others when residual error is used as the sole indicator of the goodness of fit.  The residual error is always measured for a given data sample, and to obtain a reliable estimate of the goodness of fit, data samples that cover the space of factors that can affect parameter estimates and model performances would need to be gathered.  Oftentimes this is impractical.
+
+
+\subsection{Dynamic vs. static data}
+
+The knowledge tracing model \citep{corbett1994knowledge} is one of the best known models that has been widely used to model student knowledge and learning over time. It has four parameters where two of them (prior and learn) are knowledge parameters for each skill. This is a standard model of knowledge tracing that consider the fact that students are learning over time. Tensor rank decomposition is also a general model that is used a time-based datasets. In multilinear algebra, the tensor rank decomposition may be regarded as a generalization of the matrix singular value decomposition (SVD) to tensors. SVD is a well known model in EDM where has been used in skill assessment approaches \citep{Beheshti2012Numbers}.
+
+The difference between tensor based methods and static methods is in the complexity of them. Tensor based approaches like BKT and canonical polyadic decomposition (CPD) are modeling a dynamic learning environment where static methods such as POKS, NMF, DINA/DINO and IRT are modeling a snapshot of student test performance. All data sets in this research are considered \textit{static} in the sense that they represent a snapshot of student test performance data.  This corresponds to the assumption that the student has not mastered new skills during the process of assessment, as we would expect from data from learning environments.  This assumption is common to all models considered for this study.
+
+
+The following sections are describing two recent works that have been done for model fitting in EDM:
+
+
+
+\section{On the faithfulness of simulated student performance data}
+
+Michel Desmarais in \citep{Desmarais2010} introduced an approach to investigate the faithfulness of different methods of generating simulated data by comparing the predictive performance of POKS over real vs. simulated data. The parameters for simulated datasets are set to represent those of the real data. The faithfulness of the synthetic data is dependent to its performance. The more similar is the performance of real vs. simulated data is, the more faithful it is to represent the real data.
+
+In general there are three approaches to validate the accuracy of a cognitive diagnostic model without a direct measures of skills mastery:
+
+\begin{itemize}
+\item Indirect and independent measures of skills mastery: in these methods some expert defined skills mastery mappings are created based on the students answers to a test. Vomlel \citep{vomlel:2004} and De La Torre \citep{delaTorre2008}asked experts to define these matrices for two datasets. One of the weakness of this approach is that different experts may introduce different skills or different mappings.
+
+\item Predict based on observed items only: This method does not try to predict skills mastery mappings but it predicts based on a observed set of items. In our research we are using this method as a part of our methodology.
+
+\item Generating simulated data : This is the method that Desmarais \citep{Desmarais2010} used in his work. They used a set of predefined parameters to generated a result matrix based on a specific model.
+
+\end{itemize}
+\subsection{Simulated data models}
+
+In \citep{Desmarais2010} they used POKS as the student model which is a Bayesian approach to cognitive modeling. They take the closest performance of this model over a real vs. synthetic data. For generating synthetic datasets they used four models:
+
+\begin{itemize}
+\item Expected outcome based on Marginal Probabilities: This is the expected value for the probability of item outcome which is a function of marginal probabilities of item success rate and student scores.
+\item Q-matrix Sampling: In their experiment, conjunctive model of Q-matrix is used where skills of an item must be involved in order to correctly answer that item.
+\item Covariance Matrix:Synthetic test result is generated based on a technique that preserve covariance (correlation) among items. This method is usually used in Monte Carlo simulations. In this particular study this method reflects correlation among student response patterns that derived from items with similar difficulties and same skills set.
+\item Item Response Theory: they used $2$ parameters logistic regression IRT model to generate simulated data.
+
+\end{itemize}
+
+\subsection{methodology}
+Once the simulated data is generated base on the four models they \citep{Desmarais2010} train POKS student model over both real and synthetic datasets. For validation of the accuracy of the simulated dataset they compare the predictive performance across each condition. 
+
+\subsection{Real Datasets}
+It is important to choose a good dataset for this simulation, they used two datasets which are in math and one of them has small number of samples and the other one has big number of items. The details of these datasets are in bellow :
+
+\begin{center}
+
+\begin{tabular}{|c|c|c|c|c|}
+\hline 
+\multirow{2}{*}{Dataset} & \multicolumn{2}{c|}{Number of} & Average & Item\tabularnewline
+\cline{2-3} 
+ & Items & Students & Success rate & Success rate Variance\tabularnewline
+\hline 
+Unix & 34 & 48 & 53\% & 1/34 to 34/34\tabularnewline
+\hline 
+College Math & 59 & 250 & 57\% & 9/59 to 55/59\tabularnewline
+\hline 
+\end{tabular}
+
+\end{center}
+
+\subsection{discussion}
+
+First let us summarize their conclusions and then propose our discussion. The following items are their conclusion :
+\begin{itemize}
+\item This experiment need to be expanded since it was based on a single student model which is POKS and also other models of simulated dataset should also be used in this evaluation.
+\item The expected marginal probability do not appropriately reflect the underlying ground truth of the real datasets
+\item For the first dataset (\textit{Unix}) IRT was the best representative for the underlying structure of the real data where the predictive performance of real data was $77\%$ and IRT generated data was $80\%$
+\item For College math data, the synthetic data generated based on the \textit{covariance} method shows a performance which is closer to the performance of real data than others. The accuracy gain is $40\%$ for real data when it is $37\%$ for covariance generated data.
+
+\item Validating the faithfulness of student models requires assessing parameters of those models to replicate real data characteristics.
+
+\item simulated data from the 2 parameter IRT model can appropriately reflect some dataset characteristics but not with equal faithfulness for all datasets.
+ 
+\end{itemize}
+
+In this thesis we use 7 student models for generating datasets and also measuring the predictive performances that include range of models from zero skills to multi-skills. Somehow our work can be an extension to \citep{Desmarais2010}. Obviously one of the reasons that  IRT generated data shows a good similarity with real data performance is that the performances are over POKS model which shows closest performance to POKS model(The details will be discussed later in \ref{sec:SIGNATURE}) where the other models are linear and multi-skills. 
+
+%Not sure to put this : The accuracy gain that was achieved from college math data was considerably low, in this sense that we can not compare the results of real vs. simulated data. Because the reason for this low gain can be an inappropriate model to test the predictive performance. So we can also conclude that the underlying structure of College math is not even POKS since it showed low gain. Therefore the similarity in accuracy gain can be a good measure when the gain is considerably high.
+
+To summarize the difference between our experiment and \citep{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \citep{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics.
+
+\section{simulated data to reveal the proximity of a model to reality}
+
+The next recent work \citep{Rosenberg2015} is about distinguishing between a synthetic data and a real data. This work is an extension to their previous work \citep{Rosenberg2014} where they used BKT model to generate synthetic dataset for two real dataset that correspond to the characteristics of the real data. They found similarities between the characteristics of the simulated and real datasets. The results indicate that it is hard to set real and synthetic datasets apart. The idea of this research \citep{Rosenberg2015} is about the goodness of a model for a real dataset which indicate that if it is easy to set real and synthetic data apart then the model is not a good representative of the real data otherwise the model is indeed authentic representation of the reality.
+
+\subsection{Methodology}
+They used Bayesian knowledge tracing model to calculate log likelihood with a grid search of four parameters : initial(prior knowledge), learning rate, Guess and slip. The two first parameters are knowledge parameters and the second two parameters are performance parameters. The simplest form of BKT which is used in this experiment considers a single set of prior knowledge and  learning rate for all students and an equal slip and guess rates for all students.
+To make a comprehensive comparison they used 42 datasets which are groups of Learning Opportunities(GLOPs) generated from the ASSISTments platform. Problem set and number of examinees vary for each dataset which consist of 4 to 13 questions answered by 105 to 777 students. In addition they created two synthetic datasets for each dataset that the parameters for synthetic datasets are set to represent those of the real data with exact same number of samples and items. 
+
+The methodology consist of four parts :
+\begin{itemize}
+\item Calculating a best fitting parameters for all 42 real datasets
+\item Creating two different simulated dataset with the founded parameters and the same number of students and items
+\item Calculating the log likelihood of the parameters space for both real and syn. datasets
+\item Comparing the log likelihood gradient of Synthetic vs. Real data
+\end{itemize}
+
+The comparison in the last step of the methodology is made by visualizing  a 2D log likelihood heatmap with two parameters plot where the other two parameters were fixed to the best fitting values. The similarity of the heatmap of the LL matrices of the real data and the two simulated data is a measure for model fitting in their experiment. The more they look similar the more the model fits the real data. They proposed two methods to address the degree of similarity:
+\begin{itemize}
+\item Euclidean distance : The Euclidean distance between the real dataset parameters and synthetic dataset parameters was compared to the distance of two synthetic dataset parameters. In conclusion if the distance of two synthetic parameters are smaller than the distance of real and synthetic parameters then the model is a goof fit for the data otherwise it can be improved.
+\item Log likelihood distance : The max log likelihood distance between the two synthetic datasets was compared to the max log likelihood distance between the real and synthetic datasets. 
+\end{itemize}
