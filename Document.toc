@@ -1,0 +1,107 @@
+\select@language {english}
+\select@language {french}
+\contentsline {compteur}{DEDICATION}{iii}{chapter*.1}
+\contentsline {compteur}{ACKNOWLEDGEMENTS}{iv}{chapter*.2}
+\contentsline {compteur}{R\IeC {\'E}SUM\IeC {\'E}}{v}{chapter*.3}
+\contentsline {compteur}{ABSTRACT}{vi}{chapter*.4}
+\select@language {english}
+\select@language {french}
+\select@language {english}
+\select@language {english}
+\contentsline {compteur}{Contents}{vii}{chapter*.5}
+\select@language {english}
+\contentsline {compteur}{LIST OF TABLES}{x}{chapter*.6}
+\contentsline {compteur}{LIST OF FIGURES}{xi}{chapter*.7}
+\select@language {english}
+\select@language {english}
+\select@language {french}
+\contentsline {compteur}{LIST OF ABBREVIATIONS}{xii}{chapter*.8}
+\select@language {english}
+\contentsline {chapter}{\numberline {1}INTRODUCTION}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Problem Definition and Challenges}{1}{section.1.1}
+\select@language {english}
+\contentsline {paragraph}{}{1}{section*.9}
+\contentsline {subsection}{\numberline {1.1.1}Model selection and goodness of fit}{2}{subsection.1.1.1}
+\contentsline {section}{\numberline {1.2}Research Questions}{3}{section.1.2}
+\contentsline {paragraph}{}{3}{section*.10}
+\contentsline {section}{\numberline {1.3}General Objectives}{3}{section.1.3}
+\contentsline {paragraph}{}{3}{section*.11}
+\contentsline {section}{\numberline {1.4}Hypotheses}{3}{section.1.4}
+\contentsline {paragraph}{}{3}{section*.12}
+\contentsline {paragraph}{Hypothesis 1:}{3}{section*.13}
+\contentsline {paragraph}{Hypothesis 2:}{3}{section*.14}
+\contentsline {paragraph}{Hypothesis 3:}{4}{section*.15}
+\contentsline {paragraph}{Hypothesis 4:}{4}{section*.16}
+\contentsline {section}{\numberline {1.5}Main Contributions}{4}{section.1.5}
+\contentsline {section}{\numberline {1.6}Publications}{5}{section.1.6}
+\contentsline {section}{\numberline {1.7}Organization Of the Thesis}{6}{section.1.7}
+\contentsline {paragraph}{}{6}{section*.17}
+\contentsline {chapter}{\numberline {2}STUDENT MODELLING METHODS}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}ITS and EDM}{7}{section.2.1}
+\contentsline {section}{\numberline {2.2}Definitions and concepts}{7}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Test outcome data, Q-matrix and Skill mastery matrices}{7}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Partial Order Knowledge Structure(POKS)}{8}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}Skills assessment and item outcome prediction techniques}{10}{section.2.3}
+\contentsline {section}{\numberline {2.4}Multi-skills techniques}{10}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}Matrix Factorization}{10}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Recommender systems and matrix factorization}{11}{subsection.2.4.2}
+\contentsline {subsection}{\numberline {2.4.3}Similarity with recommender systems and assumptions}{12}{subsection.2.4.3}
+\contentsline {subsection}{\numberline {2.4.4}Non-Negative Matrix Factorization(\ac {NMF})}{12}{subsection.2.4.4}
+\contentsline {subsection}{\numberline {2.4.5}Types of Q-matrix}{14}{subsection.2.4.5}
+\contentsline {subsection}{\numberline {2.4.6}Deterministic Input Noisy And/Or (DIAN/DINO)}{15}{subsection.2.4.6}
+\contentsline {subsection}{\numberline {2.4.7}Alternate Least-square Factorization (ALS)}{15}{subsection.2.4.7}
+\contentsline {subsection}{\numberline {2.4.8}Other Techniques to Derive Q-matrices from Data}{16}{subsection.2.4.8}
+\contentsline {section}{\numberline {2.5}Single skill approaches \note {should probably be earlier since it is easier to explain}}{17}{changenumber.17.1}
+\contentsline {subsection}{\numberline {2.5.1}IRT}{17}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Baseline expected value}{17}{subsection.2.5.2}
+\contentsline {section}{\numberline {2.6}Zero skill technique}{18}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Knowledge Spaces and Partial Order Knowledge Structures (POKS)}{18}{subsection.2.6.1}
+\contentsline {section}{\numberline {2.7}Recent improvements}{18}{section.2.7}
+\contentsline {section}{\numberline {2.8}NMF on single skill and multi-skill conjunctive Q-matrix}{20}{section.2.8}
+\contentsline {subsection}{\numberline {2.8.1}Simulation methodology}{21}{subsection.2.8.1}
+\contentsline {subsection}{\numberline {2.8.2}Results}{21}{subsection.2.8.2}
+\contentsline {subsection}{\numberline {2.8.3}Discussion}{23}{subsection.2.8.3}
+\contentsline {section}{\numberline {2.9}Finding the number of latent skills}{24}{section.2.9}
+\contentsline {subsection}{\numberline {2.9.1}SVD-Based method}{24}{subsection.2.9.1}
+\contentsline {subsection}{\numberline {2.9.2}Wrapper-Based method}{25}{subsection.2.9.2}
+\contentsline {subsection}{\numberline {2.9.3}Results of SVD-Based method}{26}{subsection.2.9.3}
+\contentsline {subsection}{\numberline {2.9.4}Results of Wrapper-Based method}{27}{subsection.2.9.4}
+\contentsline {subsection}{\numberline {2.9.5}Discussion}{27}{subsection.2.9.5}
+\contentsline {section}{\numberline {2.10}The refinement of a Q-matrix}{29}{section.2.10}
+\contentsline {subsection}{\numberline {2.10.1}Q-matrices validation techniques}{29}{subsection.2.10.1}
+\contentsline {subsection}{\numberline {2.10.2}Methodology and data sets}{30}{subsection.2.10.2}
+\contentsline {subsection}{\numberline {2.10.3}Results}{32}{subsection.2.10.3}
+\contentsline {subsection}{\numberline {2.10.4}Recovery rates by the number perturbation}{32}{subsection.2.10.4}
+\contentsline {subsection}{\numberline {2.10.5}Recovery rates by data set}{35}{subsection.2.10.5}
+\contentsline {subsection}{\numberline {2.10.6}Discussion}{35}{subsection.2.10.6}
+\contentsline {section}{\numberline {2.11}Improving matrix factorization techniques of student test data with partial order constraints}{36}{section.2.11}
+\contentsline {chapter}{\numberline {3}MODEL FITTING AND SIMULATED DATA}{39}{chapter.3}
+\contentsline {section}{\numberline {3.1}Model Fitting}{39}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Approaches}{39}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Measures}{39}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Dynamic vs. static data}{40}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}On the faithfulness of simulated student performance data}{41}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Simulated data models}{42}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}methodology}{42}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Real Datasets}{42}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}discussion}{42}{subsection.3.2.4}
+\contentsline {section}{\numberline {3.3}simulated data to reveal the proximity of a model to reality}{43}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Methodology}{44}{subsection.3.3.1}
+\contentsline {chapter}{\numberline {4}SYNTHETIC DATA GENERATION}{45}{chapter.4}
+\contentsline {section}{\numberline {4.1}POKS}{45}{section.4.1}
+\contentsline {section}{\numberline {4.2}IRT}{46}{section.4.2}
+\contentsline {section}{\numberline {4.3}Linear NMF Conjunctive}{47}{section.4.3}
+\contentsline {section}{\numberline {4.4}Linear NMF Additive}{48}{section.4.4}
+\contentsline {section}{\numberline {4.5}DINA/DINO}{49}{section.4.5}
+\contentsline {chapter}{\numberline {5}Experimental Results}{51}{chapter.5}
+\contentsline {section}{\numberline {5.1}Model fit in a vector space framework}{51}{section.5.1}
+\contentsline {section}{\numberline {5.2}Skills Models}{52}{section.5.2}
+\contentsline {section}{\numberline {5.3}Methodology}{54}{section.5.3}
+\contentsline {section}{\numberline {5.4}Experiment 1: Performance comparison}{54}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Data sets}{56}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}Predictive performance results}{58}{subsection.5.4.2}
+\contentsline {section}{\numberline {5.5}Experiment 2: Sensitivity of the Model performance over data generation parameters}{60}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Degree of similarity}{63}{subsection.5.5.1}
+\contentsline {chapter}{\numberline {6}Conclusion and future work}{68}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{68}{section.6.1}
+\contentsline {section}{\numberline {6.2}Future Work}{68}{section.6.2}
