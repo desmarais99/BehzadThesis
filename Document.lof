@@ -10,36 +10,41 @@
 \select@language {french}
 \select@language {english}
 \select@language {english}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.1}{\ignorespaces Partial Order Structure of 4 items}}{9}{figure.2.1}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.2}{\ignorespaces Oriented incidence matrix and Adjacency matrix}}{9}{figure.2.2}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.3}{\ignorespaces An example for Conjunctive model of Q-matrix}}{14}{figure.2.3}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.4}{\ignorespaces Items and Q-matrix}}{19}{figure.2.4}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Items with different skills}}}{19}{figure.2.4}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Q-matrix}}}{19}{figure.2.4}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.5}{\ignorespaces Visual representations of the original $\mathbf {Q}$ matrix and NMF derived matrices $\mathaccentV {hat}05E{\mathbf {Q}}$}}{22}{figure.2.5}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Matrix $\mathaccentV {hat}05E{\mathbf {Q}}$ without slip and guess factors ($r=1$)}}}{22}{figure.2.5}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Discretized $\mathaccentV {hat}05E{\mathbf {Q}}$ without slip and guess factors ($r=1$)}}}{22}{figure.2.5}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Matrix $\mathaccentV {hat}05E{\mathbf {Q}}$ with slip and guess factors of 0.2 ($r=0.91$)}}}{22}{figure.2.5}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Discretized $\mathaccentV {hat}05E{\mathbf {Q}}$ for slip and guess of 0.2 ($r=0.93$). Three out of 36 skill requirements are incorrectly mapped in this example.}}}{22}{figure.2.5}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.6}{\ignorespaces Singular values of simulated data for a 21 items test. A vertical dashed line at singular value 6 corresponds to the number of underlying latent skill factors.}}{28}{figure.2.6}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.7}{\ignorespaces Precision of student results predictions from estimated skill matrix (equation \ref {eq:ShatEstimation}). Error bars are the standard error of the accuracy curves. Experiment is done with simulated data with 6 skills and slip and guess values of 0.1 and 0.2 respectively.}}{28}{figure.2.7}
-\contentsline {figure}{\numberline {Figure\nobreakspace 2.8}{\ignorespaces Average recovery rate by number of perturbations (real and synthetic data). }}{33}{figure.2.8}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Average recovery rate by number of perturbations (real data)}}}{33}{figure.2.8}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Average recovery rate by number of perturbations (synthetic data)}}}{33}{figure.2.8}
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.1}{\ignorespaces Q-matrix and an example of simulated data with this matrix. pale cells represent 1's and red ones represent 0's.}}{48}{figure.4.1}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Q-matrix of 6 skills}}}{48}{figure.4.1}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Synthetic data of 100 students with 10\% slip and 20\% guess factor}}}{48}{figure.4.1}
-\contentsline {figure}{\numberline {Figure\nobreakspace 4.2}{\ignorespaces Additive model of Q-matrix and Corresponding synthetic data}}{49}{figure.4.2}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Additive Q-matrix}}}{49}{figure.4.2}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Raw Result matrix }}}{49}{figure.4.2}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Discretized result matrix with 20\% slip and 10\% guess factor}}}{49}{figure.4.2}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.1}{\ignorespaces Skills assessment methods}}{53}{figure.5.1}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.2}{\ignorespaces Data breakdown of cross validation process}}{54}{figure.5.2}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.3}{\ignorespaces Item outcome prediction accuracy results of {\textbf {synthetic data sets}}}}{59}{figure.5.3}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.4}{\ignorespaces Item outcome prediction accuracy results of {\textbf {real data sets}}}}{59}{figure.5.4}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.5}{\ignorespaces Variation of \textbf {Sample Size} Over synthetic data sets}}{61}{figure.5.5}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.6}{\ignorespaces Variation of \textbf {Number of items} Over synthetic data sets}}{62}{figure.5.6}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.7}{\ignorespaces Variation of \textbf {Number of skills} Over synthetic data sets}}{62}{figure.5.7}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.8}{\ignorespaces Variation of \textbf {Item Variance} Over synthetic data sets}}{64}{figure.5.8}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.9}{\ignorespaces Variation of \textbf {Student variance} Over synthetic data sets}}{64}{figure.5.9}
-\contentsline {figure}{\numberline {Figure\nobreakspace 5.10}{\ignorespaces Variation of \textbf {Success Rate} Over synthetic data sets}}{65}{figure.5.10}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.1}{\ignorespaces Items and Q-matrix}}{9}{figure.2.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Items with different skills}}}{9}{figure.2.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Q-matrix}}}{9}{figure.2.1}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.2}{\ignorespaces Partial Order Structure of 4 items}}{12}{figure.2.2}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.3}{\ignorespaces Oriented incidence matrix and Adjacency matrix}}{12}{figure.2.3}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.4}{\ignorespaces An example for Conjunctive model of Q-matrix}}{15}{figure.2.4}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.5}{\ignorespaces An example for Additive model of Q-matrix}}{16}{figure.2.5}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.6}{\ignorespaces An example for Disjunctive model of Q-matrix}}{16}{figure.2.6}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.7}{\ignorespaces Q-matrix and an example of simulated data with this matrix. Bright pixels represent 1's and dark red ones represent 0's.}}{22}{figure.2.7}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Q-matrix of 6 skills and for which 21 items are spanning the full set of 1 and 2 skill combinations}}}{22}{figure.2.7}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Simulated data example of 100 examinees with parameters: slip: 0.1, guess: 0.2, skills difficulties: ($0.17$, $0.30$, $0.43$, $0.57$, $0.70$, $0.83$)}}}{22}{figure.2.7}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.8}{\ignorespaces Visual representations of the original $\mathbf {Q}$ matrix and NMF derived matrices $\mathaccentV {hat}05E{\mathbf {Q}}$}}{25}{figure.2.8}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Matrix $\mathaccentV {hat}05E{\mathbf {Q}}$ without slip and guess factors ($r=1$)}}}{25}{figure.2.8}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Discretized $\mathaccentV {hat}05E{\mathbf {Q}}$ without slip and guess factors ($r=1$)}}}{25}{figure.2.8}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Matrix $\mathaccentV {hat}05E{\mathbf {Q}}$ with slip and guess factors of 0.2 ($r=0.91$)}}}{25}{figure.2.8}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Discretized $\mathaccentV {hat}05E{\mathbf {Q}}$ for slip and guess of 0.2 ($r=0.93$). Three out of 36 skill requirements are incorrectly mapped in this example.}}}{25}{figure.2.8}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.9}{\ignorespaces Singular values of simulated data for a 21 items test. A vertical dashed line at singular value 6 corresponds to the number of underlying latent skill factors.}}{30}{figure.2.9}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.10}{\ignorespaces Precision of student results predictions from estimated skill matrix (equation \ref {eq:ShatEstimation}). Error bars are the standard error of the accuracy curves. Experiment is done with simulated data with 6 skills and slip and guess values of 0.1 and 0.2 respectively.}}{31}{figure.2.10}
+\contentsline {figure}{\numberline {Figure\nobreakspace 2.11}{\ignorespaces Average recovery rate by number of perturbations (real and synthetic data). }}{36}{figure.2.11}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Average recovery rate by number of perturbations (real data)}}}{36}{figure.2.11}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Average recovery rate by number of perturbations (synthetic data)}}}{36}{figure.2.11}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.1}{\ignorespaces Q-matrix and an example of simulated data with this matrix. pale cells represent 1's and red ones represent 0's.}}{51}{figure.4.1}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Q-matrix of 6 skills}}}{51}{figure.4.1}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Synthetic data of 100 students with 10\% slip and 20\% guess factor}}}{51}{figure.4.1}
+\contentsline {figure}{\numberline {Figure\nobreakspace 4.2}{\ignorespaces Additive model of Q-matrix and Corresponding synthetic data}}{52}{figure.4.2}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Additive Q-matrix}}}{52}{figure.4.2}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Raw Result matrix }}}{52}{figure.4.2}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Discretized result matrix with 20\% slip and 10\% guess factor}}}{52}{figure.4.2}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.1}{\ignorespaces Skills assessment methods}}{56}{figure.5.1}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.2}{\ignorespaces Data breakdown of cross validation process}}{57}{figure.5.2}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.3}{\ignorespaces Item outcome prediction accuracy results of {\textbf {synthetic data sets}}}}{62}{figure.5.3}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.4}{\ignorespaces Item outcome prediction accuracy results of {\textbf {real data sets}}}}{62}{figure.5.4}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.5}{\ignorespaces Variation of \textbf {Sample Size} Over synthetic data sets}}{64}{figure.5.5}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.6}{\ignorespaces Variation of \textbf {Number of items} Over synthetic data sets}}{65}{figure.5.6}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.7}{\ignorespaces Variation of \textbf {Number of skills} Over synthetic data sets}}{65}{figure.5.7}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.8}{\ignorespaces Variation of \textbf {Item Variance} Over synthetic data sets}}{67}{figure.5.8}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.9}{\ignorespaces Variation of \textbf {Student variance} Over synthetic data sets}}{67}{figure.5.9}
+\contentsline {figure}{\numberline {Figure\nobreakspace 5.10}{\ignorespaces Variation of \textbf {Success Rate} Over synthetic data sets}}{68}{figure.5.10}
