@@ -16,71 +16,69 @@
 \BOOKMARK [1][-]{section.1.6}{1.6 Publications}{chapter.1}% 16
 \BOOKMARK [1][-]{section.1.7}{1.7 Organization Of the Thesis}{chapter.1}% 17
 \BOOKMARK [0][-]{chapter.2}{2 STUDENT MODELLING METHODS}{}% 18
-\BOOKMARK [1][-]{section.2.1}{2.1 ITS and EDM}{chapter.2}% 19
-\BOOKMARK [1][-]{section.2.2}{2.2 Definitions and concepts}{chapter.2}% 20
-\BOOKMARK [2][-]{subsection.2.2.1}{2.2.1 Test outcome data, Q-matrix and Skill mastery matrices}{section.2.2}% 21
-\BOOKMARK [2][-]{subsection.2.2.2}{2.2.2 Partial Order Knowledge Structure\(POKS\)}{section.2.2}% 22
-\BOOKMARK [1][-]{section.2.3}{2.3 Skills assessment and item outcome prediction techniques}{chapter.2}% 23
-\BOOKMARK [1][-]{section.2.4}{2.4 Multi-skills techniques}{chapter.2}% 24
-\BOOKMARK [2][-]{subsection.2.4.1}{2.4.1 Matrix Factorization}{section.2.4}% 25
-\BOOKMARK [2][-]{subsection.2.4.2}{2.4.2 Recommender systems and matrix factorization}{section.2.4}% 26
-\BOOKMARK [2][-]{subsection.2.4.3}{2.4.3 Similarity with recommender systems and assumptions}{section.2.4}% 27
-\BOOKMARK [2][-]{subsection.2.4.4}{2.4.4 Non-Negative Matrix Factorization\(NMF\)}{section.2.4}% 28
-\BOOKMARK [2][-]{subsection.2.4.5}{2.4.5 Types of Q-matrix}{section.2.4}% 29
-\BOOKMARK [2][-]{subsection.2.4.6}{2.4.6 Deterministic Input Noisy And/Or \(DIAN/DINO\)}{section.2.4}% 30
-\BOOKMARK [2][-]{subsection.2.4.7}{2.4.7 Alternate Least-square Factorization \(ALS\)}{section.2.4}% 31
-\BOOKMARK [2][-]{subsection.2.4.8}{2.4.8 Other Techniques to Derive Q-matrices from Data}{section.2.4}% 32
-\BOOKMARK [1][-]{changenumber.17.1}{2.5 Single skill approaches should probably be earlier since it is easier to explain}{chapter.2}% 33
-\BOOKMARK [2][-]{subsection.2.5.1}{2.5.1 IRT}{changenumber.17.1}% 34
-\BOOKMARK [2][-]{subsection.2.5.2}{2.5.2 Baseline expected value}{changenumber.17.1}% 35
-\BOOKMARK [1][-]{section.2.6}{2.6 Zero skill technique}{chapter.2}% 36
-\BOOKMARK [2][-]{subsection.2.6.1}{2.6.1 Knowledge Spaces and Partial Order Knowledge Structures \(POKS\)}{section.2.6}% 37
-\BOOKMARK [1][-]{section.2.7}{2.7 Recent improvements}{chapter.2}% 38
-\BOOKMARK [1][-]{section.2.8}{2.8 NMF on single skill and multi-skill conjunctive Q-matrix}{chapter.2}% 39
-\BOOKMARK [2][-]{subsection.2.8.1}{2.8.1 Simulation methodology}{section.2.8}% 40
-\BOOKMARK [2][-]{subsection.2.8.2}{2.8.2 Results}{section.2.8}% 41
-\BOOKMARK [2][-]{subsection.2.8.3}{2.8.3 Discussion}{section.2.8}% 42
-\BOOKMARK [1][-]{section.2.9}{2.9 Finding the number of latent skills}{chapter.2}% 43
-\BOOKMARK [2][-]{subsection.2.9.1}{2.9.1 SVD-Based method}{section.2.9}% 44
-\BOOKMARK [2][-]{subsection.2.9.2}{2.9.2 Wrapper-Based method}{section.2.9}% 45
-\BOOKMARK [2][-]{subsection.2.9.3}{2.9.3 Results of SVD-Based method}{section.2.9}% 46
-\BOOKMARK [2][-]{subsection.2.9.4}{2.9.4 Results of Wrapper-Based method}{section.2.9}% 47
-\BOOKMARK [2][-]{subsection.2.9.5}{2.9.5 Discussion}{section.2.9}% 48
-\BOOKMARK [1][-]{section.2.10}{2.10 The refinement of a Q-matrix}{chapter.2}% 49
-\BOOKMARK [2][-]{subsection.2.10.1}{2.10.1 Q-matrices validation techniques}{section.2.10}% 50
-\BOOKMARK [2][-]{subsection.2.10.2}{2.10.2 Methodology and data sets}{section.2.10}% 51
-\BOOKMARK [2][-]{subsection.2.10.3}{2.10.3 Results}{section.2.10}% 52
-\BOOKMARK [2][-]{subsection.2.10.4}{2.10.4 Recovery rates by the number perturbation}{section.2.10}% 53
-\BOOKMARK [2][-]{subsection.2.10.5}{2.10.5 Recovery rates by data set}{section.2.10}% 54
-\BOOKMARK [2][-]{subsection.2.10.6}{2.10.6 Discussion}{section.2.10}% 55
-\BOOKMARK [1][-]{section.2.11}{2.11 Improving matrix factorization techniques of student test data with partial order constraints}{chapter.2}% 56
-\BOOKMARK [0][-]{chapter.3}{3 MODEL FITTING AND SIMULATED DATA}{}% 57
-\BOOKMARK [1][-]{section.3.1}{3.1 Model Fitting}{chapter.3}% 58
-\BOOKMARK [2][-]{subsection.3.1.1}{3.1.1 Approaches}{section.3.1}% 59
-\BOOKMARK [2][-]{subsection.3.1.2}{3.1.2 Measures}{section.3.1}% 60
-\BOOKMARK [2][-]{subsection.3.1.3}{3.1.3 Dynamic vs. static data}{section.3.1}% 61
-\BOOKMARK [1][-]{section.3.2}{3.2 On the faithfulness of simulated student performance data}{chapter.3}% 62
-\BOOKMARK [2][-]{subsection.3.2.1}{3.2.1 Simulated data models}{section.3.2}% 63
-\BOOKMARK [2][-]{subsection.3.2.2}{3.2.2 methodology}{section.3.2}% 64
-\BOOKMARK [2][-]{subsection.3.2.3}{3.2.3 Real Datasets}{section.3.2}% 65
-\BOOKMARK [2][-]{subsection.3.2.4}{3.2.4 discussion}{section.3.2}% 66
-\BOOKMARK [1][-]{section.3.3}{3.3 simulated data to reveal the proximity of a model to reality}{chapter.3}% 67
-\BOOKMARK [2][-]{subsection.3.3.1}{3.3.1 Methodology}{section.3.3}% 68
-\BOOKMARK [0][-]{chapter.4}{4 SYNTHETIC DATA GENERATION}{}% 69
-\BOOKMARK [1][-]{section.4.1}{4.1 POKS}{chapter.4}% 70
-\BOOKMARK [1][-]{section.4.2}{4.2 IRT}{chapter.4}% 71
-\BOOKMARK [1][-]{section.4.3}{4.3 Linear NMF Conjunctive}{chapter.4}% 72
-\BOOKMARK [1][-]{section.4.4}{4.4 Linear NMF Additive}{chapter.4}% 73
-\BOOKMARK [1][-]{section.4.5}{4.5 DINA/DINO}{chapter.4}% 74
-\BOOKMARK [0][-]{chapter.5}{5 Experimental Results}{}% 75
-\BOOKMARK [1][-]{section.5.1}{5.1 Model fit in a vector space framework}{chapter.5}% 76
-\BOOKMARK [1][-]{section.5.2}{5.2 Skills Models}{chapter.5}% 77
-\BOOKMARK [1][-]{section.5.3}{5.3 Methodology}{chapter.5}% 78
-\BOOKMARK [1][-]{section.5.4}{5.4 Experiment 1: Performance comparison}{chapter.5}% 79
-\BOOKMARK [2][-]{subsection.5.4.1}{5.4.1 Data sets}{section.5.4}% 80
-\BOOKMARK [2][-]{subsection.5.4.2}{5.4.2 Predictive performance results}{section.5.4}% 81
-\BOOKMARK [1][-]{section.5.5}{5.5 Experiment 2: Sensitivity of the Model performance over data generation parameters}{chapter.5}% 82
-\BOOKMARK [2][-]{subsection.5.5.1}{5.5.1 Degree of similarity}{section.5.5}% 83
-\BOOKMARK [0][-]{chapter.6}{6 Conclusion and future work}{}% 84
-\BOOKMARK [1][-]{section.6.1}{6.1 Conclusion}{chapter.6}% 85
-\BOOKMARK [1][-]{section.6.2}{6.2 Future Work}{chapter.6}% 86
+\BOOKMARK [1][-]{section.2.1}{2.1 Definitions and concepts}{chapter.2}% 19
+\BOOKMARK [2][-]{subsection.2.1.1}{2.1.1 Test outcome data}{section.2.1}% 20
+\BOOKMARK [2][-]{subsection.2.1.2}{2.1.2 Skills}{section.2.1}% 21
+\BOOKMARK [2][-]{subsection.2.1.3}{2.1.3 Q-matrix and Skill mastery matrices}{section.2.1}% 22
+\BOOKMARK [2][-]{subsection.2.1.4}{2.1.4 Types of Q-matrix}{section.2.1}% 23
+\BOOKMARK [1][-]{section.2.2}{2.2 Skills assessment and item outcome prediction techniques}{chapter.2}% 24
+\BOOKMARK [1][-]{section.2.3}{2.3 Zero skill technique}{chapter.2}% 25
+\BOOKMARK [2][-]{subsection.2.3.1}{2.3.1 Knowledge Spaces and Partial Order Knowledge Structures \(POKS\)}{section.2.3}% 26
+\BOOKMARK [1][-]{section.2.4}{2.4 Single skill approaches}{chapter.2}% 27
+\BOOKMARK [2][-]{subsection.2.4.1}{2.4.1 IRT}{section.2.4}% 28
+\BOOKMARK [2][-]{subsection.2.4.2}{2.4.2 Baseline Expected Prediction}{section.2.4}% 29
+\BOOKMARK [1][-]{section.2.5}{2.5 Multi-skills techniques}{chapter.2}% 30
+\BOOKMARK [2][-]{subsection.2.5.1}{2.5.1 Types of Q-matrix \(examples\) }{section.2.5}% 31
+\BOOKMARK [2][-]{subsection.2.5.2}{2.5.2 Non-Negative Matrix Factorization\(NMF\)}{section.2.5}% 32
+\BOOKMARK [2][-]{subsection.2.5.3}{2.5.3 Deterministic Input Noisy And/Or \(DIAN/DINO\)}{section.2.5}% 33
+\BOOKMARK [2][-]{subsection.2.5.4}{2.5.4 Alternate Least-square Factorization \(ALS\)}{section.2.5}% 34
+\BOOKMARK [1][-]{section.2.6}{2.6 Recent improvements}{chapter.2}% 35
+\BOOKMARK [1][-]{section.2.7}{2.7 NMF on single skill and multi-skill conjunctive Q-matrix}{chapter.2}% 36
+\BOOKMARK [2][-]{subsection.2.7.1}{2.7.1 Simulated data}{section.2.7}% 37
+\BOOKMARK [2][-]{subsection.2.7.2}{2.7.2 Simulation methodology}{section.2.7}% 38
+\BOOKMARK [2][-]{subsection.2.7.3}{2.7.3 Results}{section.2.7}% 39
+\BOOKMARK [2][-]{subsection.2.7.4}{2.7.4 Discussion}{section.2.7}% 40
+\BOOKMARK [1][-]{section.2.8}{2.8 Finding the number of latent skills}{chapter.2}% 41
+\BOOKMARK [2][-]{subsection.2.8.1}{2.8.1 SVD-Based method}{section.2.8}% 42
+\BOOKMARK [2][-]{subsection.2.8.2}{2.8.2 Wrapper-Based method}{section.2.8}% 43
+\BOOKMARK [2][-]{subsection.2.8.3}{2.8.3 Results of SVD-Based method}{section.2.8}% 44
+\BOOKMARK [2][-]{subsection.2.8.4}{2.8.4 Results of Wrapper-Based method}{section.2.8}% 45
+\BOOKMARK [2][-]{subsection.2.8.5}{2.8.5 Discussion}{section.2.8}% 46
+\BOOKMARK [1][-]{section.2.9}{2.9 The refinement of a Q-matrix}{chapter.2}% 47
+\BOOKMARK [2][-]{subsection.2.9.1}{2.9.1 Q-matrices validation techniques}{section.2.9}% 48
+\BOOKMARK [2][-]{subsection.2.9.2}{2.9.2 Methodology and data sets}{section.2.9}% 49
+\BOOKMARK [2][-]{subsection.2.9.3}{2.9.3 Results}{section.2.9}% 50
+\BOOKMARK [2][-]{subsection.2.9.4}{2.9.4 Recovery rates by the number perturbation}{section.2.9}% 51
+\BOOKMARK [2][-]{subsection.2.9.5}{2.9.5 Recovery rates by data set}{section.2.9}% 52
+\BOOKMARK [2][-]{subsection.2.9.6}{2.9.6 Discussion}{section.2.9}% 53
+\BOOKMARK [1][-]{section.2.10}{2.10 Improving matrix factorization techniques of student test data with partial order constraints}{chapter.2}% 54
+\BOOKMARK [0][-]{chapter.3}{3 MODEL FITTING AND SIMULATED DATA}{}% 55
+\BOOKMARK [1][-]{section.3.1}{3.1 Model Fitting}{chapter.3}% 56
+\BOOKMARK [2][-]{subsection.3.1.1}{3.1.1 Approaches}{section.3.1}% 57
+\BOOKMARK [2][-]{subsection.3.1.2}{3.1.2 Measures}{section.3.1}% 58
+\BOOKMARK [2][-]{subsection.3.1.3}{3.1.3 Dynamic vs. static data}{section.3.1}% 59
+\BOOKMARK [1][-]{section.3.2}{3.2 On the faithfulness of simulated student performance data}{chapter.3}% 60
+\BOOKMARK [2][-]{subsection.3.2.1}{3.2.1 Simulated data models}{section.3.2}% 61
+\BOOKMARK [2][-]{subsection.3.2.2}{3.2.2 methodology}{section.3.2}% 62
+\BOOKMARK [2][-]{subsection.3.2.3}{3.2.3 Real Datasets}{section.3.2}% 63
+\BOOKMARK [2][-]{subsection.3.2.4}{3.2.4 discussion}{section.3.2}% 64
+\BOOKMARK [1][-]{section.3.3}{3.3 simulated data to reveal the proximity of a model to reality}{chapter.3}% 65
+\BOOKMARK [2][-]{subsection.3.3.1}{3.3.1 Methodology}{section.3.3}% 66
+\BOOKMARK [0][-]{chapter.4}{4 SYNTHETIC DATA GENERATION}{}% 67
+\BOOKMARK [1][-]{section.4.1}{4.1 POKS}{chapter.4}% 68
+\BOOKMARK [1][-]{section.4.2}{4.2 IRT}{chapter.4}% 69
+\BOOKMARK [1][-]{section.4.3}{4.3 Linear NMF Conjunctive}{chapter.4}% 70
+\BOOKMARK [1][-]{section.4.4}{4.4 Linear NMF Additive}{chapter.4}% 71
+\BOOKMARK [1][-]{section.4.5}{4.5 DINA/DINO}{chapter.4}% 72
+\BOOKMARK [0][-]{chapter.5}{5 Experimental Results}{}% 73
+\BOOKMARK [1][-]{section.5.1}{5.1 Model fit in a vector space framework}{chapter.5}% 74
+\BOOKMARK [1][-]{section.5.2}{5.2 Skills Models}{chapter.5}% 75
+\BOOKMARK [1][-]{section.5.3}{5.3 Methodology}{chapter.5}% 76
+\BOOKMARK [1][-]{section.5.4}{5.4 Experiment 1: Performance comparison}{chapter.5}% 77
+\BOOKMARK [2][-]{subsection.5.4.1}{5.4.1 Data sets}{section.5.4}% 78
+\BOOKMARK [2][-]{subsection.5.4.2}{5.4.2 Predictive performance results}{section.5.4}% 79
+\BOOKMARK [1][-]{section.5.5}{5.5 Experiment 2: Sensitivity of the Model performance over data generation parameters}{chapter.5}% 80
+\BOOKMARK [2][-]{subsection.5.5.1}{5.5.1 Degree of similarity}{section.5.5}% 81
+\BOOKMARK [0][-]{chapter.6}{6 Conclusion and future work}{}% 82
+\BOOKMARK [1][-]{section.6.1}{6.1 Conclusion}{chapter.6}% 83
+\BOOKMARK [1][-]{section.6.2}{6.2 Future Work}{chapter.6}% 84
