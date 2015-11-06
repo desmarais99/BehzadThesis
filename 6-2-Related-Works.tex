@@ -1,12 +1,7 @@
 \Chapter{MODEL FITTING AND SIMULATED DATA}\label{sec:RelatedWorks}
 
 \section{Model Fitting}
-Model fitting is the task of selecting a statistical model for a given data from a set of candidate models. Both data and the set of candidate models can involve the design of experiments that the data collected is well-suited to the problem of model selection or the candidate models best describe the data among a large number of models. Generally Model fitting consists three steps :
-\begin{itemize}
-\item Prediction : that takes a set of parameters and returns a predicted dataset 
-\item Error function : that gives a measure to represent the difference between the data and the model's prediction for a given set of parameters 
-\item Minimizing the error function : finding a set of parameters that minimize the error function 
-\end{itemize}
+Model fitting is the task of selecting a statistical model for a given data from a set of candidate models. Both data and the set of candidate models can involve the design of experiments that the data collected is well-suited to the problem of model selection or the candidate models best describe the data among a large number of models. 
 The best fit is the model that is most likely to have generated the data.
 
 \subsection{Approaches}
@@ -40,19 +35,18 @@ The difference between tensor based methods and static methods is in the complex
 The following sections are describing two recent works that have been done for model fitting in EDM:
 
 
-
 \section{On the faithfulness of simulated student performance data}
 
-Michel Desmarais in \citep{Desmarais2010} introduced an approach to investigate the faithfulness of different methods of generating simulated data by comparing the predictive performance of POKS over real vs. simulated data. The parameters for simulated datasets are set to represent those of the real data. The faithfulness of the synthetic data is dependent to its performance. The more similar is the performance of real vs. simulated data is, the more faithful it is to represent the real data.
+\citet{Desmarais2010} introduced an approach to investigate the faithfulness of different methods of generating simulated data by comparing the predictive performance of POKS over real vs. simulated data. The parameters for simulated datasets are set to represent those of the real data. The faithfulness of the synthetic data is dependent to its performance. The more similar is the performance of real vs. simulated data is, the more faithful it is to represent the real data.
 
 In general there are three approaches to validate the accuracy of a cognitive diagnostic model without a direct measures of skills mastery:
 
 \begin{itemize}
-\item Indirect and independent measures of skills mastery: in these methods some expert defined skills mastery mappings are created based on the students answers to a test. Vomlel \citep{vomlel:2004} and De La Torre \citep{delaTorre2008}asked experts to define these matrices for two datasets. One of the weakness of this approach is that different experts may introduce different skills or different mappings.
+\item Indirect and independent measures of skills mastery: in these methods some expert defined skills mastery mappings are created based on the students answers to a test. Vomlel \citep{vomlel:2004} and De La Torre \citep{delaTorre2008} asked experts to define these matrices for two datasets. One of the weakness of this approach is that different experts may introduce different skills or different mappings.
 
 \item Predict based on observed items only: This method does not try to predict skills mastery mappings but it predicts based on a observed set of items. In our research we are using this method as a part of our methodology.
 
-\item Generating simulated data : This is the method that Desmarais \citep{Desmarais2010} used in his work. They used a set of predefined parameters to generated a result matrix based on a specific model.
+\item Generating simulated data: This is the method that Desmarais \citep{Desmarais2010} used in his work. They used a set of predefined parameters to generated a result matrix based on a specific model.
 
 \end{itemize}
 \subsection{Simulated data models}
@@ -67,11 +61,11 @@ In \citep{Desmarais2010} they used POKS as the student model which is a Bayesian
 
 \end{itemize}
 
-\subsection{methodology}
-Once the simulated data is generated base on the four models they \citep{Desmarais2010} train POKS student model over both real and synthetic datasets. For validation of the accuracy of the simulated dataset they compare the predictive performance across each condition. 
+\subsection{Methodology}
+Once the simulated data is generated base on the four models \citet{Desmarais2010} train POKS student model over both real and synthetic datasets. For validation of the accuracy of the simulated dataset they compare the predictive performance across each condition. 
 
 \subsection{Real Datasets}
-It is important to choose a good dataset for this simulation, they used two datasets which are in math and one of them has small number of samples and the other one has big number of items. The details of these datasets are in bellow :
+It is important to choose a good dataset for this simulation, they used two datasets which are in math and one of them has small number of samples and the other one has big number of items. The details of these datasets are in bellow:
 
 \begin{center}
 
@@ -89,9 +83,9 @@ College Math & 59 & 250 & 57\% & 9/59 to 55/59\tabularnewline
 
 \end{center}
 
-\subsection{discussion}
+\subsection{Discussion}
 
-First let us summarize their conclusions and then propose our discussion. The following items are their conclusion :
+First let us summarize their conclusions and then propose our discussion. The following items are their conclusion:
 \begin{itemize}
 \item This experiment need to be expanded since it was based on a single student model which is POKS and also other models of simulated dataset should also be used in this evaluation.
 \item The expected marginal probability do not appropriately reflect the underlying ground truth of the real datasets
@@ -106,19 +100,19 @@ First let us summarize their conclusions and then propose our discussion. The fo
 
 In this thesis we use 7 student models for generating datasets and also measuring the predictive performances that include range of models from zero skills to multi-skills. Somehow our work can be an extension to \citep{Desmarais2010}. Obviously one of the reasons that  IRT generated data shows a good similarity with real data performance is that the performances are over POKS model which shows closest performance to POKS model(The details will be discussed later in \ref{sec:SIGNATURE}) where the other models are linear and multi-skills. 
 
-%Not sure to put this : The accuracy gain that was achieved from college math data was considerably low, in this sense that we can not compare the results of real vs. simulated data. Because the reason for this low gain can be an inappropriate model to test the predictive performance. So we can also conclude that the underlying structure of College math is not even POKS since it showed low gain. Therefore the similarity in accuracy gain can be a good measure when the gain is considerably high.
+%Not sure to put this: The accuracy gain that was achieved from college math data was considerably low, in this sense that we can not compare the results of real vs. simulated data. Because the reason for this low gain can be an inappropriate model to test the predictive performance. So we can also conclude that the underlying structure of College math is not even POKS since it showed low gain. Therefore the similarity in accuracy gain can be a good measure when the gain is considerably high.
 
 To summarize the difference between our experiment and \citep{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \citep{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics.
 
-\section{simulated data to reveal the proximity of a model to reality}
+\section{Simulated data to reveal the proximity of a model to reality}
 
 The next recent work \citep{Rosenberg2015} is about distinguishing between a synthetic data and a real data. This work is an extension to their previous work \citep{Rosenberg2014} where they used BKT model to generate synthetic dataset for two real dataset that correspond to the characteristics of the real data. They found similarities between the characteristics of the simulated and real datasets. The results indicate that it is hard to set real and synthetic datasets apart. The idea of this research \citep{Rosenberg2015} is about the goodness of a model for a real dataset which indicate that if it is easy to set real and synthetic data apart then the model is not a good representative of the real data otherwise the model is indeed authentic representation of the reality.
 
 \subsection{Methodology}
-They used Bayesian knowledge tracing model to calculate log likelihood with a grid search of four parameters : initial(prior knowledge), learning rate, Guess and slip. The two first parameters are knowledge parameters and the second two parameters are performance parameters. The simplest form of BKT which is used in this experiment considers a single set of prior knowledge and  learning rate for all students and an equal slip and guess rates for all students.
+They used Bayesian knowledge tracing model to calculate log likelihood with a grid search of four parameters: initial(prior knowledge), learning rate, Guess and slip. The two first parameters are knowledge parameters and the second two parameters are performance parameters. The simplest form of BKT which is used in this experiment considers a single set of prior knowledge and  learning rate for all students and an equal slip and guess rates for all students.
 To make a comprehensive comparison they used 42 datasets which are groups of Learning Opportunities(GLOPs) generated from the ASSISTments platform. Problem set and number of examinees vary for each dataset which consist of 4 to 13 questions answered by 105 to 777 students. In addition they created two synthetic datasets for each dataset that the parameters for synthetic datasets are set to represent those of the real data with exact same number of samples and items. 
 
-The methodology consist of four parts :
+The methodology consist of four parts:
 \begin{itemize}
 \item Calculating a best fitting parameters for all 42 real datasets
 \item Creating two different simulated dataset with the founded parameters and the same number of students and items
@@ -128,6 +122,6 @@ The methodology consist of four parts :
 
 The comparison in the last step of the methodology is made by visualizing  a 2D log likelihood heatmap with two parameters plot where the other two parameters were fixed to the best fitting values. The similarity of the heatmap of the LL matrices of the real data and the two simulated data is a measure for model fitting in their experiment. The more they look similar the more the model fits the real data. They proposed two methods to address the degree of similarity:
 \begin{itemize}
-\item Euclidean distance : The Euclidean distance between the real dataset parameters and synthetic dataset parameters was compared to the distance of two synthetic dataset parameters. In conclusion if the distance of two synthetic parameters are smaller than the distance of real and synthetic parameters then the model is a goof fit for the data otherwise it can be improved.
-\item Log likelihood distance : The max log likelihood distance between the two synthetic datasets was compared to the max log likelihood distance between the real and synthetic datasets. 
+\item Euclidean distance: The Euclidean distance between the real dataset parameters and synthetic dataset parameters was compared to the distance of two synthetic dataset parameters. In conclusion if the distance of two synthetic parameters are smaller than the distance of real and synthetic parameters then the model is a goof fit for the data otherwise it can be improved.
+\item Log likelihood distance: The max log likelihood distance between the two synthetic datasets was compared to the max log likelihood distance between the real and synthetic datasets. 
 \end{itemize}

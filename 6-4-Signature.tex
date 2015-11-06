@@ -7,7 +7,7 @@ In this chapter we present a method of determining the model that is closest to 
 
 The approach we propose to finding the model that best fits a data set is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
 
-Let us explain this idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of 6~well known skills models is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} and seventh data set named \textit{random} are added for comparison purpose.  The details of the different models and of the methodology to assess model performance are described later.  For now, let only focus on this table's data.
+Let us explain this idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} and seventh data set named \textit{random} are added for comparison purpose.  The details of the different models and of the methodology to assess model performance are described later.  For now, let us only focus on this table's data.
 
 \newcolumntype{d}[1]{D{.}{.}{#1}} % not used
 
@@ -38,9 +38,11 @@ The principle of the proposed approach is to use the whole column of performance
 
 The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turns, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.  
 
-The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance, but we will show examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
+The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance, but we will show examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
 
 \section{Skills Models}
+
+\note{This information is partly redundant with chapter 2. It needs to be adapted}
 
 The approach we introduce to assess model fit relies on the generation of synthetic data from different skills models.  We review the basics of each of these models.  We focus here on the assessment of static skills, where we assume the test data represents a snapshot in time, as opposed to models that allow the representation of skills that change in time, which is more typical of data from learning environments (see \citep{desmarais2012review}, for a review of both approaches).  However, the approach would generalize to dynamic data as well.
 
@@ -53,6 +55,8 @@ The skills assessment model we compare can be classified at a first level accord
 \begin{figure}[ht]
 \centering
    \includegraphics[trim=0.5cm 7cm 0.5cm 3cm,scale =0.5] {SkillsAssessments.pdf}
+
+\note{The figure should go in chapter 2}
 \caption{Skills assessment methods}
 \label{AssessMethods}
 \end{figure}
@@ -271,7 +275,7 @@ Note that the first 4~models do not rely on any Q-matrix for the data generation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Predictive performance results} \label{secSyn}
 
-This section shows the result of predictive performance of the seven models over the 14~datasets described in table\ref{tabl1}. 
+This section shows the result of predictive performance of the seven models over the 14~datasets described in table~\ref{tabl1}. 
 
 \begin{figure}
 \centering
@@ -294,7 +298,7 @@ For the synthetic data sets, three models reach performances that are much highe
 
 An important observation is that the pattern of relative differences of performances across techniques varies considerably and is unique to each data set: no two data sets have the same pattern of relative performance across models.  The capacity of recognizing a data set's true model relies on this uniqueness characteristic.
 
-For the real data sets, the relative performance among the techniques shows smaller discrepancies and is closer to the baseline. Although the best performers are still significantly better than the expected values for the majority of the data sets, it is surprising to see that a majority of models do worst than the baseline for a majority of data sets. \remove{It does not seem always significant.}
+For the real data sets, the relative performance among the techniques shows smaller discrepancies and is closer to the baseline. Although the best performers are still significantly better than the expected values for the majority of the data sets, it is surprising to see that a majority of models do worst than the baseline for a majority of data sets. 
 
 The results from the subsets of the Fraction data show that the pattern of the Fraction performance data set repeats over Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions.  However, it differs substantially from Fraction-2/3 for the NMF conjunctive performance which reaches that of the NMF additive one and also DINA reaches DINO. This is readily explained explained by the fact that the Q-matrix of this data set has the property of assigning a single skill to each item, in which case the two matrix factorization techniques become equivalent.  But aside from the Fraction-2/3 case, this similarity among Fraction data set and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the performance ``signature'' remains constant across these data sets.
 
@@ -312,7 +316,7 @@ Finally, we note that none of the real data sets show the large the discrepancie
 \section{Experiment 2: Sensitivity of the Model performance over data generation parameters}
 \label{Sensitive}
 
-In this experiment we want to examine the effect of data generation parameters on the stability of the model performance vector in the performance space. In this section we run the same experiment but with different parameters such as average success rate, sample size, number of latent skills, number of items, student and item score variance. These factors can can answer the question whether the patterns hold across different conditions. Table \ref{fig:param} shows different conditions of the parameters.
+In this experiment we want to examine the effect of data generation parameters on the stability of the model performance vector in the performance space. In this section we run the same experiment but with different parameters such as average success rate, sample size, number of latent skills, number of items, student and item score variance. These factors can can answer the question whether the patterns hold across different conditions. Table~\ref{fig:param} shows different conditions of the parameters.
 
 Just like the previous experiment, we assessed these results on the basis of 10-folds cross-validation. The same as before, we fixed the number of ``observed items'' for each run on each data set that varies between 9 to one item less than total number of items.
 
@@ -379,7 +383,7 @@ The most important part is to have a measure to show the degree of similarity be
 
 The evaluation of this research consists of two parts. The first part is to measure the degree of similarity for synthetic vs. synthetic datasets. The second part is to identify the ground truth by measuring the correlation between real and synthetic datasets. 
 
-Given $6\times 4$ different set of data generation parameters (described in section \ref{Sensitive}) and generating 10 times for each model will produce 1440 datasets. The comparison in our study is based on same data specific parameters. Therefore we can calculate the correlation table among 60 synthetic datasets that share same data specific parameters. This will result in 24 tables which consider all the possible data generation parameters. The expectation is that those vectors with same model show high correlation. Table \ref{tablSyn} shows the average correlation of these 24  conditions.
+Given $6\times 4$ different set of data generation parameters (described in section \ref{Sensitive}) and generating 10 times for each model will produce 1440 datasets. The comparison in our study is based on same data specific parameters. Therefore we can calculate the correlation table among 60 synthetic datasets that share same data specific parameters. This will result in 24 tables which consider all the possible data generation parameters. The expectation is that those vectors with same model show high correlation. Table~\ref{tablSyn} shows the average correlation of these 24  conditions.
 
 Evaluating the synthetic dataset versus themselves can give a clue to how accurate this comparison is in model fitting. Basically, Those datasets that have the same model behind them should show a good correlation. The diagonal of table~\ref{tablSyn} shows a high correlation because it compares the same model generated datasets. On the other hand some models such as IRT and POKS shows a high correlation since they are not using multi-skills models. Those models that share concepts such as DINA and NMF conjunctive also resulted in a high correlation comparing with other models because they are linear models which deal with conjunctive model of Q-matrix. DINO and NMF additive has almost a high correlation but since the additive model is slightly different from the disjunctive model then it's less correlated.
 
@@ -532,8 +536,8 @@ The very last experiment that we have done is a comparison between the proposed 
 
  Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. There exists 1440~datasets where each model corresponds to 240 dataset. The gray cells in table~\ref{Classification-Conf} shows the true positive values and other values in each column represent the false positive predictions for group of datasets.The values in each row shows the number of false negative predictions for each model. The confusion is mostly between those techniques that shares same concepts specially between NMF Conjunctive and DINA model where we use conjunctive Q-matrices. 
 
-The accuracy that is reported in the last row of table~\ref{Classification-Conf} is calculated based on $\frac{TP}{240}$ which counts the true positive predictions for each sub set of datasets that have the same model behind them. The accuracy the is reported in the last two columns of table~\ref{Classification-Conf} is considering how faithful the classification is to select a dataset that doesn't have the related model behind it which will count true negative values based on $\frac{TN}{1200}$ (1200 is the number of datasets that do not have same underlaying models). In terms of true positive selections there is no benefit between any of these methods even sometimes best performer shows to be better (specially for DINA and IRT). 
+The accuracy that is reported in the last row of table~\ref{Classification-Conf} is calculated based on $\frac{TP}{240}$ which counts the true positive predictions for each sub set of datasets that have the same model behind them. The accuracy the is reported in the last two columns of table~\ref{Classification-Conf} is considering how faithful the classification is to select a dataset that doesn't have the related model behind it which will count true negative values based on $\frac{TN}{1200}$ (1200 is the number of datasets that do not have same underlaying models). In terms of true positive selections there is no benefit between any of these methods even if sometimes best performer shows to be better (specially for DINA and IRT).
 
-Considering the false negative and false positive changes the classification results. Table~\ref{Classification-Acc} shows the accuracy of this classification in terms of precision, recall, $F1$ measure and accuracy ($\frac{TN+TP}{1440}$) . Since $F1$ measure is combining both precision and recall, then it is a good measure for improvement. The third column of each classification method shows that F-measure increased for Nearest neighbor method which is almost close to $1$. Also in terms of individual scores per method we also report accuracy of each technique which considers true positive and true negative values. The last column of table~\ref{Classification-Acc} shows this improvement. The total accuracy which is considering true positive numbers over number of datasets regardless of individual models shows that best performer  gets $0.75\%$ and the nearest neighbor gets upto $0.84\%$ of accuracy.
+Considering the false negative and false positive changes the classification results. Table~\ref{Classification-Acc} shows the accuracy of this classification in terms of precision, recall, $F1$ measure and accuracy ($\frac{TN+TP}{1440}$). Since $F1$ measure is combining both precision and recall, then it is a good measure for improvement. The third column of each classification method shows that F-measure increased for Nearest neighbor method which is almost close to $1$. Also in terms of individual scores per method we also report accuracy of each technique which considers true positive and true negative values. The last column of table~\ref{Classification-Acc} shows this improvement. The total accuracy which is considering true positive numbers over number of datasets regardless of individual models shows that best performer  gets $0.75\%$ and the nearest neighbor gets upto $0.84\%$ of accuracy.
 
 
