@@ -137,8 +137,7 @@ Items are generally learnt in a given order. Children learn easy problems first,
 \label{fig2} 
 \end{figure}
 
-This is reflected in the results matrix $\mathbf{R}$ by closure constraints on the possible knowledge states
-. Defining a student knowledge state as a subset of all items (i.e. a column vector in $\mathbf{R}$), then the space of valid knowledge states is closed under union and intersection according to the theory of Knowledge spaces \citep{Doignon1985}. In our study, we will relax this constraint to a closure under union, meaning that the union of any two individual knowledge states is also a valid knowledge state. This means that the constraints can be expressed as a partial order of implications among items \citep{desmarais:umuai:1996}, termed a Partial Order Knowledge Structure (POKS). The algorithm to derive such structures from the data in $\mathbf{R}$ relies on statistical tests \citep{desmarais:umuai:1996,desmarais:2005}.
+This is reflected in the results matrix $\mathbf{R}$ by closure constraints on the possible knowledge states. Defining a student knowledge state as a subset of all items (i.e. a column vector in $\mathbf{R}$), then the space of valid knowledge states is closed under union and intersection according to the theory of Knowledge spaces \citep{Doignon1985}. In our study, we will relax this constraint to a closure under union, meaning that the union of any two individual knowledge states is also a valid knowledge state. This means that the constraints can be expressed as a partial order of implications among items \citep{desmarais:umuai:1996}, termed a Partial Order Knowledge Structure (POKS). The algorithm to derive such structures from the data in $\mathbf{R}$ relies on statistical tests \citep{desmarais:umuai:1996,desmarais:2005}.
 
 A knowledge structure can be represented by an Oriented incidence matrix, O, or by an Adjacency matrix, A. In the oriented incidence matrix, rows are edges and columns are nodes of the graph. The value of -1 shows the start node of an edge and 1 indicates the end of an edge. Therefore for each row (edge) there is only one pair of (-1,1) and the rest of cells are 0. In adjacency matrix both rows and columns are Items and if there is a link between a pair of items (for example $i\rightarrow j$) there should be a 1 in $A_{ij}$ otherwise it is 0. Figure \ref{fig3IMAM} shows the corresponded oriented incidence matrix and adjacency matrix of the structure in figure~\ref{fig2}. 
 
@@ -191,8 +190,12 @@ The structure of the partial order of items is obtained from a statistical hypot
 
 A student knowledge state is represented as a vector of probabilities, one per item.  Probabilities are updated under a Naive Bayes assumption as simple posterior probabilities given observed items.
 
-%EXTEND
- \note{only looking at the order of items and there is only observation and how does it preform inferences there}
+Inference in the POKS framework to calculate the node's probability relies on standard Bayesian posteriors under the local independence assumption. The probability update for node $H$ given $E_1$,... $E_n$ can be written in following posterior odds form :
+\begin{equation}
+O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H})}
+\label{EQPOKSratio}
+\end{equation}
+where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used.
 
 \section{Single skill approaches}
 
@@ -238,13 +241,12 @@ Still there exists two types of methods in this category:
 \item Models that require a predefined Q-matrix to predict test outcome. These techniques can not directly infer the Q-matrix but they can refine an existing expert defined Q-matrix.
 \end{itemize}
 
-%EXTEND%How to derive a Q-matrix for second group
-%Cen et al. \citep{Cen2005,Cen2006} have used Learning FactorAnalysis technique(LFA) technique to improve the initially hand built Q-matrix which maps fine-grained skills to questions. They used log data which is based on the fact that the knowledge state of student dynamically changes over time as the student learns. In the case of static data of student knowledge, Barnes \citep{Barnes06} developed a method for this mapping which works based on a measure of the fit of a potential Q-matrix to the data. It was shown to be successful as well as Principle Component Analysis for skill clustering analysis.
+Deriving a Q-matrix from a test result matrix was always challenging. Some models require a pre-defined Q-matrix. In some cases an expert defined Q-matrix is available but minor mistakes in mapping skills to items are always possible even by an expert. The basic challenge is to derive a perfect Q-matrix out of a test result matrix to give it as an input parameter to some models. This challenge also creates other challenges  such as optimum number of latent skills for a set of items in a test outcome. Sometimes there exists more that single Q-matrix associated with a test result with different number of skills. Finding the optimum number of skills to derive a Q-matrix is a question that is given in more details in section \ref{EDM2012}. 
 
-%In the experiments of Winters et al. \citep{Winters05}, different standard clustering techniques for finding the Q-matrix were applied on different types of datasets. Some datasets from SAT topics such as Mathematics, Biology and French, to computer science exams, and to different trivia topics were tested with the clustering techniques. It was shown that those techniques were successful at separating items that belongs to totally different topics, for example mathematics and french. For topics without any skill behind them (essentially they are facts and the only skill required is to memorize them), topic separation was less successful.
+Given the number of latent skills, there exists few techniques to derive a Q-matrix for models that require one. Cen et al. \citep{Cen2005,Cen2006} have used Learning FactorAnalysis technique(LFA) technique to improve the initially hand built Q-matrix which maps fine-grained skills to questions. They used log data which is based on the fact that the knowledge state of student dynamically changes over time as the student learns. In the case of static data of student knowledge, Barnes \citep{Barnes06} developed a method for this mapping which works based on a measure of the fit of a potential Q-matrix to the data. It was shown to be successful as well as Principle Component Analysis for skill clustering analysis. In our experiment we use NMF as a technique to derive a Q-matrix given an optimum number of latent skills. Later in this section we will introduce NMF in more details. Section \ref{ITS2012} describes how to derive a conjunctive model of Q-matrix from a student test result.
 
+For real datasets there exists few expert defined Q-matrices. To use them as an input parameter of student skills assessment models we need to refine them. Section \ref{edm2014} gives few approaches to this problem.
 
-%EXTEND%the problem of refinement of the Q-matrix
 
 \subsection{Types of Q-matrix (examples) }
 
@@ -308,8 +310,8 @@ R & Q & S
 \label{fig1} 
 \end{figure}
 
-
-The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skills increase the chance of success based on its weight. It is possible to have different weights for skills, but for expert-defined Q-matrices in our study we consider similar weights for each skills of an item where skills for each item will sum up to~$1$.\note{they will not be equal when the Q-matrix is from a factorization} Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$  can be considered as a probability that examinee $i$ can succeed item $j$.
+%, but for expert-defined Q-matrices in our study we consider similar weights for each skills of an item\note{they will not be equal when the Q-matrix is from a factorization}\note{You are right, I was thinking about the data generation phase, in data generation process for random Q-matrix generation we consider same weights 
+The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skills increase the chance of success based on its weight. It is possible to have different weights for skills where skills for each item will sum up to~$1$. Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$  can be considered as a probability that examinee $i$ can succeed item $j$.
 
 \begin{figure}
 \begin{footnotesize} 
@@ -557,7 +559,11 @@ A few methods have been developed to estimate the slip and guess parameters from
 \subsection{Alternate Least-square Factorization (ALS)}
 \label{ALS-Def}
 
-The {Alternate Least-Square Factorization (ALS)} method is defined in \cite{Desmarais2013aied} which is also a factorization method that can infer an initial Q-matrix to estimate its parameters, or refine a predefined Q-matrix given as a starting point. The next sections in this chapter introduce a methodology to refine a existing Q-matrix in more details.\note{it was written that it cannot do a factorization without a Q-matrix, but this is not correct.  Just as NMF, it requires a starting point, but it can be a random starting point.}
+
+
+The {Alternate Least-Square Factorization (ALS)} method is defined in \cite{Desmarais2013aied} which is also a factorization method that can infer an initial Q-matrix to estimate its parameters, or refine a predefined Q-matrix given as a starting point. The next sections in this chapter introduce a methodology to refine a existing Q-matrix in more details.
+
+\note{it was written that it cannot do a factorization without a Q-matrix, but this is not correct.  Just as NMF, it requires a starting point, but it can be a random starting point.}\note{Does it give you a correct guess for any random seeding point? as far as I remember, different random points gave back different Q-matrices, if it's true then it's not a reliable technique to derive a Q-matrix}
 
 Starting with the results matrix ~$\mathbf{R}$ and an initial Q-matrix, $\mathbf{Q}_0$, a least-squares estimate of the skills matrix ~$\mathbf{\hat{S}}_0$ can be obtained by:
 
