@@ -104,7 +104,18 @@ Note that the three types of interpretation of Q-matrix make sense when there is
 
 \section{Skills assessment and item outcome prediction techniques}
 
-The skills assessment models we compare can be grouped into four categories: (1) the Knowledge Space frameworks which models a knowledge state as a set of observable items without explicit reference to latent skills, (2) the single skill Item Response Theory (IRT) approach, (3) the matrix factorization approach which decomposes the student results matrix into a Q-matrix that maps items to skills, and a skills matrix that maps skill to students, and which relies on standard matrix algebra for parameter estimation and item outcome prediction, and finally (4) the DINA/DINO approaches which also refer to a Q-matrix, but incorporate slip and guess factors and rely on different parameter estimation techniques than the matrix factorization method.
+The skills assessment models we compare can be grouped into four categories: (1) the Knowledge Space frameworks which models a knowledge state as a set of observable items without explicit reference to latent skills, (2) the single skill Item Response Theory (IRT) approach, (3) the matrix factorization approach which decomposes the student results matrix into a Q-matrix that maps items to skills, and a skills matrix that maps skill to students, and which relies on standard matrix algebra for parameter estimation and item outcome prediction, and finally (4) the DINA/DINO approaches which also refer to a Q-matrix, but incorporate slip and guess factors and rely on different parameter estimation techniques than the matrix factorization method.  We focus here on the assessment of static skills, where we assume the test data represents a snapshot in time, as opposed to models that allow the representation of skills that change in time, which is more typical of data from learning environments (see \citep{desmarais2012review}, for a review of both approaches).
+
+
+
+The skills assessment model we compare can be classified at a first level according to whether they model skills directly, and whether they are single or multiple skills.  Then, multi-skills model can be further broken down based on whether they have guess and slip parameters, and whether the skills are considered disjunctive or conjunctive.  Figure~\ref{AssessMethods} shows this hierarchy of models.
+
+\begin{figure}[ht]
+\centering
+   \includegraphics[trim=0.5cm 7cm 0.5cm 3cm,scale =0.5] {SkillsAssessments.pdf}
+\caption{Skills assessment methods}
+\label{AssessMethods}
+\end{figure}
 
 Considering  these techniques from the perspective of variety of skills in test outcome prediction, we can put them in the following categories: 
 
@@ -201,7 +212,7 @@ where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$. If evidence $E_i$ i
 
 Other approaches incorporate a single latent skill in the model. This is obviously a strong simplification of the reality of skilled performance, but in practice it is a valid approximation as results show. When a model uses single latent skill, in fact it projects all the skills mastery level in a form of unidimentional representation that implicitly combines all skills. Then there would be a single continuous skill variable which is a weighted average of the skills mastery levels of an examinee. 
 
-In this section two models are presented: The well established Item Response Theory (IRT) which models the relationship between observation and skill variable based on a logistic regression framework. The second approach is a trivial approach we call Expected Prediction. This approach is used as a baseline in our experiments.
+In this section two approaches for modeling static test data are presented: The well established Item Response Theory (IRT) which models the relationship between observation and skill variable based on a logistic regression framework. It dates back to the 1960's and is still one of the prevailing approaches \citep{bakerKim2004}.  The second approach is a trivial approach we call Expected Prediction. This approach is used as a baseline in our experiments.
 
 \subsection{IRT} 
 
@@ -438,6 +449,7 @@ Comparing these three types together, in the same condition for student skills m
 
 
 \subsection{Non-Negative Matrix Factorization (\ac{NMF})}
+\label{NMF_MODEL_ASSESS}
 
 Different techniques and methods in the field of data mining were used to derive a Q-matrix. Matrix factorization is one of the most important one in this area. Matrix factorization is a method to decompose a matrix into two or more matrices. Singular Value Decomposition (SVD) and NMF are well known examples of such methods. Beyond skill modelling, it is an important technique in different fields such as bioinformatics, and vision, to name but a few. It has achieved great results in each of these fields. For skills assessment, using tensor factorization, a generalization of matrix factorization to a hypercube instead of matrix and where one dimension represents the time, Thai-Nghe et al. \citep{Nguyen2011} have shown that the approach can lead to assessments that reach prediction accuracies comparable and even better than well established techniques such as Bayesian Knowledge Tracing \citep{corbett:umuai:1995}. Matrix factorization can also lead to better means for mapping which skills can explain the success to specific items. In this research, we use NMF as a skill assessment method that infers a Q-matrix with multiple skills.
 
@@ -563,7 +575,7 @@ A few methods have been developed to estimate the slip and guess parameters from
 
 The {Alternate Least-Square Factorization (ALS)} method is defined in \cite{Desmarais2013aied} which is also a factorization method that can infer an initial Q-matrix to estimate its parameters, or refine a predefined Q-matrix given as a starting point. The next sections in this chapter introduce a methodology to refine a existing Q-matrix in more details.
 
-\note{it was written that it cannot do a factorization without a Q-matrix, but this is not correct.  Just as NMF, it requires a starting point, but it can be a random starting point.}\note{Does it give you a correct guess for any random seeding point? as far as I remember, different random points gave back different Q-matrices, if it's true then it's not a reliable technique to derive a Q-matrix}
+%\note{it was written that it cannot do a factorization without a Q-matrix, but this is not correct.  Just as NMF, it requires a starting point, but it can be a random starting point.}\note{ Behzad Says: Does it give you a correct guess for any random seeding point? as far as I remember, different random points gave back different Q-matrices, if it's true then it's not a reliable technique to derive a Q-matrix}
 
 Starting with the results matrix ~$\mathbf{R}$ and an initial Q-matrix, $\mathbf{Q}_0$, a least-squares estimate of the skills matrix ~$\mathbf{\hat{S}}_0$ can be obtained by:
 
@@ -590,13 +602,7 @@ Note that ~$(\mathbf{Q}_0^{\mathrm{T}} \, \mathbf{Q}_0)$ or ~$(\mathbf{\hat{S}}_
 
 Let us get back to the main contribution of the thesis:  Assessing model fit on the basis of the goodness of fit measure with predictive performance analysis of real and synthetic data. The previous sections of this chapter introduced skills assessment techniques to obtain the predictive performance of a dataset. Some methods infer a Q-matrix and some other not even infer it but require a predefined one. Challenges are not limited to inferring a Q-matrix out of data: the number of latent skills is also unknown. For some real dataset there exists at least one pre-defined Q-matrix  by an expert which could have potential mistakes and requires to be refined. These are some challenges that should be addressed as a complementary steps to predictive performance analysis.
 
-The rest of this chapter presents research works that are complementary steps of the main contribution of this thesis. The general perspective of section \ref{ITS2012} is to find a way for deriving the Q-matrix from data, along with a Skills mastery matrix. We aim to find a method to derive these matrices for different types of Q-matrices. This should be a valuable and challenging task. Finding the number of latent skills (i.e. the common dimension between matrices $\mathbf{Q}$ and~$\mathbf{S}$) is another important task that is described in section \ref{ITS2012} . Finally, in section \ref{edm2014} we will introduce methods to validate tasks to skills mapping which is also applicable for the refinement of a Q-matrix.
-
-
-
-%It has been shown that this mapping can be derived by Matrix Factorization techniques \citep{desmarais2011conditions,desmarais2012item} on a test result data with different topic such as history, biology, math and french. Considering a single skill for each topic, the derived Q-matrix can represent a single skill per item mapping. Dealing with Q-matrices that success or failure of an item depends on more than one skill requires more complicated interpretation. 
-%A general contribution for such a problem is identifying a optimize number of skills for a set of items. It has been reported in \citep{lee1999learning} that number of skills should conform to : $r < nm/(n+m)$ where $r$, $n$ and $m$ is the number of skills, items and students respectively. Finding the best number of skills which counts all the essential and useful skills is always desired. The other part of this thesis is to define approaches to find the optimum number of skills for creating a Q-matrix. Finally, the last step for improving the quality of an expert defined Q-matrix is to verify and refine its accuracy  based on some approaches that we will discuss in next chapters.
-
+The rest of this chapter presents researches that are complementary steps of the main contribution of this thesis. The general perspective of section \ref{ITS2012} is to find a way for deriving the Q-matrix from data, along with a Skills mastery matrix. Section \ref{ITS2012} is inspired by \citet{desmarais2012mapping} that was published in ITS conference. This article aims to find a method to derive these matrices for different types of Q-matrices. This is a valuable and challenging task. Finding the number of latent skills (i.e. the common dimension between matrices $\mathbf{Q}$ and~$\mathbf{S}$) is another important task that is described in section \ref{ITS2012} . The text of section \ref{EDM2012} is mainly borrowed form \citet{Beheshti2012Numbers} work that was published on EDM conference. Finally, in section \ref{edm2014} few methods is introduced to validate tasks to skills mapping which is also applicable for the refinement of a Q-matrix. Parts of section \ref{edm2014} is taken from \citet{desmarais2014refinement} publication in EDM conference.
 
 
 \section{NMF on single skill and multi-skill conjunctive Q-matrix}
@@ -606,20 +612,18 @@ A few studies have shown that a mapping of skills to items can, indeed, be deriv
 
 These results were later corroborated by \citet{desmarais2011conditions} who also used simulated data to show that the low discrimination power of some topics might be explained by their lower weight in terms of skill factors, when compared to other factors such as item difficulty and student ability.
 
-The factorization methods in the studies mentioned above rely on the standard matrix operators which was in formula \ref{eq:1} and therefore can be considered as compensatory models of Q-matrix which was explained in the previous chapter. Actually, in these study all items rely on one skill and there was not a combination of skills for any item, thus the simple model of factorization will work. 
+The factorization methods in the studies mentioned above rely on the standard matrix operators which was in formula \ref{eq:1} and therefore can be considered as compensatory models of Q-matrix which was explained in the previous chapter. Actually, these studies rely on single skill per item type of Q-matrix and there was not a combination of skills for any item, thus the simple model of factorization will work. 
 
-To follow up the on previous studies \citep{Barnes2005,desmarais2011conditions,Winters07} we can apply NMF technique to equation \ref{eq:6}. The goal of this task is to determine if NMF can successfully derive a conjunctive model of Q-matrix, where skills do not add up to increase the chances of success to an item, but instead are necessary conditions.
+To follow up the on previous studies \citep{Barnes2005,desmarais2011conditions,Winters07} There is still a chance to apply NMF technique to equation \ref{eq:6}. The goal of the contribution in \citet{desmarais2012mapping} paper is to determine if NMF can successfully derive a conjunctive model of Q-matrix, where skills do not add up to increase the chances of success to an item, but instead are necessary conditions.
 
 
 \subsection{Simulated data}
+%\note{This section and the following few after seem to be taken verbatim from the ITS2012.  First, this has to be EXPLICITELY NENTIONED.  Very important or otherwise it can be considered plagiarism.  It is ok to take verbatim some parts of existing papers in a thesis where you are co-author, but it has to be mentioned, especially if you are not fisrt author.  Second, it does not fit very well in this section.  It is written as a new experiment, whereas we are in the review of past work. }
+To validate the technique, The methodology of this research relies on simulated data. Although it lacks the external validity of real data, it remains the most reliable means of obtaining test results data for which the underlying, latent skills structure is perfectly known. Therefore, assessing the technique over simulated data is a reasonable first step to establish the validity the approach under controlled conditions. 
 
-\note{This section and the following few after seem to be taken verbatim from the ITS2012.  First, this has to be EXPLICITELY NENTIONED.  Very important or otherwise it can be considered plagiarism.  It is ok to take verbatim some parts of existing papers in a thesis where you are co-author, but it has to be mentioned, especially if you are not fisrt author.  Second, it does not fit very well in this section.  It is written as a new experiment, whereas we are in the review of past work. }
+Whilst the underlying model  is shown in previous sections, we describe an overall view of simulated data generation of this paper. More details on synthetic data generation is given in chapter \ref{sec:Syn}.
 
-To validate the technique, we rely on simulated data. Although it lacks the external validity of real data, it remains the most reliable means of obtaining test results data for which the underlying, latent skills structure is perfectly known. Therefore, assessing the technique over simulated data is a reasonable first step to establish the validity the approach under controlled conditions. Further studies with real data will be necessary, granted the results of the existing study warrants such work.
-
-Whilst the underlying model and methodology of the simulated data are shown to make substantial performance of student skills assessment (see \citep{Desmarais2010a} for eg.), we describe in some details this methodology. 
-
-A first step to obtain data of simulated examinee test results is to define a Q-matrix composed of $j$ skills and $k$ items. We chose to define a Q-matrix that spans all possible combinations of 6 skills with a maximum of two skills per item, and at least one skill per item. A total of 21 items spans this space of combinations. This matrix is shown in Figure \ref{figqmatrixandResutM}. Items 1 to 15 are two-skills and items 16 to 21 are single-skill. 
+A first step to obtain data of simulated examinee test results is to define a Q-matrix composed of $j$ skills and $k$ items. They chose to define a Q-matrix that spans all possible combinations of 6 skills with a maximum of two skills per item, and at least one skill per item. A total of 21 items spans this space of combinations. This matrix is shown in Figure \ref{figqmatrixandResutM}. Items 1 to 15 are two-skills and items 16 to 21 are single-skill. 
 
 \begin{figure}[ht]
 \centering
@@ -634,17 +638,12 @@ A first step to obtain data of simulated examinee test results is to define a Q-
 \label{figqmatrixandResutM}
 \end{figure}
 
-
-We will consider that skills have a difficulty level. That difficulty will transfer to items that have this skill. The difficulty of the two-skills items will further increase by the fact that they require the conjunction of their skills. We do not assign an item difficulty since this is already reflected by skill difficulties.
-
-Examinees need to be assigned ability levels. The ability is, in fact, reflected by the set of skills mastered. Ability variance will therefore show up as the variance in number of skills across examinees, and the assigned ability level will increase this variance over the variance resulting from skill difficulty.
-
-Finally, two more parameters are used in the simulated the data, namely the $\mathit{slip}$ and $\mathit{guess}$ factors. These factors are set as constant values across items. They are essentially noise factors and the greater they are, the more difficult is the task of inducing the Q-matrix from data.
+They also considered skills difficulty in the simulated data. They did not assign an item difficulty since this is already reflected by skill difficulties. They also reflected student ability in the skills mastery matrix where ability variance will show up as the variance in number of skills across examinees. The last two parameters that they considered are $\mathit{slip}$ and $\mathit{guess}$ factors which are set as constant values across items. The details of synthetic data generation for this model is given in chapter \ref{sec:Syn} since we used the same approach to generate synthetic data based on this model for assessing model fit.
 
 Given the above framework, the process of generating simulated examinee data follows the following steps:
 \begin{enumerate}
 \item Assign a difficulty level to each skill.
-\item Generate a random set of hypothetical examinee skills vectors based on the difficulty of each skill and the examinee\textquoteright{}s ability level. Skill difficulty and examinee ability are each expressed as a random normal variable. The probability density function of their sum provides the probability of mastery of the skill for the corresponding examinee. The skill vector is a sampling in \{0, 1\} based on each skill probability of mastery. 
+\item Generate a random set of hypothetical examinee skills vectors based on the difficulty of each skill and the examinee\textquoteright{}s ability level. 
 \item Generate simulated data based on equation \ref{eq:6} without taking into account the $\mathit{slip}$ and $\mathit{guess}$ parameters. This is referred to as the $ideal$ response pattern.
 \item Randomly change the values of the generated data based on the $\mathit{slip}$ and $\mathit{guess}$ parameters. For example, with values of 0.1 and 0.2 respectively, this will result in approximately $10\%$ of the succeeded items to become failed, and $20\%$ of the failed items to become succeeded.
 \end{enumerate}
@@ -657,15 +656,15 @@ A sample of the results matrix is given in figure\ref{figqmatrixandResutM}. Exam
 \subsection{Simulation methodology}
 
 
-The assessment of the NMF performance to infer a Q-matrix from simulated test data such as figure \ref{figqmatrixandResutM}'s is conducted by comparing the predefined Q-matrix, $\mathbf{Q}$, as shown in figure \ref{figqmatrixandResutM}, with the $\hat{\mathbf{Q}}$ matrix obtained in the NMF of equation \ref{eq:6}.
+\citet{desmarais2012mapping} proposed a methodology to assess the NMF performance to infer a Q-matrix from simulated test data such as figure \ref{figqmatrixandResutM}'s. This methodology is conducted by comparing the predefined Q-matrix, $\mathbf{Q}$, as shown in figure \ref{figqmatrixandResutM}, with the $\hat{\mathbf{Q}}$ matrix obtained in the NMF of equation \ref{eq:6}.
 
-As mentioned above, the negation operator is applied over the simulated test data and the NMF algorithm is carried over this data. We used the R NMF package \citep{Gaujoux2010} and the Brunet NMF algorithm.
+As mentioned in section \ref{NMF_MODEL_ASSESS}, the negation operator is applied over the simulated test data and the NMF algorithm is carried over this data. For this experiment they used the R NMF package \citep{Gaujoux2010} and the Brunet NMF algorithm.
 
-We defined a specific method for the quantitative comparison of the matrix $\hat{\mathbf{Q}}$ with $\mathbf{Q}$. First, the $\hat{\mathbf{Q}}$ matrix contains numerical values on a continuous scale. To simplify the comparison with matrix $\mathbf{Q}$, which is composed of \{0, 1\} values, we discretize the numerical values of $\hat{\mathbf{Q}}$ by applying a clustering algorithm to each item in $\hat{\mathbf{Q}}$, forcing two clusters, one for 0\textquoteright{}s and one for 1\textquoteright{}s. For example, item 1 in the NMF inferred matrix of figure \ref{ClusteringResults}  (which we explain later) corresponds to a vector of six numerical values, say \{1.6, 1.7, 0.0015, 0.0022, 0.0022, 0.0018\}. This vector clearly cluster into the \{1, 1, 0, 0, 0, 0\} vector of item 1 in figure \ref{ClusteringResults}. The K-means algorithm is used for the clustering process of each item and we use the kmeans routine provided in R (version 2.13.1).
+They defined a specific method for the quantitative comparison of the matrix $\hat{\mathbf{Q}}$ with $\mathbf{Q}$. First, the $\hat{\mathbf{Q}}$ matrix contains numerical values on a continuous scale. To simplify the comparison with matrix $\mathbf{Q}$, which is composed of \{0, 1\} values, they discretize the numerical values of $\hat{\mathbf{Q}}$ by applying a clustering algorithm to each item in $\hat{\mathbf{Q}}$, forcing two clusters, one for 0\textquoteright{}s and one for 1\textquoteright{}s. For example, item 1 in the NMF inferred matrix of figure \ref{ClusteringResults}  (which will be explained later) corresponds to a vector of six numerical values, say \{1.6, 1.7, 0.0015, 0.0022, 0.0022, 0.0018\}. This vector clearly cluster into the \{1, 1, 0, 0, 0, 0\} vector of item 1 in figure \ref{ClusteringResults}. The K-means algorithm is used for the clustering process of each item which is provided in R (version 2.13.1).
 
 Then, to determine which skill vector (column) of the $\hat{\mathbf{Q}}$ matrix corresponds to the skill vector of the $\mathbf{Q}$ matrix, a correlation matrix is computed and the highest correlation of each column vector $\hat{\mathbf{Q}}$ is in turn matched with the corresponding unmatched column in $\mathbf{Q}$.
 
-We will use visual representations of the raw and the \textquotedblleft{}discretized\textquotedblright{} (clustered) $\hat{\mathbf{Q}}$ matrix to provide an intuitive view of the results, as well as a quantitative measures of the fit corresponding to the average of the correlations between the matched skills vectors $\hat{\mathbf{Q}}$ and $\mathbf{Q}$.
+A visual representations of the raw and the \textquotedblleft{}discretized\textquotedblright{} (clustered) $\hat{\mathbf{Q}}$ matrix is used to provide an intuitive view of the results, as well as a quantitative measures of the fit corresponding to the average of the correlations between the matched skills vectors $\hat{\mathbf{Q}}$ and $\mathbf{Q}$.
 
 
 \subsection{Results}
