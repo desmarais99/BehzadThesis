@@ -1,17 +1,72 @@
 \Chapter{SYNTHETIC DATA GENERATION}\label{sec:Syn}
 
 
-Simulated data has been playing an increasingly important role in EDM \citep{JEDM:baker2009}. The availability of new simulation software is contributing to this trend in every domain. As an example \citet{jafarpour2015quantifying} used simulated data for disease outbreak detection where simulated data is generated from a hypothesized model of a phenomena.
+Simulated data has been playing an increasingly important role in EDM \citep{JEDM:baker2009}. The availability of new simulation software is contributing to this trend in every domain. As an example \citet{jafarpour2015quantifying} used simulated data for disease outbreak detection where simulated data is generated from a hypothesized model of a phenomena. The framework of this study relies on synthetic data. Getting back to the main contribution of this thesis, we proposed an approach for model selection that relies on synthetic data. Using synthetic data allows us to validate the sensitivity of the model selection approach to data specific parameters such as sample size and noise. Then the process of generating data should be accurate such that both data  and model specific parameters are applied properly. Every model studied here can be considered \textit{generative}, to the extent that they can generate synthetic data.
 
-A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit. 
+A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit. Since the hypothesis of this research relies on comparison the performance vector of real vs. synthetic data, then we can also consider data specific parameters of the real data in the generation process to make a better comparison of the results.
 
-The framework of this study relies on synthetic data. We rely on simulated data for all experiments. Although it lacks the external validity of real data, it remains the most reliable means of obtaining test results data for which the underlying, parameters such as latent skills structure is perfectly known. Every model studied here can be considered \textit{generative}, to the extent that they can generate synthetic data.  The data generation process of each model share common parameters which are: number of items, number of students, total success rate and data distribution but other parameters vary according to different techniques.  The generation process for each model is described below.
+\section{Data generation parameters}
 
+As described before, there exists two types of parameters for student test outcome:
+\begin{itemize}
+\item Model specific: These parameters are dependent on the ground truth of a dataset. Skills assessment models that were described in section \ref{SkillsAssessmentModels} considers different parameters. Depending on the type of student model, some of them may share a parameter such as Q-matrix for multiple skills models but still the interpretation of each model is unique. Generally an experiment should be designed to learn these parameters form a dataset or they can be generated under specific criteria. More details for each parameter is given later in this chapter.
+\item Data specific (contextual): Regardless of the ground truth of a dataset, there are parameters that describe the dataste's specifications such as number of students. These parameters are common for any student model. They could possibly affect the performance of a model over a dataset.
+\end{itemize}
+
+Table \ref{tbl:param-DataGen} shows a complete list of both types of parameters required for data generation.
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+
+
+
+\begin{table}
+  \centering
+
+\begin{tabular}{c|c|l!{\VRule[1.5pt]}l|l!{\VRule[1.5pt]}l|}
+\multicolumn{3}{c}{}&\multicolumn{3}{c}{Parameters}\tabularnewline
+\cline{4-6}
+\multicolumn{3}{c!{\VRule[1.5pt]}}{Skills Model}&\multicolumn{2}{c!{\VRule[1.5pt]}}{Model specific}&\multicolumn{1}{c|}{Data specific}\tabularnewline
+\cmidrule[1.5pt]{2-6}
+&&NMF Conj. & & &  \tabularnewline
+\cline{3-3}
+&&NMF Add.&&\multirow{-2}{*}{ \tabitem  Q-matrix }&\multirow{-2}{*}{\tabitem Number of students } \tabularnewline
+\cline{3-4}
+&&DINA& \tabitem Slip & &\tabularnewline
+\cline{3-3} 
+&\multirow{-4}{*}{\begin{sideways} \scriptsize Multiple\end{sideways}}&DINO& \tabitem Guess&\multirow{-2}{*}{  \parbox[t]{3cm}{ \tabitem Students skills  \\ mastery matrix}}& \multirow{-2}{*}{\tabitem Number of items } \tabularnewline
+\cmidrule[1.5pt]{2-5}
+&&&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Student ability  } &  \tabularnewline
+&&&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Item difficulty  } &\multirow{-2}{*}{\tabitem Number of skills } \tabularnewline
+&&\multirow{-3}{*}{ IRT}&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Item discrimination}  &\tabularnewline
+\cline{3-5}
+&&&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Student Odds  } & \multirow{-2}{*}{\tabitem Test success rate }  \tabularnewline
+&\multirow{-5}{*}{\begin{sideways} \scriptsize Single \end{sideways}}&\multirow{-2}{*}{ Expected}&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Item Odds}  &  \tabularnewline
+\cmidrule[1.5pt]{2-5}
+&&&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Initial Odds } & \multirow{-2}{*}{\tabitem Student score Variance} \tabularnewline
+&&&\multicolumn{2}{l!{\VRule[1.5pt]}}{ \tabitem Odds ratio } & \tabularnewline
+\multirow{-9}{*}{\begin{sideways} \scriptsize Contributed skills \end{sideways}}&\multirow{-3}{*}{\begin{sideways} \scriptsize Zero\end{sideways}}&\multirow{-3}{*}{ POKS }&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem PO structure}& \multirow{-2}{*}{\tabitem Item score Variance} \tabularnewline
+\cmidrule[1.5pt]{2-6}
+\end{tabular}
+  \caption{Parameters involved in synthetic data generation}
+  \label{tbl:param-DataGen}
+\end{table}
+
+\subsection{Assessing parameters}
+
+To generate artificial data a set of parameters is required There are two approaches to assess required parameters to generate synthetic data:
+\begin{itemize}
+\item Parameters borrowed form a real data: Deriving contextual parameters from a real data is a straight forward task. To get model specific parameters we need to learn them from a real dataset given a model. In some cases there exists a predefined (or expert defined) parameter associated with the real data such as expert defined Q-matrices.
+\item Generate parameters randomly based on a distribution: In the case that there exists no reference dataset to derive parameters we can randomly select some samples based on a distribution (for example normal distribution). Some parameters have specific conditions that if they become violated it changes the definition of the parameter. More details is given in next sections.
+
+\end{itemize}
+
+The rest of this chapter describes the data generation process based on each model assessment technique that is used in the proposed model selection approach.
+% we can also specify which paramters has been borrowed from real data and which one has been generated
 
 \section{POKS}
 %first you have to get probabilities and which probability do you start with? where do they come from?
-% separating the data generation process in two categories, : parameters are borrowed from real data 2: we generate parameters randomly based on a distribution(randomly some samples from normal distributions : said michel) -> this can be a section that shows the different appraoches 
-% what are the parameters that can be borrowed and what are those that can not be borrowed from the data? ( that have been or have not been)
+
 % explicitly say which distribution you used? and you can write them in a form of a equation(examples are given)
 The method that generates synthetic dataset based on the POKS model requires a knowledge structure (KS). In this process the KS can be obtained from a real data set which allows us to make a better comparison of the results. It can also be generated as a random KS. The graphical demonstration of knowledge structure is an directed graph with no cycles allowed, except for symmetric relations.  
 
