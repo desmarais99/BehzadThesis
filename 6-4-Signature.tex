@@ -3,6 +3,9 @@
 In this chapter we present a method of determining the model that is closest to the ground thruth by defining a space to characterize models based on their predictive performance.  A real data set is a point in that space, and synthetic data sets associated with each model are also individual points.  The model's synthetic data set that is the closest to the real data set is deemed the ground truth.  Details of this framework is described later. We first review the basic concepts and the models used in this study.
 
 
+ % However, the approach would generalize to dynamic data as well.
+
+
 \section{Model fit in a vector space framework}
 
 The approach we propose to finding the model that best fits a data set is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
@@ -39,31 +42,6 @@ The principle of the proposed approach is to use the whole column of performance
 The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turns, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.  
 
 The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance, but we will show examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
-
-\section{Skills Models}
-
-\note{This information is partly redundant with chapter 2. It needs to be adapted}
-
-The approach we introduce to assess model fit relies on the generation of synthetic data from different skills models.  We review the basics of each of these models.  We focus here on the assessment of static skills, where we assume the test data represents a snapshot in time, as opposed to models that allow the representation of skills that change in time, which is more typical of data from learning environments (see \citep{desmarais2012review}, for a review of both approaches).  However, the approach would generalize to dynamic data as well.
-
- For modeling static test data, Item Response Theory (IRT) is likely the most established model. It dates back to the 1960's and is still one of the prevailing approaches \citep{bakerKim2004}.  But, akin to the trend in data mining in general, many other models have been introduced in recent years.  Among them is the family of models that rely on slip and guess factors \citep{junker2001cognitive,Junker2000}, such as the DINA (Deterministic Input Noisy And-Gate), DINO (Deterministic Input Noisy Or-Gate), and other variants.  Other approaches are based on the Knowledge Space theory of Doignon and Falmagne \citep{Doignon1999}, which does not directly attempt to model underlying skills but instead rely on observable items only (\citep{desmarais:umuai:1995}; see also extentions that do include skills: \citep{heller2006competence}).  Finally, recent models based on matrix factorization have also emerged in the last decade \citep{Winters05,barnes2010novel,thai2011matrix,desmarais2012mapping}.  They factorize the student per item results matrix into the linear product of the so called Q-matrix (skills required per question item) and the skills mastery matrix.
-
-There exists a large array of models to represent and assess student skills.  We focus here on the assessment of static skills, where we assume the test data represents a snapshot in time, as opposed to models that allow the representation of skills that change in time, which is more typical of data from learning environments (see \citep{desmarais2012review}, for a review of both approaches).
-
-The skills assessment model we compare can be classified at a first level according to whether they model skills directly, and whether they are single or multiple skills.  Then, multi-skills model can be further broken down based on whether they have guess and slip parameters, and whether the skills are considered disjunctive or conjunctive.  Figure~\ref{AssessMethods} shows this hierarchy of models.
-
-\begin{figure}[ht]
-\centering
-   \includegraphics[trim=0.5cm 7cm 0.5cm 3cm,scale =0.5] {SkillsAssessments.pdf}
-
-\note{The figure should go in chapter 2}
-\caption{Skills assessment methods}
-\label{AssessMethods}
-\end{figure}
-
-The POKS model avoids the specification of skills alltogether by modeling the order in which items or tasks are learned.  Skills can be be modeled in a second phase once these items are mapped to given skills.  IRT is a well established family of models that rely on a single skill to model student performance data.  Finally the multi-skill family of models rely on a mapping of item to skills, called a Q-matrix.  The DINA model incorporates the guess and slip parameters and considers the all skills specified in a Q-matrix as required in order to succeed an item, whereas the DINO model requires any skills to be sufficient.  The NMF conjunctive and NMF additive models are the counterpart of DINA and DINO, but they do not incorporate the guess and slip parameters, and the NMF additive model is closer to a continuum between conjunction and disjunction, as every skill mastered is considered to increase the chances of success as opposed to strict a disjunction for which any single skill is sufficient.
-
-
 
 
 
@@ -133,8 +111,8 @@ For each dataset there exists a training set that contains 9 folds and a test se
 \end{table}
 
 
-\newcommand{\tabitem}{~~\llap{\textbullet}~~}
-\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+%\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+%\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
 
 
 
