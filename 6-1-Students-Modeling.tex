@@ -556,7 +556,7 @@ Besides its use for student skills assessment and for deriving a Q-matrix, matri
 
 
 \subsection{Deterministic Input Noisy And/Or (DIAN/DINO)}
-
+\label{DINA-DINO-Desc}
 The other skills assessment models we consider are based on what is referred to as Deterministic Input Noisy And/Or (DINO/DINA) \cite{junker2001cognitive}.  They also rely on a Q-matrix and they can not in themselves infer a Q-matrix from a test result matrix, and instead require a predefined Q-matrix for the predictive analysis. The DINA model (Deterministic Input Noisy And) corresponds to the conjunctive model whereas the DINO (Deterministic Input Noisy Or) corresponds to the disjunctive one, where the mastery of a single skill is sufficient to succeed an item.  The acronyms makes reference to the AND/OR gates terminology.
 
 These models predict item outcome based on three parameters: the slip and guess factors of items, and the different ``gate'' function between the student's ability and the required skills.  The gate functions are equivalent to the conjunctive and disjunctive vector product logic described for the matrix factorization above.  In the DINA case, if all required skills are mastered, the result is~1, and 0~otherwise. Slip and guess parameters are values that generally vary on a~$[0,0.2]$ scale. In the DINO case, mastery of any skills is sufficient to output~1.  Assuming~$\xi$ is the output of the corresponding DINA or DINO model and~$s_j$ and~$g_j$ are the slip and guess factors, the probability of a successful outcome to item~$X_{ij}$ is:
