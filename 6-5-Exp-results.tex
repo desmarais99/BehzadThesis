@@ -1,62 +1,7 @@
 \Chapter{Experimental Results}\label{sec:SIGNATURE}
 
-In this chapter we present a method of determining the model that is closest to the ground thruth by defining a space to characterize models based on their predictive performance.  A real data set is a point in that space, and synthetic data sets associated with each model are also individual points.  The model's synthetic data set that is the closest to the real data set is deemed the ground truth.  Details of this framework is described later. 
 
-
-\section{Model fit in a vector space framework}
-
-The approach we propose to finding the model that best fits a dataset is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
-
-Let us explain this idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} and seventh data set named \textit{random} are added for comparison purpose.  The details of the methodology to assess model performance are described later.  For now, let us only focus on this table's data.
-
-\newcolumntype{d}[1]{D{.}{.}{#1}} % not used
-
-\begin{table}[ht]
-\caption{Vector space of accuracy performances}\label{tab:vectorspace}
-\centering
-\begin{tabular}{lccccccc}
-  \toprule
-  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }\tablefootnote{Note that the Synthetic datasets are generated based on different models. Namely, IRT means that the ground truth of the generated dataset assumed to be IRT model}} \\
-  \cline{2-8}
-  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{Linear .Conj}} & \multicolumn{1}{c}{{Linear .Comp}} \\ 
-  \hline
-  \textit{Expected} & \textbf{0.75} & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 \\ 
-  POKS & 0.75 & \textbf{0.94} & 0.94 & 0.81 & 0.81 & 0.90 & 0.94 \\ 
-  IRT & 0.75 & 0.91 & \textbf{0.95} & 0.73 & 0.73 & 0.79 & 0.89 \\ 
-  DINA & 0.75 & 0.77 & 0.81 & \textbf{1.00} & 0.65 & \textbf{0.98} & 0.89 \\ 
-  DINO & 0.75 & 0.63 & 0.56 & 0.66 & \textbf{1.00} & 0.68 & 0.91 \\ 
-  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58 \\ 
-  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & \textbf{0.98} \\ 
-  \bottomrule
-\end{tabular}
-\end{table}
-
-
-As we can expect, the diagonal (in bold face) always displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data.  This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth.  However, this is not always the case, in this particular example, although Linear Conj. generated dataset expected to have  better performance with NMF Conj. model but DINA shows a better performance. Later in this chapter we will discuss this case.
-
-
-
-The principle of the proposed approach is to use the whole column of performance as a vector to determine the closest model to the ground truth.  In that respect, if columns are considered as vectors in the space of dimensions created by model performances, we can use a similarity measure to determine the closest ground truth (or a distance measure if we were to consider the columns as a point in space).
-
-The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turns, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.  
-
-The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance except once case, but we will show more examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
-
-
-\section{Methodology}
-To make it straightforward we break the contribution into three experiments:
-
-\begin{itemize}
-\item Predictive performance : In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the relative performance of each model across the different synthetic data sets and across real data as well. The out put of this experiment is the relative performance or the ``signature'' of the dataset.
-\item Sensitivity of the signature over different data specific parameters: This section tests the uniqueness of the signature over different data generation parameters.
-%performance comparison
-\item Assessing the goodness of fit of a dataset: This part proposes a framework for model selection as well as a measure that represents the goodness of fit by comparing the relative performance vector of the synthetic and real data.
-\item Generality of the proposed approach under different assumptions about the data: In a third experiment, we move focus to the central problem of this thesis: classifying data sets in the performance vector space.  To validate the approach, we need to rely solely on synthetic data for which we know the underlying ground truth model.  A matrix is created with data sets generated from the different models, and each model performance is measured through a cross validation process.  This matrix allows us to classify a data set of unknown ground truth according to a nearest neighbor approach. In fact, this experiment tests if the proposed approach remains reliable on different conditions of parameters and also measuring the accuracy of its performance to predict a ground truth in comparison with other approaches for different data parameter assumptions.
-\end{itemize}
-
- 
-
-
+\begin{comment}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Relative performance}
 
@@ -109,6 +54,7 @@ For other parameters that are related to students we need to divide the test set
 
 Once all the required parameters are presented we can make a prediction for the inferred cells of the result matrix. Note that the selected observed and inferred items are the same across all the models for each run to make a better comparison for their prediction. A probability of mastery is obtained and rounded, resulting in a 0/1 error loss function.  We report the mean accuracy as the performance measure.  The R package \texttt{ltm} is used for parameter and skills estimation for IRT model and the R package \texttt{CDM} and \texttt{NMF} for Deterministic noisy and NMF models. 
 
+\end{comment}
 
 \subsection{Data sets}
 
@@ -256,13 +202,18 @@ The results from the subsets of the Fraction data show that the pattern of the F
 Finally, we note that none of the real data sets show the large the discrepancies found in the synthetic data sets models. One exception is the IRT synthetic data set which displays smaller variance across models and which ``signature'' resembles the Vomlel data, although the performance difference with the majority class is substantially higher for the synthetic data than the Vomlel data, suggesting that the real data is yet not a perfect fit to this model. Details of this conclusion is given in the next section.
 
 
+One interesting finding of the previous experiment on synthetic dataset was that the best performer model was the ground truth for the given set of parameters.
+
 \section{Sensitivity of the Model performance over data generation parameters}
 \label{Sensitive}
 
-One interesting finding of the previous experiment on synthetic dataset was that the best performer model was the ground truth for the given set of parameters. In this experiment we want to examine the effect of data generation parameters on the stability of the model performance vector in the performance space. In this section we run the same experiment but with different data generation parameters such as average success rate, sample size, number of latent skills, number of items, student and item score variance. This research can answer the question whether the patterns hold across different conditions. Table~\ref{fig:param} shows different conditions of the parameters.
+
+% In this experiment we want to examine the effect of data generation parameters on the stability of the model performance vector in the performance space. In this section we run the same experiment but with different data generation parameters such as average success rate, sample size, number of latent skills, number of items, student and item score variance. This research can answer the question whether the patterns hold across different conditions. 
+
+Table~\ref{fig:param} shows different conditions of the parameters.
 
 
-\begin{table}
+\begin{table}[h]
   \centering
 
   \begin{tabular}{>{\raggedright}p{.02\textwidth}>{\raggedright}p{.3\textwidth}>{\raggedright}p{.15\textwidth}>{\raggedright}p{.4\textwidth}}
@@ -375,6 +326,8 @@ Finally, we did a last experiment on datasets with different success rates. For 
  
 As explained the uniqueness characteristic of synthetic data signatures makes it easy to identify the ground truth and also there exists some similarity between the pattern of relative performance of synthetic and real datasets. Some real dataset that were from a same source but different parameters shared similarities in their relative performance. Hence we can define a measure to find the similarity of a synthetic generated dataset and a real one given a set of candidate models.
 
+\begin{comment}
+
 \subsection{Methodology and degree of similarity}
 The methodology that we took to assess the goodness of fit for a dataset is straightforward. It contains few steps as following :
 \begin{itemize}
@@ -388,7 +341,7 @@ The methodology that we took to assess the goodness of fit for a dataset is stra
 %The most important part is to have a measure to show the degree of similarity between the model performance vector of the synthetic data and the one of the ground truth which is a measure of model fit in our study. Many measures can be used to calculate this degree. The simplest one can be finding the distance between two vector of predictive performance between the synthetic dataset and the real one. Using distance between each of these signatures with the same ground truth can possibly result in different values for similarity. 
 
 %previous section showed that different data generation parameters with the same underlying model can create slightly different model performance vectors but with the same pattern.
-
+\end{comment}
 
 \subsection{Results}
 
@@ -471,8 +424,6 @@ Table~\ref{tablSynReal} shows the correlation of real data signature in columns 
 
 
 \section{Generality of the proposed approach}
-
-The very last experiment that we have done is a comparison between the proposed approach (``signature'' method) where the nearest neighbor classifies in the performance vector space and the simplest approach where the best performer is defining the ground truth(``Best performer'' method). We used the synthetic data generated in section \ref{Sensitive} to test this hypothesis. For the nearest neighbor approach the classification should be done where datasets have the same data generation conditions. Therefore we'll get 24 sets of datasets where similar data generation parameters exists among each set. Since we have 10 runs for each data specific parameter set then we choose 10 nearest neighbor and preform majority voting on the classification results. The classes would bethe seven models as the ground truth.
 
 Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. There exists 1440~datasets where each model corresponds to 240 dataset. The gray cells in table~\ref{Classification-Conf} shows the true positive values and other values in each column represent the false positive predictions for group of datasets.The values in each row shows the number of false negative predictions for each model. The confusion is mostly between those techniques that shares same concepts specially between NMF Conjunctive and DINA model where we use conjunctive Q-matrices. 
 
