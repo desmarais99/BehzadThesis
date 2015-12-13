@@ -12,20 +12,83 @@ On the hand the term ``goodness of fit''  for a statistical model describes how 
 The simplest way to address the first step is providing the predictive performance accuracy which is a basis for comparing models. Models with higher predictive accuracy yield more useful predictions and are more likely to provide an accurate description of the ground truth. Cross validation is also a straight forward and easy to understand approach for estimating predictive performance. In this research we used 10 fold cross validation to get the predictive accuracy.
 
 \subsection{Measures}
-There are different measures to represent the degree of similarity in step two and this is usually either the sums of squared error (SSE) or maximum likelihood. Model fitting is also called as an optimization method where each model in the set of candidate model optimized the error function (usually likelihood function) to find the best fitting model.
 
-Other measures such as Euclidean distance, cosine and correlation can also be used as a error function to compare the data and the model's prediction. The best fitting parameters can depend strongly on your choice of error function. In our study we use both 0/1 loss function as an error function and correlation as a measure of similarity.
+Models are the most important part of any educational systems since they are used to assess knowledge. To find the prediction quality of each skills assessment model some metrics are used. There is a wide range of choices of metrics to evaluate a model and choosing an appropriate one is very important since usually candidate models are preforming with small differences and a good metric can highlight the benefits of one model vs. others.
 
-The maximum likelihood function selects a set of values for the model parameters that maximizes the likelihood function which also maximizes the agreement of the selected model with the observed data. Likelihood function is also called inverse probability which is a function of the parameters of a statistical model. This allows us to fit many different types of models.
+%The notion of \textit{goodness of fit} represents how well a model can account for observed data.  For example, student test results can be accounted for by the ability of each student, and by the difficulty of each question, its discriminative factor, and by a guessing factor.  This is the basis of the 3-parameter logistic model IRT-3PL \cite{bakerKim2004}.  Given some training data to estimate the model parameters, and a partial observation of a test data set, held out responses can be ``predicted''.  The difference between the predicted and the actual responses represents the residual error, which is considered a measure of the goodness of fit.  And the lower the goodness of fit, the closer is the model considered to the ground thruth.
+
+
+There are different measures to represent the goodness of fit and this is usually either the sums of squared error (SSE) or maximum likelihood. \citet{Dhanani:EECS-2014-131} in a survey that compares three error metrics for learning model parameters in Bayesian Knowledge Tracing(BKT) framework. In their methodology they calculate the correlation between the error metrics to predict the BKT model parameters and the euclidean distance to the ground truth.  These error metrics have been widely used in model selection researches. Below we will describe these metrics briefly:
+
+%Model selection is also called as an optimization method where each model in the set of candidate model optimized the error function (usually likelihood function) to find the best fitting model.
+
+\begin{itemize}
+
+\item The maximum likelihood function selects a set of values for the model parameters that maximizes the likelihood function which also maximizes the agreement of the selected model with the observed data. Likelihood function is also called inverse probability which is a function of the parameters of a statistical model given an observed outcome. This allows us to fit many different types of model parameters. This measure is mostly for estimating parameters and in next sections of this chapter we will see the application of them in model selection. Since in our study the student test result follows a binomial distribution then the likelihood can be defined as equation \ref{Likelihood}.
+\begin{equation}
+Likelihood(data) = \prod_{i=1}^{n} p_i^{y_i}(1-p_i)^{(1-y_i)}
+\label{Likelihood}
+\end{equation}
+
+where $p_i$ and $y_i$ are the estimated and actual values of $i^{th}$ datapoint. Applying natural logarithm on the right side of equation \ref{Likelihood} will results log-likelihood which is more convenient in maximum likelihood estimation since logarithm is a monotonically increasing function.
 %“Probability is used when describing a function of the outcome given a fixed parameter value. For example, if a coin is flipped 10 times and it is a fair coin, what is the probability of it landing heads-up every time? Likelihood is used when describing a function of a parameter given an outcome. For example, if a coin is flipped 10 times and it has landed heads-up 10 times, what is the likelihood that the coin is fair?”
 
-In some context the variables can be hold constant while fitting. In this case the fitting function should preform with a subset of parameters. For example in the context of educational data mining the Q-matrix is known as a parameter which is defined by an expert. Suppose that you know the Q-matrix and we just want to let the other parameters (such as skills mastery matrix) vary. We do this by only listing ``skills mastery matrix'' as a free parameter to fit.
+\item Sum of squared errors of predictions (SSE) is the other measure which is the total deviation of the response values from the predicted values as represented in equation \ref{SSE}
 
-The notion of \textit{goodness of fit} represents how well a model can account for observed data.  For example, student test results can be accounted for by the ability of each student, and by the difficulty of each question, its discriminative factor, and by a guessing factor.  This is the basis of the 3-parameter logistic model IRT-3PL \cite{bakerKim2004}.  Given some training data to estimate the model parameters, and a partial observation of a test data set, held out responses can be ``predicted''.  The difference between the predicted and the actual responses represents the residual error, which is considered a measure of the goodness of fit.  And the lower the goodness of fit, the closer is the model considered to the ground thruth.
+\begin{equation}
+SSE(data) = \sum_{i=1}^{n} (y_i - p_i)^2
+\label{SSE}
+\end{equation}
+A more informative measure is RMSE which the squared root of the mean squared errors  :
+
+\begin{equation}
+ RMSE(data) = \sqrt{\frac{1}{n}\sum_{i = 1}^{n}(y_i - p_i)^2}
+\end{equation}
+
+\item There is another category of metrics that we used in our last experiment to compare the prediction of different models for a given data. These metrics rely on the confusion table which allows us to calculate the accuracy, recall, precision and F-measure values. A confusion matrix is a table that shows the performance of a classification model. A model selection method can also be tested as a classification method as we will show in chapter \ref{Classification}. Below a confusion table is presented where each row represents the number of instances in the actual class and each column represents the instances in the predicted class:
+
+
+\begin{center}
+\begin{tabular}{c|c|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{Prediction outcome}\tabularnewline
+\cline{3-4}
+\multicolumn{2}{c|}{}& \multicolumn{1}{c|}{Positive} & \multicolumn{1}{c|}{Negative} \tabularnewline
+\cline{2-4}
+&  \multicolumn{1}{c|}{Positive }&TP&FN\tabularnewline
+\cline{2-4}
+\multirow{-2}{*}{Actual value}& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
+\cline{2-4}
+\end{tabular}
+
+\end{center}
+
+
+\quad
+
+where Negative in the context of EDM is a failure and Positive is a success to an item. There exists four metrics that are :
+
+\begin{center}
+\[Precision = \frac{TP}{TP+FP}\]
+\[Recall = \frac{TP}{TP+FN}\]
+\[Accuracy = \frac{TP+TN}{TP+TN+FP+FN}\]
+\[F-measure_\beta = (1+\beta^2).\frac{Precision.Recall}{\beta^2.Precision+Recall}\]
+\end{center}
+
+\quad
+
+
+\end{itemize}
 
 A number of factors can affect the amount of residual error.  The capacity of an algorithm to estimate the model parameters for a given data set is often critical.  Local optima, biases, and large variance can result in estimates that are far from the best ones~\cite{hastie2005elements}.  Models themselves can yield widely different performances under different circumstances.  Some are more robust under small data sets.  Typically, complex models will require large data sets, but can sometimes lead to much better performance than simpler ones if they are fit for the data.
 
 For these reasons, a model may be ``fit to the data'', and yet it may underperform compared to others when residual error is used as the sole indicator of the goodness of fit.  The residual error is always measured for a given data sample, and to obtain a reliable estimate of the goodness of fit, data samples that cover the space of factors that can affect parameter estimates and model performances would need to be gathered.  Oftentimes this is impractical.
+
+ The other measure that we used in our study is calculating the distance to the ground truth. Assuming a model performance space where each model belongs to a specific subspace, thus the closest neighbor to the performance of a given data is the model fit and the correlated distance is the measure for the goodness of fit. Details of this measure is given in chapter \ref{sec:Approach}.
+
+
+
+
+% None Relevant : In some context the variables can be hold constant while fitting. In this case the fitting function should preform with a subset of parameters. For example in the context of educational data mining the Q-matrix is known as a parameter which is defined by an expert. Suppose that you know the Q-matrix and we just want to let the other parameters (such as skills mastery matrix) vary. We do this by only listing ``skills mastery matrix'' as a free parameter to fit.
 
 
 \subsection{Dynamic vs. static data}

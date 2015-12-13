@@ -161,6 +161,7 @@ The methodology that we took to assess the goodness of fit for a dataset is stra
 %how do you define these points
 
 \subsection{Generality of the proposed approach}
+\label{Classification}
 
 The very last experiment that we have done is a comparison between the ``signature'' method where the nearest neighbor classifies in the performance vector space and the simplest approach where the best performer is defining the ground truth(``Best performer'' method). We used the synthetic data generated in section \ref{Sensitive} to test this hypothesis. For the nearest neighbor approach the classification should be done where datasets have the same data generation conditions. Therefore we'll get 24 sets of datasets where similar data generation parameters exists among each set. Since we have 10 runs for each data specific parameter set then we choose 10 nearest neighbor and preform majority voting on the classification results. The classes would be the seven models as the ground truth.
 \begin{comment}
