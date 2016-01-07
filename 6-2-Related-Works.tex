@@ -83,25 +83,25 @@ A number of factors can affect the amount of residual error.  The capacity of an
 
 For these reasons, a model may be ``fit to the data'', and yet it may underperform compared to others when residual error is used as the sole indicator of the goodness of fit.  The residual error is always measured for a given data sample, and to obtain a reliable estimate of the goodness of fit, data samples that cover the space of factors that can affect parameter estimates and model performances would need to be gathered.  Oftentimes this is impractical.
 
- The other measure that we used in our study is calculating the distance to the ground truth. Assuming a model performance space where each model belongs to a specific subspace, thus the closest neighbor to the performance of a given data is the model fit and the correlated distance is the measure for the goodness of fit. Details of this measure is given in chapter \ref{sec:Approach}.
+ The other measure that we used in our study is calculating the distance to the ground truth. Assuming a model performance space where the performance related to each model belongs to a specific subspace, thus the closest neighbor to the performance of a given data is the model fit and the correlated distance is the measure for the goodness of fit. Details of this measure is given in chapter \ref{sec:Approach}.
 
 
 
 
 % None Relevant : In some context the variables can be hold constant while fitting. In this case the fitting function should preform with a subset of parameters. For example in the context of educational data mining the Q-matrix is known as a parameter which is defined by an expert. Suppose that you know the Q-matrix and we just want to let the other parameters (such as skills mastery matrix) vary. We do this by only listing ``skills mastery matrix'' as a free parameter to fit.
 
-
 \subsection{Dynamic vs. static data}
 
-The knowledge tracing model \citep{corbett1994knowledge} is one of the best known models that has been widely used to model student knowledge and learning over time. It has four parameters where two of them (prior and learn) are knowledge parameters for each skill. This is a standard model of knowledge tracing that consider the fact that students are learning over time. Tensor rank decomposition is also a general model that is used a time-based datasets. In multilinear algebra, the tensor rank decomposition may be regarded as a generalization of the matrix singular value decomposition (SVD) to tensors. SVD is a well known model in EDM where has been used in skill assessment approaches \citep{Beheshti2012Numbers}.
+Generally there exists two types of models: Those that are dynamic that models students over time and the second type that are a snapshot student's learning over time which are static. The knowledge tracing model \citep{corbett1994knowledge} is one of the best known models that has been widely used to model student knowledge and learning over time. It has four parameters where two of them (prior and learn) are knowledge parameters for each skill. This is a standard model of knowledge tracing that consider the fact that students are learning over time. Tensor rank decomposition is also a general model that is used a time-based datasets. In multilinear algebra, the tensor rank decomposition may be regarded as a generalization of the matrix singular value decomposition (SVD) to tensors. SVD is a well known model in EDM where has been used in skill assessment approaches \citep{Beheshti2012Numbers}.
 
 The difference between tensor based methods and static methods is in the complexity of them. Tensor based approaches like BKT and canonical polyadic decomposition (CPD) are modeling a dynamic learning environment where static methods such as POKS, NMF, DINA/DINO and IRT are modeling a snapshot of student test performance. All data sets in this research are considered \textit{static} in the sense that they represent a snapshot of student test performance data.  This corresponds to the assumption that the student has not mastered new skills during the process of assessment, as we would expect from data from learning environments.  This assumption is common to all models considered for this study.
 
+\section{Related works}
 
-The following sections are describing two recent works that have been done for model fitting in EDM:
+The following sections are describing two recent works \citep{Desmarais2010,Rosenberg2015} to assess a model fit:
 
 
-\section{On the faithfulness of simulated student performance data}
+\subsection{On the faithfulness of simulated student performance data}
 
 \citet{Desmarais2010} introduced an approach to investigate the faithfulness of different methods of generating simulated data by comparing the predictive performance of POKS over real vs. simulated data. The parameters for simulated datasets are set to represent those of the real data. The faithfulness of the synthetic data is dependent to its performance. The more similar is the performance of real vs. simulated data is, the more faithful it is to represent the real data.
 
@@ -115,7 +115,7 @@ In general there are three approaches to validate the accuracy of a cognitive di
 \item Generating simulated data: This is the method that Desmarais \citep{Desmarais2010} used in his work. They used a set of predefined parameters to generated a result matrix based on a specific model.
 
 \end{itemize}
-\subsection{Simulated data models}
+\subsubsection{Simulated data models}
 
 In \citep{Desmarais2010} they used POKS as the student model which is a Bayesian approach to cognitive modeling. They take the closest performance of this model over a real vs. synthetic data. For generating synthetic datasets they used four models:
 
@@ -127,10 +127,10 @@ In \citep{Desmarais2010} they used POKS as the student model which is a Bayesian
 
 \end{itemize}
 
-\subsection{Methodology}
+\subsubsection{Methodology}
 Once the simulated data is generated base on the four models \citet{Desmarais2010} train POKS student model over both real and synthetic datasets. For validation of the accuracy of the simulated dataset they compare the predictive performance across each condition. 
 
-\subsection{Real Datasets}
+\subsubsection{Real Datasets}
 It is important to choose a good dataset for this simulation, they used two datasets which are in math and one of them has small number of samples and the other one has big number of items. The details of these datasets are in bellow:
 
 \begin{center}
@@ -149,7 +149,7 @@ College Math & 59 & 250 & 57\% & 9/59 to 55/59\tabularnewline
 
 \end{center}
 
-\subsection{Discussion}
+\subsubsection{Discussion}
 
 First let us summarize their conclusions and then propose our discussion. The following items are their conclusion:
 \begin{itemize}
@@ -170,11 +170,11 @@ In this thesis we use 7 student models for generating datasets and also measurin
 
 To summarize the difference between our experiment and \citep{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \citep{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics.
 
-\section{Simulated data to reveal the proximity of a model to reality}
+\subsection{Simulated data to reveal the proximity of a model to reality}
 
 The next recent work \citep{Rosenberg2015} is about distinguishing between a synthetic data and a real data. This work is an extension to their previous work \citep{Rosenberg2014} where they used BKT model to generate synthetic dataset for two real dataset that correspond to the characteristics of the real data. They found similarities between the characteristics of the simulated and real datasets. The results indicate that it is hard to set real and synthetic datasets apart. The idea of this research \citep{Rosenberg2015} is about the goodness of a model for a real dataset which indicate that if it is easy to set real and synthetic data apart then the model is not a good representative of the real data otherwise the model is indeed authentic representation of the reality.
 
-\subsection{Methodology}
+\subsubsection{Methodology}
 They used Bayesian knowledge tracing model to calculate log likelihood with a grid search of four parameters: initial(prior knowledge), learning rate, Guess and slip. The two first parameters are knowledge parameters and the second two parameters are performance parameters. The simplest form of BKT which is used in this experiment considers a single set of prior knowledge and  learning rate for all students and an equal slip and guess rates for all students.
 To make a comprehensive comparison they used 42 datasets which are groups of Learning Opportunities(GLOPs) generated from the ASSISTments platform. Problem set and number of examinees vary for each dataset which consist of 4 to 13 questions answered by 105 to 777 students. In addition they created two synthetic datasets for each dataset that the parameters for synthetic datasets are set to represent those of the real data with exact same number of samples and items. 
 
