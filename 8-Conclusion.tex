@@ -38,27 +38,20 @@ Testing ``signature'' approach on different data specific parameters affected th
 
 To summarize the difference between our experiment and \cite{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \cite{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics. In this sense any skills assessment model can be added to the list of candidate models to make the prediction authentic.
 
+Although \citet{Rosenberg2015} work is the only reference in for model selection in time based skills assessment models but their work is limited to only BKT model which means the results to determine a dataset with a ground truth other than BKT should be evaluated. The limit of our work in the comparison with \citet{Rosenberg2015} is that the models are statistic which could be improved to adapt dynamic models.
 %%%%HERE%
 
-%Tensor based approach(Does it apply to time models)
-%Can we apply it in general fields of studies
-%
-
-%
-
-
-%%%%%%%%%%%%
-
-
-
-
-
 \section{Future Work}
- % However, the approach would generalize to dynamic data as well.
+
+Further studies with real and simulated data are clearly needed.  For example, there are other real datasets that potentially require a different set of candidate models. This means new approaches to generate synthetic data with respect to these skills assessment models.
+
+%Tensor based approach(Does it apply to time models)
+
+However, the approach would generalize to dynamic data as well. This approach is using static models to assess a model fit but dynamic models are also used widely in EDM. This contribution also requires data generation and performance assessment of each model.
+
  %survey on different error metrics
  %survey on different approaches
- 
+In this thesis we compared the ``signature'' approach with the ``best performer'' in terms of ground truth classification on synthetic data. The potential future contribution would be preparing a survey on different model selection approaches with their error metrics and comparing their performance over synthetic data.
 
-%Further studies with real and simulated data are clearly needed.  For example, we would like to know what is the mapping accuracy degradation when an incorrect number of skills are modelled.  And, naturally, a study with real data is necessary to establish if the approach is reliable in practice.
-
-%The other contribution on this field is to consider different items with different models in a test result. Also there are different methods to generate the synthetic datasets which could effect the signature. In general we can extend this method to other fields of study. Defining some predictors and testing the predictive performance of a dataset with different variables can result this signature which can assess a model fit.
+%Can we apply it in general fields of studies 
+Finally, because selecting right model is an important factor in all fields of studies, this approach could be applied in general fields as well. EDM is the example that we applied in our research but it can be tested in other fields of studies.
