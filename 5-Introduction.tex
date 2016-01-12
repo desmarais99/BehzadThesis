@@ -39,7 +39,7 @@ In this section we introduce a vocabulary that is related to the general objecti
 \item Ground truth: This term is originally coined by Geographical/earth science where if a location method such as GPS estimates a location coordinates of a spot on earth, then the actual location on earth would be the ``Ground truth''. This term has been adopted in other fields of study. In this context ``ground truth of a dataset'' means the actual model that best describes the dataset within its parameters.
 \item Performance of a model: The accuracy of a model over a dataset is called performance of a model. This accuracy is obtained based on the correct prediction of student test outcome with that model. Different models have different performances over a dataset. Assessing such a performance requires designing an experiment to learn the model's parameters and predict a proportion of the dataset that has not been involved in the learning phase.
 \item Performance vector: Each model have a performance over a dataset and these performances can be different values of accuracy. This results in a large space in which to explore model performance. In this thesis we defined a vector space based on model performances in which a dataset can have a performance vector that combines all performances of candidate models by putting them together in a vector.
-\item Signature: The performance vector can be considered from two perspectives: The first perspective is a performance vector in the performance space where we have the same number of dimensions as the number of candidate models in the performance vector. The second one is a kind of ``signature'' for a specific data which considers the vector in a two dimensional space with performances on the y axis and skills assessment models on x axis.  They are sharing the same concepts but different presentations. 
+\item Signature: The performance vector can be considered from two perspectives: The first perspective is a performance vector in the performance space where we have the same number of dimensions as the number of candidate models in the performance vector. The second one is a kind of ``signature'' for a specific data which considers the vector in a two dimensional space with performances on the \textit{y} axis and skills assessment models on \textit{x} axis.  They are sharing the same concepts but different presentations. 
 
 
 
@@ -63,7 +63,7 @@ In this section we introduce a vocabulary that is related to the general objecti
 
 \section{Hypotheses}
 \paragraph{}The research in this thesis tests the following hypotheses:
-\paragraph{Hypothesis 1:} The signatures of two datasets with the same underlying models have high correlation.
+\paragraph{Hypothesis 1:} The signatures of two datasets with the same ground truth have a high level of correlation.
 \paragraph{Hypothesis 2:} The best performer model in the predictive performance vector is not necessarily the ground truth.
 \paragraph{Hypothesis 3:} Datasets with the same model parameters and data specific parameters create unique performance vector. %\note{Behzad says : or The predictive performance of each synthetic data type is unique} \note{Behzad says :or the predictive performance of different models will be stable by the characteristic of a given type of data}
 \paragraph{Hypothesis 4:} Datasets with the same ground truth but different data specific parameters can have different performance vectors. 
@@ -103,6 +103,6 @@ Along the course of the doctorate studies, I contributed to a number of publicat
 
 
 \section{Organization Of the Thesis}
-\paragraph{} We review the related literature on fundamental concepts in Educational Data Mining and some machine learning techniques that have been used in our experiments in Chapter \ref{sec:RevLitt}. Chapter \ref{sec:RelatedWorks} discusses recent work about model selection. We explain synthetic data generation approaches in chapter \ref{sec:Syn}. The main contribution of the research is explained in details in Chapter \ref{sec:SIGNATURE}. Finally, we conclude and outline future work in Chapter \ref{sec:Conclusion}. 
+\paragraph{} We review the related literature on fundamental concepts in Educational Data Mining and some machine learning techniques that have been used in our experiments in Chapter \ref{sec:RevLitt}. Chapter \ref{sec:RelatedWorks} discusses recent work about model selection. The main contribution of the research starts from chapter \ref{sec:Approach} where we explain the proposed approach in details. As a complementary part of the proposed approach we explain synthetic data generation approaches in chapter \ref{sec:Syn}. The experimental results of the main contribution are explained in details in Chapter \ref{sec:SIGNATURE}. Finally, we conclude and outline future work in Chapter \ref{sec:Conclusion}. 
 
 
