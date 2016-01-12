@@ -1,8 +1,8 @@
 \Chapter{STUDENT MODELLING METHODS}\label{sec:RevLitt}
 
-A large body of methods have been developed for student modeling.  They are used to represent and assess student skills. These models have been proposed both for dynamic performance data, where a time dimension is involved and where a learning process occurs (see for eg. Bayesian Knowledge tRacing \citet{Koedinger2011}), and for static performance data where we assume student skill mastery is stationary.  In this thesis, we focus on static performance data.
+A large body of methods have been developed for student modeling.  They are used to represent and assess student skills. These models have been proposed both for dynamic performance data, where a time dimension is involved and where a learning process occurs (see for eg. Bayesian Knowledge Tracing \citet{Koedinger2011}), and for static performance data where we assume student skill mastery is stationary.  In this thesis, we focus on static performance data.
 
-We assume that skills explain the performance and outcome prediction. In general there exists many student models that incorporate zero, single or multiple skills. The most widely used one is Item Response Theory (IRT).  In its original and simplest version, IRT considers that a single skill student performance data. Of course, sometimes there are many skills involve in a single problem and therefore this model becomes insufficient for many applications in Intelligent Tutoring Systems (ITS). Under certain condtions, multi-skills models can preform better in that case. Other methods, such as POKS, have no latent skills. They just look at the relation between what directly observable test outcome items. The details of each category of techniques along with some examples are described in the next section.
+We assume that skills explain the performance and outcome prediction. In general there exists many student models that incorporate zero, single or multiple skills. The most widely used one is Item Response Theory (IRT).  In its original and simplest version, IRT considers a single skill for student performance data. Of course, sometimes there are many skills involve in a single problem and therefore this model becomes insufficient for many applications in Intelligent Tutoring Systems (ITS). Under certain condtions, multi-skills models can preform better in that case. Other methods, such as POKS, have no latent skills. They just look at the relation between what directly observable \add{among} test outcome items. The details of each category of techniques along with some examples are described in the next section.
 
 \section{Definitions and concepts}
 
@@ -12,15 +12,15 @@ In this section some concepts and basic definitions that are common between most
 
 The student test outcome data, or more simply student test data, can consists in results from exams or from exercises, in the context of an e-learning environment or in paper and pencil form.  We use the term \textit{item} to represent exercises, questions, or any task where the student has to apply a skilled performance to accomplish.  Student answers are evaluated and categorized as success~(1) or failure~(0).  The data represents a snapshot of the mastery of a student for a given subject matter, as we assume that the student's knowledge state has not changed from the time of anwser to the first question item to the last one.
 
-Test data is defined as an $m \times n$ matrix, $\mathbf{R}$. It is composed of $m$~row \textit{items} and $n$~column students. If a student successfully answers an item, the corresponding value in the results matrix is 1, otherwise it is 0.
+Test data is defined as an $m \times n$ matrix, $\mathbf{R}$. It is composed of $m$~row items and $n$~column students. If a student successfully answers an item, the corresponding value in the results matrix is 1, otherwise it is 0.
 
 \subsection{Skills}
 
 In this thesis we consider skills as problem solving abilities. For example in mathematics ``addition'', ``division'' are typical skills.  They can also be further detailed, such as single digit and multi-digit addition. There may be a single skill required to solve a problem or multiple skills. Skills are termed \textit{latent}  because they are never observed directly.
 
-If an item requires multiple skills, there are three different combinations in which each skill can contribute to succeed a problem: The first case is when having a skill is mandatory for a student to succeed an item that requires that skill. The second case is when the skill increases the chance to succeed a problem. The third case is when at least one of the skills from the set of skills for an item is required to succeed that item.  We will see later that the temrs \textit{conjunctive}, \textit{compensatory}/\textit{additive}, and \textit{disjunctive} are often used to refer to each case respectively.
+If an item requires multiple skills, there are three different ways in which each skill can contribute to succeed a problem: The first case is when having a skill is mandatory for a student to succeed an item that requires that skill. The second case is when the skill increases the chance to succeed a problem. The third case is when at least one of the skills from the set of skills for an item is required to succeed that item.  We will see later that the temrs \textit{conjunctive}, \textit{compensatory}/\textit{additive}, and \textit{disjunctive} are often used to refer to each case respectively.
 
-Skills can have different range of values based on the student model definition. For example, the single skill in IRT is continous in $\mathbb{R}$ and typically ranges between~$-4$ to~$+4$. Other student models consider skills range between~$0$ and~$1$. Finally, other models have binary~$1$ or~$0$ skills, which means it can be mastered or not. Details of definition of skills for each student model are given in next sections.
+Skills can have different range of values based on the student model definition. For example, the single skill in IRT is continous in $\mathbb{R}$ and typically ranges between~$-4$ to~$+4$. Other student models consider skills range between~$0$ and~$1$. Finally, other models have binary~$1$ or~$0$ skills, which means it can be mastered or not. Details of definition of skills for each student model are given later in this chapter.
 
 \subsection{Q-matrix and Skill mastery matrices}
 
@@ -31,7 +31,7 @@ Such a mapping is desirable and very important in student modelling; because opt
   
 
 \begin{footnotesize}
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 
 \subfigure[Items with different skills]{
@@ -80,27 +80,28 @@ i_{4}
 
 %The assignment of Skills to Items is described by a Q-matrix that describes which Skills are required by each Item. In a Q-matrix rows represent Items and columns represent latent factor (skills). In this matrix, a cell with the value of~$1$ indicates the Item uses the Skill, while a~$0$ indicates the Skill is not involved in the item.
 
-The skills mastery matrix represents student skills mastery profiles. In this matrix rows are skills and columns represent examinees. A cell with the value of 1 in $\mathbf{S}_{ij}$ indicates that examinee $j$ is mastered with skill $i$ and a value of 0 shows that he does not have the related skill.
+The skills mastery matrix, \textbf{S}, represents student skills mastery profiles. In this matrix rows are skills and columns represent examinees. A cell with the value of 1 in $\mathbf{S}_{ij}$ indicates that examinee $j$ is mastered with skill $i$ and a value of 0 shows that he does not have the related skill.
 
 \subsection{Types of Q-matrices}
  
-As explained earlier, skills can have three interpretation when they contribute to succeed an item. These interpretations can be reflected in Q-matrices. There exists three different types of Q-matrices which are useful based on the context of the problem domain:
+As explained earlier, skills can have three interpretation when they contribute to succeed an item. These interpretations can be reflected in Q-matrices. There exists three different types of Q-matrices which are useful based on the context of a problem domain:
 
 \begin{itemize}
-\item \textbf{Conjunctive}: The most common one is the conjunctive model of the Q-matrix which is the standard interpretation of the Q-matrix in Educational Data Mining. In this Q-matrix type, a student should master all the required skills by an item to succeed it. If a student misses any one of these skills, then the result will be a failure in the test outcome data. Thus there is a conjunction between required skills to succeed an item.
+\item \textbf{Conjunctive}: The most common one is the conjunctive model of the Q-matrix which is the standard interpretation of the Q-matrix in Educational Data Mining. In this type of Q-matrix, a student should master all the required skills by an item to succeed it. If a student misses any one of these skills, then the result will be a failure in the test outcome data. Thus there is a conjunction between required skills to succeed an item.
 
-\item \textbf{Additive} (compensatory): Compensatory or additive model of skills is an interpretation of a Q-matrix where each skill contributes some weight the success for that item. For example, considering an item requires two skills $a$ and $b$ with the same weight each, then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skill increases the chance of success based on its weight.
+\item \textbf{Additive} (compensatory): Compensatory or additive model of skills is an interpretation of a Q-matrix where each skill contributes some weight to succeed that item. For example, if an item requires two skills $a$ and $b$ with the same weight for each of them, then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skill increases the chance of success based on its weight.
 
 \item \textbf{Disjunctive}: In the disjunctive model, mastery of any single skill required by an item is sufficient in order to succeed the related item.
 \end{itemize}
+
+Note that the three types of interpretation of Q-matrix make sense when there is at least one item in the Q-matrix that requires more than one skill. Later in this chapter these types will be described in more details with examples.
+
 
 Q-matrices can also be categorized according to the number of skills per item:
 \begin{itemize}
 \item Single skill per item: Each item should have exactly one skill but the Q-matrix can have many skills.
 \item Multiple skills per item: Any combination of skills with at least one skill is possible for items.
 \end{itemize}
-
-Note that the three types of interpretation of Q-matrix make sense when there is at least one item in the Q-matrix that requires more than one skill. In the next sections of this chapter these types will be described in more details with examples.
 
 \section{Skills assessment and item outcome prediction techniques}
 \label{SkillsAssessmentModels}
