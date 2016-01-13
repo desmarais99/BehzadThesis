@@ -203,7 +203,7 @@ The structure of the partial order of items is obtained from a statistical hypot
 
 A student knowledge state is represented as a vector of probabilities, one per item.  Probabilities are updated under a Naive Bayes assumption as simple posterior probabilities given observed items.
 
-Inference in the POKS framework to calculate the node's probability relies on standard Bayesian posteriors under the local independence assumption. The probability update for node $H$ given $E_1$,... $E_n$ can be written in following posterior odds form :
+Inference in the POKS framework to calculate the node's probability relies on standard Bayesian posteriors under the local independence assumption. The probability update for node $H$ given $E_1$,...~$E_n$ can be written in following posterior odds form :
 \begin{equation}
 O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H})}
 \label{EQPOKSratio}
@@ -218,15 +218,15 @@ In this section two approaches for modeling static test data are presented: The 
 
 \subsection{IRT} 
 
-The \textbf{IRT family} is based on a logistic regression framework. It models a single latent skill (although variants exists for modeling multiple skills) \cite{bakerKim2004}.  Each item has a difficulty and a discrimination parameter.
+The \textbf{IRT family} is based on a logistic regression framework. It models a single latent skill (although variants exists for modeling multiple skills) \citep{bakerKim2004}.  Each item has a difficulty and a discrimination parameter.
 
 IRT assumes the probability of success to an item~$X_j$ is a function of a single ability factor~$\theta$: 
-\[P(X_j\!=\!1\;|\;\theta) = \frac{1}{1+e^{-a_j(\theta-b_j)}}\]
+\[P(X_j\!=\!1\;|\;\theta_i) = \frac{1}{1+e^{-a_j(\theta_i-b_j)}}\]
 In the two parameter form above, referred to as IRT-2pl, where parameters are:
 
 \begin{itemize}
-\item[$a$] represents the item discrimination;
-\item [$b$] represents the item difficulty, and
+\item[$a_j$] represents the item discrimination;
+\item [$b_j$] represents the item difficulty, and
 \item [$\theta_i$] the ability of a single student.
 \end{itemize}
 
