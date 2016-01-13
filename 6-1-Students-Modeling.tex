@@ -234,11 +234,11 @@ Student, $\theta_i$, is estimated by maximizing the likelihood of the observed r
 \[ P(X_1, X_2, ..., X_j, \theta_i) = \prod_j P(X_j|\theta_i) \]
 This corresponds to the usual logistic regression procedure.
 
-The specific IRT skills assessment version is the Rash model, for which the discrimination parameter~$a$ is fixed to~$1$.  Fixing this parameter reduces over fitting, as the discrimination can sometimes take unrealistically large values. Note however that we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process and test outcome prediction in order to make this data more realistic (next chapters discuss data generation in details).
+The specific IRT skills assessment version is the Rash model, for which the discrimination parameter~$a$ is fixed to~$1$.  Fixing this parameter reduces over fitting, as the discrimination can sometimes take unrealistically large values. Note however that we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process and test outcome prediction in order to make this data more realistic (chapter \ref{sec:Syn} discusses data generation approaches in details).
 
 \subsection{Baseline Expected Prediction}
 
-As a baseline model, we use the expected value of success to an item~$i$ by student~$j$, as defined by a product of odds:
+As a baseline model, we use the expected value of success to item~$i$ by student~$j$, as defined by a product of odds:
 \[ O(X_{ij}) =  O(X_i) O(S_j) \]
 where $O(X_i)$ are the odds of success to item~$i$ and $O(S_j)$ are the odds of success of student~$j$.  Both odds can be estimated from a sample.  Recall that the transformation of odds to probability is $P(X) = 1/(1+O(X))$, and conversely $O(X) = P(X)/(1 - P(X))$. Probabilities are estimated using the Laplace correction: $P(X) = (f(x\!=\!1) + 1) / (f(x\!=\!1) + f(x\!=\!0) + 2)$
 
@@ -324,7 +324,7 @@ R & Q & S
 \end{figure}
 
 %, but for expert-defined Q-matrices in our study we consider similar weights for each skills of an item\note{they will not be equal when the Q-matrix is from a factorization}\note{You are right, I was thinking about the data generation phase, in data generation process for random Q-matrix generation we consider same weights 
-The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skills increase the chance of success based on its weight. It is possible to have different weights for skills where skills for each item will sum up to~$1$. Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$  can be considered as a probability that examinee $i$ can succeed item $j$.
+The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item that requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skills increase the chance of success based on its weight. It is possible to have different weights for skills where skills for each item will sum up to~$1$. Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$  can be considered as a probability that examinee $i$ can succeed item $j$.
 
 \begin{figure}
 \begin{footnotesize} 
@@ -534,7 +534,7 @@ In fact if we apply a boolean negation function to both sides of the equation \r
 \mathbf{R}=\neg\left(\mathbf{Q}\left(\neg\mathbf{S}\right)\right)\label{eq:6}
 \end{equation}
 
-In next sections of this chapter the application of NMF on conjunctive type of Q-matrix and how this technique can derive a Q-matrix from a test result is given in details.
+Later in this chapter the application of NMF on conjunctive type of Q-matrix and how this technique can derive a Q-matrix from a test result is given in details.
 
 Besides its use for student skills assessment and for deriving a Q-matrix, matrix factorization is also a widely used technique in recommender systems. See for eg. \citet{koren2009matrix}  for a brief description of some of the adaptation of these techniques in recommender systems. 
 
@@ -575,7 +575,7 @@ A few methods have been developed to estimate the slip and guess parameters from
 
 
 
-The {Alternate Least-Square Factorization (ALS)} method is defined in \cite{Desmarais2013aied} which is also a factorization method that can infer an initial Q-matrix to estimate its parameters, or refine a predefined Q-matrix given as a starting point. The next sections in this chapter introduce a methodology to refine a existing Q-matrix in more details.
+The {Alternate Least-Square Factorization (ALS)} method is defined in \cite{Desmarais2013aied} which is also a factorization method that can infer an initial Q-matrix to estimate its parameters, or refine a predefined Q-matrix given as a starting point. Later in this chapter we introduce a methodology to refine a existing Q-matrix in more details.
 
 %\note{it was written that it cannot do a factorization without a Q-matrix, but this is not correct.  Just as NMF, it requires a starting point, but it can be a random starting point.}\note{ Behzad Says: Does it give you a correct guess for any random seeding point? as far as I remember, different random points gave back different Q-matrices, if it's true then it's not a reliable technique to derive a Q-matrix}
 
@@ -591,7 +591,7 @@ The initial matrix~$\mathbf{{Q}}_0$ is the expert defined Q-matrix. Then, a new 
   \mathbf{\hat{Q}}_1 = \mathbf{R} \, \mathbf{\hat{S}}_0^{\mathrm{T}} \, (\mathbf{\hat{S}}_0 \, \mathbf{\hat{S}}_0^{\mathrm{T}})^{-1} \label{eq:qhat2}
 \end{equation}
 
-And so on for estimating~$\mathbf{\hat{S}}_1$, ~$\mathbf{\hat{Q}}_2$, ... Alternating between equations~(\ref{eq:shat1}) and~(\ref{eq:qhat2}) yields progressive refinements of the matrices~$\mathbf{\hat{Q}}_i$ and ~$\mathbf{\hat{S}}_i$ that more closely approximate~$\mathbf{R}$ in equation~(\ref{eq:nmf}).  The convergence is based on a predefined delta between iterations. In our experiments we consider delta as $0.001$ that makes the algorithm to converge after few iterations. This performance makes the technique many times more efficient than factorizations that rely on gradient descent, for example.
+And so on for estimating~$\mathbf{\hat{S}}_1$, ~$\mathbf{\hat{Q}}_2$, ... Alternating between equations~(\ref{eq:shat1}) and~(\ref{eq:qhat2}) yields progressive refinements of the matrices~$\mathbf{\hat{Q}}_i$ and ~$\mathbf{\hat{S}}_i$ that more closely approximate~$\mathbf{R}$ in equation~(\ref{eq:1}).  The convergence is based on a predefined delta between iterations. In our experiments we consider delta as $0.001$ that makes the algorithm to converge after few iterations. This performance makes the technique many times more efficient than factorizations that rely on gradient descent, for example.
 
 The ALS factorization is \textit{compensatory} in the above description.  A \textit{conjunctive} version can be obtained by inverting the values of the $\mathbf{R}$~matrix~\citep{Desmarais2012b}.  
 
@@ -610,7 +610,7 @@ The rest of this chapter presents researches that are complementary steps of the
 \subsection{NMF on single skill and multi-skill conjunctive Q-matrix}
 \label{ITS2012}
 
-A few studies have shown that a mapping of skills to items can, indeed, be derived from data \citep{winters2006,desmarais2011conditions}. \citet{Winters2006} showed that different data mining techniques can extract item topics, one of which is matrix factorization. He showed that NMF works very well for synthetic data, but the technique's performance with real data was degraded. The above studis show that only highly distinct topics such as mathematics and French can yield a perfect mapping. Biology and history were the other topics in this research which were named as general topics. Clustering of these topics was not accurate because they are factual knowledge and they are not comparable with some topics like mathematics.
+A few studies have shown that a mapping of skills to items can, indeed, be derived from data \citep{winters2006,desmarais2011conditions}. \citet{winters2006} showed that different data mining techniques can extract item topics, one of which is matrix factorization. He showed that NMF works very well for synthetic data, but the technique's performance with real data was degraded. The above studis show that only highly distinct topics such as mathematics and French can yield a perfect mapping. Biology and history were the other topics in this research which were named as general topics. Clustering of these topics was not accurate because they are factual knowledge and they are not comparable with some topics like mathematics.
 
 \citet{desmarais2012mapping} proposed an approach to successfully deriving a conjunctive Q-matrix from simulated data with NMF. The methodology of this research relies on simulated data. They created a synthetic data with respect to conjunctive model of Q-matrix. They proposed a methodology to assess the NMF performance to infer a Q-matrix from the simulated test data. This methodology is conducted by comparing the predefined Q-matrix, $\mathbf{Q}$ which was used to generate simulated data with the $\hat{\mathbf{Q}}$ matrix obtained in the NMF of equation \ref{eq:6}.
 
@@ -632,7 +632,7 @@ The results of this experiment show that both techniques are effective in identi
 \subsection{The refinement of a Q-matrix}
 \label{edm2014}
 
-Validating of the expert defined Q-matrix has been the focus of recent developments in the field of educational data mining in recent years \citep{delaTorre2008,chiu2013statistical,barnes2010novel,loye2011validite,Desmarais2013aied}. \citet{desmarais2014refinement} compared three data driven techniques for the validation of skills-to-tasks mappings.  All methods start from a given expert defined Q-matrix, and use optimization techniques to suggest a refined version of the skills-to-task mapping.Two techniques for this purpose rely on the DINA and DINO models, whereas one relies on a matrix factorization technique called ALS. 
+Validating of the expert defined Q-matrix has been the focus of recent developments in the field of educational data mining in recent years \citep{delaTorre2008,chiu2013statistical,barnes2010novel,loye2011validite,Desmarais2013aied}. \citet{desmarais2014refinement} compared three data driven techniques for the validation of skills-to-tasks mappings.  All methods start from a given expert defined Q-matrix, and use optimization techniques to suggest a refined version of the skills-to-task mapping. Two techniques for this purpose rely on the DINA and DINO models, whereas one relies on a matrix factorization technique called ALS. 
 
 To validate and compare the effectiveness of each technique for refining a given Q-matrix, they follow a methodology based on recovering the Q-matrix from a number perturbations: the binary value of a number of cells of the Q-matrix is inverted, and this ``corrupted'' matrix is given as input to each technique.  If the technique recovers the original value of each altered cell, then we consider that it successfully ``refined'' the Q-matrix. The results of this experiment show that all techniques could recover alterations but the ALS matrix factorization technique shows a greater ability to recover alterations than the other two techniques.
 
@@ -640,11 +640,11 @@ To validate and compare the effectiveness of each technique for refining a given
 \subsection{Improving matrix factorization techniques of student test data with partial order constraints}
 \label{firstcont}
 
-The very first contribution of this thesis was improving the Matrix factorization techniques of student test data with partial order constraints. In particular, we want to address this question: can a \ac{POKS} be used to guide matrix factorization algorithms and lead to faster or better solutions to latent skills modelling?
+The very first contribution of this thesis was improving the Matrix factorization techniques of student test data with partial order constraints. In particular, we wanted to address this question: can a \ac{POKS} be used to guide matrix factorization algorithms and lead to faster or better solutions to latent skills modelling?
 
 One avenue to improve over current matrix factorization models is to adapt existing algorithms to the specific nature of the domain data.  In particular, student performance data is known to be constrained by prerequisite relations among skills or knowledge items \cite{falmagne:1990,Doignon1999}.  This constraint can substantially reduce the space of factorization, both for the purpose of assessing student skills and for mapping items to skills.  The objective of this research was to explore how one type of constraints, known as Partial Order Knowledge Structures (POKS), can lead to better factorization techniques for the purposes mentioned.
 
-The very first solution for this improvement is to develop a new factorization algorithm based on the \ac{POKS} constraints. The idea is to change the cost function of the standard \ac{NMF} function. As described in the previous section, standard \ac{NMF} algorithm works based on the cost function in equation \ref{eq:3}. Adding an other value to this cost function can lead to a new equation \ref{eq:7}. 
+The very first solution for this improvement was to develop a new factorization algorithm based on the \ac{POKS} constraints. The idea was to change the cost function of the standard \ac{NMF} function. As described in the previous section, standard \ac{NMF} algorithm works based on the cost function in equation \ref{eq:3}. Adding an other value to this cost function can lead to a new equation \ref{eq:7}. 
 \begin{equation}
 \left\Vert \mathbf{R}-\mathbf{Q}\mathbf{S}\right\Vert ^{2}+\kappa (\mathbf{O}\hat{\mathbf{R}})\label{eq:7}
 \end{equation}
