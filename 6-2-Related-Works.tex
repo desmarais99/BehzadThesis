@@ -100,7 +100,7 @@ Generally there exists two types of models: Those that are dynamic that model st
 
 \section{Related works}
 
-The following sections are describing two recent works \citep{Desmarais2010,Rosenberg2015} to assess a model fit:
+The following sections describe two recent works \citep{Desmarais2010,Rosenberg2015} to assess a model fit:
 
 
 \subsection{On the faithfulness of simulated student performance data}
@@ -112,7 +112,7 @@ In general there are three approaches to validate the accuracy of a cognitive di
 \begin{itemize}
 \item Indirect and independent measures of skills mastery: in these methods some expert defined skills mastery mappings are created based on the students answers to a test. Vomlel \citep{vomlel:2004} and De La Torre \citep{delaTorre2008} asked experts to define these matrices for two datasets. One of the weakness of this approach is that different experts may introduce different skills or different mappings.
 
-\item Predict based on observed items only: This method does not try to predict skills mastery mappings but it predicts based on a observed set of items. In our research we are using this method as a part of our methodology.
+\item Predict based on observed items only: This method does not try to predict skills mastery mappings but it predicts based on a observed set of items. In this thesis we are using this method as a part of our methodology.
 
 \item Generating simulated data: This is the method that Desmarais \citep{Desmarais2010} used in his work. They used a set of predefined parameters to generated a result matrix based on a specific model.
 
@@ -124,7 +124,7 @@ In \citep{Desmarais2010} they used POKS as the student model which is a Bayesian
 \begin{itemize}
 \item Expected outcome based on Marginal Probabilities: This is the expected value for the probability of item outcome which is a function of marginal probabilities of item success rate and student scores.
 \item Q-matrix Sampling: In their experiment, conjunctive model of Q-matrix is used where skills of an item must be involved in order to correctly answer that item.
-\item Covariance Matrix:Synthetic test result is generated based on a technique that preserve covariance (correlation) among items. This method is usually used in Monte Carlo simulations. In this particular study this method reflects correlation among student response patterns that derived from items with similar difficulties and same skills set.
+\item Covariance Matrix: Synthetic test result is generated based on a technique that preserve covariance (correlation) among items. This method is usually used in Monte Carlo simulations. In this particular study this method reflects correlation among student response patterns that derived from items with similar difficulties and same skills set.
 \item Item Response Theory: they used $2$ parameters logistic regression IRT model to generate simulated data.
 
 \end{itemize}
@@ -166,11 +166,11 @@ First let us summarize their conclusions and then propose our discussion. The fo
  
 \end{itemize}
 
-In this thesis we use 7 student models for generating datasets and also measuring the predictive performances that include range of models from zero skills to multi-skills. Somehow our work can be an extension to \citep{Desmarais2010}. Obviously one of the reasons that  IRT generated data shows a good similarity with real data performance is that the performances are over POKS model which shows closest performance to POKS model(The details will be discussed later in \ref{sec:SIGNATURE}) where the other models are linear and multi-skills. 
+In this thesis we use 7 student models for generating datasets and also measuring the predictive performances that include range of models from zero skills to multi-skills. Somehow our work can be an extension to \citep{Desmarais2010}. Obviously one of the reasons that  IRT generated data shows a good similarity with real data performance in their research is that the performances are over POKS model which shows closest performance to POKS model (The details will be discussed later in \ref{sec:SIGNATURE}) where the other models are linear and multi-skills. 
 
 %Not sure to put this: The accuracy gain that was achieved from college math data was considerably low, in this sense that we can not compare the results of real vs. simulated data. Because the reason for this low gain can be an inappropriate model to test the predictive performance. So we can also conclude that the underlying structure of College math is not even POKS since it showed low gain. Therefore the similarity in accuracy gain can be a good measure when the gain is considerably high.
 
-To summarize the difference between our experiment and \citep{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \citep{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics.
+To summarize the difference between our experiment and \citep{Desmarais2010} we can say that our work is a kind of extension to this research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \citet{Desmarais2010} uses only one technique to fit a model but in our work we compare a set of models which create a signature and those datasets that have similar signature can reflect similar characteristics.
 
 \subsection{Simulated data to reveal the proximity of a model to reality}
 
