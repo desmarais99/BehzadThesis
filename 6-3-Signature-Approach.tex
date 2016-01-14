@@ -3,16 +3,16 @@
 This chapter presents a method of determining the model that is closest to the ground truth by defining a space to characterize models based on their predictive performance. We refer to this method as ``Signature'' approach. The dimensions of this space are called as the candidate models performances over a dataset. In this research we choose seven candidate models as described in chapter \ref{sec:RevLitt}. For example, the predictive performance of a data is a point in the space where each dimension is the performance of a model over the given data. Therefore each dataset with respect to its parameters and specifications can be represented as a point in this space. Also a synthetic data based on a specific model that shares the same parameters with the given data have a position in the space.  The model's synthetic data set that is the closest to the real data set is deemed the ground truth.  Details of this framework is described later. 
 
 \section{Synthetic data}
-The framework of this approach relies on synthetic data. A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit. Since the hypothesis of this research relies on comparison the performance vector of real vs. synthetic data.
+The framework of this approach relies on synthetic data. A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit since the hypothesis of this research relies on comparison the performance vector of real vs. synthetic data.
 
-Generating data is a complex task since sometimes it requires many parameters. Some parameters are dependent to the model which is the base of generation. Regardless of the type of the base model some others are always essential which are data specific parameters such as sample size and score variance. Complexity of some model specific parameters is another issue that can potentially influence the complexity of data generation process. Even if all the required parameters are available there is still a change to have conflict among parameters. Some further details of data generation for each model are given later in chapter \ref{sec:Syn}. 
+Generating data is a complex task because sometimes it requires many parameters. Some parameters are dependent to the model which is the base of generation. Regardless of the type of the base model, some others are always essential which are data specific parameters such as sample size and score variance. Complexity of some model specific parameters is another issue that can potentially influence the complexity of data generation process. Even if all the required parameters are available there is still a chance to have a conflict among parameters. Some further details of data generation for each model are given later in chapter \ref{sec:Syn}. 
 
 One part of this contribution that assess the model fit of a real dataset requires to borrow parameters from a given data. In another part of this contribution we used synthetic data to validate the sensitivity of the model selection approach to data specific parameters. In such a case the parameters are unknown and we should randomly generate the parameters for synthetic data generation. Then the process of generating data should be accurate such that both data  and model specific parameters are applied properly. Every model studied here can be considered \textit{generative}, to the extent that they can generate synthetic data.
 
 
 \section{Model fit in a vector space framework}
 
-The approach we propose to finding the model that best fits a dataset is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
+This approach is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
 
 Let us explain this idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} and seventh data set named \textit{random} are added for comparison purpose.  The details of the methodology to assess model performance are described later.  For now, let us only focus on this table's data.
 
@@ -39,7 +39,7 @@ Let us explain this idea with the performance data in table~\ref{tab:vectorspace
 \end{table}
 
 
-As we can expect, the diagonal (in bold face) always displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data.  This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth.  However, this is not always the case, in this particular example, although Linear Conj. generated dataset expected to have  better performance with NMF Conj. model but DINA shows a better performance. Later in this chapter and chapter \ref{sec:SIGNATURE} we will discuss this case.
+As we can expect, the diagonal (in bold face, except for one) always displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data.  This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth.  However, this is not always the case, in this particular example, although Linear Conj. generated dataset expected to have  better performance with NMF Conj. model but DINA shows a better performance. Later in this chapter and chapter \ref{sec:SIGNATURE} we will discuss this case.
 
 
 
@@ -57,7 +57,7 @@ Let us get back to the research questions and design experiments for them, This 
 \begin{enumerate}
 \item What is the relative performance of student skills assessment models over real and over synthetic data created using the same models?
 \begin{itemize}
-\item Predictive performance : In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the predictive performance of each model across the different synthetic data sets and across real data as well. The out put of this experiment is the predictive performance or the ``signature'' of the dataset.
+\item Predictive performance : In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The out put of this experiment is the predictive performance or the ``signature'' of the dataset.
 \end{itemize}
 \item Is the relative performance unique to each synthetic data type (data from the same ground truth model)?
 \begin{itemize}
@@ -70,7 +70,7 @@ Let us get back to the research questions and design experiments for them, This 
 \end{itemize}
 \item How does the method compare with the standard practice of using the model with the best performance?  In particular, does the ground truth model identified better generalize over a space of parameter values?
 \begin{itemize}
-\item Generality of the proposed approach under different assumptions about the data: In a third experiment, we move focus to the central problem of this thesis: classifying data sets in the performance vector space.  To validate the approach, we need to rely solely on synthetic data for which we know the underlying ground truth model.  A matrix is created with data sets generated from the different models, and each model performance is measured through a cross validation process.  This matrix allows us to classify a data set of unknown ground truth according to a nearest neighbor approach. In fact, this experiment tests if the proposed approach remains reliable on different conditions of parameters and also measuring the accuracy of its performance to predict a ground truth in comparison with other approaches for different data parameter assumptions.
+\item Generality of the proposed approach under different assumptions about the data: In a last experiment, we move focus to the central problem of this thesis: classifying data sets in the performance vector space.  To validate the approach, we need to rely solely on synthetic data for which we know the underlying ground truth model.  A matrix is created with data sets generated from the different models, and each model performance is measured through a cross validation process.  This matrix allows us to classify a data set of unknown ground truth according to a nearest neighbor approach. In fact, this experiment tests if the proposed approach remains reliable on different conditions of parameters and also measuring the accuracy of its performance to predict a ground truth in comparison with other approaches for different data parameter assumptions.
 \end{itemize}
 \end{enumerate}
 
@@ -86,7 +86,7 @@ The performance of each model is assessed on the basis of 10-folds cross-validat
 \label{figMethod}
 \end{figure}
 
-For each dataset there exists a training set that contains 9 folds and a test set that which represents a single fold. A list of required parameters are presented in table~\ref{fig:param}. Samples are assigned randomly to each fold and this setting is the same across all predictive models for each run. Since all items are presented in the training set, then we can estimate the parameters that are related to items. 
+For each dataset there exists a training set that contains 9 folds and a test set which represents a single fold. A list of required parameters are presented in table~\ref{fig:param}. Samples are assigned randomly to each fold and this setting is the same across all predictive models for each run. Since all items are presented in the training set, then we can estimate the parameters that are related to items to be used in the test set. 
 
 
 
@@ -127,7 +127,7 @@ For other parameters that are related to students we need to divide the test set
 \end{table}
 
 
-Once all the required parameters are presented we can make a prediction for the inferred cells of the result matrix. Note that the selected observed and inferred items are the same across all the models for each run to make a better comparison for their prediction. A probability of mastery is obtained and rounded, resulting in a 0/1 error loss function.  We report the mean accuracy as the performance measure later in chapter \ref{sec:SIGNATURE}.  The R package \texttt{ltm} is used for parameter and skills estimation for IRT model and the R package \texttt{CDM} and \texttt{NMF} for Deterministic noisy and NMF models. 
+Once all the required parameters are presented we can make a prediction for the inferred cells of the result matrix. Note that the selected observed and inferred items are the same across all the models for each run to make a better comparison for their prediction. A probability of mastery is obtained and rounded, resulting in a 0/1 error loss function.  We report the mean accuracy as the performance measure later in chapter \ref{sec:SIGNATURE}.  The R package \texttt{ltm} is used for parameter and skills estimation for IRT model and the R package \texttt{CDM} and \texttt{NMF} for Deterministic Input Noisy and NMF models. 
 
 
 
@@ -144,7 +144,7 @@ This experiment essentially introduces the ``signature'' approach. By the assump
 The methodology that we took to assess the goodness of fit for a dataset is straightforward. It contains few steps as following :
 \begin{itemize}
 \item Obtaining the parameters of the given data: This step extracts the two types of parameters of the real data which are model and data specific parameters. 
-\item Generating synthetic datasets with the obtained parameters based on each candidate models: In our study we took 7 candidate models. Since some parameters influence the performance vector as described in the section~\ref{Sensitive} so we have to create synthetic data that follows the same characteristics of the real one.
+\item Generating synthetic datasets with the obtained parameters based on each candidate models: In our study we took 7 candidate models. Since some parameters influence the performance vector as we will see later in chapter~\ref{sec:SIGNATURE} so we have to create synthetic data that follows the same characteristics of the real one.
 
 \item Calculating the predictive performance of candidate models over both real and synthetic datasets: This process will result in eight signatures where only one of them is for the given real data.
 \item Measuring the similarity of the signature derived from real and each synthetic data: Each predictive performance in the previous step will become a point in the performance space. the predictive performance point for a synthetic data is in the area of the relative ground truth. Therefore the nearest neighbor to the real data performance in the performance space will become the best representative of the ground truth. In this research we used Pearson correlation coefficient as a measure of similarity to find the nearest neighbor.
@@ -163,7 +163,7 @@ The methodology that we took to assess the goodness of fit for a dataset is stra
 \subsection{Generality of the proposed approach}
 \label{Classification}
 
-The very last experiment that we have done is a comparison between the ``signature'' method where the nearest neighbor classifies in the performance vector space and the simplest approach where the best performer is defining the ground truth(``Best performer'' method). We used the synthetic data generated in section \ref{Sensitive} to test this hypothesis. For the nearest neighbor approach the classification should be done where datasets have the same data generation conditions. Therefore we'll get 24 sets of datasets where similar data generation parameters exists among each set. Since we have 10 runs for each data specific parameter set then we choose 10 nearest neighbor and preform majority voting on the classification results. The classes would be the seven models as the ground truth.
+The very last experiment that we have done is a comparison between the ``signature'' method where the nearest neighbor classifies in the performance vector space and the simplest approach where the best performer is defining the ground truth(``Best performer'' method). For this purpose, we used the synthetic datasets that were generated to test the sensitivity of the signature. For the nearest neighbor approach the classification should be done where datasets have the same data generation conditions. Therefore we'll get 24 sets of datasets (6 models times 4 data specific conditions) where similar data generation parameters exists among each set. Since we have 10 runs for each data specific parameter set then we choose 10 nearest neighbor and preform majority voting on the classification results. The classes would be the seven models as the ground truth.
 \begin{comment}
 Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. There exists 1440~datasets where each model corresponds to 240 dataset. The gray cells in table~\ref{Classification-Conf} shows the true positive values and other values in each column represent the false positive predictions for group of datasets.The values in each row shows the number of false negative predictions for each model. The confusion is mostly between those techniques that shares same concepts specially between NMF Conjunctive and DINA model where we use conjunctive Q-matrices. 
 
