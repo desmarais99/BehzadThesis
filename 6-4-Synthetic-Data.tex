@@ -268,6 +268,7 @@ Once all parameters are prepared we can generated the simulated data with equati
 
 
 \section{Linear models}
+\label{LinearModelSynthetic}
 Linear models are the simplest to generate data that covers multiple skills. In this study, Q-matrix is the only means to represent the mapping between skills and items. One of the techniques that infers this parameter is NMF. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that comply the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
 
 The very first step to generate simulated test result for linear models is to define a Q-matrix that maps $k$ skills to $n$ items. The same as before these parameters can be inferred form an existing dataset but many existing datasets offer few expert defined Q-matrices. Even some datasets have more than a single expert defined Q-matrix with different number of skills. A Q-matrix can also be generated randomly. As mentioned, there are three types of Q-matrices. In this study we use conjunctive and additive model in the factorization technique.The following sections describe generating parameters for each model.
