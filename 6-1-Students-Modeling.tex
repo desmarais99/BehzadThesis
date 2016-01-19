@@ -236,7 +236,7 @@ This corresponds to the usual logistic regression procedure.
 
 A simpler version of IRT called the Rash model, fixes the discrimination parameter~$a$ to~$1$.  Fixing this parameter reduces over fitting, as the discrimination can sometimes take unrealistically large values. We use the Rash model for student skills modeling, but we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process in order to make this data more realistic (chapter \ref{sec:Syn} discusses data generation approaches in details).
 
-\subsection{Baseline Expected Prediction}
+\subsection{Baseline Expected Prediction}\label{sec:basel-expect-pred}
 
 As a baseline model, we use the expected value of success to item~$i$ by student~$j$, as defined by a product of odds:
 \[ O(X_{ij}) =  O(X_i) O(S_j) \]

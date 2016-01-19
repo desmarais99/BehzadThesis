@@ -32,14 +32,14 @@ This chapter introduces and defines these concepts, as well as outlines the obje
 In this section we introduce a vocabulary that is related to the general objective of this thesis and used in all chapters:
 
 \begin{itemize}
-\item Student model: "In general terms, student modeling involves the construction of a qualitative representation that accounts for student behavior in terms of existing background knowledge about a domain and about students learning the domain. Such a representation, called a student model" \citep{sison1998student}. Student skills assessment models are essentially constructed to assess student's skills or estimate potential skills required for problems. Since our experiments are in the domain of educational data mining, by the term ``Model'' we mean ``student model''. 
-\item Dataset (Real/Synthetic): Dataset in this context represents student test outcome which is a matrix that shows the result of a test given by students. A test is simply a set of few questions, problems or items that can have a success of a failure result in the dataset. Datasets can be ``real'' or ``synthetic''. A ``Real'' dataset is the result of an actual test given by individuals in an e-learning environment or even a classroom. The term ``Synthetic'' means that a simulation is involved to generate an artificial student test outcome. The simulation is designed based on a model that takes a set of predefined parameters to generate student test outcome. This set contains two types of parameters : Model specific parameters and Data specific parameters.
-\item Model specific parameters: These parameters are specifically defined and learnt based on model's type. Complex models contain more parameters. Some models may share some parameters but some models have no parameters in common.
-\item Data specific parameters: These parameters are common between all datasets such as average success rate, sample size and number of items in a dataset.
-\item Ground truth: This term is originally coined by Geographical/earth science where if a location method such as GPS estimates a location coordinates of a spot on earth, then the actual location on earth would be the ``Ground truth''. This term has been adopted in other fields of study. In this context ``ground truth of a dataset'' means the actual model that best describes the dataset within its parameters.  Note that for the skills models studied here, the ground thruth is always unknown, unless we use synthetic data.
-\item Performance of a model: The accuracy of a model to predict student response outcomes over a dataset (using cross-validation) is called performance of a model.  Different models have different performances over a dataset. Assessing such a performance requires designing an experiment to learn the model's parameters and predict a proportion of the dataset that has not been involved in the learning phase.
-\item Performance vector: Each model has a performance over a dataset. Consider a set of models, $\mathcal{M}$, and a vector~$\mathbf{p}$ of length~$|\mathcal{M}|$ that contains the performance of each model over a given data set.  This vector represents a point in the performance space, and it is defined as the \textit{performance vector} of that data set.
-\item Performance Signature: We use the term \textit{performance signature} to designate the performance vector associated with the synthetic data of a model.  Note that there are different ways to prouduce the synthetic data of a model and we return to this question later.
+\item \textbf{Student model}: "In general terms, student modeling involves the construction of a qualitative representation that accounts for student behavior in terms of existing background knowledge about a domain and about students learning the domain. Such a representation, called a student model" \citep{sison1998student}. Student skills assessment models are essentially constructed to assess student's skills or estimate potential skills required for problems. Since our experiments are in the domain of educational data mining, by the term ``Model'' we mean ``student model''. 
+\item \textbf{Dataset (Real/Synthetic)}: Dataset in this context represents student test outcome which is a matrix that shows the result of a test given by students. A test is simply a set of few questions, problems or items that can have a success of a failure result in the dataset. Datasets can be ``real'' or ``synthetic''. A ``Real'' dataset is the result of an actual test given by individuals in an e-learning environment or even a classroom. The term ``Synthetic'' means that a simulation is involved to generate an artificial student test outcome. The simulation is designed based on a model that takes a set of predefined parameters to generate student test outcome. This set contains two types of parameters : Model specific parameters and Data specific parameters.
+\item \textbf{Model specific parameters}: These parameters are specifically defined and learnt based on model's type. Complex models contain more parameters. Some models may share some parameters but some models have no parameters in common.
+\item \textbf{Data specific parameters}: These parameters are common between all datasets such as average success rate, sample size and number of items in a dataset.
+\item \textbf{Ground truth}: This term is originally coined by Geographical/earth science where if a location method such as GPS estimates a location coordinates of a spot on earth, then the actual location on earth would be the ``Ground truth''. This term has been adopted in other fields of study. In this context ``ground truth of a dataset'' means the actual model that best describes the dataset within its parameters.  Note that for the skills models studied here, the ground thruth is always unknown, unless we use synthetic data.
+\item \textbf{Performance of a model}: The accuracy of a model to predict student response outcomes over a dataset (using cross-validation) is called performance of a model.  Different models have different performances over a dataset. Assessing such a performance requires designing an experiment to learn the model's parameters and predict a proportion of the dataset that has not been involved in the learning phase.
+\item \textbf{Performance vector}: Each model has a performance over a dataset. Consider a set of models, $\mathcal{M}$, and a vector~$\mathbf{p}$ of length~$|\mathcal{M}|$ that contains the performance of each model over a given data set.  This vector represents a point in the performance space, and it is defined as the \textit{performance vector} of that data set.
+\item \textbf{Performance Signature}: We use the term \textit{performance signature} to designate the performance vector associated with the synthetic data of a model.  Note that there are different ways to prouduce the synthetic data of a model and we return to this question later.
 
 The performance vector can be considered from two perspectives: The first perspective is a performance vector in the performance space where we have the same number of dimensions as the number of candidate models in the performance vector. The second one is a kind of ``signature'' for a specific data which considers the vector in a two dimensional space with performances on the \textit{y} axis and skills assessment models on \textit{x} axis.  They are sharing the same concepts but different presentations. 
 
@@ -52,24 +52,26 @@ The performance vector can be considered from two perspectives: The first perspe
 \paragraph{}The following questions are addressed in this thesis:
 
 \begin{enumerate}
-\item What is the relative performance of student skills assessment models over real and over synthetic data created using the same models?
-\item Is the relative performance unique to each synthetic data type (data from the same ground truth model)?
-\item Can the relative performance be used to define a method to reliably identify the ground truth behind the synthetic data?
+\item What is the performance vector of student skills assessment models over real and over synthetic data created using the same models?
+\item Is the performance vector unique to each synthetic data type (data from the same ground truth model)?
+\item Can the performance vector be used to define a method to reliably identify the ground truth behind the synthetic data?
 \item How does the method compare with the standard practice of using the model with the best performance?  In particular, does the ground truth model identified better generalize over a space of parameter values?
 \end{enumerate}
 
 
 \section{General Objectives}
 
-\paragraph{}The general objective of this thesis is to assess the goodness of fit on the basis of the what we will refer to as performance signatures. It can be divided in three sub-objectives: The first objective is to obtain the performance signatures of skills assessment models over a synthetic datasets generated with these very same models. This will create a vector of performances in the performance space. The second one is to assess model fit using the relative performance vector of the synthetic and real data. The third objective is to test the uniqueness and sensitivity of the performance vectors on the different data specific conditions such as sample size, nose, average success rate.
+\paragraph{}The general objective of this thesis is to assess the goodness of fit on the basis of the what we will refer to as performance signatures. It can be divided in three sub-objectives: The first objective is to obtain the performance signatures of skills assessment models over a synthetic datasets generated with these very same models. This will create a vector of performances in the performance space. The second one is to assess model fit using the performance vector of the synthetic and real data. The third objective is to test the uniqueness and sensitivity of the performance vectors on the different data specific conditions such as sample size, nose, average success rate.
 
 \section{Hypotheses}
 \paragraph{}The research in this thesis tests the following hypotheses:
 \paragraph{Hypothesis 1:} The performance vectors of two datasets with the same ground truth have a high level of correlation.
-\paragraph{Hypothesis 2:} The best performer model in the predictive performance vector is not necessarily the ground truth.
+\paragraph{Hypothesis 2:} The best performer model is not necessarily the ground truth model.
 \paragraph{Hypothesis 3:} Datasets with the same model parameters and data specific parameters create unique performance vector. %\note{Behzad says : or The predictive performance of each synthetic data type is unique} \note{Behzad says :or the predictive performance of different models will be stable by the characteristic of a given type of data}
 \paragraph{Hypothesis 4:} Datasets with the same ground truth but different data specific parameters can have different performance vectors. 
 \note{Do we need hypothesis 3 and 4?}
+\par\note{Should we have a hypothesis about the expected performance of the ground thruth model compared to the best performer?  Something like: ``If the ground thruth model is different than the best performer model for a given data set, the expected value of the performance of the ground thruth model over the space of data and model parameters is greater''.  And if we made this hypothesis, do we have the demonstration that it is a false hypothesis, as we concluded in a recent discussion?}
+
 
 
 \section{Main Contributions}
@@ -105,7 +107,7 @@ Along the course of the doctorate studies, I contributed to a number of publicat
 \end{enumerate}
 
 
-\section{Organization Of the Thesis}
+\section{Organization of the Thesis}
 \paragraph{} We review the related literature on fundamental concepts in Educational Data Mining and some machine learning techniques that have been used in our experiments in Chapter \ref{sec:RevLitt}. Chapter \ref{sec:RelatedWorks} discusses recent work about model selection. The main contribution of the research starts from chapter \ref{sec:Approach} where we explain the proposed approach in details. As a complementary part of the proposed approach we explain synthetic data generation approaches in chapter \ref{sec:Syn}. The experimental results of the main contribution are explained in details in Chapter \ref{sec:SIGNATURE}. Finally, we conclude and outline future work in Chapter \ref{sec:Conclusion}. 
 
 

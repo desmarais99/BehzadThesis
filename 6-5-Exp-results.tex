@@ -139,9 +139,9 @@ As expected, when the generative model behind the synthetic data set is the same
 
 For the synthetic data sets, three models reach performances that are much higher than the baseline, in the range of $20-30$\% (DINO, Linear Conjunctive, and DINA), whereas for the three other models the gain is closer to 5\% (Linear additive, POKS, and IRT).
 
-An important observation is that the pattern of relative differences of performances across techniques varies considerably and is unique to each data set: no two data sets have the same pattern of relative performance across models.  The capacity of recognizing a data set's true model relies on this uniqueness characteristic.
+An important observation is that the pattern of relative differences of performances across techniques varies considerably and is unique to each data set: no two data sets have the same pattern of performance vector across models.  The capacity of recognizing a data set's true model relies on this uniqueness characteristic.
 
-For the real data sets, the relative performance among the techniques shows smaller discrepancies and is closer to the baseline. The interesting finding is that the best performer is not far from the base line which means that the best performer can not be reliable to be known as the ground truth. It is also surprising to see that a majority of models do worst than the baseline for most of data sets. 
+For the real data sets, the performance vector among the techniques shows smaller discrepancies and is closer to the baseline. The interesting finding is that the best performer is not far from the base line which means that the best performer can not be reliable to be known as the ground truth. It is also surprising to see that a majority of models do worst than the baseline for most of data sets. 
 
 The results from the subsets of the Fraction data show that the pattern of the Fraction performance data set repeats over Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions.  However, it differs substantially from Fraction-2/3 for the NMF conjunctive performance which reaches that of the NMF additive one and also DINA reaches DINO. This is readily explained by the fact that the Q-matrix of this data set has the property of assigning a single skill to each item, in which case the two matrix factorization techniques or even cognitive diagnosis models become equivalent.  But aside from the Fraction-2/3 case, this similarity among Fraction data set and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the performance ``signature'' remains constant across these data sets.
 
@@ -272,7 +272,7 @@ Finally, we did a last experiment on datasets with different success rates. For 
 
 \section{Performance comparison}
  
-As explained the uniqueness characteristic of synthetic data signatures makes it easy to identify the ground truth and also there exists some similarity between the pattern of the signature of synthetic and real datasets. Also some real dataset that were from a same source but different parameters shared similarities in their relative performance. On the other side the signature of some synthetic data shows similarities to the signature of a real data. Hence we can define a measure to find the similarity of a synthetic generated dataset and a real one given a set of candidate models.
+As explained the uniqueness characteristic of synthetic data signatures makes it easy to identify the ground truth and also there exists some similarity between the pattern of the signature of synthetic and real datasets. Also some real dataset that were from a same source but different parameters shared similarities in their performance vector. On the other side the signature of some synthetic data shows similarities to the signature of a real data. Hence we can define a measure to find the similarity of a synthetic generated dataset and a real one given a set of candidate models.
 
 \subsection{Results}
 

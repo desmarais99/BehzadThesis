@@ -1,7 +1,7 @@
 \Chapter{SYNTHETIC DATA GENERATION}\label{sec:Syn}
 
 
-Simulated data has been playing an increasingly important role in EDM \citep{JEDM:baker2009}. The availability of new simulation software is contributing to this trend in every domain. As an example \citet{jafarpour2015quantifying} used simulated data for disease outbreak detection where simulated data is generated from a hypothesized model of a phenomena. The framework of this study relies on synthetic data. Getting back to the main contribution of this thesis, we proposed an approach for model selection that relies on synthetic data. Using synthetic data allows us to validate the sensitivity of the model selection approach to data specific parameters such as sample size and noise. Then the process of generating data should be accurate such that both data  and model specific parameters are applied properly. Every model studied here can be considered \textit{generative}, to the extent that they can generate synthetic data.
+The framework of this study relies on synthetic data. The performance signature vectors are based on synthetic data generated from each model of the performance space.  Therefore, we dedicate a full chapter to the process of generating synthetic data from the different models.
 
 A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit. Since the hypothesis of this research relies on comparison the performance vector of real vs. synthetic data, then we can also consider data specific parameters of the real data in the generation process to make a better comparison of the results.
 
@@ -9,17 +9,14 @@ A unique advantage of synthetic data is that the model parameters can be predefi
 %(2) explain how they are either derived from data, or initialized (presumably from a random distribution); 
 As described before, there exists two types of parameters for student test outcome:
 \begin{itemize}
-\item Model specific: These parameters are dependent on the ground truth of a dataset. Skills assessment models that were described in section \ref{SkillsAssessmentModels} considers different parameters. Depending on the type of the student model, some of them may share a parameter such as a Q-matrix for multiple skills models but still the interpretation of each model is unique. Generally an experiment should be designed to learn these parameters form a dataset or they can be generated under specific criteria. More details for each parameter is given later in this chapter.
-\item Data specific (contextual): Regardless of the ground truth of a dataset, there are parameters that describe the dataset's specifications such as number of students. These parameters are common for datasets with different ground truths. They could possibly affect the performance of a model over a dataset. 
+\item Model specific: Models have their own parameters, some of which may be shared among models, such as a Q-matrix for multiple skills models, some of which are more unique such as the item discrimination parameter of the IRT class of models. Generally an experiment should be designed to learn these parameters form a dataset or they can be generated under specific criteria. More details for each parameter is given later in this chapter.
+\item Data specific (contextual): The data specific parameters are common to all data sets.  They have to be predefined, but they may be set to reflect a data set for which we want to find the ground thruth.  For example, the item difficulty distribution or the student success rate distribution are two data specific parameters.  Data specific parameters can also be a model parameter, such as item difficulty and discrimination.
 \end{itemize}
-
 
 Table \ref{tbl:param-DataGen} shows a complete list of both types of parameters required for data generation.
 
 %\newcommand{\tabitem}{~~\llap{\textbullet}~~}
 %\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
-
-
 
 \begin{table}
   \centering
@@ -46,19 +43,22 @@ Table \ref{tbl:param-DataGen} shows a complete list of both types of parameters 
 \cmidrule[1.5pt]{2-5}
 &&&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem Initial Odds } & \multirow{-2}{*}{\tabitem Student score Variance} \tabularnewline
 &&&\multicolumn{2}{l!{\VRule[1.5pt]}}{ \tabitem Odds ratio } & \tabularnewline
-\multirow{-9}{*}{\begin{sideways} \scriptsize Contributed skills \end{sideways}}&\multirow{-3}{*}{\begin{sideways} \scriptsize Zero\end{sideways}}&\multirow{-3}{*}{ POKS }&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem PO structure}& \multirow{-2}{*}{\tabitem Item score Variance} \tabularnewline
+\multirow{-9}{*}{\begin{sideways} \scriptsize Contributed skills \end{sideways}}&\multirow{-3}{*}{\begin{sideways} \scriptsize Zero\end{sideways}}&\multirow{-3}{*}{ POKS }&\multicolumn{2}{l!{\VRule[1.5pt]}}{\tabitem \parbox[t]{.4\textwidth}{\raggedright Partial Order Knowledge Structure (KS) (includes two alpha error parameters for its induction from data)}}& \multirow{-2}{*}{\tabitem Item score Variance} \tabularnewline
 \cmidrule[1.5pt]{2-6}
 \end{tabular}
   \caption{Parameters involved in synthetic data generation}
   \label{tbl:param-DataGen}
+  \note{Item difficulty and other ``model specific'' parameter can be obtained from data.  We may have to refine this taxonomy, but let's leave it as is for now.}
 \end{table}
 
 \subsection{Assessing parameters}
 
-To generate synthetic data a set of parameters is required There are two approaches to assess required parameters to generate synthetic data:
+To generate synthetic data, a model and data specific parameters are required There are two approaches to obtain these parameters to generate synthetic data:
 \begin{itemize}
-\item Parameters borrowed form a real data: Deriving contextual parameters from a real data is a straight forward task. To get the model specific parameters, we need to learn them from a real dataset given a model. In some cases there exists a predefined (or expert defined) parameter associated with the real data such as an expert defined Q-matrices.
-\item parameters Generated randomly based on a distribution: In the case that there exists no reference dataset to derive parameters we can randomly select some samples based on a distribution (for example normal distribution). Some parameters have specific conditions that if they become violated it changes the definition of the parameter. More details is given in next sections.
+\item Parameters estimated form real data: In general, models define means to estimate their parameters from data.  Some are trivial to estimate, such as student success rate distribution if we assume a Gaussian distribution, for eg., and some are much more complex, which is the case of latent factors such as the number of skills and the Q-matrix itself.
+\item Parameters generated randomly based on a distribution: In the case that there exists no reference dataset to derive parameters we can randomly select some samples based on a distribution (for example normal distribution). Some parameters have specific conditions that if they become violated it changes the definition of the parameter. More details is given in next sections.
+\par\note{This isn't quite right I think.  We can estimate the distribution parameters from the data and still generate random parameter distributions.}
+\item Expert given and arbitrary parameters: Latent factors are often not derived from data but arbitrarily defined by expert or by some educated choice.  The Q-matrix is the most obvious of such parameter, but so are the guess and slip parameters which can prove difficult to correctly estimate from data.
 
 \end{itemize}
 
@@ -72,9 +72,10 @@ POKS is a technique that categorized as a ``zero skills'' method which does not 
 \subsection{Obtaining parameters}
 This model has three parameters with which the inference in possible : Knowledge structure, Initial probabilities, Odds ratio. To extract these parameters from an existing data we use POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. In the case that the data in not available these parameters should be generated randomly. Below we will describe how these parameters are generated with different conditions and constraints.
 %\note{Suggestion: (1) formally define all the parameters of the simulation,
-\subsubsection{Knowledge structure(KS)}
+\subsubsection{Partial Order Knowledge Structure (KS)}
 This parameter shows the relation and the dependency among a set of items. In fact, it reflects the order of learning a set of items in the same problem domain. Assuming items as different ``nodes'' in the graphical structure, there is a kind of ``parent-child'' relation between some pair of nodes where an easier item can be the child of a harder item. In our study this relation is considered as a ``link'' between two nodes. This link is not necessarily exists between each pair. Only those items that show a relation in the learning process can have a pairwise link. 
-The graphical demonstration of knowledge structure is an directed graph with no cycles allowed, except for symmetric relations. Also in the current version of POKS transitive relations between items are explicitly ignored. % because there is a likely strong correlation from transitive to direct relations that would need to be taken into account.
+
+A knowledge structure is a directed acyclic graph, with the exception that cycles in the form of symmetric relations are allowed. Also in the current version of POKS transitive relations between items are explicitly ignored. % because there is a likely strong correlation from transitive to direct relations that would need to be taken into account.
 
 % if you don't have transitive relation in your process you need to state that please
 
