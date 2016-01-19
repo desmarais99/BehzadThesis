@@ -8,19 +8,19 @@ Let us rephrase the method in more general terms and consider a set of models, $
 
 The rest of the chapter goes into more details about the method.
 
-\section{Synthetic data}
-This approach relies on synthetic data. A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit since the hypothesis of this research relies on comparison the performance vector of real vs. synthetic data.
+% \section{Synthetic data}
+% This approach relies on synthetic data. A unique advantage of synthetic data is that the model parameters can be predefined. Once the simulated data is generated with predefined parameters, a model can be trained over the generated data and a comparison with the original, known parameter values becomes possible. This may be the strongest benefit of synthetic data in assessing model fit since the hypothesis of this research relies on comparison the performance vector of real vs. synthetic data.
 
-Generating data is a complex task because sometimes it requires many parameters. Some parameters are dependent to the model which is the base of generation. Regardless of the type of the base model, some others are always essential which are data specific parameters such as sample size and score variance. Complexity of some model specific parameters is another issue that can potentially influence the complexity of data generation process. Even if all the required parameters are available there is still a chance to have a conflict among parameters. Some further details of data generation for each model are given later in chapter \ref{sec:Syn}. 
+% Generating data is a complex task because sometimes it requires many parameters. Some parameters are dependent on the model which is the base of generation. Regardless of the type of the base model, some others are always essential which are data specific parameters such as sample size and score variance. 
 
-One part of this contribution that assess the model fit of a real dataset requires to borrow parameters from a given data. In another part of this contribution we used synthetic data to validate the sensitivity of the model selection approach to data specific parameters. In such a case the parameters are unknown and we should randomly generate the parameters for synthetic data generation. Then the process of generating data should be accurate such that both data  and model specific parameters are applied properly. Every model studied here can be considered \textit{generative}, to the extent that they can generate synthetic data.
+% Given that our objective is to determine the ground thruth of a given data set, we will borrow data specific parameters from this data set to generate the synthetic data.  Further details are given in chapter~\ref{sec:Syn}. 
 
 
 \section{Model fit in a vector space framework}
 
-This approach is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
+% This approach is based on the assumption that the predictive performance of a given model will vary as a function of the data set's groud truth model, and that the relative performance between different data sets will be stable.
 
-Let us explain this idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} and seventh data set named \textit{random} are added for comparison purpose.  The details of the methodology to assess model performance are described later.  For now, let us only focus on this table's data.
+Let us explain the general idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} (section~\ref{sec:basel-expect-pred}) and a seventh data set named \textit{random} (random results that constrained to reflect the target data set parameters such as item and student success rate distribution) are added for comparison purpose.  
 
 \newcolumntype{d}[1]{D{.}{.}{#1}} % not used
 
@@ -45,15 +45,15 @@ Let us explain this idea with the performance data in table~\ref{tab:vectorspace
 \end{table}
 
 
-As we can expect, the diagonal (in bold face, except for one) always displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data.  This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth.  However, this is not always the case, in this particular example, although Linear Conj. generated dataset expected to have  better performance with NMF Conj. model but DINA shows a better performance. Later in this chapter and chapter \ref{sec:SIGNATURE} we will discuss this case.
+As we can expect, the diagonal (in bold face, except for one), corresponding to the match between the underlying synthetic model and the model performance) always displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data.  This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth.  However, this is not always the case. In this particular example, the DINA model show a better performance over the Linear Conj.\ data set, whereas this data set's corresponding model is the NMF Conj. 
 
 
 
-The principle of the proposed approach is to use the whole column of performance as a vector to determine the closest model to the ground truth.  In that respect, if columns are considered as vectors in the space of dimensions created by model performances, we can use a similarity measure to determine the closest ground truth (or a distance measure if we were to consider the columns as a point in space).
+The principle of the proposed approach is to use the whole column of performance as a vector to determine the closest model to the ground truth.  In that respect, if columns are considered as vectors in the space of dimensions created by model performances, we can use a similarity measure to determine the closest ground truth (or a distance measure if we consider the columns as a point in space).
 
-The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turns, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.  
+The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turn, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.  
 
-The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance except once case, but we will show more examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
+The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance except for one case, but we will show more examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
 
 
 \section{Research questions}
