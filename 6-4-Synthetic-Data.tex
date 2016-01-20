@@ -80,13 +80,15 @@ A knowledge structure is a directed acyclic graph, with the exception that cycle
 % if you don't have transitive relation in your process you need to state that please
 
 
-There are few other parameters involved in the generation of KS which are:
+There are two other parameters involved in the generation of KS:
 \begin{itemize}
-\item Number of independent graphs: Even in a set of items there could be different groups of nodes without any dependency between each group. Since there is no link between each group then they create an in dependent graph in the knowledge structure. This parameter can also affect the total number of links in a structure where more independent groups results in less number of links in the structure given same density of links in each group. 
-\item Total Number of links: This has a correlation with the previous parameter but still we can control the number of dependencies in a KS. This parameter has a direct effect on test success rate and item score variance. Fewer number of links will result in lower test success rate and item score variance.% There are still some other parameters that could change the test success rate and item score variance.
+\item Conditional probability strength.  For a link to be established between two items, say $X_a \rightarrow X_b$, the data must reveal a minimal conditional probability greater than a threshold $\alpha_p$: $P(X_b|X_a) > \alpha_p$.
+% Number of independent graphs: Even in a set of items there could be different groups of nodes without any dependency between each group. Since there is no link between each group then they create an in dependent graph in the knowledge structure. This parameter can also affect the total number of links in a structure where more independent groups results in less number of links in the structure given same density of links in each group. 
+\item %Interaction test.  Moreover, the conditional probability must be different than the unconditional probability: $P(X_b|X_a) \neq P(X_b)$.  This is tested with an interaction test such as the $\chi^2$ test using a given alpha error, $\alpha_c$.
+Total Number of links: This has a correlation with the previous parameter but still we can control the number of dependencies in a KS. This parameter has a direct effect on test success rate and item score variance. Fewer number of links will result in lower test success rate and item score variance.% There are still some other parameters that could change the test success rate and item score variance.
 \end{itemize}
-
-%Other input parameters can make the random generation more specific,such as the number of links and number of independent trees in a KS\note{?? Needs to be defined.}. These parameters will change the item variance in the test result matrix. 
+%In the current study, the two parameters, $\alpha_p$ and $\alpha_c$, are respectively set at~$0.5$ and~$0.2$. \note{verify this}
+Other input parameters can make the random generation more specific,such as the number of links and number of independent trees in a KS\note{?? Needs to be defined.}. These parameters will change the item variance in the test result matrix. 
 
 \begin{figure}[t]
 \centering 
@@ -128,12 +130,13 @@ L(KS,N_{i}) = max(E|E=length-of(N_{i},p)  ,  \exists path(N_{i},p)  , leaf(p)=Tr
 \label{EQ:Level}
 \end{equation}
 
+
 %The generation of a random KS consists in randomly assigning 0-1 values to an upper triangular adjacency matrix. \annote{Once the KS adjacency matrix is created, we can assign values to each item that contributes with the initial odds of each node and odds ratio between a pair of nodes.}{not clear; odds ratio has not yet been introduced}
 
 \subsubsection{Initial Probabilities}
 %first you have to get probabilities and which probability do you start with? where do they come from?
 
-Each item should be associate with an initial probability of success. This probability has a direct correlation with the difficulty of the item. In general if node $A$ implies node $B$ ($A \rightarrow B$) then node $B$ should have a higher initial probability of success because in this relation item $A$ is the harder problem. The allocation of initial values to items should be done respect to this characteristic. 
+Each item should be associate with an initial probability of success. This probability has a direct correlation with the difficulty of the item. In general if node $X_a$ implies node $X_b$ ($X_a \rightarrow X_b$) then node $X_b$ should have a higher initial probability of success because in this relation item $X_a$ is the harder problem. The allocation of initial values to items should be done respect to this characteristic. 
 
 Starting from a root node in KS we assign a random initial probability  for each node $N_{i}$ from a range of values between $r_{max}$ to $r_{max}+\frac{1-r_{max}}{L(KS,N_{i})}$ where $r_{max}$ is the maximum initial probability of $N_{i}$ parents. For a node that is a root $r_{max}$ is $0$ since it is starting node and obviously should have the lowest initial probability among its descendant. Also for a leaf the assignment range will be between $r_{max}$ and $1$ because it has level of $1$. 
 
@@ -141,24 +144,25 @@ As mentioned before, the initial probability of success for items come from thes
 
 \subsubsection{Odds ratio}
 
-The very last parameter is the odds ratio which is a ratio that represents the strength of a link between a pair of items. In the inference for POKS model this parameter is used to update the initial probability of inferred items given a set of observations. The same situation as inference we use this parameter to update the state of odds once an item has been sampled (more on these implementation details is given in the next section).
+The very last parameter is the odds ratio which is a ratio that represents the strength of a link between a pair of items. In the inference for POKS model this parameter is used to update the initial probability of inferred items given a set of observations. We also use this parameter to update the state of odds once an item has been sampled (more on these implementation details is given in the next section).
 For inference in POKS, the probability update for node $H$ given $E_1$,... $E_n$ can be written in following posterior odds form:
 %\note{This is not a clear description of the process.  What are the $E_i$ here? How is the first $E$ chosen and what is its initial probability? etc...}
 \begin{equation}
 O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H})}
 \label{EQPOKSratio}
 \end{equation}
-where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$ and $O(H)$ is the initial odds of node $H$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used. we will follow the same steps to generate data based on POKS model. 
-There are two types of odds ratio in the POKS model. Assuming $I_{3}$ as a node that has two children and a parent in figure \ref{fig:KSExample}. if the sampling result for this item (with respect to its initial odds) becomes $1$ (or success) then we should update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define a ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled,  node $I_{3}$) becomes a success. If the evidence is $0$ (or failure) then we should update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
+where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$ and $O(H)$ is the initial odds of node $H$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used. We follow the same steps to generate data based on POKS model. 
 
-In our experiments, in cases of random parameter generation, we assigned random values greater than $0.5$ as ``true odds ratio'' and smaller than $0.5$ for ``false odds ratio''for those pairs of items that have link in KS.
+There are two types of odds ratio in the POKS model. Assuming $I_{3}$ has two children and a parent in figure \ref{fig:KSExample}. If the sampling result for this item (with respect to its initial odds) becomes $1$ (success) then we update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define a ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled,  node $I_{3}$) becomes a success. If the evidence is $0$ (failure) then we update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
+
+In our experiments, in cases of random parameter generation, we assigne random values greater than $0.5$ as ``true odds ratio'' and smaller than $0.5$ for ``false odds ratio''for those pairs of items that have link in KS.
 
 %\note{Shouldn't you differenciate between the KS definition and the data generation?  Because KS can be taken from an existing data set, or generated at random with the procedure explained. Then comes the data generation part.}
 \subsection{Data generation}
 
 % (3) explain the algorithm for data point generation (should start with nodes that have no parents, then pick nodes for which all parents have values, etc.).  And what about nodes that have many parents?  This is the tricky question since POKS does not define multiple parents conditional probability tables---presumably this means that one parent is picked at random and that creates undeterminism of a kind, since picking one or the other parent would yield different probabilities.  And what about transitive relations?  In practice they are removed in the current POKS software if I recall correctly.  It would need to be explicitely mentioned.  Actually I see that the next paragraph addresses some of these issues.}
 
-Previous sections explained the process of obtaining a pre-defined or a random generated set of parameters for POKS. In this section we explain the process for sampling data points values to create a synthetic student test result matrix given a set of parameters. Each record in this approach represent a student test result that requires $n$ iterations to be generated where $n$ is the number of items and the final result matrix needs $m$ (number of students) records. The process simply follows steps in algorithm \ref{POKS:ALG}. Line 8 to 15 of this algorithm updates the state probability of the items. It is important to note that we just look at the neighbors of the item that is sampled. In other words the update propagate in breadth.
+Previous sections explained the process of obtaining a pre-defined or a random generated set of parameters for POKS. In this section we explain the process for sampling data points values to create a synthetic student test result matrix given a set of parameters. Each record in this approach represent a student test result that requires $n$ iterations to be generated where $n$ is the number of items and the final result matrix needs $m$ (number of students) records. The process simply follows steps in algorithm \ref{POKS:ALG}. Line 8 to 15 of this algorithm updates the state probability of the items. It is important to note that we just look at the neighbors of the item that is sampled. In other words the update propagates breadth-first.
 
 
 \begin{algorithm}
@@ -195,21 +199,20 @@ Previous sections explained the process of obtaining a pre-defined or a random g
 
 \subsection{Data specific parameters}
 
-Obtaining the performance of different models over a dataset is a main part of our contribution in this study. Some models require the number of skills to learn their parameters such as DINA. Since POKS generated dataset does not directly attempt to model underlying skills we have to have a prediction for this important parameter to associate with the data. \citet{Beheshti2012Numbers} proposed two approaches based on factorization technique to predict an optimum number of skills given a dataset. 
+% Obtaining the performance of different models over a dataset is a main part of our contribution in this study. Some models require the number of skills to learn their parameters such as DINA. Since POKS generated dataset does not directly attempt to model underlying skills we have to have a prediction for this important parameter to associate with the data. \citet{Beheshti2012Numbers} proposed two approaches based on factorization technique to predict an optimum number of skills given a dataset. 
 
-The only way to control the test result success rate and student/item score variance is to apply changes on the initial odds of items which are used to sample student test result. to control the student scores variance, one can scale the initial odds of each record such that the distribution of the initial odds stays the same for all students; for example we can double all the initial odds to represent a student with higher success rate but still the distribution of items score variance remains the same. Changing the initial odds that follows a specific distribution will create a dataset in which the item variance is following that distribution. It is important to note that this change should not violate any relation in the KS. For overall successrate the initial odds can be scaled independent from students or item perspective, for example tripling all initial odds for all students will result in a higher success rate than the default values.
+In some experiments, we need to generate a synthetic data with specific mean success rate for both students and items, and with specific variance, or specific entropy.
 
-
+One way to control the test result success rate and student/item score variance is to apply changes on the initial odds of items which are used to sample student test result. To control the student scores variance, one can scale the initial odds of each record such that the distribution of the initial odds stays the same for all students; for example we can double all the initial odds to represent a student with higher success rate but still the distribution of items score variance remains the same. Changing the initial odds that follows a specific distribution will create a dataset in which the item variance is following that distribution. It is important to note that this change should not violate any relation in the KS. For overall success rate, the initial odds can be scaled independently from students or item perspective, for example tripling all initial odds for all students will result in a higher success rate than the default values.
 
 %The method that generates synthetic dataset based on the POKS model requires a knowledge structure (KS). In this process the KS can be obtained from a real data set which allows us to make a better comparison of the results. It can also be generated as a random KS.  
 
-
 \section{IRT}
 
-IRT model considers single skill for each student. However there might be few skills involved to success an item but this model combines all of them into a single ability which accepts continuous values. Additional to data specific parameters, IRT model requires three other parameters to generate data points. Akin to all models these parameters can be derived from real data, it is also possible to generate these parameters with a distribution. The rest of this section describes the approaches to obtain these parameters randomly.
+The standard IRT model models student response outcome with a single skill. But in addition to the skill mastery, IRT includes three other parameters. Akin to all models these parameters can be derived from real data, it is also possible to generate these parameters with a distribution. The rest of this section describes the approaches to generate these parameters.
 
 \subsection{Generating parameters randomly}
-Let us get back to the inference for IRT model. Equation~\ref{IRTEQ} shows the probability of a student given the ability of $\theta$ to success item $j$ which has the difficulty of $b_j$ and discrimination of $a_j$ based on IRT-2PL model. 
+Equation~\ref{IRTEQ} shows the probability of a student with ability $\theta$ to succeed item $j$ which has the difficulty of $b_j$ and discrimination of $a_j$ based on IRT-2PL model. 
 
 %\note{Actually, it would be better to write this with equations, including the Poisson distribution.  See this paper (equation 2 and below): \url{http://educationaldatamining.org/EDM2011/wp-content/uploads/proc/edm2011_paper35_full_Desmarais.pdf}}
 
@@ -219,6 +222,8 @@ Let us get back to the inference for IRT model. Equation~\ref{IRTEQ} shows the p
 P(X_j\!=\!1\;|\;\theta) = \frac{1}{1+e^{-a_j(\theta-b_j)}}
 \label{IRTEQ}
 \end{equation}
+
+We assume the following distributions for the parameters:
 
 \begin{center}
 $\theta \sim \pN(\mu, s_t)$
@@ -230,20 +235,22 @@ $b_j \sim \operatorname{Pois} \left({\lambda_b}\right)$
 
 %Students ability to answer questions and item difficulty are generated by a normal distribution with the mean of $0$ and standard deviation of $1.25$\note{why these numbers?  Shouldn't they be from the sample}.
 
-The student related parameter is $\theta$ that is based on a standard normal distribution with two parameters $\mu$ and $s_t$ which are respectively mean of student ability and individual examinee standard deviation. These two parameters can be borrowed from an existing dataset or they can randomly be assigned which allows to control the student score variance. Two parameters $a$ and $b$ are item related parameters that are generated based on a poisson distribution with $\lambda_a$ and $\lambda_b$ to control item score variance.
+The student related parameter is $\theta$ and follows a standard normal distribution with two parameters $\mu$ and $s_t$ which are respectively mean of student ability and individual examinee standard deviation. These two parameters can be obtained from an existing dataset or they can be assigned to specific values if desired. Two parameters $a$ and $b$ are item related parameters that are generated based on a poisson distribution with $\lambda_a$ and $\lambda_b$ to control item score variance.
 
-Extremely large or small values for each of these parameters will result in an unrealistic outcome generation. Hence we bounded generated values for these parameters as below :
+Extremely large or small values for each of these parameters will result in an unrealistic outcome generation. Hence we bounded values for these parameters:
 
-\begin{center}
-\[-4 < \theta_i < 4\]
-\[0.5 < a_j < 3\]
-\[-3 < b_j < 3\]
-\end{center}
+\begin{eqnarray*}
+-4 < \theta_i < 4\\
+0.5 < a_j < 3\\
+-3 < b_j < 3
+\end{eqnarray*}
 where $i$ and $j$ are students and items respectively.
 
 \subsection{Simulated data}
 
-Once all parameters are prepared we can generated the simulated data with equation \ref{IRTEQ}. The same as POKS we can use the two approaches that \citet{Beheshti2012Numbers} proposed to estimate number of skills for those models that require a multiple skills Q-matrix. Also NMF can infer a Q-matrix from a dataset given a predicted number of skills. The results of \ref{IRTEQ} are probabilities between $0-1$ that should be discretized to $0$ or $1$ values. Test score success rate is the threshold to discrete the test result probabilities. Algorithm \ref{Alg:IRTGen} shows the steps to generate IRT based synthetic data.
+Once all parameters are prepared we can generate the simulated data with equation \ref{IRTEQ}. Akin to POKS we can use the two approaches that \citet{Beheshti2012Numbers} proposed to estimate number of skills for those models that require a multiple skills Q-matrix. Also NMF can infer a Q-matrix from a dataset given a predicted number of skills. The results of \ref{IRTEQ} are probabilities between $0-1$ that should be discretized to $0$ or $1$ values. Test score success rate is the threshold to discrete the test result probabilities. Algorithm \ref{Alg:IRTGen} shows the steps to generate IRT based synthetic data.
+
+\note{Why are we referring to multiple skills here??}
 
 
 \begin{algorithm}
