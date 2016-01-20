@@ -70,7 +70,7 @@ The rest of this chapter describes the data generation process based on each mod
 POKS is a technique that categorized as a ``zero skills'' method which does not directly attempt to model underlying skills but instead rely on observable items only. 
 
 \subsection{Obtaining parameters}
-This model has three parameters with which the inference in possible: Knowledge structure, Initial probabilities, Odds ratio. To extract these parameters from an existing data we use POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. In the case that the data in not available these parameters should be generated randomly. Below we will describe how these parameters are generated with different conditions and constraints.
+This model has three parameters with which the inference in possible: Knowledge structure\note{make sure terminology is consistent}, Initial probabilities, Odds ratio. To extract these parameters from an existing data we use the POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. In the case where the data is not available these parameters should be generated randomly. Below we describe how these parameters are generated with different conditions and constraints.
 %\note{Suggestion: (1) formally define all the parameters of the simulation,
 \subsubsection{Partial Order Knowledge Structure (KS)}
 This parameter shows the relation and the dependency among a set of items. In fact, it reflects the order of learning a set of items in the same problem domain. Assuming items as different ``nodes'' in the graphical structure, there is a kind of ``parent-child'' relation between some pair of nodes where an easier item can be the child of a harder item. In our study this relation is considered as a ``link'' between two nodes. This link is not necessarily exists between each pair. Only those items that show a relation in the learning process can have a pairwise link. 
@@ -80,15 +80,14 @@ A knowledge structure is a directed acyclic graph, with the exception that cycle
 % if you don't have transitive relation in your process you need to state that please
 
 
+\note{Need to restate (?) that the }
 There are two other parameters involved in the generation of KS:
 \begin{itemize}
-\item Conditional probability strength.  For a link to be established between two items, say $X_a \rightarrow X_b$, the data must reveal a minimal conditional probability greater than a threshold $\alpha_p$: $P(X_b|X_a) > \alpha_p$.
-% Number of independent graphs: Even in a set of items there could be different groups of nodes without any dependency between each group. Since there is no link between each group then they create an in dependent graph in the knowledge structure. This parameter can also affect the total number of links in a structure where more independent groups results in less number of links in the structure given same density of links in each group. 
-\item %Interaction test.  Moreover, the conditional probability must be different than the unconditional probability: $P(X_b|X_a) \neq P(X_b)$.  This is tested with an interaction test such as the $\chi^2$ test using a given alpha error, $\alpha_c$.
-Total Number of links: This has a correlation with the previous parameter but still we can control the number of dependencies in a KS. This parameter has a direct effect on test success rate and item score variance. Fewer number of links will result in lower test success rate and item score variance.% There are still some other parameters that could change the test success rate and item score variance.
+\item Number of independent graphs: Even in a set of items there could be different groups of nodes without any dependency between each group. Since there is no link between each group then they create an in dependent graph in the knowledge structure. This parameter can also affect the total number of links in a structure where more independent groups results in less number of links in the structure given same density of links in each group. 
+\item Total Number of links: This has a correlation with the previous parameter but still we can control the number of dependencies in a KS. This parameter has a direct effect on test success rate and item score variance. Fewer number of links will result in lower test success rate and item score variance.% There are still some other parameters that could change the test success rate and item score variance.
 \end{itemize}
 %In the current study, the two parameters, $\alpha_p$ and $\alpha_c$, are respectively set at~$0.5$ and~$0.2$. \note{verify this}
-Other input parameters can make the random generation more specific,such as the number of links and number of independent trees in a KS\note{?? Needs to be defined.}. These parameters will change the item variance in the test result matrix. 
+Other input parameters can make the random generation more specific,such as the number of links and number of independent trees in a KS. These parameters will change the item variance in the test result matrix. 
 
 \begin{figure}[t]
 \centering 
@@ -155,7 +154,7 @@ where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$ and $O(H)$ is the in
 
 There are two types of odds ratio in the POKS model. Assuming $I_{3}$ has two children and a parent in figure \ref{fig:KSExample}. If the sampling result for this item (with respect to its initial odds) becomes $1$ (success) then we update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define a ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled,  node $I_{3}$) becomes a success. If the evidence is $0$ (failure) then we update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
 
-In our experiments, in cases of random parameter generation, we assigne random values greater than $0.5$ as ``true odds ratio'' and smaller than $0.5$ for ``false odds ratio''for those pairs of items that have link in KS.
+In our experiments, in cases of random parameter generation, we assign random values greater than $0.5$ to ``true odds ratio'' and smaller than $0.5$ to ``false odds ratio''for those pairs of items that have link in KS.
 
 %\note{Shouldn't you differenciate between the KS definition and the data generation?  Because KS can be taken from an existing data set, or generated at random with the procedure explained. Then comes the data generation part.}
 \subsection{Data generation}

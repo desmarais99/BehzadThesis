@@ -53,7 +53,7 @@ As we can expect, the diagonal (in bold face, except for one), corresponding to 
 
 The principle of the proposed approach is to use the whole column of performance as a vector to determine the closest model to the ground truth.  In that respect, if columns are considered as vectors in the space of dimensions created by model performances, we can use a similarity measure to determine the closest ground truth (or a distance measure if we consider the columns as a point in space).
 
-The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turn, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.  \note{This is where we could refer to an explicit hypothesis.}
+The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models.  The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models.  In turn, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.
 
 The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance except for one case, but we will show more examples later that there are exeptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
 
@@ -65,20 +65,20 @@ Let us get back to the research questions and design experiments for them, This 
 \begin{enumerate}
 \item What is the performance vector of student skills assessment models over real and over synthetic data created using the same models?
 \begin{itemize}
-\item Predictive performance: In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The output of this experiment is the predictive performance or the ``signature'' of the dataset.
+\item Experiment 1: Predictive performance of models over real and synthetic data sets: In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The output of this experiment is the predictive performance or the ``signature'' of a dataset.
 \end{itemize}
 \item Is the performance vector unique to each synthetic data type (data from the same ground truth model)?
 \begin{itemize}
-\item Sensitivity of the signature over different data specific parameters: This section tests the uniqueness of the signature over different data generation parameters.
+\item Experiment 2: Sensitivity of the signature over different data specific parameters: This section tests the uniqueness of the signature over different data generation parameters.
 \end{itemize}
 %performance comparison
-\item Can the performance vector be used to define a method to reliably identify the ground truth behind the synthetic data?
+\item Can the performance vector be used as a method to reliably identify the ground truth behind the synthetic data?
 \begin{itemize}
-\item Assessing the goodness of fit of a dataset: This part proposes a framework for model selection as well as a measure that represents the goodness of fit by comparing the predictive performance vector of the synthetic and real data.
+\item Experiment 3: Model selection based on performance vector classification: This part proposes a framework for model selection as well as a measure that represents a measure for the goodness of fit of a model by comparing the predictive performance vector of the synthetic and real data. \note{rephrase?}
 \end{itemize}
 \item How does the method compare with the standard practice of using the model with the best performance?  In particular, does the ground truth model identified better generalize over a space of parameter values?
 \begin{itemize}
-\item Generality of the proposed approach under different assumptions about the data: In a last experiment, we move focus to the central problem of this thesis: classifying data sets in the performance vector space.  To validate the approach, we need to rely on synthetic data for which we know the underlying ground truth model.  A matrix is created with data sets generated from the different models, and each model performance is measured through a cross validation process.  This matrix allows us to classify a data set of unknown ground truth according to a nearest neighbor approach. In fact, this experiment tests if the proposed approach remains reliable on different conditions of parameters and also measuring the accuracy of its performance to predict a ground truth in comparison with other approaches for different data parameter assumptions.
+\item Experiment 4: Generality of the proposed approach under different assumptions about the data: In a last experiment, we move focus to the central problem of this thesis: classifying data sets in the performance vector space.  To validate the approach, we need to rely on synthetic data for which we know the underlying ground truth model.  A matrix is created with data sets generated from the different models, and each model performance is measured through a cross validation process.  This matrix allows us to classify a data set of unknown ground truth according to a nearest neighbor approach. In fact, this experiment tests if the proposed approach remains reliable on different conditions of parameters and also measuring the accuracy of its performance to predict a ground truth in comparison with other approaches for different data parameter assumptions. \note{make difference with other experiments clearer?}
 \end{itemize}
 \end{enumerate}
 

@@ -5,7 +5,7 @@ This chapter provides general information on model selection approaches and good
 \note{needs a better introduction here; in fact, this chapter could removed and its content reduced and put in the previous chapter, because it really is a review of relevant work}
 
 \section{Model selection and goodness of fit}
-One of the challenges in statistical investigations is to estimate and explain an empirical incident. The common approach is to formulate theories which are analytical tools for understanding and predicting the given phenomena. The explanation should account for both observed and unobserved incident where a prediction process is required. A formal representation of a theory is a statistical model which realizes a set of assumptions involved in the creation of the phenomena. An accurate model that has the correct specification of a theory can possibly predict the unobserved incidents.
+% One of the challenges in statistical investigations is to estimate and explain an empirical incident. The common approach is to formulate theories which are analytical tools for understanding and predicting the given phenomena. The explanation should account for both observed and unobserved incident where a prediction process is required. A formal representation of a theory is a statistical model which realizes a set of assumptions involved in the creation of the phenomena. An accurate model that has the correct specification of a theory can possibly predict the unobserved incidents.
 
 In educational data mining, or in data mining in general, analysts that wish to build a classification or a regression model over new and unknown data are faced with a very wide span of choices. Model selection in EDM is the task of selecting a statistical student model for a given data from a set of candidate models that are the best representatives of the data. Note that there could be a pre-processing step on the data itself to be well-suited to the problem of model selection but our study goes beyond that. The best fit is the model that is most likely to have generated the data. Selection is most often based on a model's ``goodness of fit''.
 
@@ -13,13 +13,13 @@ On one hand the term ``goodness of fit''  for a statistical model describes how 
 
 \subsection{Approaches}
 %pardos references
-The simplest way to address the first step is providing the predictive performance accuracy which is a basis for comparing models. Models with higher predictive accuracy yield more useful predictions and are more likely to provide an accurate description of the ground truth. Cross validation is also a straight forward and easy to understand approach for estimating predictive performance. In this research we used 10 fold cross validation to get the predictive accuracy.
+The simplest way is to choose the best performer model. Models with higher predictive accuracy yield more useful predictions and are more likely to provide an accurate description of the ground truth. 
 
 \note{ I have to add more general approaches, Do you have any recommendation for that?}
 
 \subsection{Measures}
 
-Models are the most important part of any educational systems since they are used to assess knowledge. To find the prediction quality of each skills assessment model some metrics are used. There is a wide range of choices of metrics to evaluate a model and choosing an appropriate one is very important since usually candidate models are preforming with small differences and a good metric can highlight the benefits of one model vs. others.
+To find the prediction quality of each skills assessment model some metrics are used. There is a wide range of choices of metrics to evaluate a model and choosing an appropriate one is very important since usually candidate models are preforming with small differences and a good metric can highlight the benefits of one model vs. others.
 
 %The notion of \textit{goodness of fit} represents how well a model can account for observed data.  For example, student test results can be accounted for by the ability of each student, and by the difficulty of each question, its discriminative factor, and by a guessing factor.  This is the basis of the 3-parameter logistic model IRT-3PL \cite{bakerKim2004}.  Given some training data to estimate the model parameters, and a partial observation of a test data set, held out responses can be ``predicted''.  The difference between the predicted and the actual responses represents the residual error, which is considered a measure of the goodness of fit.  And the lower the goodness of fit, the closer is the model considered to the ground thruth.
 
@@ -89,7 +89,7 @@ A number of factors can affect the amount of residual error.  The capacity of an
 
 For these reasons, a model may be ``fit to the data'', and yet it may underperform compared to others when residual error is used as the sole indicator of the goodness of fit.  The residual error is always measured for a given data sample, and to obtain a reliable estimate of the goodness of fit, data samples that cover the space of factors that can affect parameter estimates and model performances would need to be gathered.  Oftentimes this is impractical.
 
- The other measure that we used in our study is calculating the distance to the ground truth. Assuming a model performance space where the performance related to each model belongs to a specific subspace, thus the closest neighbor to the performance of a given data is the model fit and the correlated distance is the measure for the goodness of fit. Details of this measure is given in chapter \ref{sec:Approach}.
+ The other measure that we used in our study is calculating the distance to the ground truth. Assuming a model performance space where the performance related to each model belongs to a specific subspace, thus the closest neighbor to the performance of a given data is the model fit and the correlated distance is the measure for the goodness of fit. Details of this measure is given in chapter~\ref{sec:Approach}.
 
 
 
