@@ -65,7 +65,7 @@ Let us get back to the research questions and design experiments for them, This 
 \begin{enumerate}
 \item What is the performance vector of student skills assessment models over real and over synthetic data created using the same models?
 \begin{itemize}
-\item Predictive performance : In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The output of this experiment is the predictive performance or the ``signature'' of the dataset.
+\item Predictive performance: In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets.  It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The output of this experiment is the predictive performance or the ``signature'' of the dataset.
 \end{itemize}
 \item Is the performance vector unique to each synthetic data type (data from the same ground truth model)?
 \begin{itemize}
@@ -151,7 +151,7 @@ This experiment essentially introduces the ``signature'' approach. By the assump
 
 \note{Can we do away with this section?  This is a description of the basic principles that were already described, no?  The only difference is that we specify which parameters are taken from the target data (the data set to classify).  If so, then we may want to have a section that describes only this, not the whole process since it becomes confusing to understand whether this is the same process described earlier or some variant.}
 
-The methodology that we took to assess the goodness of fit for a dataset is straightforward. It contains few steps as following :
+The methodology that we took to assess the goodness of fit for a dataset is straightforward. It contains few steps as following:
 \begin{itemize}
 \item Obtaining the parameters of the given data: This step extracts the two types of parameters of the real data which are model and data specific parameters. 
 \item Generating synthetic datasets with the obtained parameters based on each candidate models: In our study we took 7 candidate models. Since some parameters influence the performance vector as we will see later in chapter~\ref{sec:SIGNATURE} so we have to create synthetic data that follows the same characteristics of the real one.
@@ -163,9 +163,9 @@ The methodology that we took to assess the goodness of fit for a dataset is stra
 
 %what are the measures 
 %how do you search -> you search for neighbors (all the neighbors defined as averages (avrages of what? ) Do you take many neighbors? how many neighbors? 
-% define the space , the principal is that let's look at the closest (nearest neighbor approach) it is a kind of classification named as : nearest neighbor classifier ,they are linear (linear discriminents) beacuse they define surface in the hyper space. and the surface split the space in to parts.we are not directly deifne the surface but we just measure the closest neighbor. 
-%Q1: how do you define the closest : 2 options
-%options : we could measure the avrage to find the centroid, we could take the average distance to a number of classes
+% define the space , the principal is that let's look at the closest (nearest neighbor approach) it is a kind of classification named as: nearest neighbor classifier ,they are linear (linear discriminents) beacuse they define surface in the hyper space. and the surface split the space in to parts.we are not directly deifne the surface but we just measure the closest neighbor. 
+%Q1: how do you define the closest: 2 options
+%options: we could measure the avrage to find the centroid, we could take the average distance to a number of classes
 %SVM or one layer neural network can find the linear discriminents or LDA .... they draw the line differently we use nearest neghbor to indirectly create a hyper surface in a hyper space to classify 
 %why did you choose one point? or many?
 %how do you define these points

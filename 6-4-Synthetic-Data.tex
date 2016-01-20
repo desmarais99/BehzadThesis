@@ -70,7 +70,7 @@ The rest of this chapter describes the data generation process based on each mod
 POKS is a technique that categorized as a ``zero skills'' method which does not directly attempt to model underlying skills but instead rely on observable items only. 
 
 \subsection{Obtaining parameters}
-This model has three parameters with which the inference in possible : Knowledge structure, Initial probabilities, Odds ratio. To extract these parameters from an existing data we use POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. In the case that the data in not available these parameters should be generated randomly. Below we will describe how these parameters are generated with different conditions and constraints.
+This model has three parameters with which the inference in possible: Knowledge structure, Initial probabilities, Odds ratio. To extract these parameters from an existing data we use POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. In the case that the data in not available these parameters should be generated randomly. Below we will describe how these parameters are generated with different conditions and constraints.
 %\note{Suggestion: (1) formally define all the parameters of the simulation,
 \subsubsection{Partial Order Knowledge Structure (KS)}
 This parameter shows the relation and the dependency among a set of items. In fact, it reflects the order of learning a set of items in the same problem domain. Assuming items as different ``nodes'' in the graphical structure, there is a kind of ``parent-child'' relation between some pair of nodes where an easier item can be the child of a harder item. In our study this relation is considered as a ``link'' between two nodes. This link is not necessarily exists between each pair. Only those items that show a relation in the learning process can have a pairwise link. 
@@ -178,11 +178,11 @@ Previous sections explained the process of obtaining a pre-defined or a random g
 \State $R_{ij}$ =  Sample item $j$ for record $i$ with respect to $S_j$
 \If{$R_{ij} = 1$}
 \State $U =$ children of item $j$ in $KS$
-\State  $\forall c\in U$ :  $S_c = S_c\times or.t_{cj}$
+\State  $\forall c\in U$:  $S_c = S_c\times or.t_{cj}$
 \EndIf
 \If{$R_{ij} = 0$}
 \State $U =$ parents of item $j$ in $KS$
-\State  $\forall p\in U$ :  $S_p = S_p\times or.f_{pj}$
+\State  $\forall p\in U$:  $S_p = S_p\times or.f_{pj}$
 \EndIf
 \EndFor
 \EndFor
@@ -246,7 +246,7 @@ Extremely large or small values for each of these parameters will result in an u
 \end{eqnarray*}
 where $i$ and $j$ are students and items respectively.
 
-\subsection{Simulated data}
+\subsection{IRT synthetic data process}
 
 Once all parameters are prepared we can generate the simulated data with equation \ref{IRTEQ}. Akin to POKS we can use the two approaches that \citet{Beheshti2012Numbers} proposed to estimate number of skills for those models that require a multiple skills Q-matrix. Also NMF can infer a Q-matrix from a dataset given a predicted number of skills. The results of \ref{IRTEQ} are probabilities between $0-1$ that should be discretized to $0$ or $1$ values. Test score success rate is the threshold to discrete the test result probabilities. Algorithm \ref{Alg:IRTGen} shows the steps to generate IRT based synthetic data.
 
@@ -273,23 +273,21 @@ Once all parameters are prepared we can generate the simulated data with equatio
 %To generate a dataset that follows this model, we need to generate a sample of students with different abilities and items with different difficulties and discriminations. 
 
 
-
-
 \section{Linear models}
 \label{LinearModelSynthetic}
-Linear models are the simplest to generate data that covers multiple skills. In this study, Q-matrix is the only means to represent the mapping between skills and items. One of the techniques that infers this parameter is NMF. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that comply the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
+Linear models generate data that covers multiple skills. In this study, Q-matrix is the only means to represent the mapping between skills and items. If the Q-matrix is to be inferred from a data set, NMF is the technique we use in this study. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that reflect the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
 
-The very first step to generate simulated test result for linear models is to define a Q-matrix that maps $k$ skills to $n$ items. The same as before these parameters can be inferred form an existing dataset but many existing datasets offer few expert defined Q-matrices. Even some datasets have more than a single expert defined Q-matrix with different number of skills. A Q-matrix can also be generated randomly. As mentioned, there are three types of Q-matrices. In this study we use conjunctive and additive model in the factorization technique.The following sections describe generating parameters for each model.
+The very first step to generate simulated test result for linear models is to define a Q-matrix that maps $k$ skills to $n$ items. The same as before these parameters can be inferred form an existing dataset but many existing datasets offer few expert defined Q-matrices. Some datasets even have more than a single expert defined Q-matrix with different number of skills. A Q-matrix can also be generated randomly. As mentioned, there are three types of Q-matrices. In this study we use conjunctive and additive model in the factorization technique.The following sections describe generating parameters for each model.
 
 \subsection{Q-matrix}
 \label{Q-MatrixObtain}
-Q-matrix is a required parameter for all linear models. Few mandatory parameters are required to create a random Q-matrix :
+Q-matrix is a required parameter for all linear models. Few mandatory parameters are required to create a random Q-matrix:
 
 \subsubsection{Parameters}
 \begin{itemize}
 \item Number of items 
-\item Number of skills : In some context there is a constraint for the number of latent skills which is: $k<nm/(n+m)$ \protect\citep{lee1999learning} where $k$ , $n$ and $m$ are number of skills, students and items respectively.
-\item Maximum number of skills per item : This parameter also can reflect item difficulty level. The difficulty of  the two-skills items will further increase by the fact that they require the participation of their skills.
+\item Number of skills: In some context there is a constraint for the number of latent skills which is: $k<nm/(n+m)$ \protect\citep{lee1999learning} where $k$ , $n$ and $m$ are number of skills, students and items respectively.
+\item Maximum number of skills per item: This parameter also can reflect item difficulty level. The difficulty of  the two-skills items will further increase by the fact that they require the participation of their skills.
 %We will consider that skills have a difficulty level. That difficulty will transfer to items that have this skill. 
 \item Item score variance: The only way to apply item score variance is to manipulate the Q-matrix. Harder items should require more skills than easier ones. Therefore the ratio of contributed skills to the total number of skills shows the variance of item scores which will be reflected in the final result matrix.
 
@@ -298,13 +296,13 @@ Q-matrix is a required parameter for all linear models. Few mandatory parameters
 In the case of unavailable predefined Q-matrix, we defined a Q-matrix that provides all the possible combination of $k$ skills with a maximum of $Max$ skills per item, and at least one skill per item. A total of $\sum\limits_{k=1}^{Max} \dbinom{n}{k}$ candidate items span this space of combinations. For example $21$ items for 6 skills and maximum 2 skills per item. This matrix is shown in Figure~\ref{PerfectQ1}. Note that red cells represent $0$ or missing skills and yellow cells are $1$ or presence of skills. Items 1 to 15 are two-skills and items 16 to 21 are single-skill. All skills have same weight in a conjunctive type of Q-matrix. The Q-matrix can be created with randomly replicating or eliminating some candidate items to adjust the number of items to the desired number. Also item score variance can be controlled by picking some appropriate items to create high or low variance.
 
 \subsubsection{Additive vs. Conjunctive}
-The proposed approach to create conjunctive type of Q-matrix differs from additive type where a normalization process change the values of skills. The normalization process force the weights that are assigned to skills to sum up to $1$ for each item. Although each skill has a specific weight to success an item but in our experiment we consider equal weight for all skills of an item. For this purpose all the values that are assigning to each item in Q-matrix should be divided by the number of involved skills for that item. Figure \ref{figNMFAddQM} shows an additive type of Q-matrix where skills have same weights for each item but different weights among items . 
+The proposed approach to create conjunctive type of Q-matrix differs from additive type where a normalization process change the values of skills. The normalization process forces the weights that are assigned to skills to sum up to $1$ for each item.  Figure \ref{figNMFAddQM} shows an additive type of Q-matrix where skills have same weights for each item but different weights among items. 
 
 
 
-\subsection{Skills mastery matrix(student profile)}
+\subsection{Skills mastery matrix (student profile)}
 \label{Student_Profile}
-Skills mastery or student profile is the other mandatory element for all linear models in this context. Mapping skills to students also requires some mandatory parameters to create more specific synthetic test result matrix:
+Skills mastery or student profile is the other mandatory element for all linear models in this context, since the synthetic data is the product of the Q-matrix by the skills mastery matrix. Mapping skills to students also requires some mandatory parameters to create more specific synthetic test result matrix:
 \subsubsection{Parameters}
 \begin{itemize}
 \item Number of students 
@@ -312,34 +310,38 @@ Skills mastery or student profile is the other mandatory element for all linear 
 %Examinees need to be assigned ability levels.  , and the assigned ability level will increase this variance over the variance resulting from skill difficulty.
 %Skill difficulty and examinee ability are each expressed as a random normal variable. The probability density function of their sum provides the probability of mastery of the skill for the corresponding examinee. The skill vector is a sampling in \{0, 1\} based on each skill probability of mastery. 
 \item Student score variance:  In order to apply student score variance one should consider different abilities for students. The ability is, in fact, reflected by the set of skills that an individual is mastered. The assigned ability level will be reflected in the generated test result. Both Item and student score variance in our study are taken from a normal distribution:
-
-\begin{center}
-$\textit{Student score} \sim \pN(\mu_S, s_s)$
-
-$\textit{Item score} \sim \pN(\mu_I, s_I)$
-\end{center}
-
+\begin{eqnarray*}
+\textrm{Student score} \sim \pN(\mu_S, s_s)\\
+\textrm{Item score} \sim \pN(\mu_I, s_I)
+\end{eqnarray*}
+\note{If the score is a percentage, a normal distribution is inappropriate.  It should be a Betq distribution, unless you use a logistic transformation.}
 \end{itemize}
 
 %EXTENDED%
 %At the same time we can apply the overall success rate on the skill mastery matrix using a threshold to discrete the assigned values in skills mastery. 
 
-Students with less mastered skills should have low test score but in reality skills have different weights. For example examinees $E_1$ and $E_2$ are mastered in skills $S_1$ and $S_2$ respectively where $S_1$ is the addition ability and $S_2$ is fraction ability. Although they both master single skill but they do not necessarily get same test scores. In this thesis we consider that skills have same level of difficulty which means that they have same weight in both Q-matrix for each item and skills mastery matrix for each student. 
+Students with fewer mastered skills should have low test score but in reality skills have different weights.
+
+For example examinees $E_1$ and $E_2$ are mastered in skills $S_1$ and $S_2$ respectively where $S_1$ is the addition ability and $S_2$ is fraction ability. Although they both master single skill but they do not necessarily get same test scores. In this thesis we consider that skills have same level of difficulty which means that they have same weight in both Q-matrix for each item and skills mastery matrix for each student. 
+
+\note{A student cannot master fraction without addition.  Is this example realistic?}
 
 
 
 \subsection{Synthetic data}
 
-The process to create synthetic data based on additive type of Q-matrix is almost the same as Conjunctive one. The difference is on the interpretation of the Q-matrix that changes the step where the result matrix is producing. In the additive model a simple cross product of the Q-matrix and skills mastery will generate the test result matrix. For conjunctive a negation operator should be applied on both skills mastery and test result matrices : 
+The process to create synthetic data based on additive type of Q-matrix is almost the same as Conjunctive one. The difference is on the interpretation of the Q-matrix that changes the step where the result matrix is producing. In the additive model a simple cross product of the Q-matrix and skills mastery will generate the test result matrix. For conjunctive a negation operator should be applied on both skills mastery and test result matrices: 
 \begin{equation}
 \begin{array}{c}
-\text{Conjunctive model :   } \mathbf{R}=\neg\left(\mathbf{Q}\times\left(\neg\mathbf{S}\right)\right)\\
-\text{Additive model :   } \mathbf{R}=\mathbf{Q}\times\mathbf{S}
+\text{Conjunctive model:   } \mathbf{R}=\neg\left(\mathbf{Q}\times\left(\neg\mathbf{S}\right)\right)\\
+\text{Additive model:   } \mathbf{R}=\mathbf{Q}\times\mathbf{S}
 \end{array}
 \label{NMF_GEN_EQ}
 \end{equation}
 
-Figure~\ref{NMFAddNoisy} shows an artificial result matrix based on additive model of Q-matrix . Since the model is additive, there are some pale cells and the paler a cell is, the more chance a student has to success the question. In conjunctive model the result matrix is either $0$ or $1$. 
+Figure~\ref{NMFAddNoisy} shows an artificial result matrix based on additive model of Q-matrix . Since the model is additive, there are some pale cells and the paler a cell is, the more chance a student has to succeed the question. In conjunctive model the result matrix is either $0$ or $1$. 
+
+\note{Stopping here for now in this chapter.  2016.01.19.  There are many typos, grammatical errors, and ill structured sentences...}
 
 
 \begin{figure}[ht]
@@ -361,9 +363,9 @@ Figure~\ref{NMFAddNoisy} shows an artificial result matrix based on additive mod
 \label{Noise_}
 Finally, two more parameters are used in the simulated the data, namely the $\mathit{slip}$ and $\mathit{guess}$ factors. They are essentially noise factors and there are three approaches to apply these factors to the result matrix:
 \begin{itemize}
-\item Student based : each student would have specific amount of these factors in his test result.
-\item Item based : this represent how tricky a question can be. The greater they are, the more tricky is the task of inducing the Q-matrix from data. This approach is used in DINA/DINO models.
-\item Overall : for linear models of data generation we use this type of noise. For example, with $s\%$ of slip and $g\%$ of guess factor ,this will result in approximately $s\%$ of the succeeded items to become failed, and $g\%$ of the failed items to become succeeded in the test outcome matrix.
+\item Student based: each student would have specific amount of these factors in his test result.
+\item Item based: this represent how tricky a question can be. The greater they are, the more tricky is the task of inducing the Q-matrix from data. This approach is used in DINA/DINO models.
+\item Overall: for linear models of data generation we use this type of noise. For example, with $s\%$ of slip and $g\%$ of guess factor ,this will result in approximately $s\%$ of the succeeded items to become failed, and $g\%$ of the failed items to become succeeded in the test outcome matrix.
 
 \end{itemize}
 
@@ -466,7 +468,7 @@ Once all the parameters are prepared we can generate an outcome of test $j$ for 
 
 Despite all the parameters and models that were described, it is still challenging to generate synthetic data for a specific model with a set of given parameters. We \citep{Trieu2015} created a package that generates synthetic data under a specific model's assumption given a set of parameters. As mentioned before these parameters can be fine grained which can be combined to create a more complex parameter. In this sense we can create a hierarchy for the complexity of these parameters. 
 
-Previous sections described the generation process for each model. This task is easy and possible as long as two conditions are satisfied : 
+Previous sections described the generation process for each model. This task is easy and possible as long as two conditions are satisfied: 
 \begin{itemize}
 \item First: All the parameters for a model are given. Table \ref{tbl:param-DataGen} shows a list of required parameters to generate synthetic data.
 \item Second: There exists no conflict between the given parameters. For example given ``number of skills'' as a simple parameter equal to $4$ and a predefined ``Q-matrix'' as a complex one with $5$ skills is a conflict to generate a synthetic data based on DINO model. However, testing these conflicts is not an easy task and also resolving a conflict is another challenge.

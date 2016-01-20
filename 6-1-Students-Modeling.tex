@@ -203,7 +203,7 @@ The structure of the partial order of items is obtained from a statistical hypot
 
 A student knowledge state is represented as a vector of probabilities, one per item.  Probabilities are updated under a Naive Bayes assumption as simple posterior probabilities given observed items.
 
-Inference in the POKS framework to calculate the node's probability relies on standard Bayesian posteriors under the local independence assumption. The probability update for node $H$ given $E_1$,...~$E_n$ can be written in following posterior odds form :
+Inference in the POKS framework to calculate the node's probability relies on standard Bayesian posteriors under the local independence assumption. The probability update for node $H$ given $E_1$,...~$E_n$ can be written in following posterior odds form:
 \begin{equation}
 O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H})}
 \label{EQPOKSratio}
@@ -620,7 +620,7 @@ A few studies have shown that a mapping of skills to items can be derived from d
 
 As expected, the accuracy of recovered Q-matrix degrades with the amount of \textit{slips} and \textit{guesses} which are somehow noise factor in their study. They showed that if the conjunctive Q-matrix contains one or two items per skill and the noise in the data remains below slip and guess factors of~$0.2$, the approach successfully derives the Q-matrix with very few mismatches of items to skills. However, once the data has slip and guess factors of~$0.3$ and~$0.2$, then the performance starts to degrade rapidly.
 
-% The results of their experiment have few advantages that are lost with real data. The most important ones are : the number of skills is known in advance and also the Q-matrix is predefined which makes it easier to validate the results. On real data NMF could not recover the expert defined Q-matrix properly. This can have few reasons that bolds our main contribution. The first reason is that the model that we are testing to infer a Q-matrix is not a fit for the dataset to describe it into its parameters. The second reason could be the variety of defining Q-matrix by different experts and also possible mistakes that experts can have in defining a Q-matrix.
+% The results of their experiment have few advantages that are lost with real data. The most important ones are: the number of skills is known in advance and also the Q-matrix is predefined which makes it easier to validate the results. On real data NMF could not recover the expert defined Q-matrix properly. This can have few reasons that bolds our main contribution. The first reason is that the model that we are testing to infer a Q-matrix is not a fit for the dataset to describe it into its parameters. The second reason could be the variety of defining Q-matrix by different experts and also possible mistakes that experts can have in defining a Q-matrix.
 
 \subsection{Finding the number of latent skills}
 \label{EDM2012}

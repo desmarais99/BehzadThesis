@@ -1,6 +1,6 @@
 \Chapter{EXPERIMENTAL RESULTS}\label{sec:SIGNATURE}
 
-Chapter \ref{sec:Approach} introduced four research questions along with their methodology of implementation. In this chapter we introduce real and synthetic datasets to examine the hypothesis and discuss the results of each experiment:
+Chapter \ref{sec:Approach} introduced four research questions along with their methodology of implementation\note{implementing questions??}. In this chapter we introduce real and synthetic datasets to examine the hypothesis and discuss the results of each experiment:
 
 \section{Data sets}
 
@@ -358,7 +358,6 @@ Table~\ref{tablSynReal} shows the correlation of real data signature in columns 
 
 Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. There exists 1440~datasets where each model corresponds to 240 dataset. The gray cells in table~\ref{Classification-Conf} shows the true positive values and other values in each column represent the false positive predictions for group of datasets.The values in each row shows the number of false negative predictions for each model. The confusion is mostly between those techniques that shares same concepts specially between NMF Conjunctive and DINA model where we use conjunctive Q-matrices. 
 
-
 \begin{table}
 \center
 \begin{footnotesize}
@@ -399,11 +398,6 @@ Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. T
 \caption{Confusion matrix for classification of 210 synthetic datasets on 7 models with Best performer Vs. Nearest neighbor methods}
 \label{Classification-Conf}
 \end{table}
-
-
-
-
-
 
 The accuracy that is reported in the last row of table~\ref{Classification-Conf} is calculated based on $\frac{TP}{240}$ which counts the true positive predictions for each sub set of datasets with the same actual ground truth. The accuracy the is reported in the last two columns of table~\ref{Classification-Conf} is considering how faithful the classification method is in the sense of specificity which will count true negative values based on $\frac{TN}{1200}$ (1200 is the number of datasets that have ground truth oppose to the target model). In terms of true positive selections there is no benefit between any of these methods even sometimes best performer shows to perform better (specially for DINA and IRT).
 
