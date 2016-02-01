@@ -2,7 +2,7 @@
 
 A large body of methods have been developed for student modeling.  They are used to represent and assess student skills and they are a fundamental part of intelligent learning environments \citep{Desmarais2011}. These models have been proposed both for dynamic performance data, where a time dimension is involved and where a learning process occurs (see for eg. Bayesian Knowledge Tracing in \citet{Koedinger2011}), and for static performance data where we assume student skill mastery is stationary.  In this thesis, we focus on static performance data.
 
-We assume that skills explain the performance and test outcome prediction. Student models incorporate single or multiple skills.  Some even model performance without explicit skills and we will refer to the as zero-skill models. The most widely used one is Item Response Theory (IRT).  In its simplest version, IRT considers a single skill for student performance data. Of course, sometimes there are many skills involve in a single problem and therefore this model becomes insufficient for many applications in Intelligent Tutoring Systems (ITS). Under certain condtions, multi-skills models can preform better in that case. Other methods, such as POKS, have no latent skills. They just look at the relation between what are directly observable among test outcome items. The details of each category of techniques along with some examples are described in the next section.
+We assume that skills explain the performance and test outcome prediction. Student models incorporate single or multiple skills.  Some even model performance without explicit skills and we will refer to them as zero-skill models. The most widely used one is Item Response Theory (IRT).  In its simplest version, IRT considers a single skill for student performance data. Of course, sometimes there are many skills involve in a single problem and therefore this model becomes insufficient for many applications in Intelligent Tutoring Systems (ITS). Under certain condtions, multi-skills models can preform better in that case. Other methods, such as POKS, have no latent skills. They just look at the relation between what are directly observable among test outcome items. The details of each category of techniques along with some examples are described in the next section.
 
 \section{Definitions and concepts}
 
@@ -18,21 +18,35 @@ Test data is defined as an $m \times n$ matrix, $\mathbf{R}$. It is composed of 
 
 In this thesis we consider skills as problem solving abilities. For example in mathematics ``addition'', ``division'' are typical skills.  They can also be further detailed, such as single digit and multi-digit addition. There may be a single skill required to solve a problem or multiple skills. Skills are termed \textit{latent}  because they are never observed directly.
 
-If an item requires multiple skills, there are three different ways in which each skill can contribute to succeed a problem: The first case is when having a skill is mandatory for a student to succeed an item that requires that skill. The second case is when the skill increases the chance to succeed a problem. The third case is when at least one of the skills from the set of skills for an item is required to succeed that item.  We will see later that the temrs \textit{conjunctive}, \textit{compensatory}/\textit{additive}, and \textit{disjunctive} are often used to refer to each case respectively.
+If an item requires multiple skills, there are three different ways in which each skill can contribute to succeed a problem: The first case is when mastering a skill is mandatory for a student to succeed an item that requires it. The second case is when the skill increases the chance to succeed a problem. The third case is when at least one of the skills from the set of skills for an item is required to succeed that item.  We will see later that the temrs \textit{conjunctive}, \textit{compensatory}/\textit{additive}, and \textit{disjunctive} are often used to refer to each case respectively.
 
-Skills can have different range of values based on the student model definition. For example, the single skill in IRT is continous in $\mathbb{R}$ and typically ranges between~$-4$ to~$+4$. Other student models consider skills range between~$0$ and~$1$. Finally, other models have binary~$1$ or~$0$ skills, which means it can be mastered or not. Details of definition of skills for each student model are given later in this chapter.
+Skills can have different range of values based on the student model definition. For example, the single skill in IRT is continous in $\mathbb{R}$ and typically ranges between~$-4$ to~$+4$. Some student models consider skills range between~$0$ and~$1$. Finally, other models have binary~$1$ or~$0$ skills, which means it can be mastered or not. Details of definition of skills for each student model are given later in this chapter.
 
 \subsection{Q-matrix and Skill mastery matrices}
 
 
 Curriculum design can be a complex task and an expert blind spots in designing curricula is possible. It is desirable to have an alternative to human sequenced curricula. To do so, there should be a model designed for this purpose which maps skills to items \citep{Tatsuoka1983,Tatsuoka2009}. Figure~\ref{QItemInt} shows an example of this mapping which is named  Q-matrix.  Figure~\ref{ItemInt} shows 4 items and each item requires different skills (or combination of skills) to be successfully answered. Assuming 3 skills such as fraction multiplication ($s_{1}$), fraction addition ($s_{2}$) and fraction reduction ($s_{3}$), these questions can be mapped to skills like the Q-matrix represented in figure~\protect\ref{QInt}. 
 
-Such a mapping is desirable and very important in student modelling; because optimal order of problems (sequence of repetition and presentation) can be determined by this model since it allows prediction of which item (question or problem) will cause learning of skills that transfer to the other items most efficiently. It can also be used to assess student knowledge of each concept, and to personalize the tutoring process according to what the student knows or does not know.  For example, Heffernan et al. in \citep{feng2009using} have developed an intelligent tutoring system (the ASSISTment system) that relies on fine grain skills mapped to items.  Barnes, Bitzer, \& Vouk in \citep{barnes2005experimental} were among the early researchers to propose algorithms for automatically discovering a Q-Matrix from data. In some context there is a constraint for the number of latent skills which is: $k<nm/(n+m)$ \protect\citep{lee1999learning} where $k$ , $n$ and $m$ are number of skills, students and items respectively.
-  
+Such a mapping is desirable and very important in student modelling; because optimal order of problems (sequence of repetition and presentation) can be determined by this model since it allows prediction of which item will cause learning of skills that transfer to the other items most efficiently. It can also be used to assess student knowledge of each concept, and to personalize the tutoring process according to what the student knows or does not know.  For example, Heffernan et al. in \citep{feng2009using} have developed an intelligent tutoring system (the ASSISTment system) that relies on fine grain skills mapped to items.  Barnes, Bitzer, \& Vouk in \citep{barnes2005experimental} were among the early researchers to propose algorithms for automatically discovering a Q-Matrix from data. In some context there is a constraint for the number of latent skills which is: $k<nm/(n+m)$ \protect\citep{lee1999learning} where $k$ , $n$ and $m$ are number of skills, students and items respectively.
+
 \begin{footnotesize}
 \begin{figure}[h]
 \centering
 
+\subfigure[Skills]{
+   $\begin{array}{cl}
+   &\\
+   &\\
+   s_{1} : & \text{fraction multiplication}\\
+   &\\
+   s_{2} : & \text{fraction addition}\\
+   &\\
+   s_{3} : & \text{fraction reduction}\\
+   &\\
+   &
+\end{array}$
+}
+\quad
 \subfigure[Items with different skills]{
    $\begin{array}{cc}
 i_{1} & \frac{4}{\frac{12}{3}}+\frac{3}{5}=\frac{8}{5}\\
@@ -76,25 +90,23 @@ i_{4}
 \end{figure}
 \end{footnotesize}
 
-\note{Why not provide a short description of the skills?}
-
-%The assignment of Skills to Items is described by a Q-matrix that describes which Skills are required by each Item. In a Q-matrix rows represent Items and columns represent latent factor (skills). In this matrix, a cell with the value of~$1$ indicates the Item uses the Skill, while a~$0$ indicates the Skill is not involved in the item.
-
 The skills mastery matrix, \textbf{S}, represents student skills mastery profiles. In this matrix rows are skills and columns represent examinees. A cell with the value of 1 in $\mathbf{S}_{ij}$ indicates that examinee $j$ is mastered with skill $i$ and a value of 0 shows that he does not have the related skill.
+
+
 
 \subsection{Types of Q-matrices}
  
 As explained earlier, skills can have three interpretation when they contribute to succeed an item. These interpretations can be reflected in Q-matrices. There exists three different types of Q-matrices which are useful based on the context of a problem domain:
 
 \begin{itemize}
-\item \textbf{Conjunctive}: The most common one is the conjunctive model of the Q-matrix which is the standard interpretation of the Q-matrix in Educational Data Mining. In this type of Q-matrix, a student should master all the required skills by an item to succeed it. If a student misses any one of these skills, then the result will be a failure in the test outcome data. Thus there is a conjunction between required skills to succeed an item.
+\item \textbf{Conjunctive}: The most common one is the conjunctive model of the Q-matrix which is the standard interpretation of the Q-matrix in Educational Data Mining. In this type, a student should master all the required skills by an item to succeed it. If a student misses any one of these skills, then the result will be a failure in the test outcome data. Thus there is a conjunction between required skills.
 
 \item \textbf{Additive} (compensatory): Compensatory or additive model of skills is an interpretation of a Q-matrix where each skill contributes some weight to succeed that item. For example, if an item requires two skills $a$ and $b$ with the same weight for each of them, then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skill increases the chance of success based on its weight.
 
 \item \textbf{Disjunctive}: In the disjunctive model, mastery of any single skill required by an item is sufficient in order to succeed the related item.
 \end{itemize}
 
-Note that the three types of interpretation of Q-matrix make sense when there is at least one item in the Q-matrix that requires more than one skill. Later in this chapter these types will be described in more details with examples.
+Note that in practice these types of interpretations becomes reasonable when there is at least one item in the Q-matrix that requires more than one skill otherwise they preform the same as each other. Later in this chapter these types will be described in more details with examples.
 
 
 Q-matrices can also be categorized according to the number of skills per item:
@@ -119,16 +131,16 @@ The skills assessment model we compare can be classified at a first level accord
 \label{AssessMethods}
 \end{figure}
 
-Considering  these techniques from the perspective of variety of skills in test outcome prediction, we can put them in the following categories: 
+Considering these techniques from the perspective of variety of skills in test outcome prediction, we can put them in the following categories: 
 
 \begin{itemize}
 
-\item Zero skill technique that predict item outcome based on observed items. POKS is the technique that is used as a zero skill student model.
+\item Zero skill technique that predict item outcome based on observed items. POKS is the technique that is used from this category.
 \item Single skill approaches, where every item is linked to the same single skill. Item Response Theory (IRT) is the typical representative of this approach, but we also use the ``expected value'' approach which, akin to IRT, incorporates estimates of a the student's general skill and the item difficulty to yield a predicted item outcome.
 \item Multi-Skills techniques that rely on Q-matrices to predict test outcome.  Deterministic Input Noisy And/Or (DINA/DINO), NMF Conjunctive and \ac{NMF} additive are the techniques we use in this study.
 
 \end{itemize}  
-Note that the ``expected value'' approach is considered as a baseline for our evaluations. 
+Note that the ``expected value'' approach is also considered as a baseline for our evaluations. 
 
 The details of the different approaches are described below.
 
@@ -142,7 +154,7 @@ POKS is one of the models adopted in our study that is a derivative of Knowlege 
 
 Items are generally learnt in a given order. Children learn easy problems first, then harder problems. It reflects the order of learning a set of items in the same problem domain. POKS learns the order structure from test data in a probabilistic framework. For example in figure \ref{fig2} four items are shown in a partial order of knowledge structure. It is required for an examinee to be able to answer $i_{4}$ in order to solve $i_{3}$ and $i_{2}$. Also for solving $i_{1}$, one should be able to answer $i_{2}$, $i_{3}$ and $i_{4}$. if an examinee was not able to answer $i_{4}$ then he would have less chance to answer correctly other items.
 
-\begin{figure}
+\begin{figure}[h]
 \begin{footnotesize} \begin{diagram}[notextflow]    & & i_{1}:\frac{4}{\frac{12}{3}}+\frac{3}{5}=\frac{8}{5} & &   \\    & \ldTo_a & & \rdTo_b &   \\    & & & &   \\   i_{2}:\frac{4}{\frac{12}{3}}=\frac{4{\times}3}{12}=\frac{12}{12}=1 & & & & i_{3}:1+\frac{3}{5}=\frac{8}{5}  \\    & & & &   \\    & \rdTo_c & & \ldTo_d &   \\    & & i_{4}:2{\times}\frac{1}{2}=1 & &    \\  \end{diagram} \end{footnotesize}
 
 \caption{Partial Order Structure of 4 items}
@@ -155,7 +167,7 @@ This is reflected in the results matrix $\mathbf{R}$ by closure constraints on t
 A knowledge structure can be represented by an Oriented incidence matrix, O, or by an Adjacency matrix, A. In the oriented incidence matrix, rows are edges and columns are nodes of the graph. The value of -1 shows the start node of an edge and 1 indicates the end of an edge. Therefore for each row (edge) there is only one pair of (-1,1) and the rest of cells are 0. In adjacency matrix both rows and columns are Items and if there is a link between a pair of items (for example $i\rightarrow j$) there should be a 1 in $A_{ij}$ otherwise it is 0. Figure \ref{fig3IMAM} shows the corresponded oriented incidence matrix and adjacency matrix of the structure in figure~\ref{fig2}. 
 
 
-\begin{figure}
+\begin{figure}[h]
 \[
 \begin{array}{ccccc}
 \begin{array}{cc}
@@ -199,6 +211,7 @@ O &  &  &  & A
 \end{figure}
 
 
+%%%%% is this right?%%%%%
 The structure of the partial order of items is obtained from a statistical hypothesis test that reckons the existence of a link between two items, say $A \rightarrow B$, on the basis of two Binomial statistical tests $P(B|A) > \alpha_1$ and $P(\neg A|\neg B) > \alpha_1$ and under a predetermined alpha error of an interaction test ($\alpha_2$).  The $\chi^2$ test is often used, or the Fisher exact test.  The values of $\alpha_1 = .85$ and $\alpha_2 = .10$ are chosen in this study across all experiments.
 
 A student knowledge state is represented as a vector of probabilities, one per item.  Probabilities are updated under a Naive Bayes assumption as simple posterior probabilities given observed items.
@@ -210,17 +223,18 @@ O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H
 \end{equation}
 where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used.
 
+
 \section{Single skill approaches}
 
 Other approaches incorporate a single latent skill in the model. This is obviously a strong simplification of the reality of skilled performance, but in practice it is a valid approximation as results show. When a model uses single latent skill, in fact it projects all the skills mastery level in a form of unidimentional representation that implicitly combines all skills. Then there would be a single continuous skill variable which is a weighted average of the skills mastery levels of an examinee. 
 
-In this section two approaches for modeling static test data are presented: The well established Item Response Theory (IRT) which models the relationship between observation and skill variable based on a logistic regression framework. It dates back to the 1960's and is still one of the prevailing approaches \citep{bakerKim2004}.  The second approach is a trivial approach we call Expected Prediction. This approach is used as a baseline in our experiments.
+In this section two approaches for modeling static test data are presented: The well established Item Response Theory (IRT) which models the relationship between observation and skill variable based on a logistic regression framework. It dates back to the 1960's and is still one of the prevailing approaches \citep{bakerKim2004}.  The second approach is a trivial approach we call \textbf{Expected Prediction}. This approach is also used as a baseline in our experiments.
 
 \subsection{IRT} 
 
 The \textbf{IRT family} is based on a logistic regression framework. It models a single latent skill (although variants exists for modeling multiple skills) \citep{bakerKim2004}.  Each item has a difficulty and a discrimination parameter.
 
-IRT assumes the probability of success to an item~$X_j$ is a function of a single ability factor~$\theta$: 
+IRT assumes the probability of success to an item~$X_j$ by student $i$ is a function of a single ability factor~$\theta_i$: 
 \[P(X_j\!=\!1\;|\;\theta_i) = \frac{1}{1+e^{-a_j(\theta_i-b_j)}}\]
 In the two parameter form above, referred to as IRT-2pl, where parameters are:
 
@@ -230,17 +244,19 @@ In the two parameter form above, referred to as IRT-2pl, where parameters are:
 \item [$\theta_i$] the ability of a single student.
 \end{itemize}
 
-Student, $\theta_i$, is estimated by maximizing the likelihood of the observed response outcomes probabilities:
+Student ability, $\theta_i$, is estimated by maximizing the likelihood of the observed response outcomes probabilities:
 \[ P(X_1, X_2, ..., X_j, \theta_i) = \prod_j P(X_j|\theta_i) \]
 This corresponds to the usual logistic regression procedure.
 
-A simpler version of IRT called the Rash model, fixes the discrimination parameter~$a$ to~$1$.  Fixing this parameter reduces over fitting, as the discrimination can sometimes take unrealistically large values. We use the Rash model for student skills modeling, but we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process in order to make this data more realistic (chapter \ref{sec:Syn} discusses data generation approaches in details).
+A simpler version of IRT called the Rash model, fixes the discrimination parameter,~$a$, to~$1$.  Fixing this parameter reduces over fitting, as the discrimination can sometimes take unrealistically large values. Rash model is a valid model for student skills modeling, but we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process in order to make this data more realistic (chapter \ref{sec:Syn} discusses data generation approaches in details).
+
+%%%%%HERE%%%%
 
 \subsection{Baseline Expected Prediction}\label{sec:basel-expect-pred}
 
 As a baseline model, we use the expected value of success to item~$i$ by student~$j$, as defined by a product of odds:
 \[ O(X_{ij}) =  O(X_i) O(S_j) \]
-where $O(X_i)$ are the odds of success to item~$i$ and $O(S_j)$ are the odds of success of student~$j$.  Both odds can be estimated from a sample.  Recall that the transformation of odds to probability is $P(X) = 1/(1+O(X))$, and conversely $O(X) = P(X)/(1 - P(X))$. Probabilities are estimated using the Laplace correction: $P(X) = (f(x\!=\!1) + 1) / (f(x\!=\!1) + f(x\!=\!0) + 2)$, where $f(x=\{1,0\}}$ represents the frequency of the corresponding category $x=1$ or $x=0$.
+where $O(X_i)$ is the odds of success to item~$i$ by all participants and $O(S_j)$ is the odds of success rate of student~$j$.  Both odds can be estimated from a sample.  Recall that the transformation of odds to probability is $P(X) = 1/(1+O(X))$, and conversely $O(X) = P(X)/(1 - P(X))$. Probabilities are estimated using the Laplace correction: $P(X) = (f(x\!=\!1) + 1) / (f(x\!=\!1) + f(x\!=\!0) + 2)$, where $f(x=\{1,0\})$ represents the frequency of the corresponding category $x=1$ or $x=0$.
 
 
 \section{Multi-skills techniques}
@@ -248,7 +264,7 @@ where $O(X_i)$ are the odds of success to item~$i$ and $O(S_j)$ are the odds of 
 Finally the last category of student skills assessment models are considering student test result with multiple latent skills. Representation of multiple skills is possible in the form of a Q-matrix where skills are mapped to each item. As explained before there exists different types of Q-matrices that each type represent a unique interpretation. The following sections will describe different skills assessment models along with their specific type of Q-matrix.
 
 
-Still there exists two types of methods in this category: 
+Still this category of models can be divided into two sub-categories: 
 \begin{itemize}
 \item Models that infer a Q-matrix from test result data such as models that uses matrix factorization techniques.
 \item Models that require a predefined Q-matrix to predict test outcome. These techniques can not directly infer the Q-matrix but they can refine an existing expert defined Q-matrix.
@@ -258,14 +274,14 @@ Deriving a Q-matrix from a test result matrix is challenging. Some models requir
 
 Given the number of latent skills, there exists few techniques to derive a Q-matrix for models that require one. Cen et al. \citep{Cen2005,Cen2006} have used Learning FactorAnalysis technique(LFA) technique to improve the initially hand built Q-matrix which maps fine-grained skills to questions. They used log data which is based on the fact that the knowledge state of student dynamically changes over time as the student learns. In the case of static data of student knowledge, Barnes \citep{Barnes06} developed a method for this mapping which works based on a measure of the fit of a potential Q-matrix to the data. It was shown to be successful as well as Principle Component Analysis for skill clustering analysis. In our experiment we use NMF as a technique to derive a Q-matrix given an optimum number of latent skills. Later in this section we will introduce NMF in more details. Section \ref{ITS2012} describes how to derive a conjunctive model of Q-matrix from a student test result.
 
-For real datasets there exists few expert defined Q-matrices. To use them as an input parameter of student skills assessment models we need to refine them. Section \ref{edm2014} gives few approaches to this problem.
+For real datasets there exists few expert defined Q-matrices. To use them as an input parameter for student skills assessment models we need to refine them. Section \ref{edm2014} gives few approaches to this problem.
 
 
 \subsection{Types of Q-matrix (examples) }
 
 There are three models for the Q-matrix which are useful based on the context of the problem domain. The most important one is the conjunctive model of the Q-matrix which is the standard interpretation of the Q-matrix. In figure \ref{fig1} an example of conjunctive model of Q-matrix is shown. Examinee $e_{1}$ answered item $i_{1}$ and item $i_{4}$ because he has mastered in the required skills but although he has skill $s_{1}$ he couldn't answer item $i_{3}$ which requires skill $s_{2}$ as well.
 
-\begin{figure}
+\begin{figure}[h]
 \begin{footnotesize} 
 \[
 \begin{array}{ccc}
@@ -326,7 +342,7 @@ R & Q & S
 %, but for expert-defined Q-matrices in our study we consider similar weights for each skills of an item\note{they will not be equal when the Q-matrix is from a factorization}\note{You are right, I was thinking about the data generation phase, in data generation process for random Q-matrix generation we consider same weights 
 The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item that requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skills increase the chance of success based on its weight. It is possible to have different weights for skills where skills for each item will sum up to~$1$. Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$  can be considered as a probability that examinee $i$ can succeed item $j$.
 
-\begin{figure}
+\begin{figure}[h]
 \begin{footnotesize} 
 \[
 \begin{array}{ccc}
@@ -389,7 +405,7 @@ Finally, in the disjunctive model of a Q-matrix, at least one of the required sk
 
 
 
-\begin{figure}
+\begin{figure}[h]
 \begin{footnotesize} 
 \[
 \begin{array}{ccc}
@@ -448,8 +464,6 @@ R & Q & S
 \end{figure}
 
 Comparing these three types together, in the same condition for student skills mastery level we can find out that the average success rate in the test result data is the highest for disjunctive type and the lowest for conjunctive type. 
-
-Note that if we model the Q-matrix as a single skill per item, then the definition of conjunctive, disjunctive and additive model of Q-matrix are all equivalent.
 
 
 \subsection{Non-Negative Matrix Factorization (\ac{NMF})}
@@ -541,23 +555,6 @@ Later in this chapter the application of NMF on conjunctive type of Q-matrix and
 Besides its use for student skills assessment and for deriving a Q-matrix, matrix factorization is also a widely used technique in recommender systems. See for eg. \citet{koren2009matrix}  for a brief description of some of the adaptation of these techniques in recommender systems. 
 
 
-
-%\subsection{Recommender systems and matrix factorization}
-
-%In the field of recommender systems, linear models have taken a central role.  Models based on matrix factorization fared particularly well in recent years.  They allow the alignment of users and votes along a few common latent factors, which was proven very efficient for predicting votes.  A culminant demonstration of the efficiency of these techniques was given in the Netflix contest~\cite{journals/sigkdd/BellK07,conf/kdd/JahrerTL10}.
-
-%The recommender systems techniques were recently applied in the field of student skills modeling~\cite{conf/its/CetintasSXH10,Toscher2010,Nguyen2011}.  The 2010 KDD Cup was held over educational data and surely helped in bringing attention of the recommender community over the task of student skills assessment.  A comparison with the widely recognized Bayesian Knowledge Tracing approach showed that it compared favorably~\cite{Nguyen2011}. Nguyen et al.\ used a multi-relational matrix and tensor-based factorization to model latent factors (skills) and the time effect to predict student success~\cite{Nguyen2011,conf/csedu/Thai-NgheDHNS11}.
-
-%The above work was conducted over dynamic student performance data.  It consists of logs of success and failures of students on exercises as they interact with a learning system environment.  These environments typically exercise the same skills over multiple problem, and often provide hints to help solve the exercises as the student faces difficulties. Obviously, learning will occur during the interaction. In fact, the same question item can be presented many times, failed one or mores time and succeeded in the end.  This is in contrast to test data where the items are presented at once without any opportunity to access learning material.  We refer to this data as static performance data.
-
-%\note{birnbaum:1968 and the connection of IRT and recoomender systems and MF??}
-%A large body of methods have been developed for assessing student skills with static performance data (see~\cite{Desmarais2011} for a review).  For the vast majority, these methods are either non linear models or general linear models (for eg.~logistic regression). The most widely used one is Item Response Theory (IRT)~\cite{birnbaum:1968}.  Although it and it dates back to almost 50~years, it remains one of the most prominant and an active field of research in psychometrics (for eg.~\cite{bakerKim2004}).
-
-%\subsection{Similarity with recommender systems and assumptions}
-
-%Equation~(\ref{eq:nmf}) is analoguous to the decomposition of the (\textit{item} $\times$ \textit{user}) votes matrix into two smaller matrices: the (\textit{item} $\times$ \textit{preference}) and (\textit{preference} $\times$ \textit{user}) matrices.  However, the the votes matrix is typically sparse and different means have been developed to accomodate matrix factorization techniques with sparse matrices, and to compensate for predictions based on highly uneven number of votes in columns and rows that tend to negatively affect the predictive performance of algorithms.
-
-
 \subsection{Deterministic Input Noisy And/Or (DINA/DINO)}
 \label{DINA-DINO-Desc}
 The other skills assessment models we consider are based on what is referred to as Deterministic Input Noisy And/Or (DINO/DINA) \cite{junker2001cognitive}.  They also rely on a Q-matrix and they can not in themselves infer a Q-matrix from a test result matrix, and instead require a predefined Q-matrix for the predictive analysis. The DINA model (Deterministic Input Noisy And) corresponds to the conjunctive model whereas the DINO (Deterministic Input Noisy Or) corresponds to the disjunctive one, where the mastery of a single skill is sufficient to succeed an item.  The acronyms makes reference to the AND/OR gates terminology.
@@ -572,43 +569,11 @@ The DINO model is analog to the DINA model, except that mastery follows the disj
 
 A few methods have been developed to estimate the slip and guess parameters from data and we use the one implemented in the R~CDM package \citep{Robitzsch2012}.
 
-\subsection{Alternate Least-square Factorization (ALS)}
-\label{ALS-Def}
-
-\note{This model is not used, right?  Could be omitted?}
-
-The {Alternate Least-Square Factorization (ALS)} method is defined in \cite{Desmarais2013aied} which is also a factorization method that can infer an initial Q-matrix to estimate its parameters, or refine a predefined Q-matrix given as a starting point. Later in this chapter we introduce a methodology to refine a existing Q-matrix in more details.
-
-%\note{it was written that it cannot do a factorization without a Q-matrix, but this is not correct.  Just as NMF, it requires a starting point, but it can be a random starting point.}\note{ Behzad Says: Does it give you a correct guess for any random seeding point? as far as I remember, different random points gave back different Q-matrices, if it's true then it's not a reliable technique to derive a Q-matrix}
-
-Starting with the results matrix ~$\mathbf{R}$ and an initial Q-matrix, $\mathbf{Q}_0$, a least-squares estimate of the skills matrix ~$\mathbf{\hat{S}}_0$ can be obtained by:
-
-\begin{equation}
-    \mathbf{\hat{S}}_0 = (\mathbf{Q}_0^{\mathrm{T}}  \, \mathbf{Q}_0)^{-1} \, \mathbf{Q}_0^{\mathrm{T}} \, \mathbf{R} \label{eq:shat1}
-\end{equation}
-
-
-The initial matrix~$\mathbf{{Q}}_0$ is the expert defined Q-matrix. Then, a new estimate of the Q-matrix, $\mathbf{\hat{Q}}_1$, is again obtained by the least-squares estimate:
-\begin{equation}
-  \mathbf{\hat{Q}}_1 = \mathbf{R} \, \mathbf{\hat{S}}_0^{\mathrm{T}} \, (\mathbf{\hat{S}}_0 \, \mathbf{\hat{S}}_0^{\mathrm{T}})^{-1} \label{eq:qhat2}
-\end{equation}
-
-And so on for estimating~$\mathbf{\hat{S}}_1$, ~$\mathbf{\hat{Q}}_2$, ... Alternating between equations~(\ref{eq:shat1}) and~(\ref{eq:qhat2}) yields progressive refinements of the matrices~$\mathbf{\hat{Q}}_i$ and ~$\mathbf{\hat{S}}_i$ that more closely approximate~$\mathbf{R}$ in equation~(\ref{eq:1}).  The convergence is based on a predefined delta between iterations. In our experiments we consider delta as $0.001$ that makes the algorithm to converge after few iterations. This performance makes the technique many times more efficient than factorizations that rely on gradient descent, for example.
-
-The ALS factorization is \textit{compensatory} in the above description.  A \textit{conjunctive} version can be obtained by inverting the values of the $\mathbf{R}$~matrix~\citep{Desmarais2012b}.  
-
-It is worth mentioning that, by starting with non negative matrices ~$\mathbf{{Q}}_0$ and ~$\mathbf{R}$, the convergence process will generally end with positive values for both matrices ~$\mathbf{\hat{Q}}_i$ and ~$\mathbf{\hat{S}}_i$. The vast majority of values obtained are between 0.5 and 1.5 if both the results matrix and the initial Q-matrix have {0,1} values. Also regularization terms could be used in the implementation of the algorithm to force non-negative or integer values.
-
-Note that ~$(\mathbf{Q}_0^{\mathrm{T}} \, \mathbf{Q}_0)$ or ~$(\mathbf{\hat{S}}_0 \,\mathbf{\hat{S}}_0^{\mathrm{T}})_0$ may not be invertable, for example in the case where the matrix~$\mathbf{Q}_0$ is not column full-rank, or the matrix~$\mathbf{S}_0$ is not row full-rank.  This is resolved by adding a very small Gaussian noise before attempting the inverse.  Ensuring the choice of a relatively insignificant noise does not affect the end result for our purpose. 
-
-
 \section{Recent improvements}
 
 The previous sections of this chapter introduced skills assessment techniques to obtain the predictive performance given a dataset. Recall that these models are used for the purpose of defining a performance space used for assessing model fit, as briefly described earlier and detailed in chapter~\ref{sec:Approach}.  Let us add to the description of the models a few recent developments that concern how the Q-matrix is determined.
 
-% Some methods infer a Q-matrix from data, while some others require a predefined one. However, in both cases we are faced with the challenge of determining the number of latent skills. For some real dataset there exists at least one pre-defined Q-matrix  by an expert which could have potential mistakes and requires to be refined. These are some challenges that should be addressed as a complementary steps to predictive performance analysis.
-
-% The rest of this chapter presents researches that are complementary steps of the main contribution of this thesis. The general perspective of section \ref{ITS2012} is to find a way for deriving the Q-matrix from data, along with a Skills mastery matrix. Section \ref{ITS2012} is inspired by \citet{desmarais2012mapping} that was published in ITS conference. This article aims to find a method to derive these matrices for different types of Q-matrices. This is a valuable and challenging task. Finding the number of latent skills (i.e. the common dimension between matrices $\mathbf{Q}$ and~$\mathbf{S}$) is another important task that is described in section \ref{ITS2012} . The text of section \ref{EDM2012} is mainly borrowed form \citet{Beheshti2012Numbers} work that was published on EDM conference. Finally, in section \ref{edm2014} few methods is introduced to validate tasks to skills mapping which is also applicable for the refinement of a Q-matrix. Parts of section \ref{edm2014} is taken from \citet{desmarais2014refinement} publication in EDM conference.
+The general perspective of section \ref{ITS2012} is to find a way for deriving the Q-matrix from data, along with a Skills mastery matrix. Section \ref{ITS2012} is inspired by \citet{desmarais2012mapping} that was published in ITS conference. This article aims to find a method to derive these matrices for different types of Q-matrices. Finding the number of latent skills (i.e. the common dimension between matrices $\mathbf{Q}$ and~$\mathbf{S}$) is another important task that is described in section \ref{ITS2012} . The text of section \ref{EDM2012} is mainly borrowed form \citet{Beheshti2012Numbers} work that was published on EDM conference. Finally, in section \ref{edm2014} few methods is introduced to validate tasks to skills mapping which is also applicable for the refinement of a Q-matrix. Parts of section \ref{edm2014} is taken from \citet{desmarais2014refinement} publication in EDM conference.
 
 
 \subsection{NMF on single skill and multi-skill conjunctive Q-matrix}
@@ -620,19 +585,16 @@ A few studies have shown that a mapping of skills to items can be derived from d
 
 As expected, the accuracy of recovered Q-matrix degrades with the amount of \textit{slips} and \textit{guesses} which are somehow noise factor in their study. They showed that if the conjunctive Q-matrix contains one or two items per skill and the noise in the data remains below slip and guess factors of~$0.2$, the approach successfully derives the Q-matrix with very few mismatches of items to skills. However, once the data has slip and guess factors of~$0.3$ and~$0.2$, then the performance starts to degrade rapidly.
 
-% The results of their experiment have few advantages that are lost with real data. The most important ones are: the number of skills is known in advance and also the Q-matrix is predefined which makes it easier to validate the results. On real data NMF could not recover the expert defined Q-matrix properly. This can have few reasons that bolds our main contribution. The first reason is that the model that we are testing to infer a Q-matrix is not a fit for the dataset to describe it into its parameters. The second reason could be the variety of defining Q-matrix by different experts and also possible mistakes that experts can have in defining a Q-matrix.
-
 \subsection{Finding the number of latent skills}
 \label{EDM2012}
-
-% We do not need to identify all the skills behind an item in order to use the item outcome for assessment purpose. As long as we can establish a minimally strong tie from an item to a skill, this is a sufficient condition to use the item in the assessment of that skill. But knowledge that there is a fixed number of determinant factors to predict item outcome is a useful information. For example, if a few number of skills, say 6, are meant to be assessed by a set of 20 questions items, and we find that the underlying number of determinant latent factors behind these items is very different than 6, then it gives us a hint that our 6-skills model may not be congruent with the assessment result.
+%%%%%HERE%%%%
 
 A major issue with Q-matrices is determining in advance what is the correct number of skills.  This issue is present for both expert defined Q-matrices and for data derived ones as well.
 
-In an effort towards the goal of finding the skills behind a set of items, we  investigated two techniques to determine the number of dominant latent skills \citep{Beheshti2012Numbers}. The SVD is a known technique to find latent factors. The singular values represent direct evidence of the strength of latent factors. Application of SVD to finding the number of latent skills is explored. We introduce a second technique based on a wrapper approach. In statistical learning, the wrapper approach refers to a general method for selecting the most effective set of variables by measuring the predictive performance of a model with each variables set (see \citet{Guyon2003}). In our context, we assess the predictive performance of linear models embedding different number of latent skills. The model that yields the best predictive performance is deemed to reflect the optimal number of skills.
+In an effort towards the goal of finding the skills behind a set of items, we  investigated two techniques to determine the number of dominant latent skills \citep{Beheshti2012Numbers}. The SVD is a known technique to find latent factors. The singular values represent direct evidence of the strength of latent factors. Application of SVD to finding the number of latent skills is explored. We introduced a second technique based on a wrapper approach. In statistical learning, the wrapper approach refers to a general method for selecting the most effective set of variables by measuring the predictive performance of a model with each variables set (see \citet{Guyon2003}). In our context, we assess the predictive performance of linear models embedding different number of latent skills. The model that yields the best predictive performance is deemed to reflect the optimal number of skills.
 
 
-The results of this experiment show that both techniques are effective in identifying the number of latent factors (skills) over synthetic data. An investigation with real data from the fraction algebra domain is also reported. Both the SVD and wrapper methods yield results that have no simple interpretation. 
+The results of this experiment show that both techniques are effective in identifying the number of latent factors (skills) over synthetic data. An investigation with real data from the fraction algebra domain is also reported. Both the SVD and wrapper methods yield results that have no simple interpretation on the real data. 
 
 
 \subsection{The refinement of a Q-matrix}
@@ -640,7 +602,7 @@ The results of this experiment show that both techniques are effective in identi
 
 Very often, experts define the Q-matrix because they have a clear idea of what skills are relevant and of how they should be taught.
 
-Validating of the expert defined Q-matrix has been the focus of recent developments in the field of educational data mining in recent years \citep{delaTorre2008,chiu2013statistical,barnes2010novel,loye2011validite,Desmarais2013aied}. \citet{desmarais2014refinement} compared three data driven techniques for the validation of skills-to-tasks mappings.  All methods start from a given expert defined Q-matrix, and use optimization techniques to suggest a refined version of the skills-to-task mapping. Two techniques for this purpose rely on the DINA and DINO models, whereas one relies on a matrix factorization technique called ALS. 
+Validating of the expert defined Q-matrix has been the focus of recent developments in the field of educational data mining in recent years \citep{delaTorre2008,chiu2013statistical,barnes2010novel,loye2011validite,Desmarais2013aied}. \citet{desmarais2014refinement} compared three data driven techniques for the validation of skills-to-tasks mappings.  All methods start from a given expert defined Q-matrix, and use optimization techniques to suggest a refined version of the skills-to-task mapping. Two techniques for this purpose rely on the DINA and DINO models, whereas one relies on a matrix factorization technique called ALS (see \citep{Desmarais2013aied} for more details on ALS technique). 
 
 To validate and compare the effectiveness of each technique for refining a given Q-matrix, they follow a methodology based on recovering the Q-matrix from a number perturbations: the binary value of a number of cells of the Q-matrix is inverted, and this ``corrupted'' matrix is given as input to each technique.  If the technique recovers the original value of each altered cell, then we consider that it successfully ``refined'' the Q-matrix. The results of this experiment show that all techniques could recover alterations but the ALS matrix factorization technique shows a greater ability to recover alterations than the other two techniques.
 
