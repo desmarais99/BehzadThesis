@@ -4,14 +4,14 @@ This chapter presents the method we introduce to determine the model that is clo
 
 The basic principles of the method is to define a vector space of model performances, namely the models described in chapter \ref{sec:RevLitt}.  Then, synthetic data is created with each model, and each model's performances are measured over each of the synthetic data set.  These measures represent a point in that space which is called \textbf{Performance prototype}. The synthetic data point associated with that point represents the ground truth prototype, or the centroid for classification.  Given a new data set, a \textbf{Target Performance Vector} can be obtained. Then, we use a nearest neighbor approach with a correlation distance to identify the closest ground truth model.
 
-Let us rephrase the method in more general terms and consider a set of models, $\mathcal{M}$, and a vector~$\mathbf{p}$ of length~$|\mathcal{M}|$ that contains the performance of each model over a given data set.  This \textbf{Target Performance Vector} represents a point in the performance space.  For each model $M \in \mathcal{M}$, we determine a \textbf{Performance prototype} point in the performance space that corresponds to synthetic data generated with model~$M$.  Then, for a given data set, we find the nearest synthetic data set point, using correlation as a distance, and consider the model behind it to be the ground truth.
+Let us rephrase the method in more specific terms and consider a set of models, $\mathcal{M}$, and a vector~$\mathbf{p}$ of length~$|\mathcal{M}|$ that contains the performance of each model over a given data set.  This \textbf{Target Performance Vector} represents a point in the performance space.  For each model $M \in \mathcal{M}$, we determine a \textbf{Performance prototype} point in the performance space that corresponds to synthetic data generated with model~$M$.  Then, for a given data set, we find the nearest synthetic data set point, using correlation as a distance, and consider the model behind it to be the ground truth.
 
 
 The rest of the chapter goes into more details about the method.
 
 \section{Model fit in a vector space framework}
 
-Let us explain the general idea with the performance data in table~\ref{tab:vectorspace}, where the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} (section~\ref{sec:basel-expect-pred}) and a seventh data set named \textit{random} (random results that constrained to reflect the target data set parameters such as item and student success rate distribution) are added for comparison purpose.  
+The performance data in table~\ref{tab:vectorspace} will serve here to explain the method with a concrete example.  In this table, the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models.  A seventh ``model'' named \textit{expected} (section~\ref{sec:basel-expect-pred}) and a seventh data set named \textit{random} (random results that constrained to reflect the target data set parameters such as item and student success rate distribution) are added for comparison purpose.  
 
 \newcolumntype{d}[1]{D{.}{.}{#1}} % not used
 

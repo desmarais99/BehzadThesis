@@ -1,6 +1,6 @@
 \Chapter{EXPERIMENTAL RESULTS}\label{sec:SIGNATURE}
 
-Chapter \ref{sec:Approach} introduced four experiments to answer research questions of this thesis. They require synthetic datasets to examine the hypothesis of this thesis. However, we test experiment 1 and 3 with real datasets to test if this means is effective to assess a model fit with real data. The generation process of synthetic data with respect to each skills assessment models is given in details in previous chapter. In this chapter we introduce real and synthetic datasets to examine the hypothesis and discuss the results of each experiment:
+Chapter \ref{sec:Approach} introduced four experiments that each address a research questions of this thesis. In adddition to synthetic datasets, they require real datasets.  In this chapter we describe real and synthetic datasets to examine the hypothesis and discuss the results of each experiment.
 
 \section{Data sets}
 
@@ -99,16 +99,15 @@ Note that the first 3~models(Expected, IRT, POKS) do not rely on any Q-matrix ne
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results of Experiment 1: Predictive performance of models over real and synthetic datasets} \label{secSyn}
 
-There are two possibility for visualization of the predictive performance of seven models over a dataset, Figure \ref{Fig:Predictive-Preformace_rep} shows these two representations. We used both of them in this thesis for an easier understanding. Figure \ref{Predictive-Preformace_Base} shows the comparative performance signature which is the difference in accuracy of each model's performance from the expected value, which serves as a baseline. Figure \ref{Predictive-Preformace_Sig} shows the performance signature of seven models over a dataset.
+There are two possibilities for visualization of the predictive performance of seven models over a dataset, Figure \ref{Fig:Predictive-Preformace_rep} shows these two representations of the same results data. We used both of them in this thesis, whichever is deemed more appropriate to ease understanding. Figure \ref{Predictive-Preformace_Sig} shows the signature performance in terms of percent accuracy of seven models over a dataset. Figure \ref{Predictive-Preformace_Base} centers the performances with respect to the accuracy of the \textit{expected} model which serves as a baseline.  When a model performs below that performance, it can be considered a relatively weak performer since the expected value is simply the combined student and item mean.
 
 \begin{figure}[h]
 \centering
-
-\subfigure[comparative performances]{
-   \includegraphics[scale =1] {Predictive-Preformace_Base.pdf}\label{Predictive-Preformace_Base}
- }\quad
- \subfigure[Signature]{
+ \subfigure[Absolute accuracy percentage.]{
    \includegraphics[scale =1] {Predictive-Preformace_Sig.pdf}\label{Predictive-Preformace_Sig}
+ }\quad
+\subfigure[Relative accuracy (centered at the \textit{expected} model performance).]{
+   \includegraphics[scale =1] {Predictive-Preformace_Base.pdf}\label{Predictive-Preformace_Base}
  }
 \caption{Two types of representation of predictive performance of 7 models over DINA generated dataset}
 \label{Fig:Predictive-Preformace_rep}
@@ -129,16 +128,24 @@ There are two possibility for visualization of the predictive performance of sev
 
 Figures~\ref{fig1} and~\ref{fig2} show the performance of each model over the synthetic and real data sets described in table~\ref{tabl1}. Note that the y-scale of the synthetic data is double the one of the real data sets, and therefore the differences in performance for the synthetic datasets are much wider.  An error bar of 1~standard deviation is reported, computed over 10 simulation runs that each run considers four different number of observation that varies between 9 to an item less than the maximum number of items, provides an idea of the variability of the results. A dataset of random data is also reported for a~$0.75$ average success rate.
 
+\note{If you have the scripts to quickly produce the figures, it would be worth using a 95\% confidence interval which is the standard deviation divided by the square root of the number of instances (10).  A 95\% c.i. is 2 standard deviations and the sqrt of 10 is about 1/3, so the bars should be around 2/3 of the ones shown.  If it recreating these figures is long, we can simply mention this fact.}
+
 
 \subsection{Discussion}
 
-As expected, when the generative model behind the synthetic data set is the same as the skills assessment technique, the corresponding technique's performance is the best, or close to the best.  And this performance is also always above the expected value performance, except for the random data set where no model can do any different than the expected value, which is what we would expect.
+For the synthetic data sets, as expected, when the generative model behind the synthetic data set is the same as the skills assessment technique, the corresponding technique's performance is the best, or close to the best.  And this performance is also always above the expected value performance, except for the random data set where no model can do any different than the expected value, which is what we would expect.
 
-For the synthetic data sets, three models reach performances that are much higher than the baseline, in the range of $20-30$\% (DINO, Linear Conjunctive, and DINA), whereas for the three other models the gain is closer to 5\% (Linear additive, POKS, and IRT).
+Three models reach performances that are much higher than the baseline, in the range of $20-30$\% (DINO, Linear Conjunctive, and DINA), whereas for the three other models the gain is closer to 5\% (Linear additive, POKS, and IRT).
 
 An important observation is that the pattern of relative differences of performances across techniques varies considerably and is unique to each data set: no two data sets have the same pattern of performance vector across models.  The capacity of recognizing a data set's true model relies on this uniqueness characteristic.
 
-For the real data sets, the performance vector among the techniques shows smaller discrepancies and is closer to the baseline. The interesting finding is that the best performer is not far from the base line which means that the best performer can not be reliable to be known as the ground truth. It is also surprising to see that a majority of models do worst than the baseline for most of data sets. 
+For the real data sets, the performance vector among the techniques shows smaller discrepancies and is closer to the baseline. 
+
+An interesting finding is that in most cases, the best performer is close to the baseline. Moreover, a majority of models do worst than the baseline on most of data sets. This is particularly surprising for the DINA model which is a relatively well accepted model in psychometrics and student modeling.  Even the highly used IRT model is not showing a better performance than the \textit{expected} model.  This is due in part because the estimated from \textit{expected} model can rely on at least 19~observed items, but it is still indicative of a weakness of the models when we compare these results with the synthetic data results where the underlying model often reaches 20\% above the \textit{expected} baseline.  However, it is also noteworthy to notice that for the POKS and IRT synthetic data, the highest performances are notably lower than for the other models.  We will study in a later experiment the performances when fewer items are observed.
+
+\note{It is surprising that POKS does not do any better, and even worst than Vomlel.}
+
+\note{Where is the mention that the target item to predict is the last one?  Or is it?  It would be worthwhile to provide more details on this in this chapter or the previous.}
 
 The results from the subsets of the Fraction data show that the pattern of the Fraction performance data set repeats over Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions.  However, it differs substantially from Fraction-2/3 for the NMF conjunctive performance which reaches that of the NMF additive one and also DINA reaches DINO. This is readily explained by the fact that the Q-matrix of this data set has the property of assigning a single skill to each item, in which case the two matrix factorization techniques or even cognitive diagnosis models become equivalent.  But aside from the Fraction-2/3 case, this similarity among Fraction data set and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the performance ``signature'' remains constant across these data sets.
 
