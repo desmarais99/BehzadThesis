@@ -44,12 +44,11 @@ Table \ref{tbl:param-DataGen} shows a complete list of both types of parameters 
 \end{tabular}
   \caption{Parameters involved in synthetic data generation}
   \label{tbl:param-DataGen}
-  \note{Item difficulty and other ``model specific'' parameter can be obtained from data.  We may have to refine this taxonomy, but let's leave it as is for now.}
 \end{table}
 
 \subsection{Assessing parameters}
 
-Both types of parameters are required to generate synthetic dataset. There are few steps to obtain these parameters:
+Both types of parameters are required to generate synthetic dataset. There are few means to obtain these parameters:
 \begin{itemize}
 \item \textbf{Parameters estimated form real data}: In general, models define means to estimate their parameters from data.  Some are trivial to estimate, such as student success rate distribution if we assume a Gaussian distribution, for eg., and some are much more complex, which is the case of latent factors such as the number of skills and the Q-matrix itself.
 \item \textbf{Initialized from a random distribution}: In the case that there exists no reference dataset to derive parameters we can randomly select some samples based on a distribution that can be estimated form the data. Some parameters have specific conditions that if they become violated it changes the definition of the parameter. More details is given in next sections.
@@ -57,7 +56,7 @@ Both types of parameters are required to generate synthetic dataset. There are f
 
 \end{itemize}
 
-These steps are not essentially separated. Each of them is an alternative to provide parameters in the absence of others or a combination of them can be used to obtain a more complex parameter. 
+These means can be combined. For eg.\ guess and slip can be estimated based on maximum likelihood of a given model over existing data, and an expert can provide an estimate of the variance of the guess and slip on a per item basis, which will eventually be the basis of a random generation of the guess and slip parameters of an item pool, say from a Gaussian distribution.
 
 The rest of this chapter describes the data generation process based on each skills assessment technique in chapter \ref{sec:RevLitt}.
 
@@ -69,20 +68,19 @@ As mentioned before this technique does not directly model latent skills and the
 This model has three parameters with which the inference in possible: Partial order knowledge structure (let us name it KS for shot), Initial probabilities, Odds ratio. To extract these parameters from an existing data we use the POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. Sometimes these parameters are defined by an expert. In the absence of these two alternatives, these parameters should be generated randomly. Below we describe how these parameters are generated with different conditions and constraints.
 
 \subsubsection{Partial Order Knowledge Structure (KS)}
-This parameter shows the relation and the dependency among a set of items. In fact, it reflects the order of learning a set of items in the same problem domain. Assuming items as different ``nodes'' in the graphical structure, there is a kind of ``parent-child'' relation between some pair of nodes where an easier item can be the child of a harder item. In our study this relation is considered as a ``link'' between two nodes. This link is not necessarily exists between each pair. Only those items that show a relation in the learning process can have a pairwise link. 
-
-A KS is a directed acyclic graph, with the exception that cycles in the form of symmetric relations are allowed. Also in the current version of POKS transitive relations between items are explicitly ignored. 
+This parameter is in fact a directed graph that shows the relation and the dependency among a set of items. It reflects the order of learning a set of items in the same problem domain. Items are ``nodes'' in the graphical structure and the ``parent-child'' relation represents a prerequesite relation.  Symmetric links are allowed and represent items that are similar.  They are the only type of cycles possible. Also in the current version of POKS transitive relations between items are explicitly ignored. 
 
 KS is a complex parameter which has two other parameters involved in itself:
 \begin{itemize}
-\item Number of independent graphs: Consider the graphical demonstration of a KS. Even in a set of items there could be different groups of nodes without any dependency between each group. Since there exists no link between groups then they create an independent graph in the knowledge structure. This parameter can also affect the total number of links in a structure where more independent groups results in less number of links in the structure given same density of links in each group. 
+\item Number of independent graph components: If graphiof a KS is not a connected graph, the graph is said to be composed of independent graph components, each of which is connected.  This is an important parameter as it represents the number of indepent knowledge topics.
 \item Total Number of links: This has a correlation with the previous parameter but still we can control the number of dependencies in a KS. This parameter has a direct effect on test success rate and item score variance. Fewer number of links will result in lower test success rate and item score variance. There are still some other parameters that could change the test success rate and item score variance. In this sense manipulating one parameter may affect others.
 \end{itemize} 
 
+\note{These parameters come out of nowhere...}
 In the current study, the two parameters, $\alpha_p$ and $\alpha_c$, are respectively set at~$0.85$ and~$0.10$. 
 Other input parameters can make the random generation more specific, such as the number of links and number of independent trees in a KS. These parameters will change the item variance in the test result matrix. 
 
-Adjacency matrix  is one way to represent the KS. To avoid having a cycle in the structure we randomly assign $0$~-~$1$ values to an upper triangular of this matrix. For simplicity we consider the structure to be a single connected graph and the number of links corresponds to half of the cells of the upper triangular of this matrix. figure \ref{fig:KSExample} shows a adjacency matrix associated with its graphical structure. 
+Adjacency matrix  is one way to represent the KS. To avoid having a cycle in the structure we randomly assign $0$~-~$1$ values to the upper triangular of this matrix. For simplicity we consider the structure to be a single connected graph and the number of links corresponds to half of the cells of the upper triangular of this matrix. Figure~\ref{fig:KSExample} shows a adjacency matrix associated with its graphical structure. 
 
 
 \begin{figure}[h]
@@ -117,7 +115,7 @@ i_{5}
 \end{figure}
 
 
-Once the KS is generated we should initialize the two other parameters : initial probability of all items and odds ratio for some pairs of items. One of the important concepts for this purpose is the ``level'' of a node in the graphical representation of the KS which corresponds to the longest path from that node to a leaf node. A leaf node is a node that does not have any child and a root is a node without any parents. Equation \ref{EQ:Level} shows the definition of this function where $length-of$ returns the length of a path between two nodes; and $path$ returns $true$ value if there exists a directed path between two nodes; and $leaf$ returns $true$ if the node is a leaf.  For example in figure \ref{fig:KSExample} $I_{5}$ is a leaf with the level of $1$ and $I_{2}$ is a root with level of $3$.
+Once the KS is generated we should initialize the two other parameters : initial probability of all items and odds ratio for some pairs of items. One of the important concepts for this purpose is the ``level'' of a node in the graphical representation of the KS which corresponds to the longest path from that node to a leaf node. A leaf node is a node that does not have any child and a root is a node without any parents. Equation \ref{EQ:Level} shows the definition of this function where $length-of$ returns the length of a path between two nodes; and $path$ returns $true$ value if there exists a directed path between two nodes; and $leaf$ returns $true$ if the node is a leaf.  For example in figure~\ref{fig:KSExample} $I_{5}$ is a leaf with the level of $1$ and $I_{2}$ is a root with level of $3$.
 
 \begin{equation}
 L(KS,N_{i}) = max(E|E=length-of(N_{i},p)  ,  \exists path(N_{i},p)  , leaf(p)=True)
@@ -126,7 +124,7 @@ L(KS,N_{i}) = max(E|E=length-of(N_{i},p)  ,  \exists path(N_{i},p)  , leaf(p)=Tr
 
 \subsubsection{Initial Probabilities}
 
-Each item should be associate with an initial probability of success. This probability has a direct correlation with the difficulty of the item. This is an example where a data specific parameter is also a model parameter. In general if node $X_a$ implies node $X_b$ ($X_a \rightarrow X_b$) then node $X_b$ should have a higher initial probability of success because in this relation item $X_a$ is the harder problem. The allocation of initial values to items should be done respect to this characteristic. 
+Each item should be associate with an initial probability of success. This probability has a direct correlation with the difficulty of the item. This is an example where a data specific parameter is also a model parameter. In general if node $X_a$ implies node $X_b$ ($X_a \rightarrow X_b$) then node $X_b$ should have a higher initial probability of success because in this relation item $X_a$ is the harder problem. The allocation of initial values to items should be done with respect to this characteristic. 
 
 Starting from a root node in KS we assign a random initial probability for each node $N_{i}$ from a range of values between $r_{max}$ to $r_{max}+\frac{1-r_{max}}{L(KS,N_{i})}$ where $r_{max}$ is the maximum initial probability of $N_{i}$'s parents. For a node that is a root $r_{max}$ is $0$. Obviously it should have the lowest initial probability among its descendant. Also for a leaf the assignment range will be between $r_{max}$ and $1$ because it has the least level. 
 
@@ -144,13 +142,13 @@ O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H
 \end{equation}
 where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$ and $O(H)$ is the initial odds of node $H$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used. We follow the same steps to generate data based on POKS model. 
 
-There are two types of odds ratio in the POKS model. Consider $I_{3}$ in figure \ref{fig:KSExample} which has two children and a parent . If the sampling result for this item (with respect to its initial odds) becomes $1$ (success) then we update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled,  node $I_{3}$) becomes a success. If the evidence is $0$ (failure) then we update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
+There are two types of odds ratio in the POKS model. Consider $I_{3}$ in figure~\ref{fig:KSExample} which has two children and a parent . If the sampling result for this item (with respect to its initial odds) becomes $1$ (success) then we update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled,  node $I_{3}$) becomes a success. If the evidence is $0$ (failure) then we update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
 
 In our experiments, in cases of random parameter generation, we assign values greater than $0.5$ to ``true odds ratios'' and smaller than $0.5$ to ``false odds ratios'' for those pairs of items that have link in KS. 
 
 \subsection{Data generation}
 
-Previous sections explained the process of obtaining a random generated set of parameters for POKS. This is useful if the expert defined parameters or even the estimated parameters form real data are not available. In this section we explain the process for sampling data points values to create a synthetic student test result matrix given a set of parameters. Each record in this approach represent a student test result that requires $n$ iterations to be generated where $n$ is the number of items and the final result matrix needs $m$ (number of students) records. The process simply follows steps in algorithm \ref{POKS:ALG}. Line 8 to 15 of this algorithm updates the state odds of the items. It is important to note that we just look at the neighbors of the item that is sampled. In other words the update propagates through a breadth-first search.
+Previous sections explained the process of obtaining a random generated set of parameters for POKS. This is useful if the expert defined parameters or even the estimated parameters from real data are not available. In this section we explain the process for sampling data points values to create a synthetic student test result matrix given a set of parameters. Each record in this approach represents a student test result that requires $n$ iterations to be generated where $n$ is the number of items and the final result matrix needs $m$ (number of students) records. The process simply follows steps in algorithm \ref{POKS:ALG}. Line 8 to 15 of this algorithm updates the odds of the items. It is important to note that we just look at the neighbors of the item that is sampled. In other words the update propagates through a breadth-first search.
 
 
 \begin{algorithm}
@@ -184,7 +182,7 @@ Previous sections explained the process of obtaining a random generated set of p
 
 In some experiments, we need to generate a synthetic data with specific mean success rate for both students and items, and with specific variance, or specific entropy.
 
-One way to control the test result success rate and student/item score variance is to apply changes on the initial odds of items which are used to sample student test result. To control the student scores variance, one can scale the initial odds of each record such that the distribution of the initial odds stays the same for all students; for example we can double all the initial odds to represent a student with higher success rate but still the distribution of items score variance remains the same. Changing the initial odds that follows a specific distribution will create a dataset in which the item variance is following that distribution. It is important to note that this change should not violate any relation in the KS. For overall success rate, the initial odds can be scaled regardless of the student or item perspective, for example tripling all initial odds for all students will result in a higher success rate than the default values. As mentioned before these parameters are somehow connected. Changing one parameter may affect others.
+One way to control the test result success rate and student/item score variance is to apply changes on the initial odds of items which are used to sample student test result. To control the student scores variance, one can scale the initial odds of each record such that the distribution of the initial odds stays the same for all students; for example we can double all the initial odds to represent a student with higher success rate but still the distribution of items score variance remains the same. Changing the initial odds that follows a specific distribution will create a dataset in which the item variance is following that distribution. It is important to note that this change should not violate any relation in the KS. For overall success rate, the initial odds can be scaled regardless of the student or item perspective, for example tripling all initial odds for all students will result in a higher success rate than the default values. 
 
 
 
@@ -226,7 +224,7 @@ where $i$ and $j$ are students and items respectively.
 
 \subsection{IRT synthetic data process}
 
-Once all parameters are prepared we can generate the simulated data with equation \ref{IRTEQ}. The results of \ref{IRTEQ} are probabilities between $0-1$ that should be discretized to $0$ or $1$ values. Test score success rate is the threshold to discrete the test result probabilities. Algorithm \ref{Alg:IRTGen} shows the steps to generate IRT based synthetic data. $\theta$ and $b$ are also a kind of data specific parameter which can control the item and student variance in the generated data.
+Once all parameters are obtained we can generate the simulated data with equation \ref{IRTEQ}. The results of \ref{IRTEQ} are probabilities between $0-1$ that should be discretized to $0$ or $1$ values by rounding. Test score success rate is the threshold to discrete the test result probabilities. Algorithm \ref{Alg:IRTGen} shows the steps to generate IRT based synthetic data. $\theta$ and $b$ are also a kind of data specific parameter which can control the item and student variance in the generated data.
 
 \begin{algorithm}
 \caption{IRT data generation}
@@ -248,9 +246,9 @@ Once all parameters are prepared we can generate the simulated data with equatio
 
 \section{Linear models}
 \label{LinearModelSynthetic}
-Generating synthetic data with linear models is one way to cover multiple skills. In this study, Q-matrix is the only means to represent the mapping between skills and items. If the Q-matrix needs to be inferred from a data set, NMF is the technique we use in this study. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that reflect the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
+Generating synthetic data with linear models is one way to cover multiple skills. In this study, Q-matrix is the means to represent the mapping between skills and items. If the Q-matrix needs to be inferred from a data set, NMF is the technique we use in this study. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that reflect the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
 
-The very first step to generate simulated test result for linear models is to define a Q-matrix that maps $k$ skills to $n$ items. The same as before these parameters can be inferred form an existing dataset but many existing datasets offer few expert defined Q-matrices. Some datasets even have more than a single expert defined Q-matrix with different number of skills. Section \ref{edm2014} introduced few methods to refine an expert-defined Q-matrix. A Q-matrix can also be generated randomly. As mentioned, there are three types of Q-matrices. In this study we use conjunctive and additive model in the factorization technique.The following sections describe generating parameters for each model.
+The very first step to generate simulated test result for linear models is to define a Q-matrix that maps $k$ skills to $n$ items. As before these parameters can be inferred form an existing dataset but many existing datasets offer few expert defined Q-matrices. Some datasets even have more than a single expert defined Q-matrix with different number of skills. Section \ref{edm2014} introduced methods to refine an expert-defined Q-matrix. A Q-matrix can also be generated randomly. As mentioned, there are three types of Q-matrices. In this study we use conjunctive and additive model in the factorization technique.The following sections describe generating parameters for each model.
 
 \subsection{Q-matrix}
 \label{Q-MatrixObtain}
@@ -270,7 +268,42 @@ In the case of unavailable predefined Q-matrix, we defined a Q-matrix that provi
 
 
 \subsubsection{Additive vs. Conjunctive}
-The proposed approach to create conjunctive type of Q-matrix differs from additive type where a normalization process change the values of skills. The normalization process forces the weights that are assigned to skills to sum up to $1$ for each item.  Figure \ref{figNMFAddQM} shows an additive type of Q-matrix where skills have same weights for each item but different weights among items. 
+The proposed approach to create conjunctive type of Q-matrix differs from additive type where a normalization process changes the values of skills. The normalization process forces the weights that are assigned to skills to sum up to $1$ for each item.  Figure~\ref{figNMFAddQM} shows an additive type of Q-matrix where skills have same weights for each item but different weights among items. 
+
+\begin{figure}
+\begin{tabular}{c}
+\subfigure[{Additive Q-matrix\label{figNMFAddQM}}]{\begin{footnotesize}
+$\begin{array}{ccc}
+ && \textrm{items}\\
+
+\mathrm{\begin{sideways}skills\end{sideways}} & & \left[\begin{array}{cccccccccccccccccc}
+
+0.00&0.00&0.25&0.00&0.00&0.00&0.33&0.33&0.5&0.0&0.0&0.5&0.0&0&0&0&0\\
+0.25&0.00&0.25&0.25&0.00&0.00&0.00&0.33&0.0&0.0&0.0&0.0&0.0&0&1&0&0\\
+0.25&0.25&0.25&0.25&0.00&0.33&0.00&0.33&0.0&0.5&0.0&0.0&0.0&1&0&0&0\\
+0.25&0.25&0.00&0.00&0.33&0.33&0.00&0.00&0.5&0.0&0.5&0.0&0.0&0&0&0&0\\
+0.25&0.25&0.00&0.25&0.33&0.33&0.33&0.00&0.0&0.0&0.0&0.0&0.5&0&0&1&0\\
+0.00&0.25&0.25&0.25&0.33&0.00&0.33&0.00&0.0&0.5&0.5&0.5&0.5&0&0&0&1
+
+
+\end{array}\right]
+\end{array}$
+\end{footnotesize}
+}\\
+\begin{tabular}{cc}
+\subfigure[Raw Result matrix ]{
+   \includegraphics[scale =0.5] {NMFAddNonNoisy.pdf}\label{NMFAddNonNoisy}
+ }\quad
+&
+\subfigure[Discretized result matrix with 20\% slip and 10\% guess factor]{
+   \includegraphics[scale =0.5] {NMFAddNoisy}\label{NMFAddNoisy}
+ }\quad
+\end{tabular}
+\end{tabular}
+\caption{Additive model of Q-matrix and Corresponding synthetic data}
+\label{figNMFAddgen}
+\end{figure}
+
 
 \subsection{Skills mastery matrix (student profile)}
 \label{Student_Profile}
@@ -332,42 +365,7 @@ Finally, two more parameters are used in the simulated data, namely the $\mathit
 
 \end{itemize}
 
-Two samples of synthetic result matrices for conjunctive and additive model are given in figure~\ref{Result_ofPerfectQ} and  \ref{NMFAddNoisy} respectively where pale cells represent a value of 1 and red cells are 0. Examinee ability shows up as vertical patterns, whereas item difficulty creates horizontal patterns. As expected, the mean success rate of the 2-skills items 1 to 15 is lower than the single skill items 16 to 21. The same situation holds for additive model in figure \ref{figNMFAddgen}, the patterns in figure \ref{NMFAddNonNoisy} are more tangible where there are shades of colors that indicate different probability of success. Therefore, for a synthetic result matrix based on additive model, the values should be discretized with respect to an average success rate parameter. Figure \ref{NMFAddNoisy} shows a Discretized version of result matrix with 20\% slip and 10\% guess factor.
-
-
- \begin{figure}[h]
-\begin{tabular}{c}
-\subfigure[{Additive Q-matrix\label{figNMFAddQM}}]{\begin{footnotesize}
-$\begin{array}{ccc}
- && \textrm{items}\\
-
-\mathrm{\begin{sideways}skills\end{sideways}} & & \left[\begin{array}{cccccccccccccccccc}
-
-0.00&0.00&0.25&0.00&0.00&0.00&0.33&0.33&0.5&0.0&0.0&0.5&0.0&0&0&0&0\\
-0.25&0.00&0.25&0.25&0.00&0.00&0.00&0.33&0.0&0.0&0.0&0.0&0.0&0&1&0&0\\
-0.25&0.25&0.25&0.25&0.00&0.33&0.00&0.33&0.0&0.5&0.0&0.0&0.0&1&0&0&0\\
-0.25&0.25&0.00&0.00&0.33&0.33&0.00&0.00&0.5&0.0&0.5&0.0&0.0&0&0&0&0\\
-0.25&0.25&0.00&0.25&0.33&0.33&0.33&0.00&0.0&0.0&0.0&0.0&0.5&0&0&1&0\\
-0.00&0.25&0.25&0.25&0.33&0.00&0.33&0.00&0.0&0.5&0.5&0.5&0.5&0&0&0&1
-
-
-\end{array}\right]
-\end{array}$
-\end{footnotesize}
-}\\
-\begin{tabular}{cc}
-\subfigure[Raw Result matrix ]{
-   \includegraphics[scale =0.5] {NMFAddNonNoisy.pdf}\label{NMFAddNonNoisy}
- }\quad
-&
-\subfigure[Discretized result matrix with 20\% slip and 10\% guess factor]{
-   \includegraphics[scale =0.5] {NMFAddNoisy}\label{NMFAddNoisy}
- }\quad
-\end{tabular}
-\end{tabular}
-\caption{Additive model of Q-matrix and Corresponding synthetic data}
-\label{figNMFAddgen}
-\end{figure}
+Two samples of synthetic result matrices for conjunctive and additive model are given in figure~\ref{Result_ofPerfectQ} and~\ref{NMFAddNoisy} respectively where pale cells represent a value of 1 and red cells are 0. Examinee ability shows up as vertical patterns, whereas item difficulty creates horizontal patterns. As expected, the mean success rate of the 2-skills items 1 to 15 is lower than the single skill items 16 to 21. The same situation holds for additive model in figure~\ref{figNMFAddgen}, the patterns in figure~\ref{NMFAddNonNoisy} are more tangible where there are shades of colors that indicate different probability of success. Therefore, for a synthetic result matrix based on additive model, the values should be discretized with respect to an average success rate parameter. Figure~\ref{NMFAddNoisy} shows a Discretized version of result matrix with 20\% slip and 10\% guess factor.
 
 
 \section{Cognitive Diagnosis Models}
@@ -412,7 +410,7 @@ Once all the parameters are prepared we can generate an outcome of test $j$ for 
 
 \section{Educational data generator}
 
-Despite all the parameters and models that were described, it is still challenging to generate synthetic data for a specific model with a set of given parameters. We \citep{Trieu2015} created a package that generates synthetic data under a specific model's assumption given a set of parameters. As mentioned before these parameters can be fine grained which can be combined to create a more complex parameter. In this sense we can create a hierarchy for the complexity of these parameters. 
+Despite all the parameters and models that were described, it is still challenging to generate synthetic data for a specific model with a set of given parameters. Trinh \citep{Trieu2015} created a package that generates synthetic data under a specific model's assumption given a set of parameters. As mentioned before these parameters can be fine grained which can be combined to create a more complex parameter. In this sense we can create a hierarchy for the complexity of these parameters. 
 
 Previous sections described the generation process for each model. This task is easy and possible as long as two conditions are satisfied: 
 \begin{itemize}
@@ -420,7 +418,7 @@ Previous sections described the generation process for each model. This task is 
 \item Second: There exists no conflict between the given parameters. For example given ``number of skills'' as a simple parameter equal to $4$ and a predefined ``Q-matrix'' as a complex one with $5$ skills is a conflict to generate a synthetic data based on DINO model. However, testing these conflicts is not an easy task and also resolving a conflict is another challenge.
 \end{itemize} 
 
-For some of parameters we can use default values but some are mandatory such as number of skills. Therefore based on the hierarchical structure among parameters of a model we can define sets of sufficient parameters to generate data based on a model. Due to this structure there are different combination of parameters that can generate a synthetic data. For example, a synthetic dataset based on DINA can be generated with \{Q-matrix, Skills mastery matrix, Slip and Guess vectors\} or \{Number of skills, Items and students\}. Figure \ref{Line_Conj_Pars} shows the hierarchical structure of the required parameters for linear conjunctive model. This graph can be extended to other models. 
+For some of parameters we can use default values but some are mandatory such as number of skills. Therefore based on the hierarchical structure among parameters of a model we can define sets of sufficient parameters to generate data based on a model. Due to this structure there are different combination of parameters that can generate a synthetic data. For example, a synthetic dataset based on DINA can be generated with \{Q-matrix, Skills mastery matrix, Slip and Guess vectors\} or \{Number of skills, Items and students\}. Figure~\ref{Line_Conj_Pars} shows the hierarchical structure of the required parameters for linear conjunctive model. This graph can be extended to other models. 
 
 \begin{figure}[ht]
 \centering
