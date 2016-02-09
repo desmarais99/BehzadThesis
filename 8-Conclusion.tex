@@ -1,54 +1,51 @@
 \Chapter{Conclusion and future work}\label{sec:Conclusion}
 
-\section{Conclusion}
-In this thesis, we introduced seven student skills assessment models with different characteristics to be used to assess mode fit. The main contribution of this thesis is to assess model fit of a student model with comparison of the performance prototypes of synthetic vs. target performance vector of a real data. It is a complex task since there are many parameters involved in synthetic data generation process that can potentially affect the results of model selection. In this chapter, we summarize the results, conclusions, and possible future works.
+In this thesis, the performance of seven student skills assessment models is assessed and used to define a framework for evaluating mode fit.  Model fit of a data set is defined as the similarity between the \textit{performance vector} obtained over this data set and, the \textit{prototype performance} vectors obtained over synthetic data sets.
+
+Let us return to the conjecture that the comparison of performance vectors over synthetic data can help determine whether a specific skill model corresponds to the ground truth of some data set. As described, the standard practice is to select the model that has the highest predictive performance as the best fit.  Using synthetic data, we have shown that the generative model does not always correspond to the best performer, and that an approach based on defining a vector space model of performance and on finding the nearest synthetic data point to the target data in that space provides a more reliable means to find the underlying model behind the target data.
+
+This means of determining a data set's ground thruth is made possible because the synthetic data sets have very distinct performance patterns, showing sharp differences across models.  The data sets from a single model tend to share a strong similarity among themselves, and show strong dissimilarity from most other models.  This property of synthetic \textit{performance vectors} cluster around distinct \textit{performance prototypes} is very strong for synthetic data.
+
+Another finding is that we find evidence that data sets that share a common source have correlated \textit{performance vectors}.  This happends with the Fraction data sets.  They all have a similar pattern of performances across different subsets of items, different number of skills (latent factors), and different variants of the models as expressed by variations in the Q-matrices. Only when the Q-matrix has a very different property, namely a single skill per item, do we observe a different \textit{performance vector} for the models that depend on the Q-matrix (NMF conjunctive, DINA, NMF additive, and DINO).  
+
+However, the similarity of \textit{performance vectors} does not seem to substantially extend to data that shares the same domain: although the Vomlel data is within the same domain as the Fraction data, namely arithmetic, the performance signatures are relatively different between the two.  This could be attributed to the Q-matrices involved (although both are multiple skills and therefore the difference is not due to the formal property of single skill per item), but other factors could also be involved such as sensitivity to data specific parameters.
+
+The other interesting finding is that for real data sets the performances are not better than the expected performance and the conclusion behind that can be either the ground truth is not among the candidate models, or the best performer is not necessarily the ground truth. 
 
 
-Let us return to the conjecture that the comparison of real vs.\ synthetic data can help determine whether a specific skill model corresponds to the ground truth of some data set. As described, the standard practice is to select the model that has the highest predictive performance as the best fit.  However, using synthetic data, we have shown that the generative model does not always correspond to the best performer, and that an approach based on defining a vector space model of performance and on finding the nearest synthetic data point to the target data in that space provides a more reliable means to find the underlying model behind the target data.
 
-an important finding is that the synthetic data sets have very distinct performance patterns, showing sharp differences across models.  In that respect, synthetic data have distinct positions in the performance space. However, the real data sets tend to be centered around the Expected value model.  They are also more similar to one another than the synthetic data sets.
-
-
-
-The Fraction data sets do display a similar pattern of performances across different subsets of items, different number of skills (latent factors), and different variants of the models as expressed by variations in the Q-matrices. Only when the Q-matrix has the property of a single skill per item, we observe a different performance vector for the models that depend on the Q-matrix (NMF conjunctive, DINA, NMF additive, and DINO).  The other models are not affected (expected, POKS and IRT).  Therefore, in the domain of skills modeling, we find evidence that data from a common source does have correlated performance vectors as long as the models do not have large formal differences.
-
-
-The other interesting finding is that for real data sets the performances are not better than expected performance and the conclusion behind that can be either the ground truth is not among the candidate models or the best performer is not necessarily the ground truth. Therefore best performer is not necessarily a reliable model selection approach. Results of our experiments also confirmed this on synthetic datasets with special assumption about the data. 
-
-That said, even though the Vomlel data is within the same domain as the Fraction data, namely arithmetic, the performance signature of the Q-matrix dependent models display two very different patterns.  This could be attributed to the Q-matrices involved (although both are multiple skills and therefore the difference is not due to the formal property of single skill per item), but other factors could also be involved such as sensitivity to data specific parameters.
-
-Therefore, we do find evidence to support the claim that the performance vector of the different skills modeling approaches create signatures over data sets.  And these signatures carry the potential to provide evidence about the ground truth. The other perspective is to consider the performances in a space where a dataset has a position in this performance space. Thus performance vectors of datasets with same ground truth would locate in a specific sub space.
-
-Comparing the performance vectors of two datasets with the same underlying models shows a high correlation while this measure is lower for those with different ground truth. Our experiments confirm this measure for synthetic data and also we used the same measure of goodness of fit for real data to assess a model fit. The highest correlation was for Vomlel dataset which selects IRT as the ground truth. As expected , for the ECPE data set, the performance vector is close to that of random data which resulted in very small differences among model performances. Note that this dataset comes from English examination domain and our investigation shows that a simple query among records retrieves all possible combination of test results which is an evidence of randomness.
+The highest correlation was for Vomlel dataset which selects IRT as the ground truth. As expected , for the ECPE data set, the \textit{performance vector} is close to that of random data which resulted in very small differences among model performances. Note that this dataset comes from English examination domain and our investigation shows that a simple query among records retrieves all possible combination of test results which is an evidence of randomness.
 
 The results of assessing model fit for synthetic data show that some datasets with different ground truths that share some concepts, show a high correlation. For example, datasets based on linear conjunctive and DINA model. There exist no correlation for those that have completely different underlying models.
 
-Furthermore investigations show that the predictive performance of each model over a dataset is dependent to different model and data specific parameters. For some parameters the performance vector stays stable but some others play an important role in changing this vector. Although the predictive performance vector changes for some parameters but it still shows a high correlation with datasets with the same ground truth.
+Furthermore investigations show that the predictive performance of each model over a dataset is dependent to different model and data specific parameters. For some parameters the \textit{performance vector} stays stable but some others play an important role in changing this vector. Although the predictive \textit{performance vector} changes for some parameters but it still shows a high correlation with datasets with the same ground truth.
 
 
 The most important finding of this research is that the best performer may not be the model that is most representative of the ground truth, but instead it may be the result of contextual factors that make this model outperform the ground truth one. The last experiment tests the accuracy of signature approach versus best performer to classify a set of synthetic datasets with different contextual parameters. The results confirms that the ``signature'' approach shows a better accuracy in terms of measures for the confusion table in the span of different parameter conditions. This also shows the effect of data generation parameters on the best performer and reliability of these approaches on different assumptions about the data.
 
-\subsection{Limits}
+\section{Limits}
 
+\note{Took out the two paragraphs because they are not limitations. 
 
-To summarize the similarity between our research and \cite{Desmarais2010}, this thesis is a kind of extension to \citet{Desmarais2010}'s work . Both of them try to identify the ground truth of a given data. The difference is in the number of predictive performance models. \citet{Desmarais2010} use only one technique for model selection but in our work we compare a set of models which create a signature. In this sense any skills assessment model can be added to the list of candidate models to make the prediction authentic.
+Could discuss:
 
-Although \citet{Rosenberg2015} work is the only reference in model selection for time based skills assessment models but their work is limited to only BKT model which means the results to determine a dataset with a ground truth other than BKT should be evaluated. The limit of our work in the comparison with \citet{Rosenberg2015}'s research is that the models are statistic which could be improved to adapt dynamic models.
+  \begin{enumerate}
+  \item study limited to static data as opposed to dynamic (time) data like BKT
+  \item also limited mostly to fraction data
+  \item synthetic data does not have the complexity of the real world: generality of the findings
+  \item dependent on the models; would it work if we only had 2 models?
+  \end{enumerate}
 
-
-%it's a tautology that the best performer is always better in terms of expected performance comparing to any other method then it should be a false hypothesis.
-
+}
 
 \section{Future Work}
 
 Further studies with real and simulated data are clearly needed.  For example, there are other real datasets that potentially require a different set of candidate models. And this requires new approaches to generate synthetic data with respect to these skills assessment models.
 
-
 However, the approach would generalize to dynamic data as well. This approach is using static models to assess a model fit but dynamic models are also used widely in EDM. This contribution also requires data generation and performance assessment of each model.
 
-
 In this thesis we compared the ``signature'' approach with the ``best performer'' in terms of ground truth classification on synthetic data. The potential future contribution would be preparing a survey on different model selection approaches with their error metrics and comparing their performance over synthetic data.
-
+\note{What about likelihood or other measure of fit?}
 
 One important future work is to give different weights to different parts of the space to justify the performance gain where in our research we assumed that the space is equally important.
 
