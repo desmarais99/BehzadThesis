@@ -1,17 +1,11 @@
-% Résumé du mémoire.
-%
-%   Le résumé est un bref exposé du sujet traité, des objectifs visés,
-% des hypothèses émises, des méthodes expérimentales utilisées et de
-% l'analyse des résultats obtenus. On y présente également les
-% principales conclusions de la recherche ainsi que ses applications
-% éventuelles. En général, un résumé ne dépasse pas quatre pages.
-%
-%   Le résumé doit donner une idée exacte du contenu du mémoire ou de la thèse. Ce ne
-% peut pas être une simple énumération des parties du document, car il
-% doit faire ressortir l'originalité de la recherche, son aspect
-% créatif et sa contribution au développement de la technologie ou à
-% l'avancement des connaissances en génie et en sciences appliquées.
-% Un résumé ne doit jamais comporter de références ou de figures.
 \chapter*{RÉSUMÉ}\thispagestyle{headings}
 \addcontentsline{toc}{compteur}{RÉSUMÉ}
+Dans l'exploration de données de l'éducation, ou dans l'extraction de données en général, les analystes qui souhaitent construire une classification ou un modèle de régression sur les données nouvelles et inconnues sont confrontés à un très large espace de choix. Techniques d'apprentissage machine offrent aujourd'hui la possibilité d'apprendre et de former un grand et une variété sans cesse croissante des modèles de données. Parallèlement à cette augmentation de l'affichage de modèles qui peuvent être définis et formés à partir des données, vient la question abordée dans cette thèse: comment décider qui sont les plus représentatifs de la réalité de terrain sous-jacent.
 
+La pratique courante est de former différents modèles, et d'envisager l'une avec la performance prédictive la plus élevée que le meilleur ajustement. Cependant, la performance du modèle varie généralement le long des facteurs tels que la taille de l'échantillon, cibler entropie variable et prédicteur, le bruit, les valeurs manquantes, etc. Par exemple, la capacité d'adaptation d'un modèle pour le bruit et la capacité de faire face à la petite taille de l'échantillon peut donner de meilleures performances que la vérité terrain modèle pour un ensemble de données.
+
+Par conséquent, la meilleure performance peut ne pas être le modèle qui est le plus représentatif de la réalité de terrain, mais il peut être le résultat de facteurs contextuels qui rendent ce modèle surperformer le seul motif de la vérité.
+
+Nous étudions la question de l'évaluation de modèle différent Convient à partir de données synthétiques en définissant un espace vectoriel des performances du modèle, et d'utiliser une approche plus proche voisin avec une distance de corrélation pour identifier le modèle de vérité terrain. Cette approche est basée sur les définitions et les modalités suivantes. Soit un ensemble de modèles, $\mathcal{M}$, et un vecteur ~ $\mathbf{p}$ de longueur ~ $|\mathcal{M}|$ qui contient la performance de chaque modèle sur un ensemble de données. Ce vecteur représente un point qui caractérisent l'ensemble de l'espace de représentation des données. Pour chaque modèle $M$ dans $\mathcal {M}$, nous déterminons un nouveau point dans l'espace de la performance qui correspond à des données synthétiques générés avec le modèle ~ $M$. Puis, pour un ensemble de données, nous trouvons la synthèse point de consigne de données le plus proche, par corrélation comme une distance, et considérons le modèle derrière elle pour être la vérité terrain.
+
+Les résultats montrent que, pour les ensembles de données synthétiques, leurs ensembles de modèles sous-jacents sont généralement plus souvent correctement identifiés à l'approche proposée à l'aide de la meilleure approche de l'interprète. Ils montrent aussi que les modèles sémantiquement similaires sont également rapprochés dans l'espace de la performance que les modèles qui sont basés sur très différents concepts.
