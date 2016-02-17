@@ -85,23 +85,22 @@ The performance of each model is assessed on the basis of 10-folds cross-validat
 
 For each dataset there exists a training set that contains 9 folds and a test set, which represents a single fold. Samples are assigned randomly to each fold and this setting is the same across all predictive models for each run. Since all items are presented in the training set, then we can estimate the parameters that are related to items to be used in the test set. 
 
-For other parameters that are related to students we need to divide the test set into an observed and inferred set. From the observed set we can estimate these parameters. Obviously, the number of observed items is an important factor that can affect the predictive performance and consequently it can change the performance vector. Consider a set of total items for a test outcome, $\mathcal{I}$, and a subset of randomly selected items to be observed which are fed to the model, $\mathcal{I}_o$, consequently the remaining subset are target items to predict, $\mathcal{I}_t = \mathcal{I}-\mathcal{I}_o$. In order to cover different number of observed items in the predictive performance of a model over a dataset, we report the average of performances with four different numbers for observed items:
+For other parameters that are related to students we need to divide the test set into an observed and inferred set. From the observed set we can estimate these parameters. Obviously, the number of observed items is an important factor that can affect the predictive performance and consequently it can change the performance vector. Consider a set of total items for a test outcome, $\mathcal{I}$, and a subset of randomly selected items to be observed which are fed to the model, $\mathcal{I}_o$, consequently the remaining subset are target items to predict, $\mathcal{I}_t = \mathcal{I}\setminus\mathcal{I}_o$. In order to cover different number of observed items in the predictive performance of a model over a dataset, we report the average of performances with four different numbers for observed items:
 
 \begin{equation}
 P = \frac{\sum_{i = 1}^{4}{P(O_{q_i})}}{4}
 \label{Eq:Overal-performance}
 \end{equation} 
 
- where $P$ is the average performance of a model over a dataset; and $q_i$ varies between the 3-quantiles (tertiles) of natural numbers in the range of $5$ to $(|\mathcal{I}|-1)$; and $P(O_{q_i})$ is the performance of a model with $q_i$ observed items.
+ where $P$ is the average performance of a model over dataset~$O$; and $q_i$ varies between the 3-quantiles (tertiles) of natural numbers in the range of $5$ to $(|\mathcal{I}|-1)$; and $P(O_{q_i})$ is the performance of a model with $q_i$ observed items.
 
-The observation set, $\mathcal{I}_o$, is chosen somehow to cover all items in the item set($\mathcal{I}$). For example, with $|\mathcal{I}| = 20$ and  $|\mathcal{I}_o| = 5$ we randomly divide $\mathcal{I}$ into $4$ subsets of observable items while the union of them recovers all items in $\mathcal{I}$. Consider $\mathcal{I}_o^n$ with $n$ items to be observed, there are $\ceil{\frac{|\mathcal{I}|}{n}}$ possibilities to obtain this subset from $\mathcal{I}$. let us name $i^{th}$ possibility as $\mathcal{I}_{o_i}^n$. Therefore:
-
+The observation set, $\mathcal{I}_o$, is chosen to cover all items in the item set $\mathcal{I}$. For example, with $|\mathcal{I}| = 20$ and  $|\mathcal{I}_o| = 5$ we randomly divide $\mathcal{I}$ into $4$ subsets of observable items while the union of them recovers all items in $\mathcal{I}$. Consider $\mathcal{I}_o^n$ with $n$ items to be observed, there are ${|\mathcal{I}|\choose n}$  combinations to obtain this subset from $\mathcal{I}$. Let us name $i^{th}$ possibility as $\mathcal{I}_{o_i}^n$. Therefore:
 \begin{equation}
-P(O_n) = \frac{\sum_{j = 1}^{\ceil{\frac{|\mathcal{I}|}{n}}}{P(\mathcal{I}_{o_j}^n)}}{\ceil{\frac{|\mathcal{I}|}{n}}}
+P(O_n) = \frac{\sum_{j = 1}^{|\mathcal{I}|\choose n}{P(\mathcal{I}_{o_j}^n)}}{{|\mathcal{I}|\choose n}}
 \label{Eq:Sub-Performance}
 \end{equation}
 
-Combining equation \ref{Eq:Overal-performance} with \ref{Eq:Sub-Performance}, one can calculate the average performance of a dataset, $P$ in equation \ref{Eq:Overal-performance}, that considers variety of observation where $n$ in  \ref{Eq:Sub-Performance} equals to $q_i$ in \ref{Eq:Overal-performance}.
+Combining equation \ref{Eq:Overal-performance} with \ref{Eq:Sub-Performance}, one can calculate the average performance of a dataset, $P$ in equation \ref{Eq:Overal-performance}, that considers a variety of observation where $n$ in  \ref{Eq:Sub-Performance} equals to $q_i$ in \ref{Eq:Overal-performance}.
 
 A list of required model specific parameters for assessing the model performance is presented in table~\ref{fig:param-Predictive-Performance} \footnote{Details of all parameters are given in chapter \ref{sec:Syn}}.
 
