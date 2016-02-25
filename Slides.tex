@@ -1,0 +1,541 @@
+\documentclass{beamer}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{beamerthemeshadow}
+\setbeamertemplate{footline}[text line]{%
+  \parbox{\linewidth}{\vspace*{-8pt}\hfill\insertframenumber/\inserttotalframenumber}}
+\usepackage{color}
+\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage[small,nohug,heads=vee]{diagrams}
+\diagramstyle[labelstyle=\scriptstyle]
+\definecolor{gray0}{rgb}{0.80,0.80,0.80}
+\definecolor{gray1}{rgb}{0.60,0.60,0.60}
+\definecolor{blue1}{rgb}{0.1,0.1,0.9}
+\usepackage{verbatim} 
+\usepackage{multirow}
+\usepackage{natbib}
+\usepackage[english,french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+%%%%%%%%%%
+%%%%%%%%%%
+
+
+\begin{document}
+\title{Empirical means to validate skills models and assess the fit of a student model}  
+\author{Behzad Beheshti\\{\footnotesize Supervisor: Michel C. Desmarais} }
+\institute{{\tiny Génie Informatique Et Génie Logiciel\\ École Polytechnique de Montréal}}
+\date{\today} 
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Introduction}
+\subsection{Problem Specification}
+\begin{frame}\frametitle{Problem Specification}
+
+\begin{itemize}
+\item<1-> Student skills assessment models 
+\item<2-> How to decide which are the most representative of the underlying ground truth? 
+\item<3-> Static  Vs. Dynamic 
+\item<4-> Model selection and goodness of fit 
+\item<4-> A general answer : best performer
+%\begin{itemize}
+%\item<4-> Selecting a statistical model for a given data that is the best representative of the data.
+%\item<4-> ``goodness of fit'' for a statistical model describes how well it fits a set of observation
+%\end{itemize}
+\item <5->Our contribution
+\begin{itemize}
+\item To make a comprehensive comparison of educational data model performances
+\item To propose a new approach to assessing model fit
+\end{itemize}
+\item<6-> The proposed approach:
+\begin{itemize}
+\item Assessing the fit of the model to the underlying ground truth using a methodology based on \textbf{synthetic data}
+\end{itemize}
+\end{itemize}
+\begin{overprint}
+\vspace{-4.5cm}
+\includegraphics<1>[trim= 0cm 6cm 0cm 12cm ,clip = true,scale =0.6]{images/Models}
+\includegraphics<2>[trim= 0cm 5cm 0cm 6.5cm , scale =0.5]{images/Model-Selection}
+\includegraphics<3>[trim= 0cm 5cm 0cm 5cm , scale =0.5]{images/Dynamic-Syn}
+\includegraphics<4>[trim= 0cm 5cm 0cm 8.5cm , scale =0.5]{images/Model-Selected}
+\includegraphics<5>[trim= 0cm 16cm 0cm 0cm , scale =0.5]{images/Models}
+\includegraphics<6>[trim= 0cm 18cm 0cm 0cm , scale =0.5]{images/Models}
+\end{overprint}
+\end{frame}
+
+\subsection{Introduction}
+\begin{frame}
+\vspace{-1cm}
+    \begin{block}{Student skills assessment models}
+    \vspace{-0.5cm}
+\resizebox{.9\columnwidth}{4cm}{\includegraphics[trim=0.5cm 7cm 0.5cm 3cm,scale =0.4] {images/SkillsAssessments}}
+    \end{block}
+\begin{overprint}
+      \onslide<1>
+		\begin{columns}
+		\begin{column}{0.35\textwidth}
+      		\begin{itemize}
+      		\vspace{-0.05cm}
+      			\item Number of Skills
+	      	\end{itemize}
+	      \end{column}
+	      \begin{column}{0.7\textwidth}
+	      \end{column}
+	     \end{columns}
+      \onslide<2>
+		\begin{columns}
+		\begin{column}{0.35\textwidth}
+      		\begin{itemize}
+      		   	\vspace{-1.1cm}
+      			\item Number of Skills
+      			\item Q-matrix
+	      	\end{itemize}
+	      \end{column}
+	      \begin{column}{0.7\textwidth}
+	      
+	      \resizebox{\columnwidth}{1.2cm}{
+$\begin{array}{c|c|c}
+   \begin{array}{cl}
+   &\\
+   &\\
+   s_{1} : & \text{fraction multiplication}\\
+   &\\
+   s_{2} : & \text{fraction addition}\\
+   &\\
+   s_{3} : & \text{fraction reduction}\\
+   &\\
+   &
+\end{array}
+&
+   \begin{array}{cc}
+i_{1} & \frac{4}{\frac{12}{3}}+\frac{3}{5}=\frac{8}{5}\\
+ &  \\
+i_{2} & \frac{4}{\frac{12}{3}}=\frac{4{\times}3}{12}=\frac{12}{12}=1\\
+ &  \\
+i_{3} & 1+\frac{3}{5}=\frac{8}{5}\\
+ &  \\
+i_{4} & 2{\times}\frac{1}{2}=1\\
+&
+\end{array}
+&
+\begin{array}{c}
+\begin{array}{cc}
+ & \textrm{Skills}\\
+ & \begin{array}{ccc}
+s_{1} & s_{2} & s_{3}\end{array}\\
+\mathrm{\begin{sideways}Items\end{sideways}}\begin{array}{c}
+i_{1}\\
+i_{2}\\
+i_{3}\\
+i_{4}
+\end{array} & \left[\begin{array}{ccc}
+1 & 1 & 1\\
+1 & 0 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1
+\end{array}\right]
+\end{array}\\
+\\
+\\
+
+\end{array}
+\end{array}$
+	      }
+	      
+	      \end{column}
+	     \end{columns}
+      \onslide<3>
+		\begin{columns}
+		\begin{column}{0.35\textwidth}
+      		\begin{itemize}
+      			\item Number of Skills
+      			\item Q-matrix 
+      			\item Slip and Guess
+	      	\end{itemize}
+	      \end{column}
+	      \begin{column}{0.7\textwidth}
+	      \end{column}
+	     \end{columns}
+	     \onslide<4>
+	     		\begin{columns}
+		\begin{column}{0.4\textwidth}
+      		\begin{itemize}
+      		      		   	\vspace{-0.5cm}
+      			\item Number of Skills
+      			\item \textbf{Q-matrices (types)}
+      			\item Slip and Guess
+	      	\end{itemize}
+	      \end{column}
+	      \begin{column}{0.25\textwidth}
+	      \begin{enumerate}
+	      \item Conjunctive
+	      \item Additive 
+	      \item Disjunctive
+	      \end{enumerate}
+	      \end{column}
+	      \begin{column}{0.4\textwidth}
+	      
+	      \resizebox{0.66\columnwidth}{1.2cm}{
+
+$\begin{array}{c}
+\begin{array}{cc}
+ & \textrm{Skills}\\
+ & \begin{array}{ccc}
+s_{1} & s_{2} & s_{3}\end{array}\\
+\mathrm{\begin{sideways}Items\end{sideways}}\begin{array}{c}
+i_{1}\\
+i_{2}\\
+i_{3}\\
+i_{4}
+\end{array} & \left[\begin{array}{ccc}
+1 & 1 & 1\\
+1 & 0 & 1\\
+0 & 1 & 1\\
+1 & 0 & 1
+\end{array}\right]
+\end{array}\\
+\\
+\\
+
+\end{array}$
+	      }
+	      
+	      \end{column}
+	     \end{columns}
+\end{overprint}
+\end{frame}
+
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
+\newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
+
+
+\subsection{Predictive performance}
+\begin{frame}
+\begin{itemize}
+\item<1-> \textbf{Performance of a model} over a data set
+\item<2-> Model parameters
+\item<3-> Performance vector
+\item<3-> Performance signature
+\item<4-> Performance prototype
+\item<5-> Target performance vector
+\end{itemize}
+\begin{overprint}
+\vspace{-2cm}
+\onslide<1> \centering \includegraphics[trim=0cm 8.5cm 2.4cm 2.4cm,clip=true,width=\textwidth]{images/Methodology.pdf}
+\onslide<2> \vspace{1cm} \centering \includegraphics[width=.7\textwidth]{images/Parameters-Model}
+\onslide<3>
+		\begin{columns}
+		\begin{column}{0.5\textwidth}
+		 %\includegraphics[trim=0cm 0cm 0cm 0cm,clip=true,width=\textwidth]{images/Performance-Presentation}	   
+		 \vspace{1.5cm}   
+   \includegraphics[trim=0cm 0cm 0cm 1.5cm,clip=true,scale =0.55] {images/Predictive-Preformace_Sig.pdf}
+   \includegraphics[trim=0cm 0cm 0cm 1.5cm,clip=true,scale =0.55] {images/Predictive-Preformace_Base.pdf}
+
+		 \end{column}
+	      \begin{column}{0.5\textwidth}
+	      \[\begin{array}{l|c}
+	      Model & Performace\\
+	      \cline{1-2}
+			Expected & 0.72\%\\
+			POKS & 0.80\%\\
+			IRT & 0.74\%\\
+			NMF.Conj & 0.94\%\\
+			Dina & 0.99\%\\
+			NMF.Add & 0.60\%\\
+			Dino & 0.65\%
+			\end{array}
+			\]
+	      \end{column}
+	     \end{columns}
+\onslide<4>\vspace{3cm} The \textit{performance vector} associated with the synthetic data of a model class.
+\onslide<5>\vspace{3cm} The \textit{performance vector} of the real data set to classify.
+\end{overprint}
+\end{frame}
+
+\section{Main contributions}
+\subsection{Experiment 1: Predictive performance}
+\begin{frame}\frametitle{Research questions}
+\begin{enumerate}
+\item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
+\begin{itemize}
+\item Experiment 1: Predictive performance of models over real and synthetic data sets
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}\frametitle{Datasets}
+\centering
+\resizebox{7cm}{!}{
+\centering
+\footnotesize
+\begin{tabular}{|l|c|c|r|r|l|}
+\hline
+
+%\rowcolor{\color[rgb]{.8,.8,.8}}
+\multirow{2}{*}{Data set} & \multicolumn{3}{c|}{Number of} & {\parbox{6ex}{\center Mean\\Score}} & \multirow{2}{*}{Q-matrix}\tabularnewline
+\cline{2-4} 
+%\rowcolor{\color[rgb]{.8,.8,.8}}
+ & Skills & Items & Students &  & \tabularnewline
+\hline
+\hline
+%\rowcolor{\color[rgb]{.9,.9,.9}}
+\multicolumn{6}{|c|}{\textit{Synthetic}}\\
+\hline
+\hline
+1.Random & 7 & 30 & 700 &0.75& $\mathbf{Q}_{01}$\tabularnewline
+\hline
+2.POKS & 7 & 20 & 500 &0.50 & $\mathbf{Q}_{02}$\tabularnewline
+\hline
+3.IRT-2PL & 5 & 20 & 600 &0.50& $\mathbf{Q}_{03}$\tabularnewline
+\hline
+4.DINA & 7 & 28 & 500 &0.31& $\mathbf{Q}_5$\tabularnewline
+\hline
+5.DINO & 7 & 28 & 500 &0.69& $\mathbf{Q}_6$\tabularnewline
+\hline
+\multicolumn{6}{|l|}{Linear (Matrix factorization)}\\
+\hline
+6.~~~Conj. & 8 & 20 & 500 &0.24& $\mathbf{Q}_1$\tabularnewline
+\hline
+7.~~~Comp. & 8 & 20 & 500 &0.57& $\mathbf{Q}_1$ \tabularnewline
+\hline
+\hline
+%\rowcolor{\color[rgb]{.9,.9,.9}}
+\multicolumn{6}{|c|}{\textit{Real}}\\
+\hline
+\hline
+8.Fraction & 8 & 20 & 536 &0.53& $\mathbf{Q}_1$\tabularnewline
+\hline
+9.Vomlel & 6 & 20 & 149 &0.61& $\mathbf{Q}_4$\tabularnewline
+\hline
+10.ECPE & 3 & 28 & 2922 &0.71& $\mathbf{Q}_3$\tabularnewline
+\hline
+\multicolumn{6}{|l|}{Fraction subsets and variants of $\mathbf{Q}_{1}$}\\
+\hline
+11.~~~1 & 5 & 15 & 536 &0.53& $\mathbf{Q}_{10}$\tabularnewline
+\hline
+12.~~~2/1 & 3 & 11 & 536 &0.51& $\mathbf{Q}_{11}$\tabularnewline
+\hline
+13.~~~2/2 & 5 & 11 & 536 &0.51& $\mathbf{Q}_{12}$\tabularnewline
+\hline
+14.~~~2/3 & 3 & 11 & 536 &0.51& $\mathbf{Q}_{13}$\tabularnewline
+\hline
+\end{tabular}}
+\end{frame}
+
+\begin{frame}\frametitle{Predictive performance of models over synthetic datasets}
+\vspace{-0.5cm}
+\includegraphics[scale =0.45] {images/Syn}
+\begin{overprint}
+      \onslide<1> \small The highest performance is for the generative model behind the dataset
+%The highest performance is for the skills assessment technique that is the same as the generative model behind the dataset%%%%the generative model behind the data set is the same as the skills assessment technique, the corresponding technique’s performance is the best, or close to the best.
+	  \onslide<2> \small Data sets have unique pattern of performance vector across models
+     \onslide<3> The random data set has a flat performance across techniques 
+     %%%which corresponds to the dominant class prediction. 
+	  \onslide<4> The capacity of recognizing a data set’s true model relies on this uniqueness characteristic
+\end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Predictive performance of models over real datasets}
+\vspace{-0.5cm}
+\includegraphics[scale =0.4] {images/Real}
+\begin{overprint}
+      \onslide<1> In most cases, the best performer is close to the baseline
+      \onslide<2> The pattern of the Fraction performance data set repeats over its subsets %Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions
+      %this similarity among Fraction data set and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the performance signature remains constant across these data sets.
+      \onslide<3> None of the real data sets show the large the amplitude and the differences found in the synthetic data sets models %Scles are 4 times bigger
+\end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Vector space of accuracy performances}
+\begin{itemize}
+\item Performance vectors of datasets in columns(Data points in the performance space)
+\end{itemize}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lccccccc}
+  \toprule
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }} \\
+  \cline{2-8}
+  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{Linear .Conj}} & \multicolumn{1}{c}{{Linear .Comp}} \\ 
+  \hline
+  \textit{Expected} & \textbf{0.75} & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 \\ 
+  POKS & 0.75 & \textbf{0.94} & 0.94 & 0.81 & 0.81 & 0.90 & 0.94 \\ 
+  IRT & 0.75 & 0.91 & \textbf{0.95} & 0.73 & 0.73 & 0.79 & 0.89 \\ 
+  DINA & 0.75 & 0.77 & 0.81 & \textbf{1.00} & 0.65 & \textbf{0.98} & 0.89 \\ 
+  DINO & 0.75 & 0.63 & 0.56 & 0.66 & \textbf{1.00} & 0.68 & 0.91 \\ 
+  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58 \\ 
+  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & \textbf{0.98} \\ 
+  \bottomrule
+\end{tabular}}
+\vspace{.7cm}
+
+The diagonal generally displays the best performance %the diagonal (in bold face, except for one, corresponding to the match between the underlying synthetic model and the model performance) generally displays the best perfor- mance since it corresponds to the alignment of the model and the ground truth behind the data.
+
+\end{frame}
+
+\subsection{Experiment 2: Sensitivity of the Model performance}
+\begin{frame}\frametitle{Research questions}
+\begin{enumerate}
+\item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
+\begin{itemize}
+\item Experiment 1: Predictive performance of models over real and synthetic data sets
+\end{itemize}
+\item \textbf{Is the \textit{performance vector} unique to each synthetic data type (data from the same ground truth model)?}
+\begin{itemize}
+\item Experiment 2: Sensitivity of the Model performance over different data generation parameters
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Variation of sample size over synthetic data sets}
+\includegraphics[scale =0.37] {images/SampleSize}
+\begin{overprint}
+      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+\end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Variation of number of items over synthetic data sets}
+\includegraphics[scale =0.37] {images/numberofitems}
+\begin{overprint}
+      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+\end{overprint}
+\end{frame}
+
+\subsection{Experiment 3: Signature Approach}
+\begin{frame}\frametitle{Research questions}
+\begin{enumerate}
+\item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
+\begin{itemize}
+\item Experiment 1: Predictive performance of models over real and synthetic data sets
+\end{itemize}
+\item \checkmark Is the \textit{performance vector} unique to each synthetic data type (data from the same ground truth model)?
+\begin{itemize}
+\item Experiment 2: Sensitivity of the Model performance over different data generation parameters
+\end{itemize}
+\item \textbf{Can the \textit{performance vector} be used to define a method to reliably identify the ground truth behind the synthetic data?}
+\begin{itemize}
+\item Experiment 3: Model selection based on performance vector classification
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Degree of similarity between six synthetic datasets based on the correlation}
+\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c|c|c|}
+\multicolumn{2}{c}{} & \multicolumn{6}{c}{Synthetic Datasets} \tabularnewline
+\multicolumn{8}{c}{} \tabularnewline
+\cline{3-8} 
+\multicolumn{2}{c|}{} & POKS & IRT & NMF Conj. & DINA & NMF Add. & DINO\tabularnewline
+\cline{2-8}
+\cline{2-3}
+&POKS & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{2-4}
+&IRT & 0.86 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{2-5}
+&NMF Conj. & 0.22 & -0.20 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{2-6}
+&DINA & 0.02 & -0.40 & 0.94 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{2-7}
+&NMF Add. & 0.44 & 0.75 & -0.62 & -0.73 & \textbf {0.93} & \multicolumn{1}{|c}{}\tabularnewline
+\cline{2-8}
+\multicolumn{1}{c|}{\multirow{-6}{*}{\begin{sideways}Synthetic Datasets\end{sideways}}}&DINO & -0.15 & 0.20 & -0.70 & -0.69 & 0.63 & \textbf {0.95}\tabularnewline
+\cline{2-8}
+\end{tabular}}
+\begin{overprint}
+      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+\end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Degree of similarity between six synthetic datasets and the ground truth based on the correlation}
+\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c|c|c|c|}
+
+\multicolumn{2}{c}{}&\multicolumn{7}{c}{Real Datasets}\tabularnewline   
+\multicolumn{9}{c}{}\tabularnewline   
+\cline{6-9}
+\multicolumn{5}{c|}{}&\multicolumn{4}{c|}{Fraction subsets}   \tabularnewline   
+\cline{3-9} 
+\multicolumn{2}{c|}{}   & Vomlel &ECPE &Fraction &1&21&22&23\tabularnewline
+\cline{2-9}
+\cline{2-9}
+&Random & 0.58 &\textbf {0.73} & 0.61   & 0.43 & 0.24 & 0.61 & 0.57 \tabularnewline
+\cline{2-9}
+&IRT & \textbf {0.90} & 0.42 & 0.72   & 0.88 & 0.60 & 0.77 & 0.61 \tabularnewline
+\cline{2-9}
+&DINA & -0.38  & -0.09 &   0.23 &   0.30 & 0.56 & 0.06 & 0.38 \tabularnewline
+\cline{2-9}
+&DINO & 0.34 & 0.15  &  -0.18 &  -0.31 & 0.10 & -0.08 & 0.38 \tabularnewline
+\cline{2-9}
+&POKS & 0.75 &0.40  &  \textbf {0.83}  &  \textbf {0.95} &\textbf {0.70} & \textbf {0.83} & \textbf {0.80}\tabularnewline
+\cline{2-9}
+ &NMF Conj. & -0.05 & 0.54  & 0.51   & 0.55  & 0.66 & 0.33 & 0.57\tabularnewline
+\cline{2-9}
+\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Synthetic Datasets\end{sideways}}}&NMF Add. & 0.39 &0.06   & -0.04   & -0.19 & -0.03 & 0.13 & 0.28\tabularnewline
+\cline{2-9}
+\end{tabular}
+}
+\begin{overprint}
+      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+\end{overprint}
+\end{frame}
+
+\subsection{Experiment 4: Signature vs. best performer}
+\begin{frame}\frametitle{Research questions}
+\begin{enumerate}
+\item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
+\begin{itemize}
+\item Experiment 1: Predictive performance of models over real and synthetic data sets
+\end{itemize}
+\item \checkmark Is the \textit{performance vector} unique to each synthetic data type (data from the same ground truth model)?
+\begin{itemize}
+\item Experiment 2: Sensitivity of the Model performance over different data generation parameters
+\end{itemize}
+\item \checkmark Can the \textit{performance vector} be used to define a method to reliably identify the ground truth behind the synthetic data?
+\begin{itemize}
+\item Experiment 3: Model selection based on performance vector classification
+\end{itemize}
+\item \textbf{How does the method compare with the standard practice of using the model with the best performance?}
+\begin{itemize}
+\item Experiment 4: Signature vs. best performer classification
+\end{itemize}
+\end{enumerate}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}\frametitle{Research questions}
+\begin{enumerate}
+\item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
+\begin{itemize}
+\item Experiment 1: Predictive performance of models over real and synthetic data sets
+\end{itemize}
+\item \checkmark Is the \textit{performance vector} unique to each synthetic data type (data from the same ground truth model)?
+\begin{itemize}
+\item Experiment 2: Sensitivity of the Model performance over different data generation parameters
+\end{itemize}
+\item \checkmark Can the \textit{performance vector} be used to define a method to reliably identify the ground truth behind the synthetic data?
+\begin{itemize}
+\item Experiment 3: Model selection based on performance vector classification
+\end{itemize}
+\item \checkmark How does the method compare with the standard practice of using the model with the best performance?
+\begin{itemize}
+\item Experiment 4: Signature vs. best performer classification
+\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\subsection{Questions}
+\begin{frame}\frametitle{Thank you}
+\begin{figure}
+\includegraphics[scale =0.55] {images/Question} 
+\end{figure}
+\end{frame}
+\end{document}
