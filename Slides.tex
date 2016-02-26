@@ -3,7 +3,8 @@
 \usepackage{beamerthemeshadow}
 \setbeamertemplate{footline}[text line]{%
   \parbox{\linewidth}{\vspace*{-8pt}\hfill\insertframenumber/\inserttotalframenumber}}
-\usepackage{color}
+\usepackage{color, colortbl}
+\usepackage{xcolor}
 \usepackage{rotating}
 \usepackage{subfigure}
 \usepackage[small,nohug,heads=vee]{diagrams}
@@ -18,6 +19,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usepackage{array}
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
 
 %%%%%%%%%%
@@ -521,9 +523,15 @@ This approach relies on generating synthetic datasets
 \cline{2-8}
 \multicolumn{1}{c|}{\multirow{-6}{*}{\begin{sideways}Synthetic Datasets\end{sideways}}}&DINO & -0.15 & 0.20 & -0.70 & -0.69 & 0.63 & \textbf {0.95}\tabularnewline
 \cline{2-8}
-\end{tabular}}
+\multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\end{tabular}} 
 \begin{overprint}
-      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+\onslide<1>
+\begin{itemize}
+	  \item he diagonal shows high correlations because it compares the same model generated datasets. 
+	   \item Datasets with similar ground truth also show a high correlation. 
+\end{itemize}
+\onslide<2> In general, correlation similarity provides a very good measure of model fit.
 \end{overprint}
 \end{frame}
 
@@ -552,10 +560,13 @@ This approach relies on generating synthetic datasets
 \cline{2-9}
 \multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Synthetic Datasets\end{sideways}}}&NMF Add. & 0.39 &0.06   & -0.04   & -0.19 & -0.03 & 0.13 & 0.28\tabularnewline
 \cline{2-9}
+ \multicolumn{1}{c}{}&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} \tabularnewline
 \end{tabular}
 }
 \begin{overprint}
-      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+      \onslide<1> Vomlel dataset shows a high correlation with IRT model
+      \onslide<2> Fraction with its subset datasets show similarity with POKS model. 
+      \onslide<3> As expected, ECPE has the highest correlation with random generated dataset. 
 \end{overprint}
 \end{frame}
 
@@ -581,6 +592,88 @@ This approach relies on generating synthetic datasets
 \end{enumerate}
 \end{frame}
 
+\begin{frame}\frametitle{Problem specification}
+\begin{overprint}
+\onslide<1> 
+\begin{itemize}
+	\item Evaluating the ability of the Signature approach to identify the ground truth model \textbf{over datasets with different data specific parameters}
+	\end{itemize}
+	\includegraphics[trim=1cm 17cm 1cm 1cm,scale=0.55]{images/Data-Gen-Break-Down.pdf}
+	\onslide<2> 
+	\begin{itemize}
+	\item Evaluating the ability of the Signature approach to identify the ground truth model \textbf{over datasets with different data specific parameters}
+	\item Comparing the results with the best performer approach.
+\end{itemize}
+	\includegraphics[trim=3cm 10cm 5cm 5cm,scale=0.36]{images/BestPerformer.pdf}
+\onslide<3>
+\begin{itemize}
+	\item Evaluating the ability of the Signature approach to identify the ground truth model \textbf{over datasets with different data specific parameters}
+	\item Comparing the results with the best performer approach.
+	\item Reporting the accuracy of these classification in terms of precision, recall, F1 measure
+\end{itemize}
+\begin{columns}
+\begin{column}{.4\textwidth}
+\vspace{-0.5cm}
+\begin{center}
+\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{2}{c}{Prediction outcome}\tabularnewline
+\cline{3-4}
+\multicolumn{2}{c|}{}& \multicolumn{1}{c|}{Positive} & \multicolumn{1}{c|}{Negative} \tabularnewline
+\cline{2-4}
+Actual&  \multicolumn{1}{c|}{Positive }&TP&FN\tabularnewline
+\cline{2-4}
+value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
+\cline{2-4}
+\end{tabular}}
+
+\[Precision = \frac{TP}{TP+FP}\]
+\[Recall = \frac{TP}{TP+FN}\]
+
+\end{center}
+\end{column}
+\begin{column}{.6\textwidth}
+\vspace{-1cm}
+\begin{center}
+\[Accuracy = \frac{TP+TN}{TP+TN+FP+FN}\]
+\[F_\beta = (1+\beta^2).\frac{Precision.Recall}{\beta^2.Precision+Recall}\]
+\end{center}
+\end{column}
+\end{columns}
+\end{overprint}
+
+
+\end{frame}
+
+\begin{frame}\frametitle{Results of signature vs. best performer classification}
+\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c!{\VRule[2pt]}c|c|c|c|}
+\multicolumn{2}{c}{}&\multicolumn{8}{c}{Performance}\tabularnewline
+\cline{3-10}
+\multicolumn{2}{c|}{}&\multicolumn{4}{c|}{Best Performer}&\multicolumn{4}{c|}{Nearest Neighbor}\tabularnewline
+\cline{3-10}
+\multicolumn{2}{c|}{}&\scriptsize Precision&\scriptsize Recall&\multicolumn{1}{c|}{\scriptsize F-Measure}&\scriptsize Accuracy&\scriptsize Precision&\scriptsize Recall&\scriptsize F-Measure&\scriptsize Accuracy\tabularnewline
+\cline{2-10}
+&POKS&0.564&0.992&0.719&0.871&0.793&0.908&\cellcolor{gray!25}0.847&\cellcolor{gray!25}0.945\tabularnewline
+\cline{2-10}
+&IRT&0.982&0.458&0.625&0.908&0.846&0.867&\cellcolor{gray!25}0.856&\cellcolor{gray!25}0.951\tabularnewline
+\cline{2-10}
+&NMF Conj.&0.943&0.342&0.502&0.887&0.711&0.750&\cellcolor{gray!25}0.730&\cellcolor{gray!25}0.907\tabularnewline
+\cline{2-10}
+&DINA&0.617&0.921&0.739&0.891&0.777&0.696&\cellcolor{gray!25}0.734&\cellcolor{gray!25}0.916\tabularnewline
+\cline{2-10}
+&NMF Add.&0.938&0.875&0.905&0.969&0.946&0.879&\cellcolor{gray!25}0.911&\cellcolor{gray!25}0.971\tabularnewline
+\cline{2-10}
+\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&1&0.929&0.963&0.988&0.996&0.946&\cellcolor{gray!25}0.970&\cellcolor{gray!25}0.990\tabularnewline
+\cline{1-10}
+\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{4}{c|}{0.75\%}&\multicolumn{4}{c|}{\cellcolor{gray!25}0.84\%}\tabularnewline
+\cline{1-10}
+\end{tabular}}
+\begin{itemize}
+\item The F-measure increases when the signature approach is used for classification.\pause
+\item In terms of individual scores per method, the accuracy increases when signature approach is used.\pause
+\item The total accuracy considers true positive numbers over number of datasets regardless of individual models
+\end{itemize}
+\end{frame}
+
 \section{Conclusion}
 \begin{frame}\frametitle{Research questions}
 \begin{enumerate}
@@ -604,6 +697,27 @@ This approach relies on generating synthetic datasets
 
 \end{frame}
 
+\subsection{Conclusion and discussion}
+\begin{frame}\frametitle{Conclusion}
+\begin{itemize}
+\item 1 \pause
+\item 2 \pause
+\item 3 \pause
+\item 4 \pause
+\item 5 \pause
+\item 6 \pause
+\end{itemize}
+\end{frame}
+\subsection{Future works}
+\begin{frame}\frametitle{Future works}
+\begin{itemize}
+\item 1 \pause
+\item 2 \pause
+\item 3 \pause
+\item 4 \pause
+\item 5 \pause
+\end{itemize}
+\end{frame}
 \subsection{Questions}
 \begin{frame}\frametitle{Thank you}
 \begin{figure}
