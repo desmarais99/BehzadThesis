@@ -394,21 +394,39 @@ The diagonal generally displays the best performance %the diagonal (in bold face
 \begin{itemize}
 \item Experiment 2: Sensitivity of the Model performance over different data generation parameters
 \end{itemize}
+Are they stable in addition to be unique.
 \end{enumerate}
 \end{frame}
 
 \begin{frame}\frametitle{Variation of sample size over synthetic data sets}
 \includegraphics[scale =0.37] {images/SampleSize}
 \begin{overprint}
-      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+      \onslide<1> Obviously, the signature pattern did not change significantly for some parameters such as \textbf{Sample size}.
 \end{overprint}
 \end{frame}
 
 \begin{frame}\frametitle{Variation of number of items over synthetic data sets}
 \includegraphics[scale =0.37] {images/numberofitems}
 \begin{overprint}
-      \onslide<1> Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 Item1 
+	  \onslide<1> Even for synthetic data the ground truth should not necessarily be close to 100%.
+      \onslide<2> The Performance signature shifts down once the number of items degrades.
 \end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Data specific parameters}
+\begin{enumerate}
+\item Sample size (Number of students)
+\item Number of items
+\item Number of latent skills
+\item Item score variance 
+\item Student score variance
+\item Average success rate\pause
+\end{enumerate}
+Conclusion :
+\begin{itemize}
+      \item Contextual factors can potentially influence the performance of a model%the best performer may not be the model that is most representative of the ground truth, but instead it may be the result of contextual factors that make this model outperform the ground truth one.
+	  \item For better comparison of the results, we can also consider \textbf{data specific parameters} of the real data in the generation process%we can also consider data specific parameters of the real data in the generation process to make a better comparison of the results.
+\end{itemize}
 \end{frame}
 
 \subsection{Experiment 3: Signature Approach}
@@ -427,6 +445,60 @@ The diagonal generally displays the best performance %the diagonal (in bold face
 \item Experiment 3: Model selection based on performance vector classification
 \end{itemize}
 \end{enumerate}
+\end{frame}
+
+\begin{frame}\frametitle{Signature framework}
+This approach relies on generating synthetic datasets
+\begin{overprint}
+\onslide<1> 
+		\begin{columns}
+		\begin{column}{0.7\textwidth}
+		\vspace{-0.8cm}
+			\includegraphics[trim=1cm 10cm 1cm 1cm,scale=0.43]{images/Approach1.pdf}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+		\end{column}
+		\end{columns}
+\onslide<2> 		\begin{columns}
+		\begin{column}{0.7\textwidth}
+		\vspace{-0.8cm}
+			\includegraphics[trim=1cm 10cm 1cm 1cm,scale=0.43]{images/Approach2.pdf}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+		\end{column}
+		\end{columns}
+		\onslide<3> 		\begin{columns}
+		\begin{column}{0.7\textwidth}
+			\vspace{-0.8cm}
+			\includegraphics[trim=1cm 10cm 1cm 1cm,scale=0.43]{images/Approach3.pdf}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+			\hspace{1.5cm}Recall
+          
+          \vspace{1cm}
+           \rightline{\includegraphics[trim=0cm 0cm 0cm 1.5cm,clip=true,scale =0.5] {images/Predictive-Preformace_Sig.pdf}}
+
+
+		\end{column}
+		\end{columns}
+		\onslide<4> 		\begin{columns}
+		\begin{column}{0.7\textwidth}
+			\vspace{-0.8cm}			
+			\includegraphics[trim=1cm 10cm 1cm 1cm,scale=0.43]{images/Approach4.pdf}
+		\end{column}
+		\begin{column}{0.3\textwidth}
+		\end{column}
+		\end{columns}\end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Pool of synthetic datasets}
+\includegraphics[trim=1cm 17cm 1cm 1cm,scale=0.55]{images/Data-Gen-Break-Down.pdf}
+\begin{overprint}
+\onslide<1> There exists 6 skills assessment models 
+\onslide<2> There exists 6 skills assessment models X 6 data specific parameters 
+\onslide<3> There exists 6 skills assessment models X 6 data specific parameters~X 4 values 
+\onslide<4> There exists 6 skills assessment models X 6 data specific parameters~X 4 values X 10 samples = 1440 samples in the pool
+\end{overprint}
 \end{frame}
 
 \begin{frame}\frametitle{Degree of similarity between six synthetic datasets based on the correlation}
