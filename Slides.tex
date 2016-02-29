@@ -46,15 +46,17 @@
 
 \begin{itemize}
 \item<1-> Student skills assessment models 
-\item<2-> How to decide which are the most representative of the underlying ground truth? 
+\item<2-> How to decide which are the most representative of the underlying ground truth? %What is the model behind the data, that's what everybody in science like to know
 \item<3-> Static  Vs. Dynamic 
 \item<4-> Model selection and goodness of fit 
-\item<4-> A general answer : best performer
+\item<4-> A general answer : best performer % but best performer not necessarily always the best under all circumstances (generalizability)
+%for example Naive base is always a good performer but we know that the assumption of naive base are too strong which assumes independence between evidences but it always the best performer , why? because the sample is small and many models require more data, many models do overfitting and many models ca not do well when you do not feed the whole space of input parameters ……
+
 %\begin{itemize}
 %\item<4-> Selecting a statistical model for a given data that is the best representative of the data.
 %\item<4-> ``goodness of fit'' for a statistical model describes how well it fits a set of observation
 %\end{itemize}
-\item <5->Our contribution
+\item<5-> Our contribution
 \begin{itemize}
 \item To make a comprehensive comparison of educational data model performances
 \item To propose a new approach to assessing model fit
@@ -71,7 +73,7 @@
 \includegraphics<3>[trim= 0cm 5cm 0cm 5cm , scale =0.5]{images/Dynamic-Syn}
 \includegraphics<4>[trim= 0cm 5cm 0cm 8.5cm , scale =0.5]{images/Model-Selected}
 \includegraphics<5>[trim= 0cm 16cm 0cm 0cm , scale =0.5]{images/Models}
-\includegraphics<6>[trim= 0cm 18cm 0cm 0cm , scale =0.5]{images/Models}
+\includegraphics<6>[trim= 0cm 16cm 0cm 0cm , scale =0.5]{images/Models}
 \end{overprint}
 \end{frame}
 
@@ -174,7 +176,7 @@ i_{4}
       		\begin{itemize}
       		      		   	\vspace{-0.5cm}
       			\item Number of Skills
-      			\item \textbf{Q-matrices (types)}
+      			\item \textbf{Q-matrices (types)}%some are based on matrix factorization but others have more adhoc representation
       			\item Slip and Guess
 	      	\end{itemize}
 	      \end{column}
@@ -221,8 +223,8 @@ i_{4}
 \newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
 
 
-\subsection{Predictive performance}
-\begin{frame}
+\subsection{Presentation terms and concepts}
+\begin{frame}\frametitle{Presentation terms and concepts}
 \begin{itemize}
 \item<1-> \textbf{Performance of a model} over a data set
 \item<2-> Model parameters
@@ -239,7 +241,7 @@ i_{4}
 		\begin{columns}
 		\begin{column}{0.5\textwidth}
 		 %\includegraphics[trim=0cm 0cm 0cm 0cm,clip=true,width=\textwidth]{images/Performance-Presentation}	   
-		 \vspace{1.5cm}   
+		 \vspace{1.25cm}   
    \includegraphics[trim=0cm 0cm 0cm 1.5cm,clip=true,scale =0.55] {images/Predictive-Preformace_Sig.pdf}
    \includegraphics[trim=0cm 0cm 0cm 1.5cm,clip=true,scale =0.55] {images/Predictive-Preformace_Base.pdf}
 
@@ -270,7 +272,7 @@ i_{4}
 \begin{enumerate}
 \item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
 \begin{itemize}
-\item Experiment 1: Predictive performance of models over real and synthetic data sets
+\item Experiment 1: Predictive \textit{performance vector} of models over real and synthetic data sets
 \end{itemize}
 \end{enumerate}
 \end{frame}
@@ -339,11 +341,11 @@ i_{4}
 \vspace{-0.5cm}
 \includegraphics[scale =0.45] {images/Syn}
 \begin{overprint}
-      \onslide<1> \small The highest performance is for the generative model behind the dataset
-%The highest performance is for the skills assessment technique that is the same as the generative model behind the dataset%%%%the generative model behind the data set is the same as the skills assessment technique, the corresponding technique’s performance is the best, or close to the best.
-	  \onslide<2> \small Data sets have unique pattern of performance vector across models
-     \onslide<3> The random data set has a flat performance across techniques 
+     \onslide<1> The random data set has a flat performance across techniques 
      %%%which corresponds to the dominant class prediction. 
+      \onslide<2> \small The highest performance is for the generative model behind the dataset
+%The highest performance is for the skills assessment technique that is the same as the generative model behind the dataset%%%%the generative model behind the data set is the same as the skills assessment technique, the corresponding technique’s performance is the best, or close to the best.
+	  \onslide<3> \small Data sets have unique pattern of performance vector across models
 	  \onslide<4> The capacity of recognizing a data set’s true model relies on this uniqueness characteristic
 \end{overprint}
 \end{frame}
@@ -352,10 +354,10 @@ i_{4}
 \vspace{-0.5cm}
 \includegraphics[scale =0.4] {images/Real}
 \begin{overprint}
-      \onslide<1> In most cases, the best performer is close to the baseline
+      \onslide<1> In most cases, the best performer is close to the baseline %many methods are not doing better than expected value
       \onslide<2> The pattern of the Fraction performance data set repeats over its subsets %Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions
       %this similarity among Fraction data set and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the performance signature remains constant across these data sets.
-      \onslide<3> None of the real data sets show the large the amplitude and the differences found in the synthetic data sets models %Scles are 4 times bigger
+      \onslide<3> None of the real data sets show the large variance and the differences found in the synthetic data sets models %Scles are 4 times bigger
 \end{overprint}
 \end{frame}
 
@@ -396,7 +398,7 @@ The diagonal generally displays the best performance %the diagonal (in bold face
 \begin{itemize}
 \item Experiment 2: Sensitivity of the Model performance over different data generation parameters
 \end{itemize}
-Are they stable in addition to be unique.
+Are they stable in addition to be unique?
 \end{enumerate}
 \end{frame}
 
@@ -410,7 +412,7 @@ Are they stable in addition to be unique.
 \begin{frame}\frametitle{Variation of number of items over synthetic data sets}
 \includegraphics[scale =0.37] {images/numberofitems}
 \begin{overprint}
-	  \onslide<1> Even for synthetic data the ground truth should not necessarily be close to 100%.
+	  \onslide<1> Even for synthetic data the performance of the ground truth model should not necessarily be close to 100\%.
       \onslide<2> The Performance signature shifts down once the number of items degrades.
 \end{overprint}
 \end{frame}
@@ -426,7 +428,7 @@ Are they stable in addition to be unique.
 \end{enumerate}
 Conclusion :
 \begin{itemize}
-      \item Contextual factors can potentially influence the performance of a model%the best performer may not be the model that is most representative of the ground truth, but instead it may be the result of contextual factors that make this model outperform the ground truth one.
+      \item Data specific parameters can potentially influence the performance of a model%the best performer may not be the model that is most representative of the ground truth, but instead it may be the result of contextual factors that make this model outperform the ground truth one.
 	  \item For better comparison of the results, we can also consider \textbf{data specific parameters} of the real data in the generation process%we can also consider data specific parameters of the real data in the generation process to make a better comparison of the results.
 \end{itemize}
 \end{frame}
@@ -700,22 +702,30 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 \subsection{Conclusion and discussion}
 \begin{frame}\frametitle{Conclusion}
 \begin{itemize}
-\item 1 \pause
-\item 2 \pause
-\item 3 \pause
-\item 4 \pause
-\item 5 \pause
-\item 6 \pause
+\item Model fit of a data set is defined as the similarity between \textit{prototype} and \textit{target} performance vector \pause
+\item The generative model does not always correspond to the best performer and our approach provides a more reliable means \pause
+%This means of determining a data set’s ground truth is made possible because the synthetic data sets have very distinct performance patterns, showing sharp differences across models. and uniqueness characteristics
+\item Datasets that share a common source have correlated performance vectors. \pause % Fraction data
+\item It does not seem to substantially extend to data that shares the same domain
 \end{itemize}
 \end{frame}
+
+\begin{frame}\frametitle{Conclusion}
+\begin{itemize}
+\item For real data sets, the performances are not better than the expected performance \pause %the conclusion behind that can be either the ground truth is not among the candidate models, or the best performer is not necessarily the ground truth.
+\item For synthetic  data, datasets with different ground truths that share some concepts, show a high correlation. \pause
+\item \textit{performance vector} changes for some data specific parameters but it still shows a high correlation with datasets with the same ground truth. \pause
+\item Best performer may not be the model that is most representative of the ground truth.
+\end{itemize}
+\end{frame}
+
 \subsection{Future works}
 \begin{frame}\frametitle{Future works}
 \begin{itemize}
-\item 1 \pause
-\item 2 \pause
-\item 3 \pause
-\item 4 \pause
-\item 5 \pause
+\item Further studies with real and simulated data \pause
+\item generalize to dynamic data and skills assessment models \pause
+\item Candidate models and their complexity \pause
+\item Application in other fields of study  
 \end{itemize}
 \end{frame}
 \subsection{Questions}
@@ -725,3 +735,5 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 \end{figure}
 \end{frame}
 \end{document}
+
+%Pardos Work compared with our work : make link between performance space and parameter space.  We look for close points of synthetic data, they look for similar likelihood surfaces in the space of parameters
