@@ -45,9 +45,10 @@
 \begin{frame}\frametitle{Problem Specification}
 
 \begin{itemize}
+\vspace{0.5cm}
 \item<1-> Student skills assessment models 
-\item<2-> How to decide which are the most representative of the underlying ground truth? %What is the model behind the data, that's what everybody in science like to know
-\item<3-> Static  Vs. Dynamic 
+\item<2-> Static  Vs. Dynamic 
+\item<3-> How to decide which are the most representative of the underlying ground truth? %What is the model behind the data, that's what everybody in science like to know
 \item<4-> Model selection and goodness of fit 
 \item<4-> A general answer : best performer % but best performer not necessarily always the best under all circumstances (generalizability)
 %for example Naive base is always a good performer but we know that the assumption of naive base are too strong which assumes independence between evidences but it always the best performer , why? because the sample is small and many models require more data, many models do overfitting and many models ca not do well when you do not feed the whole space of input parameters ……
@@ -55,28 +56,38 @@
 %\begin{itemize}
 %\item<4-> Selecting a statistical model for a given data that is the best representative of the data.
 %\item<4-> ``goodness of fit'' for a statistical model describes how well it fits a set of observation
-%\end{itemize}
-\item<5-> Our contribution
-\begin{itemize}
-\item To make a comprehensive comparison of educational data model performances
-\item To propose a new approach to assessing model fit
-\end{itemize}
-\item<6-> The proposed approach:
-\begin{itemize}
-\item Assessing the fit of the model to the underlying ground truth using a methodology based on \textbf{synthetic data}
-\end{itemize}
 \end{itemize}
 \begin{overprint}
 \vspace{-4.5cm}
-\includegraphics<1>[trim= 0cm 6cm 0cm 12cm ,clip = true,scale =0.6]{images/Models}
-\includegraphics<2>[trim= 0cm 5cm 0cm 6.5cm , scale =0.5]{images/Model-Selection}
-\includegraphics<3>[trim= 0cm 5cm 0cm 5cm , scale =0.5]{images/Dynamic-Syn}
-\includegraphics<4>[trim= 0cm 5cm 0cm 8.5cm , scale =0.5]{images/Model-Selected}
-\includegraphics<5>[trim= 0cm 16cm 0cm 0cm , scale =0.5]{images/Models}
-\includegraphics<6>[trim= 0cm 16cm 0cm 0cm , scale =0.5]{images/Models}
+      \onslide<1>
+      		\includegraphics[trim= 0cm 6cm 0cm 8cm ,clip = true,scale =0.6]{images/Models}
+      	\onslide<2> \includegraphics[trim= 0cm 5cm 0cm 0cm , scale =0.5]{images/Dynamic-Syn}
+      \onslide<3> \includegraphics[trim= 0cm 0cm 0cm -3cm , scale =0.4]{images/Model-Selection}
+      \onslide<4> \includegraphics[trim= 0cm 5cm 0cm 2.5cm , scale =0.5]{images/Model-Selected}
+%\includegraphics<2>[trim= 0cm 5cm 0cm 0cm , scale =0.5]{images/Dynamic-Syn}
+%\includegraphics<3>[trim= 0cm 7cm 0cm 0cm , scale =0.4]{images/Model-Selection}
+%\includegraphics<4>[trim= 0cm 5cm 0cm 2cm , scale =0.5]{images/Model-Selected}
 \end{overprint}
 \end{frame}
 
+\subsection{Our approach}
+\begin{frame}\frametitle{Problem Specification}
+Our contribution
+\begin{itemize}
+\item To make a comprehensive comparison of educational data model performances
+\item To propose a new approach to assessing model fit \pause
+\end{itemize}
+General hypothesis:
+\begin{itemize}
+\item Recognizing the ground truth based on the uniqueness of this comprehensive comparison \pause
+\end{itemize}
+The proposed approach:
+\begin{itemize}
+\item Assessing the fit of the model to the underlying ground truth using a methodology based on \textbf{synthetic data} 
+\end{itemize}
+\end{frame}
+
+\begin{comment}
 \subsection{Introduction}
 \begin{frame}
 \vspace{-1cm}
@@ -218,6 +229,7 @@ i_{4}
 	     \end{columns}
 \end{overprint}
 \end{frame}
+\end{comment}
 
 \newcommand{\tabitem}{~~\llap{\textbullet}~~}
 \newcommand\VRule[1][\arrayrulewidth]{\vrule width #1}
@@ -263,6 +275,59 @@ i_{4}
 	     \end{columns}
 \onslide<4>\vspace{3cm} The \textit{performance vector} associated with the synthetic data of a model class.
 \onslide<5>\vspace{3cm} The \textit{performance vector} of the real data set to classify.
+\end{overprint}
+\end{frame}
+
+\begin{frame}\frametitle{Vector space of accuracy performances}
+\begin{overprint}
+\onslide<1>
+\begin{itemize}
+\item Performance vectors of datasets in columns(Data points in a part of performance space)
+\end{itemize}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lcccccccc}
+ \cline{1-8}
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }} &\multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{white}{Target}}}} \\
+  \cline{2-8}
+  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{L.Conj.}} & \multicolumn{1}{c}{{L.Comp.}} &\\ 
+ \cline{1-8}
+  \textit{Expected} & 0.75 & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 &  \\ 
+  POKS & 0.75 & 0.94 & 0.94 & 0.81 & 0.81 & 0.90 & 0.94  & \\ 
+  IRT & 0.75 & 0.91 & 0.95 & 0.73 & 0.73 & 0.79 & 0.89  & \\ 
+  DINA & 0.75 & 0.77 & 0.81 & 1.00 & 0.65 & 0.98 & 0.89 & \\ 
+  DINO & 0.75 & 0.63 & 0.56 & 0.66 & 1.00 & 0.68 & 0.91 & \\ 
+  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58 & \\ 
+  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & 0.98  &\\ 
+ \cline{1-8}
+\end{tabular}}
+\vspace{.7cm}
+
+The diagonal generally displays the best performance %the diagonal (in bold face, except for one, corresponding to the match between the underlying synthetic model and the model performance) generally displays the best perfor- mance since it corresponds to the alignment of the model and the ground truth behind the data.
+\onslide<2>
+\begin{itemize}
+\item Given a target vector, we want to define which columns are the closest to the target column
+\end{itemize}
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{lcccccccc}
+\cline{1-9}
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{red}{Target}}}}\\
+  \cline{2-8}
+  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{L.Conj.}} & \multicolumn{1}{c}{{L.Comp.}} &\\ 
+\cline{1-9}
+  \textit{Expected} & 0.75 & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 & \textcolor{red}{0.43} \\ 
+  POKS & 0.75 & 0.94 & 0.94 & 0.81 & 0.81 & 0.90 & 0.94  & \textcolor{red}{0.75}\\ 
+  IRT & 0.75 & 0.91 & 0.95 & 0.73 & 0.73 & 0.79 & 0.89  & \textcolor{red}{0.68}\\ 
+  DINA & 0.75 & 0.77 & 0.81 & 1.00 & 0.65 & 0.98 & 0.89  & \textcolor{red}{0.93}\\ 
+  DINO & 0.75 & 0.63 & 0.56 & 0.66 & 1.00 & 0.68 & 0.91  & \textcolor{red}{0.60}\\ 
+  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58  & \textcolor{red}{0.80}\\ 
+  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & 0.98  & \textcolor{red}{0.70}\\ 
+\cline{1-9}
+\end{tabular}}
+
+\begin{itemize}
+\item Our hypothesis : the similarity of vectors can indicate the nature of data 
+\item The nearest neighbour in this space can be a candidate for the ground truth
+\end{itemize}
 \end{overprint}
 \end{frame}
 
@@ -345,8 +410,9 @@ i_{4}
      %%%which corresponds to the dominant class prediction. 
       \onslide<2> \small The highest performance is for the generative model behind the dataset
 %The highest performance is for the skills assessment technique that is the same as the generative model behind the dataset%%%%the generative model behind the data set is the same as the skills assessment technique, the corresponding technique’s performance is the best, or close to the best.
-	  \onslide<3> \small Data sets have unique pattern of performance vector across models
-	  \onslide<4> The capacity of recognizing a data set’s true model relies on this uniqueness characteristic
+	  \onslide<3> Motivation: Most of the models preform worse than simple expected prediction model %You may want to point to : At first place this study was about the comparison of the models performances but it turned out that some models are doing worst than the most simple approach which is expected approach (AVG line * AVG col)
+	  \onslide<4> \small Data sets have discriminant pattern of performance vector across models
+	  \onslide<5> The capacity of recognizing a data set’s true model relies on this discriminant characteristic
 \end{overprint}
 \end{frame}
 
@@ -361,31 +427,6 @@ i_{4}
 \end{overprint}
 \end{frame}
 
-\begin{frame}\frametitle{Vector space of accuracy performances}
-\begin{itemize}
-\item Performance vectors of datasets in columns(Data points in the performance space)
-\end{itemize}
-\resizebox{\columnwidth}{!}{
-\begin{tabular}{lccccccc}
-  \toprule
-  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }} \\
-  \cline{2-8}
-  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{Linear .Conj}} & \multicolumn{1}{c}{{Linear .Comp}} \\ 
-  \hline
-  \textit{Expected} & \textbf{0.75} & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 \\ 
-  POKS & 0.75 & \textbf{0.94} & 0.94 & 0.81 & 0.81 & 0.90 & 0.94 \\ 
-  IRT & 0.75 & 0.91 & \textbf{0.95} & 0.73 & 0.73 & 0.79 & 0.89 \\ 
-  DINA & 0.75 & 0.77 & 0.81 & \textbf{1.00} & 0.65 & \textbf{0.98} & 0.89 \\ 
-  DINO & 0.75 & 0.63 & 0.56 & 0.66 & \textbf{1.00} & 0.68 & 0.91 \\ 
-  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58 \\ 
-  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & \textbf{0.98} \\ 
-  \bottomrule
-\end{tabular}}
-\vspace{.7cm}
-
-The diagonal generally displays the best performance %the diagonal (in bold face, except for one, corresponding to the match between the underlying synthetic model and the model performance) generally displays the best perfor- mance since it corresponds to the alignment of the model and the ground truth behind the data.
-
-\end{frame}
 
 \subsection{Experiment 2: Sensitivity of the Model performance}
 \begin{frame}\frametitle{Research questions}
@@ -398,7 +439,8 @@ The diagonal generally displays the best performance %the diagonal (in bold face
 \begin{itemize}
 \item Experiment 2: Sensitivity of the Model performance over different data generation parameters
 \end{itemize}
-Are they stable in addition to be unique?
+Are they stable in addition to be discriminant?
+%It’s is not only that performance is dependent to the data parameters but we wanted to check if the signature totally changes with different data parameters or it stays stable? if it changes my hypothesis will not stay anymore, and if it totally changes then the nearest neighbour or correlation would not work here.
 \end{enumerate}
 \end{frame}
 
@@ -417,7 +459,7 @@ Are they stable in addition to be unique?
 \end{overprint}
 \end{frame}
 
-\begin{frame}\frametitle{Data specific parameters}
+\begin{frame}\frametitle{Data parameters}
 \begin{enumerate}
 \item Sample size (Number of students)
 \item Number of items
@@ -428,8 +470,8 @@ Are they stable in addition to be unique?
 \end{enumerate}
 Conclusion :
 \begin{itemize}
-      \item Data specific parameters can potentially influence the performance of a model%the best performer may not be the model that is most representative of the ground truth, but instead it may be the result of contextual factors that make this model outperform the ground truth one.
-	  \item For better comparison of the results, we can also consider \textbf{data specific parameters} of the real data in the generation process%we can also consider data specific parameters of the real data in the generation process to make a better comparison of the results.
+      \item Data parameters can potentially influence the performance of a model%the best performer may not be the model that is most representative of the ground truth, but instead it may be the result of contextual factors that make this model outperform the ground truth one.
+	  \item For better comparison of the vectors, we also consider \textbf{data characteristic parameters} of the real data in the generation process%we can also consider data specific parameters of the real data in the generation process to make a better comparison of the results.
 \end{itemize}
 \end{frame}
 
@@ -495,49 +537,64 @@ This approach relies on generating synthetic datasets
 		\end{columns}\end{overprint}
 \end{frame}
 
+
+
 \begin{frame}\frametitle{Pool of synthetic datasets}
 \includegraphics[trim=1cm 17cm 1cm 1cm,scale=0.55]{images/Data-Gen-Break-Down.pdf}
 \begin{overprint}
 \onslide<1> There exists 6 skills assessment models 
 \onslide<2> There exists 6 skills assessment models X 6 data specific parameters 
 \onslide<3> There exists 6 skills assessment models X 6 data specific parameters~X 4 values 
-\onslide<4> There exists 6 skills assessment models X 6 data specific parameters~X 4 values X 10 samples = 1440 samples in the pool
+\onslide<4> There exists 6 skills assessment models X 6 data specific parameters~X 4 values X 10 samples = 1440 samples in the pool ($DB$)
+\onslide<5> $|DB| = 1440$ and $|DC| = 24$
 \end{overprint}
 \end{frame}
 
-\begin{frame}\frametitle{Degree of similarity between six synthetic datasets based on the correlation}
-\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c|c|c|}
-\multicolumn{2}{c}{} & \multicolumn{6}{c}{Synthetic Datasets} \tabularnewline
-\multicolumn{8}{c}{} \tabularnewline
-\cline{3-8} 
-\multicolumn{2}{c|}{} & POKS & IRT & NMF Conj. & DINA & NMF Add. & DINO\tabularnewline
-\cline{2-8}
-\cline{2-3}
-&POKS & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
-\cline{2-4}
-&IRT & 0.86 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
-\cline{2-5}
-&NMF Conj. & 0.22 & -0.20 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
-\cline{2-6}
-&DINA & 0.02 & -0.40 & 0.94 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{}\tabularnewline
-\cline{2-7}
-&NMF Add. & 0.44 & 0.75 & -0.62 & -0.73 & \textbf {0.93} & \multicolumn{1}{|c}{}\tabularnewline
-\cline{2-8}
-\multicolumn{1}{c|}{\multirow{-6}{*}{\begin{sideways}Synthetic Datasets\end{sideways}}}&DINO & -0.15 & 0.20 & -0.70 & -0.69 & 0.63 & \textbf {0.95}\tabularnewline
-\cline{2-8}
-\multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\begin{frame}\frametitle{Prototype definition}
+\begin{itemize}
+\item Target performance vector : $\mathcal{T}_c^mt = P(D_c^mt \in DB)$ where: \newline $D_c$ is characterized with data parameter condition $c \in DC$  \pause
+\item $\mathcal{N}_c^m$ is a centroid performance prototype of models $m$ with data parameter condition  $c$\pause
+\item $\mathcal{N}_c^m = AVG(\forall P(D_c^m) | D_c^m \in DB)$ \pause%where in our case  $|D| = 10 | D_c^m \in DB$
+\item In this study each centroid performance prototype is the average of 10 performances and $|DC|=24$ \pause
+\item Next slid shows the average of correlation between the target and prototype in all data parameter conditions
+\end{itemize}
+\end{frame}
+
+%Synthetic performance vectors %characteristics
+\begin{frame}\frametitle{Degree of similarity between six synthetic performance vector based on the correlation}
+\resizebox{\columnwidth}{!}{\begin{tabular}{cc|c|c|c|c|c|c|c|}
+&\multicolumn{2}{c}{} & \multicolumn{6}{c}{Synthetic performance vectors} \tabularnewline
+&\multicolumn{8}{c}{} \tabularnewline
+\cline{4-9} 
+&\multicolumn{2}{c|}{} & POKS & IRT & NMF Conj. & DINA & NMF Add. & DINO\tabularnewline
+\cline{3-9}
+\cline{3-4}
+&&POKS & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{3-5}
+&&IRT & 0.86 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{3-6}
+&&NMF Conj. & 0.22 & -0.20 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{3-7}
+&&DINA & 0.02 & -0.40 & 0.94 & \textbf {0.96} & \multicolumn{1}{|c}{} & \multicolumn{1}{c}{}\tabularnewline
+\cline{3-8}
+&&NMF Add. & 0.44 & 0.75 & -0.62 & -0.73 & \textbf {0.93} & \multicolumn{1}{|c}{}\tabularnewline
+\cline{3-9}
+\multicolumn{1}{c}{\multirow{-6}{*}{\begin{sideways}\small Centroid synthetic\end{sideways}}}&\multicolumn{1}{c|}{\multirow{-6}{*}{\begin{sideways} \small performance vectors\end{sideways}}}&DINO & -0.15 & 0.20 & -0.70 & -0.69 & 0.63 & \textbf {0.95}\tabularnewline
+\cline{3-9}
+&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}\tabularnewline
 \end{tabular}} 
 \begin{overprint}
 \onslide<1>
 \begin{itemize}
-	  \item he diagonal shows high correlations because it compares the same model generated datasets. 
-	   \item Datasets with similar ground truth also show a high correlation. 
+	  \item The diagonal shows high correlations because it compares performance vectors of the same model generated datasets. 
+	   \item Performance vectors with similar ground truth also show a high correlation. 
 \end{itemize}
 \onslide<2> In general, correlation similarity provides a very good measure of model fit.
 \end{overprint}
 \end{frame}
 
-\begin{frame}\frametitle{Degree of similarity between six synthetic datasets and the ground truth based on the correlation}
+
+\begin{frame}\frametitle{Degree of similarity between six real datasets and the ground truth based on the correlation}
 \resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c|c|c|c|}
 
 \multicolumn{2}{c}{}&\multicolumn{7}{c}{Real Datasets}\tabularnewline   
@@ -566,9 +623,10 @@ This approach relies on generating synthetic datasets
 \end{tabular}
 }
 \begin{overprint}
-      \onslide<1> Vomlel dataset shows a high correlation with IRT model
-      \onslide<2> Fraction with its subset datasets show similarity with POKS model. 
-      \onslide<3> As expected, ECPE has the highest correlation with random generated dataset. 
+	  \onslide<1> The centroid performance vector of each model is the average of performance vectors of 10 generated datasets
+      \onslide<2> Vomlel dataset shows a high correlation with IRT model
+      \onslide<3> Fraction with its subset datasets show similarity with POKS model. 
+      \onslide<4> As expected, ECPE has the highest correlation with random generated dataset. 
 \end{overprint}
 \end{frame}
 
@@ -598,20 +656,19 @@ This approach relies on generating synthetic datasets
 \begin{overprint}
 \onslide<1> 
 \begin{itemize}
-	\item Evaluating the ability of the Signature approach to identify the ground truth model \textbf{over datasets with different data specific parameters}
+	\item What we did? to evaluate the ability of the Signature approach to identify the ground truth model
 	\end{itemize}
-	\includegraphics[trim=1cm 17cm 1cm 1cm,scale=0.55]{images/Data-Gen-Break-Down.pdf}
 	\onslide<2> 
 	\begin{itemize}
-	\item Evaluating the ability of the Signature approach to identify the ground truth model \textbf{over datasets with different data specific parameters}
-	\item Comparing the results with the best performer approach.
+	\item What we did? to evaluate the ability of the Signature approach to identify the ground truth model
+	\item What we want to do? to compare the results of classification based on signature approach with the best performer \small approach.
 \end{itemize}
-	\includegraphics[trim=3cm 10cm 5cm 5cm,scale=0.36]{images/BestPerformer.pdf}
+	\includegraphics[trim=3cm 10cm 5cm 5cm,scale=0.37]{images/BestPerformer.pdf}
 \onslide<3>
 \begin{itemize}
-	\item Evaluating the ability of the Signature approach to identify the ground truth model \textbf{over datasets with different data specific parameters}
-	\item Comparing the results with the best performer approach.
-	\item Reporting the accuracy of these classification in terms of precision, recall, F1 measure
+	\item What we did? to evaluate the ability of the Signature approach to identify the ground truth model
+	\item What we want to do? to compare the results of classification based on signature approach with the best performer \small approach.
+	\item Reporting the accuracy of these classification in terms of F1and accuracy measures
 \end{itemize}
 \begin{columns}
 \begin{column}{.4\textwidth}
@@ -637,7 +694,7 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 \vspace{-1cm}
 \begin{center}
 \[Accuracy = \frac{TP+TN}{TP+TN+FP+FN}\]
-\[F_\beta = (1+\beta^2).\frac{Precision.Recall}{\beta^2.Precision+Recall}\]
+\[F_1 = \frac{Precision.Recall}{Precision+Recall}\]
 \end{center}
 \end{column}
 \end{columns}
@@ -646,28 +703,33 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 
 \end{frame}
 
+\begin{frame}\frametitle{Prototype definitions}
+
+\end{frame}
+
+
 \begin{frame}\frametitle{Results of signature vs. best performer classification}
-\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c!{\VRule[2pt]}c|c|c|c|}
-\multicolumn{2}{c}{}&\multicolumn{8}{c}{Performance}\tabularnewline
-\cline{3-10}
-\multicolumn{2}{c|}{}&\multicolumn{4}{c|}{Best Performer}&\multicolumn{4}{c|}{Nearest Neighbor}\tabularnewline
-\cline{3-10}
-\multicolumn{2}{c|}{}&\scriptsize Precision&\scriptsize Recall&\multicolumn{1}{c|}{\scriptsize F-Measure}&\scriptsize Accuracy&\scriptsize Precision&\scriptsize Recall&\scriptsize F-Measure&\scriptsize Accuracy\tabularnewline
-\cline{2-10}
-&POKS&0.564&0.992&0.719&0.871&0.793&0.908&\cellcolor{gray!25}0.847&\cellcolor{gray!25}0.945\tabularnewline
-\cline{2-10}
-&IRT&0.982&0.458&0.625&0.908&0.846&0.867&\cellcolor{gray!25}0.856&\cellcolor{gray!25}0.951\tabularnewline
-\cline{2-10}
-&NMF Conj.&0.943&0.342&0.502&0.887&0.711&0.750&\cellcolor{gray!25}0.730&\cellcolor{gray!25}0.907\tabularnewline
-\cline{2-10}
-&DINA&0.617&0.921&0.739&0.891&0.777&0.696&\cellcolor{gray!25}0.734&\cellcolor{gray!25}0.916\tabularnewline
-\cline{2-10}
-&NMF Add.&0.938&0.875&0.905&0.969&0.946&0.879&\cellcolor{gray!25}0.911&\cellcolor{gray!25}0.971\tabularnewline
-\cline{2-10}
-\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&1&0.929&0.963&0.988&0.996&0.946&\cellcolor{gray!25}0.970&\cellcolor{gray!25}0.990\tabularnewline
-\cline{1-10}
-\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{4}{c|}{0.75\%}&\multicolumn{4}{c|}{\cellcolor{gray!25}0.84\%}\tabularnewline
-\cline{1-10}
+\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c!{\VRule[2pt]}c|c|}
+\multicolumn{2}{c}{}&\multicolumn{4}{c}{Performance}\tabularnewline
+\cline{3-6}
+\multicolumn{2}{c|}{}&\multicolumn{2}{c|}{Best Performer}&\multicolumn{2}{c|}{Signature approach}\tabularnewline
+\cline{3-6}
+\multicolumn{2}{c|}{}&\multicolumn{1}{c|}{\scriptsize F-Measure}&\scriptsize Accuracy&\scriptsize F-Measure&\scriptsize Accuracy\tabularnewline
+\cline{2-6}
+&POKS&0.719&0.871&\cellcolor{gray!25}0.847&\cellcolor{gray!25}0.945\tabularnewline
+\cline{2-6}
+&IRT&0.625&0.908&\cellcolor{gray!25}0.856&\cellcolor{gray!25}0.951\tabularnewline
+\cline{2-6}
+&NMF Conj.&0.502&0.887&\cellcolor{gray!25}0.730&\cellcolor{gray!25}0.907\tabularnewline
+\cline{2-6}
+&DINA&0.734&0.891&\cellcolor{gray!25}0.739&\cellcolor{gray!25}0.916\tabularnewline
+\cline{2-6}
+&NMF Add.&0.905&0.969&\cellcolor{gray!25}0.911&\cellcolor{gray!25}0.971\tabularnewline
+\cline{2-6}
+\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&0.963&0.988&\cellcolor{gray!25}0.970&\cellcolor{gray!25}0.990\tabularnewline
+\cline{1-6}
+\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{2}{c|}{75\%}&\multicolumn{2}{c|}{\cellcolor{gray!25}84\%}\tabularnewline
+\cline{1-6}
 \end{tabular}}
 \begin{itemize}
 \item The F-measure increases when the signature approach is used for classification.\pause
@@ -677,54 +739,97 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 \end{frame}
 
 \section{Conclusion}
+\subsection{Conclusion and discussion}
 \begin{frame}\frametitle{Research questions}
+\vspace{-0.5cm}
+\begin{overprint}
+\onslide<1>
 \begin{enumerate}
 \item \checkmark What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
+\end{enumerate}
 \begin{itemize}
 \item Experiment 1: Predictive performance of models over real and synthetic data sets
+\item In terms of signature pattern : it is unique for each generative model
+\item In terms of data points in the performance vector space : They are data points in this space%data points with same ground truth belong to a specific sub-space
+\item For real data sets, the performances are not better than the expected performance
+\item For synthetic  data, datasets with different ground truths that share some concepts, show a high correlation.
 \end{itemize}
+\onslide<2>
+\begin{enumerate}
+\item \begin{scriptsize}
+\checkmark Predictive performance of models over real and synthetic data sets
+\end{scriptsize} 
 \item \checkmark Is the \textit{performance vector} unique to each synthetic data type (data from the same ground truth model)?
+\end{enumerate}
 \begin{itemize}
 \item Experiment 2: Sensitivity of the Model performance over different data generation parameters
+\item Different parameters can create different points in the performance vector space
+\item There would be a cloud of points for a particular model (Ground truth)
+\item The cloud is not too dispersed
 \end{itemize}
+\onslide<3>
+\begin{enumerate}
+\item \begin{scriptsize}
+\checkmark Predictive performance of models over real and synthetic data sets
+\end{scriptsize} 
+\item \begin{scriptsize}
+\checkmark Sensitivity of the Model performance over different data parameters
+\end{scriptsize}  
 \item \checkmark Can the \textit{performance vector} be used to define a method to reliably identify the ground truth behind the synthetic data?
+\end{enumerate}
 \begin{itemize}
 \item Experiment 3: Model selection based on performance vector classification
+\item A comparison between the target and the prototype signature 
+\item Datasets that share a common source have correlated performance vectors.
 \end{itemize}
+\onslide<4>
+\begin{enumerate}
+\item \begin{scriptsize}
+\checkmark Predictive performance of models over real and synthetic data sets
+\end{scriptsize} 
+\item \begin{scriptsize}
+\checkmark Sensitivity of the Model performance over different data parameters
+\end{scriptsize}  
+\item \begin{scriptsize}
+\checkmark Model selection based on performance vector classification
+\end{scriptsize} 
 \item \checkmark How does the method compare with the standard practice of using the model with the best performance?
+\end{enumerate}
 \begin{itemize}
 \item Experiment 4: Signature vs. best performer classification
+\item The ground truth model does not always correspond to the best performer and our approach provides a more reliable means
+%conclusion
 \end{itemize}
-\end{enumerate}
 
+\end{overprint}
 \end{frame}
 
-\subsection{Conclusion and discussion}
-\begin{frame}\frametitle{Conclusion}
-\begin{itemize}
-\item Model fit of a data set is defined as the similarity between \textit{prototype} and \textit{target} performance vector \pause
-\item The generative model does not always correspond to the best performer and our approach provides a more reliable means \pause
+
+%\begin{frame}\frametitle{Conclusion}
+%\begin{itemize}
+%\item Model fit of a data set is defined as the similarity between \textit{prototype} and \textit{target} performance vector \pause
+%\item The ground truth model does not always correspond to the best performer and our approach provides a more reliable means \pause
 %This means of determining a data set’s ground truth is made possible because the synthetic data sets have very distinct performance patterns, showing sharp differences across models. and uniqueness characteristics
-\item Datasets that share a common source have correlated performance vectors. \pause % Fraction data
-\item It does not seem to substantially extend to data that shares the same domain
-\end{itemize}
-\end{frame}
+%\item Datasets that share a common source have correlated performance vectors. \pause % Fraction data
+%\item It does not seem to substantially extend to data that shares the same domain
+%\end{itemize}
+%\end{frame}
 
-\begin{frame}\frametitle{Conclusion}
-\begin{itemize}
-\item For real data sets, the performances are not better than the expected performance \pause %the conclusion behind that can be either the ground truth is not among the candidate models, or the best performer is not necessarily the ground truth.
-\item For synthetic  data, datasets with different ground truths that share some concepts, show a high correlation. \pause
-\item \textit{performance vector} changes for some data specific parameters but it still shows a high correlation with datasets with the same ground truth. \pause
-\item Best performer may not be the model that is most representative of the ground truth.
-\end{itemize}
-\end{frame}
+%\begin{frame}\frametitle{Conclusion}
+%\begin{itemize}
+%\item For real data sets, the performances are not better than the expected performance \pause %the conclusion behind that can be either the ground truth is not among the candidate models, or the best performer is not necessarily the ground truth.
+%\item For synthetic  data, datasets with different ground truths that share some concepts, show a high correlation. \pause
+%\item \textit{performance vector} changes for some data specific parameters but it still shows a high correlation with datasets with the same ground truth. \pause
+%\item Best performer may not be the model that is most representative of the ground truth.
+%\end{itemize}
+%\end{frame}
 
 \subsection{Future works}
 \begin{frame}\frametitle{Future works}
 \begin{itemize}
-\item Further studies with real and simulated data \pause
+\item to be extend over different models, different domains and more datasets \pause
 \item generalize to dynamic data and skills assessment models \pause
-\item Candidate models and their complexity \pause
+\item Candidate models and their complexity where the data is created with a mixture of models) \pause
 \item Application in other fields of study  
 \end{itemize}
 \end{frame}
