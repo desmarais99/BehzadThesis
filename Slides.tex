@@ -551,12 +551,13 @@ This approach relies on generating synthetic datasets
 \end{frame}
 
 \begin{frame}\frametitle{Prototype definition}
+\small{Target performance vector:} $\mathcal{T}^{(tm)} = Performance.vector(D_c^{(tm)} \in DB)$ where: $D_c^{(tm)}$ is characterized with data parameter condition $c \in DC$ and ground truth $(tm)$  \pause
 \begin{itemize}
-\item Target performance vector : $\mathcal{T}_c^mt = P(D_c^mt \in DB)$ where: \newline $D_c$ is characterized with data parameter condition $c \in DC$  \pause
-\item $\mathcal{N}_c^m$ is a centroid performance prototype of models $m$ with data parameter condition  $c$\pause
-\item $\mathcal{N}_c^m = AVG(\forall P(D_c^m) | D_c^m \in DB)$ \pause%where in our case  $|D| = 10 | D_c^m \in DB$
-\item In this study each centroid performance prototype is the average of 10 performances and $|DC|=24$ \pause
-\item Next slid shows the average of correlation between the target and prototype in all data parameter conditions
+\item Given $c \in DC$ and $m \in \mathcal{M}$ : $D = \{\forall D_i^{(j)} \in DB | i = c , j = m\}$
+\item $\mathcal{N}^m$ is a centroid performance prototype defined for $D_c^{(m)}$\pause
+\item $\mathcal{N}^m = AVG(Performance.vector(D))$ \pause%where in our case  $|D| = 10 | D_c^m \in DB$
+\item Pearson correlation coefficient is used as a measure of similarity between $\mathcal{T}^{(tm)}$ and $\mathcal{N}^m$ \pause
+\item Next slid shows the average of correlation between $\mathcal{T}^{(tm)}$ and $\mathcal{N}^m$ for all data parameter conditions in $DC$
 \end{itemize}
 \end{frame}
 
@@ -703,8 +704,13 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 
 \end{frame}
 
-\begin{frame}\frametitle{Prototype definitions}
-
+\begin{frame}\frametitle{Signature classifier}
+\small{Target performance vector:} $\mathcal{T}^{(tm)} = Performance.vector(D_c^{(tm)} \in DB)$ where: $D_c^{(tm)}$ is characterized with data parameter condition $c \in DC$ and ground truth $(tm)$  \pause
+\begin{itemize}
+\item Given $c \in DC$  : $D = \{\forall D_i^{(j)} \in DB | i = c , j \in \mathcal{M} \}$ \pause
+\item Neighbors of $\mathcal{T}^{(tm)}$ are performance vectors of $D$ \pause
+\item A majority voting among the ground truth of 10 nearest neighbors to $\mathcal{T}^{(tm)}$ defines the estimated ground truth 
+\end{itemize}
 \end{frame}
 
 
