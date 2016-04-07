@@ -539,13 +539,13 @@ This approach relies on generating synthetic datasets
 
 
 
-\begin{frame}\frametitle{Pool of synthetic datasets}
+\begin{frame}\frametitle{Database of synthetic datasets}
 \includegraphics[trim=1cm 17cm 1cm 1cm,scale=0.55]{images/Data-Gen-Break-Down.pdf}
 \begin{overprint}
-\onslide<1> There exists 6 skills assessment models 
-\onslide<2> There exists 6 skills assessment models X 6 data specific parameters 
-\onslide<3> There exists 6 skills assessment models X 6 data specific parameters~X 4 values 
-\onslide<4> There exists 6 skills assessment models X 6 data specific parameters~X 4 values X 10 samples = 1440 samples in the pool ($DB$)
+\onslide<1> \small There exists 6 skills assessment models 
+\onslide<2> \small There exists 6 skills assessment models X 6 data characteristic parameters 
+\onslide<3> \small There exists 6 skills assessment models X 6 data characteristic parameters X 4 values 
+\onslide<4> \small There exists 6 skills assessment models X 6 data characteristic parameters X 4 values X 10 samples = 1440 samples in the Database ($DB$)
 \onslide<5> $|DB| = 1440$ and $|DC| = 24$
 \end{overprint}
 \end{frame}
@@ -554,9 +554,9 @@ This approach relies on generating synthetic datasets
 \small{Target performance vector:} $\mathcal{T}^{(tm)} = Performance.vector(D_c^{(tm)} \in DB)$ where: $D_c^{(tm)}$ is characterized with data parameter condition $c \in DC$ and ground truth $(tm)$  \pause
 \begin{itemize}
 \item Given $c \in DC$ and $m \in \mathcal{M}$ : $D = \{\forall D_i^{(j)} \in DB | i = c , j = m\}$
-\item $\mathcal{N}^m$ is a centroid performance prototype defined for $D_c^{(m)}$\pause
+\item $\mathcal{N}^m$ is a centroid performance prototype defined for model $m$\pause
 \item $\mathcal{N}^m = AVG(Performance.vector(D))$ \pause%where in our case  $|D| = 10 | D_c^m \in DB$
-\item Pearson correlation coefficient is used as a measure of similarity between $\mathcal{T}^{(tm)}$ and $\mathcal{N}^m$ \pause
+\item Pearson correlation coefficient is used as a measure of similarity between $\mathcal{T}^{(tm)}$ and $\mathcal{N}^m$ (for data condition $c$) \pause
 \item Next slid shows the average of correlation between $\mathcal{T}^{(tm)}$ and $\mathcal{N}^m$ for all data parameter conditions in $DC$
 \end{itemize}
 \end{frame}
@@ -564,7 +564,7 @@ This approach relies on generating synthetic datasets
 %Synthetic performance vectors %characteristics
 \begin{frame}\frametitle{Degree of similarity between six synthetic performance vector based on the correlation}
 \resizebox{\columnwidth}{!}{\begin{tabular}{cc|c|c|c|c|c|c|c|}
-&\multicolumn{2}{c}{} & \multicolumn{6}{c}{Synthetic performance vectors} \tabularnewline
+&\multicolumn{2}{c}{} & \multicolumn{6}{c}{Target performance vectors} \tabularnewline
 &\multicolumn{8}{c}{} \tabularnewline
 \cline{4-9} 
 &\multicolumn{2}{c|}{} & POKS & IRT & NMF Conj. & DINA & NMF Add. & DINO\tabularnewline
@@ -596,31 +596,31 @@ This approach relies on generating synthetic datasets
 
 
 \begin{frame}\frametitle{Degree of similarity between six real datasets and the ground truth based on the correlation}
-\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c|c|c|c|c|c|}
+\resizebox{\columnwidth}{!}{\begin{tabular}{cc|c|c|c|c|c|c|c|c|}
 
-\multicolumn{2}{c}{}&\multicolumn{7}{c}{Real Datasets}\tabularnewline   
+\multicolumn{3}{c}{}&\multicolumn{7}{c}{Target performance vectors of Real Datasets}\tabularnewline   
 \multicolumn{9}{c}{}\tabularnewline   
-\cline{6-9}
-\multicolumn{5}{c|}{}&\multicolumn{4}{c|}{Fraction subsets}   \tabularnewline   
-\cline{3-9} 
-\multicolumn{2}{c|}{}   & Vomlel &ECPE &Fraction &1&21&22&23\tabularnewline
-\cline{2-9}
-\cline{2-9}
-&Random & 0.58 &\textbf {0.73} & 0.61   & 0.43 & 0.24 & 0.61 & 0.57 \tabularnewline
-\cline{2-9}
-&IRT & \textbf {0.90} & 0.42 & 0.72   & 0.88 & 0.60 & 0.77 & 0.61 \tabularnewline
-\cline{2-9}
-&DINA & -0.38  & -0.09 &   0.23 &   0.30 & 0.56 & 0.06 & 0.38 \tabularnewline
-\cline{2-9}
-&DINO & 0.34 & 0.15  &  -0.18 &  -0.31 & 0.10 & -0.08 & 0.38 \tabularnewline
-\cline{2-9}
-&POKS & 0.75 &0.40  &  \textbf {0.83}  &  \textbf {0.95} &\textbf {0.70} & \textbf {0.83} & \textbf {0.80}\tabularnewline
-\cline{2-9}
- &NMF Conj. & -0.05 & 0.54  & 0.51   & 0.55  & 0.66 & 0.33 & 0.57\tabularnewline
-\cline{2-9}
-\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Synthetic Datasets\end{sideways}}}&NMF Add. & 0.39 &0.06   & -0.04   & -0.19 & -0.03 & 0.13 & 0.28\tabularnewline
-\cline{2-9}
- \multicolumn{1}{c}{}&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} \tabularnewline
+\cline{7-10}
+\multicolumn{6}{c|}{}&\multicolumn{4}{c|}{Fraction subsets}   \tabularnewline   
+\cline{4-10} 
+\multicolumn{3}{c|}{}   & Vomlel &ECPE &Fraction &1&21&22&23\tabularnewline
+\cline{3-10}
+\cline{3-10}
+&&Random & 0.58 &\textbf {0.73} & 0.61   & 0.43 & 0.24 & 0.61 & 0.57 \tabularnewline
+\cline{3-10}
+&&IRT & \textbf {0.90} & 0.42 & 0.72   & 0.88 & 0.60 & 0.77 & 0.61 \tabularnewline
+\cline{3-10}
+&&DINA & -0.38  & -0.09 &   0.23 &   0.30 & 0.56 & 0.06 & 0.38 \tabularnewline
+\cline{3-10}
+&&DINO & 0.34 & 0.15  &  -0.18 &  -0.31 & 0.10 & -0.08 & 0.38 \tabularnewline
+\cline{3-10}
+&&POKS & 0.75 &0.40  &  \textbf {0.83}  &  \textbf {0.95} &\textbf {0.70} & \textbf {0.83} & \textbf {0.80}\tabularnewline
+\cline{3-10}
+ &&NMF Conj. & -0.05 & 0.54  & 0.51   & 0.55  & 0.66 & 0.33 & 0.57\tabularnewline
+\cline{3-10}
+\multicolumn{1}{c}{\multirow{-7}{*}{\begin{sideways} \small Performance Prototype\end{sideways}}}&\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}of Synthetic Datasets\end{sideways}}}&NMF Add. & 0.39 &0.06   & -0.04   & -0.19 & -0.03 & 0.13 & 0.28\tabularnewline
+\cline{3-10}
+ \multicolumn{2}{c}{}&\multicolumn{1}{c}{} &\multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{}   & \multicolumn{1}{c}{}  & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} & \multicolumn{1}{c}{} \tabularnewline
 \end{tabular}
 }
 \begin{overprint}
@@ -669,7 +669,7 @@ This approach relies on generating synthetic datasets
 \begin{itemize}
 	\item What we did? to evaluate the ability of the Signature approach to identify the ground truth model
 	\item What we want to do? to compare the results of classification based on signature approach with the best performer \small approach.
-	\item Reporting the accuracy of these classification in terms of F1and accuracy measures
+	\item Reporting the accuracy of these classification in terms of F1 and accuracy measures
 \end{itemize}
 \begin{columns}
 \begin{column}{.4\textwidth}
@@ -715,26 +715,27 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 
 
 \begin{frame}\frametitle{Results of signature vs. best performer classification}
-\resizebox{\columnwidth}{!}{\begin{tabular}{c|c|c|c!{\VRule[2pt]}c|c|}
+
+\resizebox{0.8\columnwidth}{2cm}{\begin{tabular}{c|c|c|c!{\VRule[2pt]}c|c|}
 \multicolumn{2}{c}{}&\multicolumn{4}{c}{Performance}\tabularnewline
 \cline{3-6}
 \multicolumn{2}{c|}{}&\multicolumn{2}{c|}{Best Performer}&\multicolumn{2}{c|}{Signature approach}\tabularnewline
 \cline{3-6}
 \multicolumn{2}{c|}{}&\multicolumn{1}{c|}{\scriptsize F-Measure}&\scriptsize Accuracy&\scriptsize F-Measure&\scriptsize Accuracy\tabularnewline
 \cline{2-6}
-&POKS&0.719&0.871&\cellcolor{gray!25}0.847&\cellcolor{gray!25}0.945\tabularnewline
+&POKS&0.719&0.871&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\tabularnewline
 \cline{2-6}
-&IRT&0.625&0.908&\cellcolor{gray!25}0.856&\cellcolor{gray!25}0.951\tabularnewline
+&IRT&0.625&0.908&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\tabularnewline
 \cline{2-6}
-&NMF Conj.&0.502&0.887&\cellcolor{gray!25}0.730&\cellcolor{gray!25}0.907\tabularnewline
+&NMF Conj.&0.502&0.887&\cellcolor{gray!25}0.985&\cellcolor{gray!25}99.5\tabularnewline
 \cline{2-6}
-&DINA&0.734&0.891&\cellcolor{gray!25}0.739&\cellcolor{gray!25}0.916\tabularnewline
+&DINA&0.734&0.891&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
 \cline{2-6}
-&NMF Add.&0.905&0.969&\cellcolor{gray!25}0.911&\cellcolor{gray!25}0.971\tabularnewline
+&NMF Add.&0.905&0.969&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
 \cline{2-6}
 \multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&0.963&0.988&\cellcolor{gray!25}0.970&\cellcolor{gray!25}0.990\tabularnewline
 \cline{1-6}
-\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{2}{c|}{75\%}&\multicolumn{2}{c|}{\cellcolor{gray!25}84\%}\tabularnewline
+\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{2}{c|}{75\%}&\multicolumn{2}{c|}{\cellcolor{gray!25}99\%}\tabularnewline
 \cline{1-6}
 \end{tabular}}
 \begin{itemize}
@@ -835,7 +836,7 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 \begin{itemize}
 \item to be extend over different models, different domains and more datasets \pause
 \item generalize to dynamic data and skills assessment models \pause
-\item Candidate models and their complexity where the data is created with a mixture of models) \pause
+\item Candidate models and their complexity where the data is created with a mixture of models \pause
 \item Application in other fields of study  
 \end{itemize}
 \end{frame}

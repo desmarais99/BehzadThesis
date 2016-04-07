@@ -367,19 +367,19 @@ Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. I
 \cline{2-16}
 \multicolumn{1}{c|}{}& Expected& 0& 0& 0& 0& 0& 0& 0& 0&12& 0& 2& 0& & \tabularnewline
 \cline{2-16}
-\multicolumn{1}{c|}{}& POKS&\cellcolor{gray!25} 238&\cellcolor{gray!25} 218&130&32&21& 12&14& 0&18&13& 1& 0&85&95\tabularnewline
+\multicolumn{1}{c|}{}& POKS&\cellcolor{gray!25} 238&\cellcolor{gray!25} 240&130&1&21& 0&14& 0&18&0& 1& 0&84.7&99.9\tabularnewline
 \cline{2-16}
-\multicolumn{1}{c|}{}& IRT& 2& 20&\cellcolor{gray!25}110&\cellcolor{gray!25}208& 0& 0& 0& 0& 0&15& 0& 3&100&97\tabularnewline
+\multicolumn{1}{c|}{}& IRT& 2& 0&\cellcolor{gray!25}110&\cellcolor{gray!25}239& 0& 0& 0& 0& 0&0& 0& 0&99.8&100\tabularnewline
 \cline{2-16}
-\multicolumn{1}{c|}{}& NMF \scriptsize Conj.& 0& 0& 0& 0&\cellcolor{gray!25}82&\cellcolor{gray!25}180& 5&73& 0& 0& 0& 0&100&94\tabularnewline
+\multicolumn{1}{c|}{}& NMF \scriptsize Conj.& 0& 0& 0& 0&\cellcolor{gray!25}82&\cellcolor{gray!25}236& 5&3& 0& 0& 0& 0&99.6&99.8\tabularnewline
 \cline{2-16}
-\multicolumn{1}{c|}{}& DINA& 0& 0& 0& 0&137&48&\cellcolor{gray!25}221&\cellcolor{gray!25}167& 0& 0& 0& 0&87&96\tabularnewline
+\multicolumn{1}{c|}{}& DINA& 0& 0& 0& 0&137&4&\cellcolor{gray!25}221&\cellcolor{gray!25}237& 0& 0& 0& 0&88.6&99.7\tabularnewline
 \cline{2-16}
-\multicolumn{1}{c|}{}& NMF \scriptsize Add.& 0& 2& 0& 0& 0& 0& 0& 0&\cellcolor{gray!25}210&\cellcolor{gray!25}211& 14&10&99&99\tabularnewline
+\multicolumn{1}{c|}{}& NMF \scriptsize Add.& 0& 0& 0& 0& 0& 0& 0& 0&\cellcolor{gray!25}210&\cellcolor{gray!25}240& 14&0&98.8&100\tabularnewline
 \cline{2-16}
-\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}& DINO& 0& 0& 0& 0& 0& 0& 0& 0& 0& 1&\cellcolor{gray!25}223&\cellcolor{gray!25}227&100&100\tabularnewline
+\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}& DINO& 0& 0& 0& 0& 0& 0& 0& 0& 0& 1&\cellcolor{gray!25}223&\cellcolor{gray!25}240&100&100\tabularnewline
 \cline{1-16}
-\multicolumn{2}{|c!{\VRule[2pt]}}{ Accuracy \scriptsize (\%)} & 99 & 91 & 46 & 87 &34 & 75 & 92 & 70 & 88 & 87 & 93 & 95&\multicolumn{2}{|c}{}\tabularnewline
+\multicolumn{2}{|c!{\VRule[2pt]}}{ Accuracy \scriptsize (\%)} & 99.2 & 100 & 45.8 & 99.6 &34.2 & 98.3 & 92.1 & 98.8 & 87.5 & 100 & 92.9 & 100&\multicolumn{2}{|c}{}\tabularnewline
 \cline{1-14}
 \end{tabular}
 \end{adjustwidth}
@@ -390,9 +390,9 @@ Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. I
 \label{Classification-Conf}
 \end{table}
 
-The accuracy that is reported in the last row of table~\ref{Classification-Conf} is calculated based on $\frac{TP}{240}$ which counts the true positive predictions for each sub set of datasets with the same actual ground truth. The accuracy that is reported in the last two columns of table~\ref{Classification-Conf} shows how faithful the classification method is in the sense of specificity. Therefore it counts true negative values based on $\frac{TN}{1200}$ (1200 is the number of datasets that have ground truth oppose to the target model). In terms of true positive selections there is no benefit between any of these methods even sometimes best performer shows to perform better (specially for DINA and IRT).
+The accuracy that is reported in the last row of table~\ref{Classification-Conf} is calculated based on $\frac{TP}{240}$ which counts the true positive predictions for each sub set of datasets with the same actual ground truth. The accuracy that is reported in the last two columns of table~\ref{Classification-Conf} shows how faithful the classification method is in the sense of specificity. Therefore it counts true negative values based on $\frac{TN}{1200}$ (1200 is the number of datasets that have ground truth oppose to the target model). In both types of accuracies the signature approach shows a higher performance.
 
-Taking into account the false negative and false positive values changes the classification results. Table~\ref{Classification-Acc} shows the accuracy of this classification in terms of precision, recall, $F1$ measure and accuracy ($\frac{TN+TP}{1440}$). Since $F1$ measure combines both precision and recall, then it is a good measure to show the comparison. The third column of each classification method shows that F-measure is increased when the signature approach is used for classification. Also in terms of individual scores per method we also report accuracy of each technique, which considers true positive and true negative values. The last column of table~\ref{Classification-Acc} shows this result. The total accuracy which considers true positive numbers over number of datasets regardless of individual models shows that the best performer approach gets $0.75\%$ and the signature approach gets upto $0.84\%$ of accuracy.
+Taking into account the false negative and false positive values creates a more valuable measure. Table~\ref{Classification-Acc} shows the accuracy of this classification in terms of precision, recall, $F1$ measure and accuracy ($\frac{TN+TP}{1440}$). Since $F1$ measure combines both precision and recall, then it is a good measure to show the comparison. The third column of each classification method shows that F-measure is increased when the signature approach is used for classification. Also in terms of individual scores per method we also report accuracy of each technique, which considers true positive and true negative values. The last column of table~\ref{Classification-Acc} shows this result. The total accuracy which considers true positive numbers over number of datasets regardless of individual models shows that the best performer approach gets $0.75\%$ and the signature approach gets upto $0.99\%$ of accuracy.
 
 
 \begin{table}[h]
@@ -405,17 +405,17 @@ Taking into account the false negative and false positive values changes the cla
 \cline{3-10}
 \multicolumn{2}{c|}{}&\scriptsize Precision&\scriptsize Recall&\multicolumn{1}{c|}{\scriptsize F-Measure}&\scriptsize Accuracy&\scriptsize Precision&\scriptsize Recall&\scriptsize F-Measure&\scriptsize Accuracy\tabularnewline
 \cline{2-10}
-&POKS&0.564&0.992&0.719&0.871&0.793&0.908&\cellcolor{gray!25}0.847&\cellcolor{gray!25}0.945\tabularnewline
+&POKS&0.564&0.992&0.719&87.1&0.996&1&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\tabularnewline
 \cline{2-10}
-&IRT&0.982&0.458&0.625&0.908&0.846&0.867&\cellcolor{gray!25}0.856&\cellcolor{gray!25}0.951\tabularnewline
+&IRT&0.982&0.458&0.625&0.908&1&0.996&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\tabularnewline
 \cline{2-10}
-&NMF Conj.&0.943&0.342&0.502&0.887&0.711&0.750&\cellcolor{gray!25}0.730&\cellcolor{gray!25}0.907\tabularnewline
+&NMF Conj.&0.943&0.342&0.502&0.887&0.987&0.983&\cellcolor{gray!25}0.985&\cellcolor{gray!25}99.5\tabularnewline
 \cline{2-10}
-&DINA&0.617&0.921&0.739&0.891&0.777&0.696&\cellcolor{gray!25}0.734&\cellcolor{gray!25}0.916\tabularnewline
+&DINA&0.617&0.921&0.739&0.891&0.983&0.988&\cellcolor{gray!25}0.985&\cellcolor{gray!25}99.5\tabularnewline
 \cline{2-10}
-&NMF Add.&0.938&0.875&0.905&0.969&0.946&0.879&\cellcolor{gray!25}0.911&\cellcolor{gray!25}0.971\tabularnewline
+&NMF Add.&0.938&0.875&0.905&0.969&1&1&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
 \cline{2-10}
-\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&1&0.929&0.963&0.988&0.996&0.946&\cellcolor{gray!25}0.970&\cellcolor{gray!25}0.990\tabularnewline
+\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&1&0.929&0.963&0.988&1&1&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
 \cline{1-10}
 \multicolumn{2}{|c|}{Total accuracy}&\multicolumn{4}{c|}{0.75\%}&\multicolumn{4}{c|}{\cellcolor{gray!25}0.84\%}\tabularnewline
 \cline{1-10}
