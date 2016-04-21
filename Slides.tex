@@ -262,13 +262,13 @@ i_{4}
 	      \[\begin{array}{l|c}
 	      Model & Performace\\
 	      \cline{1-2}
-			Expected & 0.72\%\\
-			POKS & 0.80\%\\
-			IRT & 0.74\%\\
-			NMF.Conj & 0.94\%\\
-			Dina & 0.99\%\\
-			NMF.Add & 0.60\%\\
-			Dino & 0.65\%
+			Expected & 72\%\\
+			POKS & 80\%\\
+			IRT & 74\%\\
+			NMF.Conj & 94\%\\
+			Dina & 99\%\\
+			NMF.Add & 60\%\\
+			Dino & 65\%
 			\end{array}
 			\]
 	      \end{column}
@@ -287,7 +287,7 @@ i_{4}
 \resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccccccc}
  \cline{1-8}
-  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }} &\multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{white}{Target}}}} \\
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Performance prototype }} &\multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{white}{Target}}}} \\
   \cline{2-8}
   & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{L.Conj.}} & \multicolumn{1}{c}{{L.Comp.}} &\\ 
  \cline{1-8}
@@ -310,7 +310,7 @@ The diagonal generally displays the best performance %the diagonal (in bold face
 \resizebox{\columnwidth}{!}{
 \begin{tabular}{lcccccccc}
 \cline{1-9}
-  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{red}{Target}}}}\\
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Performance prototype }} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{red}{Target}}}}\\
   \cline{2-8}
   & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{L.Conj.}} & \multicolumn{1}{c}{{L.Comp.}} &\\ 
 \cline{1-9}
@@ -624,7 +624,7 @@ This approach relies on generating synthetic datasets
 \end{tabular}
 }
 \begin{overprint}
-	  \onslide<1> The centroid performance vector of each model is the average of performance vectors of 10 generated datasets
+	  \onslide<1> The centroid performance prototype of each model is the average of performance vectors of 10 generated datasets
       \onslide<2> Vomlel dataset shows a high correlation with IRT model
       \onslide<3> Fraction with its subset datasets show similarity with POKS model. 
       \onslide<4> As expected, ECPE has the highest correlation with random generated dataset. 
@@ -723,17 +723,17 @@ value& \multicolumn{1}{c|}{Negative} &FP&TN\tabularnewline
 \cline{3-6}
 \multicolumn{2}{c|}{}&\multicolumn{1}{c|}{\scriptsize F-Measure}&\scriptsize Accuracy&\scriptsize F-Measure&\scriptsize Accuracy\tabularnewline
 \cline{2-6}
-&POKS&0.719&0.871&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\tabularnewline
+&POKS&0.719&87.1\%&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\%\tabularnewline
 \cline{2-6}
-&IRT&0.625&0.908&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\tabularnewline
+&IRT&0.625&90.8\%&\cellcolor{gray!25}0.998&\cellcolor{gray!25}99.9\%\tabularnewline
 \cline{2-6}
-&NMF Conj.&0.502&0.887&\cellcolor{gray!25}0.985&\cellcolor{gray!25}99.5\tabularnewline
+&NMF Conj.&0.502&88.7\%&\cellcolor{gray!25}0.985&\cellcolor{gray!25}99.5\%\tabularnewline
 \cline{2-6}
-&DINA&0.734&0.891&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
+&DINA&0.734&89.1\%&\cellcolor{gray!25}1&\cellcolor{gray!25}100\%\tabularnewline
 \cline{2-6}
-&NMF Add.&0.905&0.969&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
+&NMF Add.&0.905&96.9\%&\cellcolor{gray!25}1&\cellcolor{gray!25}100\%\tabularnewline
 \cline{2-6}
-\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&0.963&0.988&\cellcolor{gray!25}0.970&\cellcolor{gray!25}0.990\tabularnewline
+\multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&0.963&98.8\%&\cellcolor{gray!25}0.970&\cellcolor{gray!25}99\%\tabularnewline
 \cline{1-6}
 \multicolumn{2}{|c|}{Total accuracy}&\multicolumn{2}{c|}{75\%}&\multicolumn{2}{c|}{\cellcolor{gray!25}99\%}\tabularnewline
 \cline{1-6}

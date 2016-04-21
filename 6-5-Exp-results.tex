@@ -2,17 +2,17 @@
 
 Chapter \ref{sec:Approach} introduced four experiments that each addressed a research questions of this thesis. In adddition to synthetic datasets, they require real datasets. In this chapter we describe real and synthetic datasets to examine the hypotheses and discuss the results of each experiment.
 
-\section{Data sets}
+\section{Datasets}
 
-In experiment 1 we want to extract the predictive \textit{performance vector} of models over real and synthetic data sets. The performance of the models is assessed over a total of 14~data sets, 7~of which are synthetic, and 7~are real data. They are listed in table~\ref{tabl1}, along with the number of skills of their Q-matrix, their number of items, the number of the student respondents, and the average score. Table~\ref{tabl1} also reports the Q-matrix used for each dataset. As can be seen, some synthetic data sets share their Q-matrix with real data sets. This sharing allows greater similarity between the synthetic data and a real data counterpart that shares a Q-matrix. Other parameters used to create the synthetic data sets were also obtained from real data sets with the same intent of allowing better comparison. Chapter \ref{sec:Syn} shows details of generating each synthetic dataset.
+In experiment 1 we want to extract the predictive \textit{performance vector} of models over real and synthetic datasets. The performance of the models is assessed over a total of 14~datasets, 7~of which are synthetic, and 7~are real data. They are listed in table~\ref{tabl1}, along with the number of skills of their Q-matrix, their number of items, the number of the student respondents, and the average score. Table~\ref{tabl1} also reports the Q-matrix used for each dataset. As can be seen, some synthetic datasets share their Q-matrix with real datasets. This sharing allows greater similarity between the synthetic data and a real data counterpart that shares a Q-matrix. Other parameters used to create the synthetic datasets were also obtained from real datasets with the same intent of allowing better comparison. Chapter \ref{sec:Syn} shows details of generating each synthetic dataset.
 
-Of the 7~real data sets, only three are independent. The other~4 are variations of a well known data set in fraction algebra from Tatsuoka's work \citep{tatsuoka1984analysis}. They consist in subsets of questions and variations of the Q-matrix. These variants allow us to explore the effect of different models (Q-matrices) over the same data source.
+Of the 7~real datasets, only three are independent. The other~4 are variations of a well known dataset in fraction algebra from Tatsuoka's work \citep{tatsuoka1984analysis}. They consist in subsets of questions and variations of the Q-matrix. These variants allow us to explore the effect of different models (Q-matrices) over the same data source.
 
 The Vomlel data was obtained from \citep{vomlel:2004} and is also on the topic of fraction algebra. The Q-matrix for this data is derived from the Bayesian Network defined over the 20~item test by experts.
 
-The ECPE data (Examination for the Certificate of Proficiency in English) is an English as a foreign language examination. It is recognized in several countries as a test of advanced proficiency in English and used by a number of universities.
+The ECPE data (Examination for the Certificate of Proficiency in English) is an English as a foreign language examination. It is recognized in several countries as a test of advanced proficiency in English and used by large number of universities.
 
-These real data sets were obtained from different sources and are freely available from the CDM \citep{Robitzsch2012} and NPCD ({\url{http://cran.r-project.org/web/packages/NPCD/}}) R packages. The Q-matrices of the real data sets were made by experts.
+These real datasets were obtained from different sources and are freely available from the CDM \citep{Robitzsch2012} and NPCD ({\url{http://cran.r-project.org/web/packages/NPCD/}}) R packages. The Q-matrices of the real datasets were made by experts.
 
 Note that we use these datasets for experiment 3 which estimates a ground truth model for a dataset based on \textit{performance vector} classification.
 
@@ -30,7 +30,7 @@ Note that we use these datasets for experiment 3 which estimates a ground truth 
 \hline
 
 %\rowcolor{\color[rgb]{.8,.8,.8}}
-\multirow{2}{*}{Data set} & \multicolumn{3}{c|}{Number of} & {\parbox{6ex}{\center Mean\\Score}} & \multirow{2}{*}{Q-matrix}\tabularnewline
+\multirow{2}{*}{dataset} & \multicolumn{3}{c|}{Number of} & {\parbox{6ex}{\center Mean\\Score}} & \multirow{2}{*}{Q-matrix}\tabularnewline
 \cline{2-4} 
 %\rowcolor{\color[rgb]{.8,.8,.8}}
  & Skills & Items & Students &  & \tabularnewline
@@ -83,23 +83,23 @@ Note that we use these datasets for experiment 3 which estimates a ground truth 
 \label{tabl1}
 \end{table}
 
-The synthetic data sets are generated from each skills assessment model, with an effort to fit the parameters as closely as possible to a real data counterpart that shares the same Q-matrix. 
+The synthetic datasets are generated from each skills assessment model, with an effort to fit the parameters as closely as possible to a real data counterpart that shares the same Q-matrix. 
 
-For POKS, the structure was obtained from the Fraction data set and the conditional probabilities were generated stochastically, but in accordance with the semantic constraints of these structures and to obtain an average success rate of 0.5.
+For POKS, the structure was obtained from the Fraction dataset and the conditional probabilities were generated stochastically, but in accordance with the semantic constraints of these structures and to obtain an average success rate of 0.5.
 
-For IRT, the student ability distributions was obtained from the Fraction data set, and the item difficulty was set to reasonable values: averaging to 1 and following a Poisson distribution that kept most values between 0.5 and 2 (done by generating random numbers from a Poisson distribution with lambda parameter set to 10 and dividing by 10). 
+For IRT, the student ability distributions was obtained from the Fraction dataset, and the item difficulty was set to reasonable values: averaging to 1 and following a Poisson distribution that kept most values between 0.5 and 2 (done by generating random numbers from a Poisson distribution with lambda parameter set to 10 and dividing by 10). 
 
 The synthetic datasets from linear and Cognitive Diagnosis models were generated by taking a Q-matrix of 7~skills that contains all possible combinations of 1 and 2~skills, which gives a total of 28~combinations and therefore the same number of items. For skills mastery we set $\alpha_I$, $\beta_I$, $\alpha_S$ and $\beta_S$ parameters equal to $1.5$ to avoid high or low entropy for student and item variance. Skills space for DINA/DINO models considers all possible combination of skills with same probability of appearance in the skills mastery matrix. 
 The synthetic datasets with linear model ground truths do not have any noise factor where \textit{slip} and \textit{guess} values of $0.1$ and $0.2$ respectively were set for synthetic data with DINA and DINO models.
 
-Note that the first 3~models (Expected, IRT, POKS) do not rely on any Q-matrix neither for the data generation process nor for learning phase, but the DINO/DINA and matrix factorization assessment models still require one during the learning phase. For example a synthetic data with IRT model does not accompany any Q-matrix to preform experiment 1 which is assessing predictive \textit{performance vector} of models but DINA requires one in the learning phase of this experiment. To define these Q-matrices (denoted~$\mathbf{Q}_{0x}$ in table~\ref{tabl1}), a wrapper method was used to first determine the number of skills according to \citet{Beheshti2012Numbers}, then a Q-matrix was derived with the deterministic ALS algorithm (see \citealp{Desmarais2013aied}, for more details on ALS technique), starting with an initial random Q-matrix.
+Note that the first 3~models (Expected, IRT, POKS) do not rely on any Q-matrix neither for the data generation process nor for learning phase, but the DINO/DINA and matrix factorization assessment models still require one during the learning phase. For example a synthetic data with IRT model does not accompany any Q-matrix to perform experiment 1 which is assessing predictive \textit{performance vector} of models but DINA requires one in the learning phase of this experiment. To define these Q-matrices (denoted~$\mathbf{Q}_{0x}$ in table~\ref{tabl1}), a wrapper method was used to first determine the number of skills according to \citet{Beheshti2012Numbers}, then a Q-matrix was derived with the deterministic ALS algorithm (see \citealp{Desmarais2013aied}, for more details on ALS technique), starting with an initial random Q-matrix.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results of Experiment 1: Predictive performance of models over real and synthetic datasets} \label{secSyn}
 
-There are two possibilities for visualization of the predictive performance of seven models over a dataset, Figure \ref{Fig:Predictive-Preformace_rep} shows these two representations of the same results data. We used both of them in this thesis; whichever is deemed more appropriate to ease understanding. Figure \ref{Predictive-Preformace_Sig} shows the signature performance in terms of percent accuracy of seven models over a dataset. Figure \ref{Predictive-Preformace_Base} centers the performances with respect to the accuracy of the \textit{expected} model, which serves as a baseline. When a model performs below that performance, it can be considered a relatively weak performer since the expected value is simply the combined student and item mean.
+There are two possibilities for visualization of the predictive performance of seven models over a dataset. Figure \ref{Fig:Predictive-Preformace_rep} shows these two representations of the same results data. We used both of them in this thesis; whichever is deemed more appropriate to ease understanding. Figure \ref{Predictive-Preformace_Sig} shows the signature performance in terms of percent accuracy of seven models over a dataset. Figure \ref{Predictive-Preformace_Base} centers the performances with respect to the accuracy of the \textit{expected} model, which serves as a baseline. When a model performs below that performance, it can be considered a relatively weak performer since the expected value is simply the combined student and item mean.
 
 \begin{figure}[h]
 \centering
@@ -117,35 +117,35 @@ There are two possibilities for visualization of the predictive performance of s
 \begin{figure}
 \centering
 \includegraphics[clip=true,width=.9\textwidth]{Syn.pdf}
-\caption{Item outcome prediction accuracy results of {\textbf{synthetic data sets}}}
+\caption{Item outcome prediction accuracy results of {\textbf{synthetic datasets}}}
 \label{fig1}
 
 {\includegraphics[clip=true,width=.9\textwidth]{Real.pdf}}
-\caption{Item outcome prediction accuracy results of {\textbf{real data sets}}. Note that the y-scale is different than the synthetic data set.}
+\caption{Item outcome prediction accuracy results of {\textbf{real datasets}}. Note that the y-scale is different than the synthetic dataset.}
 \label{fig2}
 \end{figure}
 
 
-Figures~\ref{fig1} and~\ref{fig2} show the performance of each model over the synthetic and real data sets described in table~\ref{tabl1}. Note that the y-scale of the synthetic data is double the one of the real data sets, and therefore the differences in performance for the synthetic datasets are much wider. An error bar of 95\% confidence interval is reported, computed over 10 simulation runs. A dataset of random data is also reported for a~$0.75$ average success rate. As mentioned before, we used different number of observed items in this study consequently this factor affects the number of items to predict. For more details on the effect of this parameter on the predictive performance we refer the reader to section \ref{Exp1:NO}.
+Figures~\ref{fig1} and~\ref{fig2} show the performance of each model over the synthetic and real datasets described in table~\ref{tabl1}. Note that the y-scale of the synthetic data is double the one of the real datasets, and therefore the differences in performance for the synthetic datasets are much wider. An error bar of 95\% confidence interval is reported, computed over 10 simulation runs. A dataset of random data is also reported for a~$0.75$ average success rate. As mentioned before, we used different number of observed items in this study. Consequently this factor affects the number of items to predict. For more details on the effect of this parameter on the predictive performance we refer the reader to section \ref{Exp1:NO}.
 
 
 \subsection{Discussion}
 
-For the synthetic data sets, as expected, when the generative model behind the data set is the same as the skills assessment technique, the corresponding technique's performance is the best, or close to the best. And this performance is also always above the expected value performance, except for the random data set where no model can do any different than the expected value, which is what we would expect.
+For the synthetic datasets, as expected, when the generative model behind the dataset is the same as the skills assessment technique, the corresponding technique's performance is the best, or close to the best. And this performance is also always above the expected value performance, except for the random dataset where no model can do any different than the expected value, which is what we would expect.
 
 Three models reach performances that are much higher than the baseline, in the range of $20-30$\% (DINO, Linear Conjunctive, and DINA), whereas for the three other models the gain is closer to 5\% (Linear additive, POKS, and IRT).
 
-An important observation is that the pattern of relative differences of performances across techniques varies considerably and is unique to each data set: no two data sets have the same pattern of \textit{performance vector} across models. The capacity of recognizing a data set's true model relies on this uniqueness characteristic.
+An important observation is that the pattern of relative differences of performances across techniques varies considerably and is unique to each dataset: no two datasets have the same pattern of \textit{performance vector} across models. The capacity of recognizing a dataset's true model relies on this uniqueness characteristic.
 
-For the real data sets, the \textit{performance vector} among the techniques shows smaller discrepancies and is closer to the baseline. 
+For the real datasets, the \textit{performance vector} among the techniques shows smaller discrepancies and is closer to the baseline. 
 
-An interesting finding is that in most cases, the best performer is close to the baseline. Moreover, a majority of models do worst than the baseline on most of data sets. This is particularly surprising for the DINA model, which is a relatively well accepted model in psychometrics and student modeling. Even the highly used IRT model is not showing a better performance than the \textit{expected} model. It is still indicative of a weakness of the models when we compare these results with the synthetic data results where the underlying model often reaches 20\% above the \textit{expected} baseline. Also noteworthy to notice is that for the POKS and IRT synthetic data, the highest performances are notably lower than for the other models. We will study in a later experiment the performances when datasets have fewer items.
+An interesting finding is that in most cases, the best performer is close to the baseline. Moreover, a majority of models do worst than the baseline on most of datasets. This is particularly surprising for the DINA model, which is a relatively well accepted model in psychometrics and student modeling. Even the highly used IRT model is not showing a better performance than the \textit{expected} model. It is still indicative of a weakness of the models when we compare these results with the synthetic data results where the underlying model often reaches 20\% above the \textit{expected} baseline. Also noteworthy to notice is that for the POKS and IRT synthetic data, the highest performances are notably lower than for the other models. We will study in a later experiment the performances when datasets have fewer items.
 
-The results from the subsets of the Fraction data show that the pattern of the Fraction performance data set repeats over Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions. However, it differs substantially from Fraction-2/3 for the NMF conjunctive performance ,which reaches that of the NMF additive one and also DINA reaches DINO. This is readily explained by the fact that the Q-matrix of this data set has the property of assigning a single skill to each item, in which case the two matrix factorization techniques or even cognitive diagnosis models become equivalent. But aside from the Fraction-2/3 case, this similarity among Fraction data set and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the \textit{performance signature} remains constant across these data sets.
+The results from the subsets of the Fraction data show that the pattern of the Fraction performance dataset repeats over Fraction-1, Fraction-2/1 and Fraction-2/2, in spite of the different number of skills and different subsets of questions. However, it differs substantially from Fraction-2/3 for the NMF conjunctive performance ,which reaches that of the NMF additive one and also DINA reaches DINO. This is readily explained by the fact that the Q-matrix of this dataset has the property of assigning a single skill to each item, in which case the two matrix factorization techniques or even cognitive diagnosis models become equivalent. But aside from the Fraction-2/3 case, this similarity among Fraction dataset and its derivative suggests that in spite of the model differences (different Q-matrices and item subsets), the \textit{performance signature} remains constant across these datasets.
 
 %%%%QUESTION???
 
-Finally, we note that none of the real data sets show the large the amplitude and the differences found in the synthetic data sets models (the scale of figure~\ref{fig1} is about 4 times that of figure~\ref{fig2}). Among the signatures of synthetic datasets, IRT's ``signature'' resembles the Vomlel data, although the performance difference with the majority class is substantially higher for the synthetic data than the Vomlel data, suggesting that the real data is yet not a perfect fit to this model. Details of this conclusion are given in the next section.
+Finally, we note that none of the real datasets show the large the amplitude and the differences found in the synthetic datasets models (the scale of figure~\ref{fig1} is about 4 times that of figure~\ref{fig2}). Among the signatures of synthetic datasets, IRT's ``signature'' resembles the Vomlel data, although the performance difference with the majority class is substantially higher for the synthetic data than the Vomlel data, suggesting that the real data is yet not a perfect fit to this model. Details of this conclusion are given in the next section.
 
 \section{Results of Experiment 2: Sensitivity of the Model performance over different data generation parameters}
 \label{Sensitive}
@@ -207,38 +207,38 @@ Figure~\ref{figSampleSize} shows the results of extracting performance signature
   \centering
 
     \includegraphics[scale=0.58]{SampleSize.pdf}
-     \caption{Variation of \textbf{Sample Size} Over synthetic data sets}
+     \caption{Variation of \textbf{Sample Size} Over synthetic datasets}
 \label{figSampleSize}
 \end{figure}
 
 
-The other parameter is the number of items as a data specific parameter to generate synthetic data. Figure~\ref{figNumberofItems} shows how the \textit{performance signature} has been changed on different parameter values. For three types of synthetic data (IRT, POKS, Linear additive) the pattern of the signature does not change across this parameter but for the others ( Linear Conj. DINA, DINO) it shifts down once the number of items degrades. This result highlights the role of this parameter in the assessment of \textit{performance vector}. It also shows that even for synthetic data the ground truth should not necessarily be close to 100\%.
+The other parameter is the number of items as a data specific parameter to generate synthetic data. Figure~\ref{figNumberofItems} shows how the \textit{performance signature} has been changed on different parameter values. For three types of synthetic data (IRT, POKS, Linear additive) the pattern of the signature does not change across this parameter but for the others (Linear Conj. DINA, DINO) it shifts down once the number of items decreases. This result highlights the role of this parameter in the assessment of \textit{performance vector}. It also shows that even for synthetic data the ground truth should not necessarily be close to 100\%.
 
 \begin{figure}
   \centering
     \includegraphics[scale=0.58]{numberofitems.pdf}
-\caption{Variation of \textbf{Number of items} Over synthetic data sets}
+\caption{Variation of \textbf{Number of items} Over synthetic datasets}
 \label{figNumberofItems}
 \end{figure}
 
 \begin{figure}
   \centering
     \includegraphics[scale=0.58]{numberofskills.pdf}
-\caption{Variation of \textbf{Number of skills} Over synthetic data sets}
+\caption{Variation of \textbf{Number of skills} Over synthetic datasets}
 \label{figSkills}
 \end{figure}
 
 \begin{figure}
   \centering
     \includegraphics[scale=0.58]{ItemVariance.pdf}
-\caption{Variation of \textbf{Item Variance} Over synthetic data sets}
+\caption{Variation of \textbf{Item Variance} Over synthetic datasets}
 \label{figitemVar}
 \end{figure}
 
 \begin{figure}
   \centering
     \includegraphics[scale=0.58]{StudentVariance.pdf}
-\caption{Variation of \textbf{Student variance} Over synthetic data sets}
+\caption{Variation of \textbf{Student variance} Over synthetic datasets}
 \label{figStudentVar}
 \end{figure}
 
@@ -246,14 +246,14 @@ The other parameter is the number of items as a data specific parameter to gener
 \begin{figure}
   \centering
     \includegraphics[scale=0.58]{Successrate.pdf}
-\caption{Variation of \textbf{Success Rate} Over synthetic data sets}
+\caption{Variation of \textbf{Success Rate} Over synthetic datasets}
 \label{figSucceessRate}
 \end{figure}
 
-The next parameter is the number of skills, which is a latent parameter. The two first models (IRT and POKS) do not rely on Q-matrix for data generation. In order to calculate the performance vector of such a dataset(especially for those models in this vector that rely on a Q-matrix such as NMF Models and DINA/DINO), one should determine the number of the number of skills which is the variable of this experiment. The remaining models ( NMF models, DINA and DINO) require a Q-matrix. Section \ref{Q-MatrixObtain} and \ref{Syn:DINAO} describe generation of a Q-matrix for these models in details. Note that, the minimum and maximum number of skills per item in a Q-matrix are $1$ and $5$ respectively.
+The next parameter is the number of skills, which is a latent parameter. The two first models (IRT and POKS) do not rely on Q-matrix for data generation. In order to calculate the performance vector of such a dataset (especially for those models in this vector that rely on a Q-matrix such as NMF Models and DINA/DINO), one should determine the number of skills which is the variable of this experiment. The remaining models (NMF models, DINA and DINO) require a Q-matrix. Section \ref{Q-MatrixObtain} and \ref{Syn:DINAO} describe the generation of a Q-matrix for these models in details. Note that ,the minimum and maximum numbers of skills per item in a Q-matrix are $1$ and $5$ respectively.
 
 
-Figure~\ref{figSkills} shows the results of running experiment 1 on datasets with different number of latent skills. Synthetic data based on IRT and POKS can not be affected by this parameter because they are either zero or one skill models. However in the learning phase of these datasets this parameter is required. The signature pattern did not change substantially for these datasets except for linear conjunctive model. For other datasets the signature pattern stays stable while it slightly shifts upward on the correct prediction axis as the number of skills degrades. Increasing the number of skills while the number of item is constant can resemble the single skill modeling such as IRT and POKS. 
+Figure~\ref{figSkills} shows the results of running experiment 1 on datasets with different values for latent skills. Synthetic data based on IRT and POKS cannot be affected by this parameter because they are either zero or one skill models. However in the learning phase of these datasets this parameter is required. The signature pattern did not change substantially for these datasets except for linear conjunctive model. For other datasets the signature pattern stays stable while it slightly shifts upward on the correct prediction axis as the number of skills degrades. Increasing the number of skills while the number of item is constant can resemble the single skill modeling such as IRT and POKS. 
 
 Figure~\ref{figitemVar} shows the same experiment across datasets with different item variance. The item variance was reflected as the item difficulty for IRT and initial odds for POKS. Clearly the pattern stays the same for different values except for few minor changes. Although the set of performance values shifts across the correct prediction axis but the pattern stays stable.
 
@@ -263,7 +263,7 @@ Finally, we did a last experiment on datasets with different success rates. For 
  
 The third experiment addresses the question of identifying the ground thruth model using \textit{performance signatures}. As explained before, the uniqueness characteristic of synthetic data signatures offers a means to identify the ground truth based on the similarity between the \textit{performance prototype} from a synthetic data and the \textit{target performance vector} from the real data (See \ref{Vocabl} for the definition of \textit{performance prototype} and \textit{target performance vector}). In this experiment we used the measure form section \ref{Sigapproach-measure} as a degree of similarity between these vectors.
 
-In this experiment, a number of synthetic data sets for each model are created using different parameters. There are $6$ data specific parameters (namely : Number of items, students, skills, average success rate, item and student score variance) and $4$ different values for each parameter. In total, this makes $24$ combinations of unique parameter-value pairs. We will call a combination a \textbf{group}. For each each group, we generate $10$ datasets with different seeding point for each skills assessment ground truths. In total, $240$ samples are generated for each model. Figure \ref{figData-Gen-Break-Down} shows this hierarchy. Note that there exists 6 models in the first level and the range of values that are used in the third level are given in table \ref{fig:param}.
+In this experiment, a number of synthetic datasets for each model are created using different parameters. There are $6$ data specific parameters (namely : Number of items, students, skills, average success rate, item and student score variance) and $4$ different values for each parameter. In total, this makes $24$ combinations of unique parameter-value pairs. We will call a combination a \textbf{group}. For each each group, we generate $10$ datasets with different seeding point for each skills assessment ground truths. In total, $240$ samples are generated for each model. Figure \ref{figData-Gen-Break-Down} shows this hierarchy. Note that there exists 6 models in the first level and the range of values that are used in the third level are given in table \ref{fig:param}.
 
  \begin{figure}[h]
   \centering
@@ -277,14 +277,14 @@ The most important condition of signature model selection approach is to compare
 
 \subsection{Results}
 
-We evaluate the value of the correlation between \textit{performance vectors} as an indicator of model fit (the calculation of this experiment is given in details in section \ref{Sigapproach-measure}). The diagonal of table~\ref{tablSyn} shows the correlation between the \textit{performance vectors} of the model that was used to create the synthetic data. As expected, it shows high correlations because it compares the same model generated datasets. On the other hand some models such as IRT and POKS also show a high correlation since they are not using multi-skills models. Those models that share concepts such as DINA and NMF conjunctive also show a high correlation comparing to other models because they are linear models, which deal with conjunctive model of Q-matrix. DINO and NMF additive has almost a high correlation but since the additive model is slightly different from the disjunctive model then they are less correlated.
+We evaluate the value of the correlation between \textit{target performance vector} and each of \textit{performance prototype vectors} of synthetic datasets as an indicator of model fit (the calculation of this experiment is given in details in section \ref{Sigapproach-measure}). The diagonal of table~\ref{tablSyn} shows the correlation between the \textit{performance vectors} of the model that was used to create the synthetic data. As expected, it shows high correlations because it compares the same model generated datasets. On the other hand some models such as IRT and POKS also show a high correlation since they are not using multi-skills models. Those models that share concepts such as DINA and NMF conjunctive also show a high correlation comparing to other models because they are linear models, which deal with conjunctive model of Q-matrix. DINO and NMF additive has almost a high correlation but since the additive model is slightly different from the disjunctive model then they are less correlated.
 
 In general, correlation similarity provides a very good measure of model fit, although models that have strong similarities show close values that could lead to misrecognition among them, which is to be expected.
 
 \begin{table}[h]
 \center
 \begin{tabular}{c|c|c|c|c|c|c|c|}
-\multicolumn{2}{c}{} & \multicolumn{6}{c}{Synthetic Datasets} \tabularnewline
+\multicolumn{2}{c}{} & \multicolumn{6}{c}{Target performance vectors} \tabularnewline
 \multicolumn{8}{c}{} \tabularnewline
 \cline{3-8} 
 \multicolumn{2}{c|}{} & POKS & IRT & NMF Conj. & DINA & NMF Add. & DINO\tabularnewline
@@ -347,7 +347,7 @@ Table~\ref{tablSynReal} shows the correlation of target \textit{performance vect
 
 Having shown that the correlation similarity between \textit{performance vectors} is a good indicator of model fit for synthetic data (see Table~\ref{tablSyn}), we now move to the final experiment to evaluate the ability of the approach to identify the ground truth model over datasets with different data specific parameters and compare the results with the simple best performer approach.
 
-Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. In total, there exists 1440~datasets where each model corresponds to 240 dataset (see section \ref{Classification} for more details on these datasets). The gray cells in table~\ref{Classification-Conf} show the true positive values and other values in each column represent the false positive predictions for a group of datasets.The values in each row shows the number of false negative predictions for each model. The confusion is mostly between those techniques that share same concepts specially between NMF Conjunctive and DINA model where we use conjunctive Q-matrices. 
+Table~\ref{Classification-Conf} shows the confusion matrix of this experiment. In total, there exists 1440~datasets where each model corresponds to 240 dataset (see section \ref{Classification} for more details on these datasets). The gray cells in table~\ref{Classification-Conf} show the true positive values and other values in each column represent the false positive predictions for a group of datasets. The values in each row shows the number of false negative predictions for each model. The confusion is mostly between those techniques that share same concepts specially between NMF Conjunctive and DINA model where we use conjunctive Q-matrices. 
 
 \begin{table}[h]
 \center
@@ -417,7 +417,7 @@ Taking into account the false negative and false positive values creates a more 
 \cline{2-10}
 \multicolumn{1}{c|}{\multirow{-7}{*}{\begin{sideways}Models\end{sideways}}}&DINO&1&0.929&0.963&0.988&1&1&\cellcolor{gray!25}1&\cellcolor{gray!25}100\tabularnewline
 \cline{1-10}
-\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{4}{c|}{0.75\%}&\multicolumn{4}{c|}{\cellcolor{gray!25}0.84\%}\tabularnewline
+\multicolumn{2}{|c|}{Total accuracy}&\multicolumn{4}{c|}{0.75\%}&\multicolumn{4}{c|}{\cellcolor{gray!25}0.99\%}\tabularnewline
 \cline{1-10}
 \end{tabular}
 \caption{Accuracy of best performer and nearest neighbor classification methods }

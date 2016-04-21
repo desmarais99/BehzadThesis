@@ -3,7 +3,7 @@
 A large body of methods have been developed for student modeling. They are used to represent and assess student skills and they are a fundamental part of intelligent learning environments \citep{Desmarais2011}. These models have been proposed both for dynamic performance data, where a time dimension is involved and where a learning process occurs (see for eg. Bayesian Knowledge Tracing in \citet{Koedinger2011}), and for static performance data where we assume student skill mastery is stationary. In this thesis, we focus on static performance data.
 
 
-We assume that skills explain the performance and test outcome prediction. Student models incorporate single or multiple skills. Some even model performance without explicit skills and we will refer to them as zero-skill models. The most widely used one is Item Response Theory (IRT). In its simplest version, IRT considers a single skill for student performance data. Of course, sometimes there are many skills involve in a single problem and therefore this model becomes insufficient for many applications in Intelligent Tutoring Systems (ITS). Under certain conditions, multi-skills models can preform better in that case. Other methods, such as POKS, have no latent skills. They just look at the relation between what are directly observable among test outcome items. The details of each category of techniques along with some examples are described in the next section.
+We assume that skills explain the performance and test outcome prediction. Student models incorporate single or multiple skills. Some even model performance without explicit skills and we will refer to them as zero-skill models. The most widely used one is Item Response Theory (IRT). In its simplest version, IRT considers a single skill for student performance data. Of course, sometimes there are many skills involve in a single problem and therefore this model becomes insufficient for many applications in Intelligent Tutoring Systems (ITS). Under certain conditions, multi-skills models can perform better in that case. Other methods, such as POKS, have no latent skills. They just look at the relation between those items that are directly observable among test outcome items. The details of each category of techniques along with some examples are described in the next section.
 
 \section{Definitions and concepts}
 
@@ -91,7 +91,7 @@ i_{4}
 \end{figure}
 \end{footnotesize}
 
-The skills mastery matrix, \textbf{S}, represents student skills mastery profiles. In this matrix rows are skills and columns represent examinees. A cell with the value of 1 in $\mathbf{S}_{ij}$ indicates that examinee $j$ is mastered with skill $i$ and a value of 0 shows that he does not have the related skill.
+The skills mastery matrix, \textbf{S}, represents student skills mastery profiles. In this matrix rows are skills and columns represent examinees. A cell with the value of 1 in $\mathbf{S}_{ij}$ indicates that examinee $j$ is proficient in skill $i$ and a value of 0 shows that he does not have the related skill.
 
 
 
@@ -147,7 +147,7 @@ The details of the different approaches are described below.
 
 \section{Zero skill techniques}
 
-\textit{Zero skill techniques} are so called because they make no explicit reference to latent skills. They are based on the Knowledge Space theory of Doignon and Falmagne \citep{Doignon1999,desmarais:umuai:2006}, which does not directly attempt to model underlying skills but instead rely on observable items only. An individual's knowledge state is represented as a subset of these items. In place of representing skills mastery directly, they leave the skills assessment to be based on the set of observed and predicted item outcomes which can be done in a subsequent phase. 
+\textit{Zero skill techniques} are so called because they make no explicit reference to latent skills. They are based on the Knowledge Space theory of Doignon and Falmagne \citep{Doignon1999,desmarais:umuai:2006}, which does not directly attempt to model underlying skills but instead rely on observable items only. An individual's knowledge state is represented as a subset of these items. In place of representing skills mastery directly, they leave the skills assessment to be based on the set of observed and predicted item outcomes which can be done in a subsequent phase. TETRAD \citep{scheines1998tetrad} is a software that identifies pre-requisite relationships among items which is widely used in EDM.
 
 POKS is one of the models adopted in our study that is a derivative of Knowledge Space Theory. POKS stands for Partial Order Knowledge Structures. It is a more constrained version of Knowledge Spaces theory \citep{desmarais:umuai:1995}. POKS assumes that items are learned in a strict partial order. It uses this order to infer that the success to hard items increases the probability of success to easier ones, or conversely, that the failure to easy items decreases the chances of success to harder ones.
 
@@ -165,7 +165,7 @@ Items are generally learnt in a given order. Children learn easy problems first,
 
 This is reflected in the results matrix $\mathbf{R}$ by closure constraints on the possible knowledge states. Defining a student knowledge state as a subset of all items (i.e. a column vector in $\mathbf{R}$), then the space of valid knowledge states is closed under union and intersection according to the theory of Knowledge spaces \citep{Doignon1985}. In POKS, this constraint is relaxed to a closure under union, meaning that the union of any two individual knowledge states is also a valid knowledge state. This means that the constraints can be expressed as a partial order of implications among items, termed a Partial Order Knowledge Structure (POKS). The algorithm to derive such structures from the data in $\mathbf{R}$ relies on statistical tests \citep{desmarais:umuai:1996,desmarais:2005}.
 
-A knowledge structure can be represented by an Oriented incidence matrix, O, or by an Adjacency matrix, A. In the oriented incidence matrix, rows are edges and columns are nodes of the graph. The value of -1 shows the start node of an edge and 1 indicates the end of an edge. Therefore for each row (edge) there is only one pair of (-1,1) and the rest of cells are 0. In adjacency matrix both rows and columns are Items and if there is a link between a pair of items (for example $i\rightarrow j$) there should be a 1 in $A_{ij}$ otherwise it is 0. Figure \ref{fig3IMAM} shows the corresponded oriented incidence matrix and adjacency matrix of the structure in figure~\ref{fig2}. 
+A knowledge structure can be represented by an Oriented incidence matrix, O, or by an Adjacency matrix, A. In the oriented incidence matrix, rows are edges and columns are nodes of the graph. The value of -1 shows the start node of an edge and 1 indicates the end of an edge. Therefore for each row (edge) there is only one pair of (-1,1) and the rest of cells are 0. In adjacency matrix both rows and columns are Items and if there is a link between a pair of items (for example $i\rightarrow j$) there should be a 1 in $A_{ij}$ otherwise it is 0. Figure \ref{fig3IMAM} shows the corresponding oriented incidence matrix and adjacency matrix of the structure in figure~\ref{fig2}. 
 
 
 \begin{figure}[h]
@@ -221,14 +221,14 @@ Inference in the POKS framework to calculate the node's probability relies on st
 O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H})}
 \label{EQPOKSratio}
 \end{equation}
-where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used.
+where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used. \citet{desmarais:umuai:1996} provides more details on inference in POKS.
 
 
 \section{Single skill approaches}
 
 Other approaches incorporate a single latent skill in the model. This is obviously a strong simplification of the reality of skilled performance, but in practice it is a valid approximation as results show. When a model uses single latent skill, in fact it projects all the skills mastery level in a form of uni-dimensional representation that implicitly combines all skills. Then there would be a single continuous skill variable which is a weighted average of the skills mastery levels of an examinee. 
 
-In this section two approaches for modeling static test data are presented: The well established Item Response Theory (IRT) which models the relationship between observation and skill variable based on a logistic regression framework. It dates back to the 1960's and is still one of the prevailing approaches \citep{bakerKim2004}. The second approach is a trivial approach we call \textbf{Expected Prediction}. This approach is also used as a baseline in our experiments.
+In this section two approaches for modeling static test data are presented: the well established Item Response Theory (IRT), which models the relationship between observation and skill variable based on a logistic regression framework. It dates back to the 1960's and is still one of the prevailing approaches \citep{bakerKim2004}. The second approach is a trivial approach we call \textbf{Expected Prediction}. This approach is also used as a baseline in our experiments.
 
 \subsection{IRT} 
 
@@ -246,9 +246,9 @@ In the two parameter form above, referred to as IRT-2pl, where parameters are:
 
 Student ability, $\theta_i$, is estimated by maximizing the likelihood of the observed response outcomes probabilities:
 \[ P(X_1, X_2, ..., X_j, \theta_i) = \prod_j P(X_j|\theta_i) \]
-This corresponds to the usual logistic regression procedure.
+This corresponds to the usual logistic regression procedure. Note that the 2PL version of IRT is equivalent to the 3PL model with $c$ parameter equal to zero which represents pseudo guessing.
 
-A simpler version of IRT called the Rash model, fixes the discrimination parameter,~$a$, to~$1$. Fixing this parameter reduces over fitting, as the discrimination can sometimes take unrealistically large values. Rash model is a valid model for student skills modeling, but we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process in order to make this data more realistic (chapter \ref{sec:Syn} discusses data generation approaches in details).
+A simpler version of IRT called the Rash model, fixes the discrimination parameter,~$a$, to~$1$. Fixing this parameter reduces overfitting, as the discrimination can sometimes take unrealistically large values. Rash model is a valid model for student skills modeling, but we do use the more general IRT-2pl model, which includes both~$a$ and $b$, for the synthetic data generation process in order to make this data more realistic (chapter \ref{sec:Syn} discusses data generation approaches in details).
 
 \subsection{Baseline Expected Prediction}\label{sec:basel-expect-pred}
 
@@ -264,13 +264,13 @@ Finally the last category of student skills assessment models are considering st
 
 Still this category of models can be divided into two sub-categories: 
 \begin{itemize}
-\item Models that infer a Q-matrix from test result data such as models that uses matrix factorization techniques.
-\item Models that require a predefined Q-matrix to predict test outcome. These techniques can not directly infer the Q-matrix but they can refine an existing expert defined Q-matrix.
+\item Models that infer a Q-matrix from test result data, such as models that uses matrix factorization techniques.
+\item Models that require a predefined Q-matrix to predict test outcome. These techniques can not directly infer the Q-matrix but they can refine an existing expert-defined Q-matrix.
 \end{itemize}
 
 Deriving a Q-matrix from a test result matrix is challenging. Some models require a pre-defined Q-matrix. In some cases an expert defined Q-matrix is available but minor mistakes in mapping skills to items are always possible even by an expert. The basic challenge is to derive a perfect Q-matrix out of a test result matrix to give it as an input parameter to some models. This challenge also creates other challenges such as optimum number of latent skills for a set of items in a test outcome. Sometimes there exist more than single Q-matrix associated with a test result with different number of skills. Finding the optimum number of skills to derive a Q-matrix is a question that is given in more details in section \ref{EDM2012}. 
 
-Given the number of latent skills, there exist few techniques to derive a Q-matrix for models that require one. Cen et al. \citep{Cen2005,Cen2006} have used Learning Factor Analysis technique(LFA) technique to improve the initially hand built Q-matrix which maps fine-grained skills to questions. They used log data which is based on the fact that the knowledge state of student dynamically changes over time as the student learns. In the case of static data of student knowledge, Barnes \citep{Barnes06} developed a method for this mapping which works based on a measure of the fit of a potential Q-matrix to the data. It was shown to be successful as well as Principle Component Analysis for skill clustering analysis. In our experiment we use NMF as a technique to derive a Q-matrix given an optimum number of latent skills. Later in this section we will introduce NMF in more details. Section \ref{ITS2012} describes how to derive a conjunctive model of Q-matrix from a student test result.
+Given the number of latent skills, there exist few techniques to derive a Q-matrix for models that require one. Cen et al. \citep{Cen2005,Cen2006} have used Learning Factor Analysis(LFA) technique to improve the initially hand-built Q-matrix which maps fine-grained skills to questions. They used log data which is based on the fact that the knowledge state of student dynamically changes over time as the student learns. In the case of static data of student knowledge, Barnes \citep{Barnes06} developed a method for this mapping which works based on a measure of the fit of a potential Q-matrix to the data. It was shown to be successful as well as Principal Component Analysis for skill clustering analysis. In our experiment we use NMF as a technique to derive a Q-matrix given an optimum number of latent skills. Later in this section we will introduce NMF in more details. Section \ref{ITS2012} describes how to derive a conjunctive model of Q-matrix from a student test result.
 
 For real datasets there exists few expert defined Q-matrices. To use them as an input parameter for student skills assessment models we need to refine them. Section \ref{edm2014} gives few approaches to this problem.
 
@@ -338,7 +338,7 @@ R & Q & S
 \end{figure}
 
 
-The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item that requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skill increase the chance of success based on its weight. It is possible to have different weights for skills where skills for each item will sum up to~$1$. Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$ can be considered as a probability that examinee $i$ can succeed item $j$.
+The other type is the additive model of Q-matrix. Compensatory or additive model of skills is an interpretation of a Q-matrix where skills have weights to yield a success for that item. For example, considering an item that requires two skills $a$ and $b$ with the same weight each. Then each skill will contribute equally to yield a success of the item. In the compensatory model of Q-matrix, each skill increases the chance of success based on its weight. It is possible to have different weights for skills where skills for each item will sum up to~$1$. Figure \ref{fig1Add} represents an example of an additive model of Q-matrix with its corresponding result matrix. The value $R_{ij}$ can be considered as a probability that examinee $i$ can succeed item $j$.
 
 \begin{figure}[h]
 \begin{footnotesize} 
@@ -475,7 +475,7 @@ Assume $\mathbf{R}$ is a result matrix containing student test results of ${n}$ 
 \end{equation}
 where $\mathbf{Q}$ and $\mathbf{S}$ are ${n}\times{k}$ and ${k}\times{m}$ respectively. $\mathbf{Q}$ represents a Q-matrix which maps items to skills and $\mathbf{S}$ represents the skill mastery matrix that represents the mastered skills for each student. ${k}$ is called as the rank of factorization which is the same as number of latent skills. Equation \ref{eq:1} represents an additive type of Q-matrix.
 
-For example in the following equation, assume that we know the skills behind each item which means we know the exact Q-matrix and also we know the skills mastery matrix as well. In this example the product of $\mathbf{Q}$ and $\mathbf{S}$ will reproduces the result matrix. Given a result matrix, we want to decompose this result matrix into the expected Q-matrix and skill mastery matrices. Since the Q-matrix is a single skill per item then the type of Q-matrix does not affect the inference of the result matrix.
+For example in the following equation, assume that we know the skills behind each item which means we know the exact Q-matrix and also we know the skills mastery matrix as well. In this example the product of $\mathbf{Q}$ and $\mathbf{S}$ will reproduces the result matrix. Given a result matrix, we want to decompose this result matrix into the expected Q-matrix and skill mastery matrices. Since the Q-matrix is a single skill per item, the type of Q-matrix does not affect the inference of the result matrix.
 
 \[
 \begin{array}{ccccc}
@@ -510,7 +510,7 @@ R &  & Q &  & S
 
 The prominent characteristic of \ac{NMF} is the non-negative constraint on the decomposed elements. \ac{NMF} imposes this constraint and consequently all those values in the decomposed elements are non-negative. The clear point of this decomposition is that there can be different solutions. Although the constraint of non-negative elements eliminates some solutions, there remain many different solutions for this factorization.
 
-Considering the large space of solutions to $\mathbf{R}\approx\mathbf{Q}\mathbf{S}$, it implies different algorithms may lead to different solutions. Many algorithms for matrix factorization search the space of solutions to equation \eqref{eq:1} by gradient descent. These algorithms can be interpreted as rescaled gradient descent, where the rescaling factor is optimally chosen to ensure convergence. Most of factorization algorithms operate iteratively in order to find the optimal factors. At each iteration of these algorithms, the new value of $\mathbf{Q}$ or $\mathbf{S}$ (for \ac{NMF}) is found by multiplying the current value by some factor that depends on the quality of the approximation in Eq. \eqref{eq:1}. It was proved that repeated iteration of the update rules is guaranteed to converge to a locally optimal factorization~\citep{seung2001algorithms}. We refer the reader to \citep{Berry2007} for a more thorough and recent review of this technique which has gained strong adoption in many different fields. 
+Considering the large space of solutions to $\mathbf{R}\approx\mathbf{Q}\mathbf{S}$, different algorithms may lead to different solutions. Many algorithms for matrix factorization search the space of solutions to equation \eqref{eq:1} by gradient descent. These algorithms can be interpreted as rescaled gradient descent, where the rescaling factor is optimally chosen to ensure convergence. Most of factorization algorithms operate iteratively in order to find the optimal factors. At each iteration of these algorithms, the new value of $\mathbf{Q}$ or $\mathbf{S}$ (for \ac{NMF}) is found by multiplying the current value by some factor that depends on the quality of the approximation in Eq. \eqref{eq:1}. It was proved that repeated iteration of the update rules is guaranteed to converge to a locally optimal factorization~\citep{seung2001algorithms}. We refer the reader to \citep{Berry2007} for a more thorough and recent review of this technique which has gained strong adoption in many different fields. 
 
 Gradient decent is one of the best known approaches for implementing \ac{NMF}. If $k$ is less than the minimum of $m$ and $n$, finding the exact $\mathbf{Q}$ and $\mathbf{S}$ matrices which satisfy $\mathbf{R}=\mathbf{Q}\mathbf{S}$, can entail a loss of information. Therefore this algorithm tries to get the best estimation for $\mathbf{Q}$ and $\mathbf{S}$ to make $\mathbf{R}\approx\mathbf{Q}\mathbf{S}$ more accurate. Based on the definition of gradient descent method, a cost function should be defined to quantify the quality of the approximation. This cost function can be a measure of distance between two non-negative matrices $\mathbf{R}$ and $\mathbf{Q}\mathbf{S}$. It can be the Euclidean distance between these two matrices as shown in equation \eqref{eq:3} where $\mathbf{Q}_{i}$ is a row vector of $\mathbf{Q}$ and $\mathbf{S}_{j}$ is a column vector of $\mathbf{S}$ and $\mathbf{R}_{ij}$ is cell $(i,j)$ of $\mathbf{R}$.
 
@@ -525,7 +525,7 @@ Another cost function is based on the Kullback-Leibler divergence, which measure
 D(\mathbf{R}||\mathbf{Q}\mathbf{S})=\sum_{{\scriptscriptstyle ij}}(\mathbf{R}_{ij}log\frac{\mathbf{R}_{ij}}{\mathbf{Q}_{i}\mathbf{S}_{j}}-\mathbf{R}_{ij}+\mathbf{Q}_{i}\mathbf{S}_{j})\label{eq:4}
 \end{equation}
 
-In both approaches, the goal is to minimize the cost function where they are lower bounded by zero and it happens only if $\mathbf{R}=\mathbf{Q}\mathbf{S}$ \citep{seung2001algorithms}. For simplicity we just consider the cost function based on the Euclidean distance.
+In both approaches, the goal is to minimize the cost function where they are lower-bounded by zero and it happens only if $\mathbf{R}=\mathbf{Q}\mathbf{S}$ \citep{seung2001algorithms}. For simplicity we just consider the cost function based on the Euclidean distance.
 
 The gradient descent algorithm used to minimize the error is iterative and in each iteration we expect a new estimation of the factorization. We will refer to the estimated Q-matrix{ as} $\hat{\mathbf{Q}}$ and{ the} estimated Skill mastery matrix{ as} $\hat{\mathbf{S}}$. The iterative gradient descent algorithm should change $\mathbf{Q}$ and $\mathbf{S}$ to minimize the cost function. This change should be done by an update rule. \citet{seung2001algorithms} found the following update rule in equation \eqref{eq:5}. These update rules in equation \eqref{eq:5} guarantee that the Euclidean distance $\left\Vert \mathbf{R}-\mathbf{Q}\mathbf{S}\right\Vert $ is non increasing during the iteration of the algorithm.
 
@@ -600,7 +600,7 @@ The results of this experiment show that both techniques are effective in identi
 
 Very often, experts define the Q-matrix because they have a clear idea of what skills are relevant and of how they should be taught.
 
-Validating of the expert defined Q-matrix has been the focus of recent developments in the field of educational data mining in recent years \citep{delaTorre2008,chiu2013statistical,barnes2010novel,loye2011validite,Desmarais2013aied}. \citet{desmarais2014refinement} compared three data driven techniques for the validation of skills-to-tasks mappings. All methods start from a given expert defined Q-matrix, and use optimization techniques to suggest a refined version of the skills-to-task mapping. Two techniques for this purpose rely on the DINA and DINO models, whereas one relies on a matrix factorization technique called ALS (see \citep{Desmarais2013aied} for more details on ALS technique). 
+Validating of the expert defined Q-matrix has been the focus of recent developments in the field of educational data mining in recent years \citep{delaTorre2008,chiu2013statistical,barnes2010novel,loye2011validite,Desmarais2013aied}. \citet{desmarais2014refinement} compared three data-driven techniques for the validation of skills-to-tasks mappings. All methods start from a given expert defined Q-matrix, and use optimization techniques to suggest a refined version of the skills-to-task mapping. Two techniques for this purpose rely on the DINA and DINO models, whereas one relies on a matrix factorization technique called ALS (see \citep{Desmarais2013aied} for more details on ALS technique). 
 
 To validate and compare the effectiveness of each technique for refining a given Q-matrix, they follow a methodology based on recovering the Q-matrix from a number perturbations: the binary value of a number of cells of the Q-matrix is inverted, and this ``corrupted'' matrix is given as input to each technique. If the technique recovers the original value of each altered cell, then we consider that it successfully ``refined'' the Q-matrix. The results of this experiment show that all techniques could recover alterations but the ALS matrix factorization technique shows a greater ability to recover alterations than the other two techniques.
 
@@ -608,7 +608,7 @@ To validate and compare the effectiveness of each technique for refining a given
 
 \section{Model selection and goodness of fit}
 
-In educational data mining, or in data mining in general, analysts that wish to build a classification or a regression model over new and unknown data are faced with a very wide span of choices. Model selection in EDM is the task of selecting a statistical student model for a given data from a set of candidate models that are the best representatives of the data. Note that there could be a pre-processing step on the data itself to be well-suited to the problem of model selection but our study goes beyond that. The best fit is the model that is most likely to have generated the data. Selection is most often based on a model's ``goodness of fit''. The simplest way is to choose the best performer model. Models with higher predictive accuracy yield more useful predictions and are more likely to provide an accurate description of the ground truth. 
+In educational data mining, or in data mining in general, analysts who wish to build a classification or a regression model over new and unknown data are faced with a very wide span of choices. Model selection in EDM is the task of selecting a statistical student model for a given data from a set of candidate models that are the best representatives of the data. Note that there could be a pre-processing step on the data itself to be well-suited to the problem of model selection but our study goes beyond that. The best fit is the model that is most likely to have generated the data. Selection is most often based on a model's ``goodness of fit''. The simplest way is to choose the best performer model. Models with higher predictive accuracy yield more useful predictions and are more likely to provide an accurate description of the ground truth. 
 
 On one hand the term ``goodness of fit'' for a statistical model describes how well it fits a set of observation. The distance between observed values and the predicted values under the model can be a measure of goodness of fit. The goodness of fit is usually determined using different measures, namely the best known is likelihood ratio. There exist different approaches to assess model fit based on the measure of goodness of fit. Below we describe few measures that are commonly used:
 
@@ -617,7 +617,7 @@ On one hand the term ``goodness of fit'' for a statistical model describes how w
 
 To find the prediction quality of each skills assessment model some metrics are used. There is a wide range of choices of metrics to evaluate a model and choosing an appropriate one is very important since usually candidate models are preforming with small differences and a good metric can highlight the benefits of one model vs. others.
 
-There are different measures to represent the goodness of fit and this is usually either the sums of squared error (SSE) or maximum likelihood. \citet{dhanani2014comparison} in a survey compared three error metrics for learning model parameters in Bayesian Knowledge Tracing(BKT) framework. In their methodology they calculate the correlation between the error metrics to predict the BKT model parameters and the euclidean distance to the ground truth. These error metrics have been widely used in model selection researches. Below we will describe these metrics briefly:
+There are different measures to represent the goodness of fit and this is usually either the sums of squared error (SSE) or maximum likelihood. \citet{dhanani2014comparison} in a survey compared three error metrics for learning model parameters in Bayesian Knowledge Tracing(BKT) framework \citep{corbett1994knowledge}. In their methodology they calculate the correlation between the error metrics to predict the BKT model parameters and the euclidean distance to the ground truth. These error metrics have been widely used in model selection researches. Below we will describe these metrics briefly:
 
 \begin{itemize}
 
@@ -676,7 +676,7 @@ and also Negative in the context of EDM is a failure and Positive is a success t
 \end{itemize}
 
 
-Given all these measures, still a number of factors can affect the amount of residual error. The capacity of an algorithm to estimate the model parameters for a given data set is often critical. Local optima, biases, and large variance can result in estimations that are far from the best ones~\citep{hastie2005elements}. Models themselves can yield widely different performances under different circumstances. Some are more robust under small data sets. Typically, complex models will require large data sets, but can sometimes lead to much better performance than simpler ones if they are fit for the data.
+Given all these measures, still a number of factors can affect the amount of residual error. The capacity of an algorithm to estimate the model parameters for a given dataset is often critical. Local optima, biases, and large variance can result in estimations that are far from the best ones~\citep{hastie2005elements}. Models themselves can yield widely different performances under different circumstances. Some are more robust under small datasets. Typically, complex models will require large datasets, but can sometimes lead to much better performance than simpler ones if they are fit for the data.
 
 For these reasons, a model may be ``fit to the data'', and yet it may underperform compared to others when residual error is used as the sole indicator of the goodness of fit. The residual error is always measured for a given data sample, and to obtain a reliable estimate of the goodness of fit, data samples that cover the space of factors that can affect parameter estimates and model performances would need to be gathered. Oftentimes this is impractical.
 
@@ -713,18 +713,18 @@ In general there are three approaches to validate the accuracy of a cognitive di
 \end{itemize}
 
 \subsubsection{Methodology}
-Once the simulated data is generated base on the four models \citet{Desmarais2010} train POKS student model over both real and synthetic datasets. For validation of the accuracy of the simulated dataset they compare the predictive performance across each condition. 
+Once the simulated data is generated based on the four models \citet{Desmarais2010} train POKS student model over both real and synthetic datasets. For validation of the accuracy of the simulated dataset they compare the predictive performance across each condition. 
 
 \subsubsection{Real Datasets}
-It is important to choose a good dataset for this simulation, they used two datasets, which are in math and one of them has small number of samples and the other one has big number of items. The details of these datasets are described as:
+It is important to choose a good dataset for this simulation. They used two datasets, which are in math. One of them has small number of samples and the other one has big number of items. The details of these datasets are described as:
 
 \begin{center}
 
 \begin{tabular}{|c|c|c|c|c|}
 \hline 
-\multirow{2}{*}{Dataset} & \multicolumn{2}{c|}{Number of} & Average & Item\tabularnewline
+\multirow{2}{*}{Dataset} & \multicolumn{2}{c|}{Number of} & Average & Range of item\tabularnewline
 \cline{2-3} 
- & Items & Students & Success rate & Success rate Variance\tabularnewline
+ & Items & Students & Success rate & success rate\tabularnewline
 \hline 
 Unix & 34 & 48 & 53\% & 1/34 to 34/34\tabularnewline
 \hline 
@@ -738,20 +738,20 @@ College Math & 59 & 250 & 57\% & 9/59 to 55/59\tabularnewline
 
 First let us summarize their conclusions and then propose our discussion. The following items are their conclusion:
 \begin{itemize}
-\item This experiment need to be expanded since it was based on a single student model which is POKS and also other models of simulated dataset should also be used in this evaluation.
-\item The expected marginal probability do not appropriately reflect the underlying ground truth of the real datasets
+\item This experiment needs to be expanded since it was based on a single student model which is POKS and also other models of simulated dataset should also be used in this evaluation.
+\item The expected marginal probability do not appropriately reflect the underlying ground truth of the real datasets.
 \item For the first dataset (\textit{Unix}) IRT was the best representative for the underlying structure of the real data where the predictive performance of real data was $77\%$ and IRT generated data was $80\%$
 \item For College math data, the synthetic data generated based on the \textit{covariance} method shows a performance which is closer to the performance of real data than others. The accuracy gain is $40\%$ for real data when it is $37\%$ for covariance generated data.
 
 \item Validating the faithfulness of student models requires assessing parameters of those models to replicate real data characteristics.
 
-\item simulated data from the 2 parameter IRT model can appropriately reflect some dataset characteristics but not with equal faithfulness for all datasets.
+\item Simulated data from the 2 parameter IRT model can appropriately reflect some dataset characteristics but not with equal faithfulness for all datasets.
  
 \end{itemize}
 
 As we will see later, in this thesis we use 7 student models for both generating datasets and calculating the predictive performances that include range of models from zero skills to multi-skills. Somehow our work can be an extension to \citet{Desmarais2010}'s work. Obviously one of the reasons that synthetic data with IRT ground truth shows a good similarity with real data performance in their research is that the performances are over POKS model which shows closest performance to POKS model (The details will be discussed later in \ref{sec:SIGNATURE}) oppose to other models that are linear and multi-skills. 
 
-To summarize the difference between our experiment and \citet{Desmarais2010}'s, we can say that our work is a kind of extension to their research. Both of them are comparing the behavior of different datasets with different underlying structure. The difference is in the number of predictive performance models. \citet{Desmarais2010} used only one technique to fit a model but in our work we compare a set of models which create a \textit{performance signature} and those datasets that have similar signatures can reflect similar characteristics.
+To summarize the difference between our experiment and \citet{Desmarais2010}'s, we can say that our work is a kind of extension to their research. Both of them are comparing the behavior of different datasets with different underlying structures. The difference is in the number of predictive performance models. \citet{Desmarais2010} used only one technique to fit a model but in our work we compare a set of models which create a \textit{performance signature} and those datasets that have similar signatures can reflect similar characteristics.
 
 
 \subsection{Simulated data to reveal the proximity of a model to reality}
@@ -759,7 +759,7 @@ To summarize the difference between our experiment and \citet{Desmarais2010}'s, 
 The next recent work \citep{Rosenberg2015} is about distinguishing between a synthetic data and a real data. This work is an extension to their previous work \citep{Rosenberg2014} where they used BKT model to generate synthetic dataset for two real dataset that correspond to the characteristics of the real data. They found similarities between the characteristics of the simulated and real datasets. Their results indicate that it is hard to set real and synthetic datasets apart. The idea of this research \citep{Rosenberg2015} is about the goodness of a model for a real dataset which indicate that if it is easy to set real and synthetic data apart then the model is not a good representative of the real data otherwise the model is indeed authentic representation of the reality.
 
 \subsubsection{Methodology}
-They used Bayesian knowledge tracing model to calculate log likelihood with a grid search of four parameters: initial(prior knowledge), learning rate, Guess and slip. The two first parameters are knowledge parameters and the others are performance parameters. The simplest form of BKT which is used in their experiment considers a single set of prior knowledge and learning rate for all students and an equal slip and guess rates for all students.
+They used Bayesian Knowledge Tracing(BKT) model to calculate log likelihood with a grid search of four parameters: initial(prior knowledge), learning rate, guess and slip. The two first parameters are knowledge parameters and the others are performance parameters. The simplest form of BKT which is used in their experiment considers a single set of prior knowledge and learning rate for all students and an equal slip and guess rates for all students.
 To make a comprehensive comparison, they used 42 datasets, which are groups of Learning Opportunities(GLOPs) generated from the ASSISTments platform. Problem set and number of examinees vary for each dataset which consist of 4 to 13 questions answered by 105 to 777 students. In addition they created two synthetic datasets for each dataset that the parameters for synthetic datasets are set to represent those of the real data with exact same number of samples and items. 
 
 The methodology consist of four parts:
@@ -775,3 +775,5 @@ The comparison in the last step of the methodology is made by visualizing a 2D l
 \item Euclidean distance: The Euclidean distance between the real dataset parameters and synthetic dataset parameters was compared to the distance of two synthetic dataset parameters. In conclusion if the distance of two synthetic parameters are smaller than the distance of real and synthetic parameters then the model is a goof fit for the data otherwise it can be improved.
 \item Log likelihood distance: The max log likelihood distance between the two synthetic datasets was compared to the max log likelihood distance between the real and synthetic datasets. 
 \end{itemize}
+
+\citet{Rosenberg2015} try to identify the ground truth model within-BKT in the parameter space. In this thesis we want to identify the ground truth in the performance space based on the similarity of model performances.

@@ -9,7 +9,7 @@ A unique advantage of synthetic data is that the model parameters can be predefi
 As described before, there exist two types of parameters for student test outcome:
 \begin{itemize}
 \item Model specific: Models have their own parameters, some of which may be shared among models, such as a Q-matrix for multiple skills models, some of which are more unique such as the item discrimination parameter of the IRT class of models. Generally an experiment should be designed to learn these parameters form a dataset or they can be generated under specific criteria. More details for each parameter are given later in this chapter.
-\item Data specific (contextual): The data specific parameters are common to all data sets. They have to be predefined, but they may be set to reflect a data set for which we want to find the ground truth. For example, the item difficulty distribution or the student success rate distribution are two data specific parameters. Data specific parameters can also be a model parameter, such as item difficulty and discrimination.
+\item Data specific (contextual): The data specific parameters are common to all datasets. They have to be predefined, but they may be set to reflect a dataset for which we want to find the ground truth. For example, the item difficulty distribution or the student success rate distribution are two data specific parameters. Data specific parameters can also be a model parameter, such as item difficulty and discrimination.
 \end{itemize}
 
 Table \ref{tbl:param-DataGen} shows a complete list of both types of parameters required for data generation.
@@ -50,7 +50,7 @@ Table \ref{tbl:param-DataGen} shows a complete list of both types of parameters 
 
 Both types of parameters are required to generate synthetic dataset. There are few means to obtain these parameters:
 \begin{itemize}
-\item \textbf{Parameters estimated form real data}: In general, models define means to estimate their parameters from data. Some are trivial to estimate, such as student success rate distribution if we assume a Gaussian distribution, for eg., and some are much more complex, which is the case of latent factors such as the number of skills and the Q-matrix itself.
+\item \textbf{Parameters estimated from real data}: In general, models define means to estimate their parameters from data. Some are trivial to estimate, such as student success rate distribution if we assume a Gaussian distribution, for eg., and some are much more complex, which is the case of latent factors such as the number of skills and the Q-matrix itself.
 \item \textbf{Initialized from a random distribution}: In the case that there exists no reference dataset to derive parameters we can randomly select some samples based on a distribution that can be estimated form the data. Some parameters have specific conditions that if they become violated it changes the definition of the parameter. More details are given in next sections.
 \item \textbf{Expert given and arbitrary parameters}: Latent factors are often not derived from data but arbitrarily defined by expert or by some educated choice. The Q-matrix is the most obvious of such parameter, but some are the guess and slip parameters, which can prove difficult to correctly estimate from data.
 
@@ -65,7 +65,7 @@ The rest of this chapter describes the data generation process based on each ski
 As mentioned before this technique does not directly model latent skills and the inference relies on observable items only. 
 
 \subsection{Obtaining parameters}
-This model has three parameters with which the inference in possible: Partial order knowledge structure (let us name it KS for shot), Initial probabilities, Odds ratio. To extract these parameters from an existing data we use the POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. Sometimes an expert defines these parameters. In the absence of these two alternatives, these parameters should be initialized from a random distribution. Below we describe how these parameters are generated with different conditions and constraints.
+This model has three parameters with which the inference is possible: Partial order knowledge structure (let us name it KS for short), Initial probabilities, Odds ratio. To extract these parameters from an existing data we use the POKS \footnote{http://www.professeurs.polymtl.ca/michel.desmarais/Papers/UMAP2011/lib-poks.R} R package to learn all the parameters given a dataset. Sometimes an expert defines these parameters. In the absence of these two alternatives, these parameters should be initialized from a random distribution. Below we describe how these parameters are generated with different conditions and constraints.
 
 \subsubsection{Partial Order Knowledge Structure (KS)}
 This parameter is in fact a directed graph that shows the relation and the dependency among a set of items. It reflects the order of learning a set of items in the same problem domain. Items are ``nodes'' in the graphical structure and the ``parent-child'' relation represents a prerequisite relation. Symmetric links are allowed and represent items that are similar. They are the only type of cycles possible. Also in the current version of POKS transitive relations between items are explicitly ignored. 
@@ -76,7 +76,7 @@ KS is a complex parameter, which has two other parameters involved in itself:
 \item Total Number of links: This has a correlation with the previous parameter but still we can control the number of dependencies in a KS. This parameter has a direct effect on test success rate and item score variance. Fewer number of links will result in lower test success rate and item score variance. There are still some other parameters that could change the test success rate and item score variance. In this sense manipulating one parameter may affect others.
 \end{itemize} 
 
-A quick recall from section \ref{POKS-Lit-Rev} which introduces two parameters : alpha parameter for binomial statistical tests ($\alpha_1$) and an alpha error of an interaction test ($\alpha_2$) .In the current study, the two parameters, $\alpha_1$ and $\alpha_2$, are respectively set at~$0.85$ and~$0.10$. 
+A quick recall from section \ref{POKS-Lit-Rev} which introduces two parameters : alpha parameter for binomial statistical tests ($\alpha_1$) and an alpha error of an interaction test ($\alpha_2$). In the current study, the two parameters, $\alpha_1$ and $\alpha_2$, are respectively set at~$0.85$ and~$0.10$. 
 Other input parameters can make the random generation more specific, such as the number of links and number of independent trees in a KS. These parameters will change the item variance in the test result matrix. 
 
 Adjacency matrix is one way to represent a KS. To avoid having a cycle in the structure we randomly assign $0$~-~$1$ values to the upper triangular of this matrix. For simplicity we consider the structure to be a single connected graph and the number of links corresponds to half of the cells of the upper triangular of this matrix. Figure~\ref{fig:KSExample} shows a adjacency matrix associated with its graphical structure. 
@@ -114,10 +114,10 @@ i_{5}
 \end{figure}
 
 
-Once the KS is generated we should initialize the two other parameters : initial probability of all items and odds ratio for some pairs of items. One of the important concepts for this purpose is the ``level'' of a node in the graphical representation of the KS, which corresponds to the longest path from that node to a leaf node. A leaf node is a node that does not have any child and a root is a node without any parents. Equation \ref{EQ:Level} shows the definition of this function where $length-of$ returns the length of a path between two nodes; and $path$ returns $true$ value if there exists a directed path between two nodes; and $leaf$ returns $true$ if the node is a leaf. For example in figure~\ref{fig:KSExample} $I_{5}$ is a leaf with the level of $1$ and $I_{2}$ is a root with level of $3$.
+Once the KS is generated we should initialize the two other parameters : initial probability of all items and odds ratio for some pairs of items. One of the important concepts for this purpose is the ``level'' of a node in the graphical representation of the KS, which corresponds to the longest path from that node to a leaf node. A leaf node is a node that does not have any child and a root is a node without any parents. Equation \ref{EQ:Level} shows the definition of this function where $length$ returns the length of a path between two nodes; and $path$ returns $true$ value if there exists a directed path between two nodes; and $leaf$ returns $true$ if the node is a leaf. For example in figure~\ref{fig:KSExample} $I_{5}$ is a leaf with the level of $1$ and $I_{2}$ is a root with level of $3$.
 
 \begin{equation}
-L(KS,N_{i}) = max(E|E=length-of(N_{i},p)  ,  \exists path(N_{i},p)  , leaf(p)=True)
+L(KS,N_{i}) = max(E|E=length(N_{i},p)  ,  \exists path(N_{i},p)  , leaf(p)=True)
 \label{EQ:Level}
 \end{equation}
 
@@ -128,7 +128,7 @@ Each item should be associated with an initial probability of success. This prob
 Starting from a root node in KS we assign a random initial probability for each node $N_{i}$ from a range of values between $r_{max}$ to $r_{max}+\frac{1-r_{max}}{L(KS,N_{i})}$ where $r_{max}$ is the maximum initial probability of $N_{i}$'s parents. For a node that is a root $r_{max}$ is $0$. Obviously it should have the lowest initial probability among its descendant. Also for a leaf the assignment range will be between $r_{max}$ and $1$ because it has the least level. 
 
 
-As mentioned before, the initial probability of success for items come from these values. To sample test outcome for a record(student) we start with initial probabilities. This set of values changes when a sample is assigned to each item. Let us call this variable success probability set as the \textbf{state} of probabilities (shown as $S$ where $S_i$ is the probability of success for item $i$). In this context we use odds instead of probabilities where $O(H) = \frac{P(H)}{1-P(H)}$. The sampling process for a single record preforms item by item and in each step the \textbf{state} vector, $S$, gets updated. The details of updating the ``state of odds'' and assigning samples to items are given in next sections.
+As mentioned before, the initial probability of success for items comes from these values. To generate a sample test outcome(record) we start with initial probabilities. This set of values changes when a sample is assigned to each item. Let us call this variable success probability set as the \textbf{state} of probabilities (shown as $S$ where $S_i$ is the probability of success for item $i$). In this context we use odds instead of probabilities where $O(H) = \frac{P(H)}{1-P(H)}$. The sampling process for a single record performs item by item and in each step the \textbf{state} vector, $S$, gets updated. The details of updating the ``state of odds'' and assigning samples to items are given in next sections.
 
 \subsubsection{Odds ratio}
 
@@ -141,7 +141,7 @@ O(H|E_1,E_2, ... , E_n) = O(H) \prod_{i}^{n} \frac{P(E_i|H)}{P(E_i | \overline{H
 \end{equation}
 where odds definition is $O(H|E) = \frac{P(H|E)}{1-P(H|E)}$ and $O(H)$ is the initial odds of node $H$. If evidence $E_i$ is negative for observation $i$, then the ratio $\frac{P(\overline{E_i}|H)}{P(\overline{E_i}|\overline{H})}$ is used. We follow the same steps to generate data based on POKS model. 
 
-There are two types of odds ratio in the POKS model. Consider $I_{3}$ in figure~\ref{fig:KSExample} which has two children and a parent . If the sampling result for this item (with respect to its initial odds) becomes $1$ (success) then we update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled, node $I_{3}$) becomes a success. If the evidence is $0$ (failure) then we update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
+There are two types of odds ratio in the POKS model. Consider $I_{3}$ in figure~\ref{fig:KSExample} which has two children and a parent. If the sampling result for this item (with respect to its initial odds) becomes $1$ (success) then we update the odds of its children because a success for a harder item should increase the chances of success for an easier one. Therefore we define ``true odds ratio'' which is applicable when the evidence (in this case the evidence is the one that has been sampled, node $I_{3}$) becomes a success. If the evidence is $0$ (failure) then we update the odds of its parents since a failure for an easier problem should decrease the chances to success a hard one. To update the parents' odds we use ``False odds ratio'' when the evidence is false. In fact $\frac{P(E_i|H)}{P(E_i | \overline{H})}$ in equation \ref{EQPOKSratio} represents the odds ratio of the item $H$ given evidence $E_i$. 
 
 In our experiments, in cases of random parameter generation, we assign values greater than $0.5$ to ``true odds ratios'' and smaller than $0.5$ to ``false odds ratios'' for those pairs of items that have a link in KS. 
 
@@ -245,7 +245,7 @@ Once all parameters are obtained we can generate the simulated data with equatio
 
 \section{Linear models}
 \label{LinearModelSynthetic}
-Generating synthetic data with linear models is one way to cover multiple skills. In this study, Q-matrix is the means to represent the mapping between skills and items. If the Q-matrix needs to be inferred from a data set, NMF is the technique we use in this study. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that reflect the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
+Generating synthetic data with linear models is one way to cover multiple skills. In this study, Q-matrix is the means to represent the mapping between skills and items. If the Q-matrix needs to be inferred from a dataset, NMF is the technique we use in this study. Depending on the type of a Q-matrix, different models could be applied to NMF technique. In this section we describe how to generate synthetic datasets that reflect the characteristics of each model of the Q-matrices used for factorization technique. Section \ref{NMF_DESC} described all details to learn parameters of these models given a dataset. This section discusses the process of generating synthetic data given a set of parameters for these models.
 
 The very first step to generate simulated test result for linear models is to define a Q-matrix that maps $k$ skills to $n$ items. As before these parameters can be inferred form an existing dataset but many existing datasets offer few expert defined Q-matrices. Some datasets even have more than single expert defined Q-matrix with different number of skills. Section \ref{edm2014} introduced methods to refine an expert-defined Q-matrix. A Q-matrix can also be generated randomly. As mentioned, there are three types of Q-matrices. In this study we use conjunctive and additive model in the factorization technique.The following sections describe generating parameters for each model.
 
@@ -263,7 +263,7 @@ Q-matrix is a required parameter for all linear models. Few mandatory parameters
 
 
 
-In the case of unavailable predefined Q-matrix, we defined a Q-matrix that provides all the possible combination of $k$ skills with a maximum of $Max$ skills per item, and at least one skill per item. A total of $\sum\limits_{k=1}^{Max} \dbinom{n}{k}$ candidate items span this space of combinations. For example $21$ items for $6$ skills and a maximum of $2$ skills per item. This matrix is shown in Figure~\ref{PerfectQ1}. Note that red cells represent $0$ or missing skills and yellow cells are $1$ or presence of skills. Items 1 to 15 are two-skills and items 16 to 21 are single-skill. All skills have same weight in a conjunctive type of Q-matrix. The Q-matrix can be created with randomly replicating or eliminating some candidate items to adjust the number of items to the desired number. Selecting some appropriate items to create high or low variance can also control item score variance.
+In the case of unavailable predefined Q-matrix, we defined a Q-matrix that provides all the possible combination of $k$ skills with a maximum of $Max$ skills per item, and at least one skill per item. A total of $\sum\limits_{k=1}^{Max} \dbinom{n}{k}$ candidate items span this space of combinations. For example $21$ items for $6$ skills and a maximum of $2$ skills per item. This matrix is shown in Figure~\ref{PerfectQ1}. Note that red cells represent $0$ or absence of skills and yellow cells are $1$ or presence of skills. Items 1 to 15 are two-skills and items 16 to 21 are single-skill. All skills have same weight in a conjunctive type of Q-matrix. The Q-matrix can be created with randomly replicating or eliminating some candidate items to adjust the number of items to the desired number. Selecting some appropriate items to create high or low variance can also control item score variance.
 
 \begin{figure}[ht]
 \centering
@@ -391,7 +391,7 @@ A skill mastery matrix can be generated once these parameters are set.
 
 
 \subsection{Slip and Guess}
-one of the characteristics of DINA/DINO models is that they incorporate slip and guess factors. These parameters are essentially noise factors and in these models they are treated item-wised (section \ref{Noise_}). We defined a uniform distribution to cover a range of values for slip and guess:
+One of the characteristics of DINA/DINO models is that they incorporate slip and guess factors. These parameters are essentially noise factors and in these models they are treated item-wised (section \ref{Noise_}). We defined a uniform distribution to cover a range of values for slip and guess:
 
 
 \begin{center}
@@ -417,7 +417,7 @@ Previous sections described the generation process for each model. This task is 
 \item Second: There exists no conflict between the given parameters. For example given ``number of skills'' as a simple parameter equal to $4$ and a predefined ``Q-matrix'' as a complex one with $5$ skills is a conflict to generate a synthetic data based on DINO model. However, testing these conflicts is not an easy task and also resolving a conflict is another challenge, which is possible with user interactions.
 \end{itemize} 
 
-For some of parameters we can use default values but some are mandatory such as number of skills. Therefore based on the hierarchical structure among parameters of a model we can define sets of sufficient parameters to generate data based on a model. Due to this structure there are different combination of parameters that can generate a synthetic data. For example, a synthetic dataset based on DINA can be generated with \{Q-matrix, Skills mastery matrix, Slip and Guess vectors\} or \{Number of skills, Items and students\}. Figure~\ref{Line_Conj_Pars} shows the hierarchical structure of the required parameters for linear conjunctive model. This graph can also be extended to other models. 
+For some of parameters we can use default values but some are mandatory, such as number of skills. Therefore based on the hierarchical structure among parameters of a model we can define sets of sufficient parameters to generate data based on a model. Due to this structure there are different combinations of parameters that can generate a synthetic data. For example, a synthetic dataset based on DINA can be generated with \{Q-matrix, Skills mastery matrix, Slip and Guess vectors\} or \{Number of skills, Items and students\}. Figure~\ref{Line_Conj_Pars} shows the hierarchical structure of the required parameters for linear conjunctive model. This graph can also be extended to other models. 
 
 \begin{figure}[ht]
 \centering
@@ -426,4 +426,4 @@ For some of parameters we can use default values but some are mandatory such as 
 \label{Line_Conj_Pars}
 \end{figure}
 
-There exist some intermediate steps between the lower level(simple) and higher level(more complex) parameters which can potentially result in a variance in the generated data. The goal of creating this package is to efficiently use the available parameters to generate data based on different models where potential conflicts and exceptions are covered. 
+There exists some intermediate steps between the lower level (simple) and higher level (more complex) parameters which can potentially result in a variance in the generated data. The goal of creating this package is to efficiently use the available parameters to generate data based on different models where potential conflicts and exceptions are covered. 

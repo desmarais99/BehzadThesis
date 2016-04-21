@@ -1,46 +1,55 @@
 \Chapter{PERFORMANCE SIGNATURE APPROACH}\label{sec:Approach}
 
-This chapter presents the method we introduce to determine the model that is closest to the ground truth for a given data set. We refer to this method as ``Performance Signature'' approach, or ``Signature'' approach for short. 
+This chapter presents the method we introduce to determine the model that is closest to the ground truth for a given dataset. We refer to this method as ``Performance Signature'' approach, or ``Signature'' approach for short. 
 
-The basic principles of the method is to define a vector space of model performances, namely the models described in chapter \ref{sec:RevLitt}. Then, synthetic data is created with each model, and each model's performances are measured over each of the synthetic data set. These measures represent a point in that space which is called \textit{Performance prototype}. The synthetic data point associated with that point represents the ground truth prototype, or the centroid for classification. Given a new data set, a \textit{Target Performance Vector} can be obtained. Then, we use a nearest neighbor approach with a correlation distance to identify the closest ground truth model.
+The basic principles of the method is to define a vector space of model performances, namely the models described in chapter \ref{sec:RevLitt}. Then, synthetic data is created with each model, and each model's performances are measured over each of the synthetic dataset. These measures represent a point in that space which is called \textit{Performance prototype}. The synthetic data point associated with that point represents the ground truth prototype, or the centroid for classification. Given a new dataset, a \textit{Target Performance Vector} can be obtained. Then, we use a nearest neighbor approach with a correlation distance to identify the closest ground truth model. Figure \ref{SignatureFrameworkNew} demonstrates these steps in the signature framework.
 
-Let us rephrase the method in more specific terms and consider a set of models, $\mathcal{M}$, and a vector~$\mathbf{p}$ of length~$|\mathcal{M}|$ that contains the performance of each model over a given data set. This \textit{Target Performance Vector} represents a point in the performance space. For each model $M \in \mathcal{M}$, we determine a \textit{Performance prototype} point in the performance space that corresponds to synthetic data generated with model~$M$. Then, for a given data set, we find the nearest synthetic data set point, using correlation as a distance, and consider the model behind it to be the ground truth.
+\begin{figure}[h]
+\centering
+{\includegraphics[trim=1cm 10cm 1cm 1cm,scale=0.7]{images/Approach4.pdf}}
+\caption{Signature framework}
+\label{SignatureFrameworkNew}
+\end{figure}
+
+
+Let us rephrase the method in more specific terms and consider a set of models, $\mathcal{M}$, and a vector~$\mathbf{p}$ of length~$|\mathcal{M}|$ that contains the performance of each model over a given dataset. This \textit{Target Performance Vector} represents a point in the performance space. For each model $M \in \mathcal{M}$, we determine a \textit{Performance prototype} point in the performance space that corresponds to synthetic data generated with model~$M$. Then, for a given dataset, we find the nearest synthetic dataset point, using correlation as a distance, and consider the model behind it to be the ground truth. Next section provides practical examples of this framework.
 
 
 The rest of the chapter goes into more details about the method.
 
 \section{Model fit in a vector space framework}
 
-The performance data in table~\ref{tab:vectorspace} will serve here to explain the method with a concrete example. In this table, the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic data sets generated with the same models. A seventh ``model'' named \textit{expected} (section~\ref{sec:basel-expect-pred}) and a seventh data set named \textit{random} (random results that constrained to reflect the target data set parameters such as item and student success rate distribution) are added for better comparison purpose. 
+The performance data in table~\ref{tab:vectorspace} will serve here to explain the method with a concrete example. In this table, the predictive accuracy of the 6~models reviewed in chapter~\ref{sec:RevLitt} is reported against 6~synthetic datasets generated with the same models. A seventh ``model'' named \textit{expected} (section~\ref{sec:basel-expect-pred}) and a seventh dataset named \textit{random} (random results that constrained to reflect the target dataset parameters such as item and student success rate distribution) are added for better comparison purpose. 
 
 \newcolumntype{d}[1]{D{.}{.}{#1}} % not used
 
 \begin{table}[ht]
 \caption{Vector space of accuracy performances}\label{tab:vectorspace}
 \centering
-\begin{tabular}{lccccccc}
-  \toprule
-  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Synthetic data set }\tablefootnote{Note that the Synthetic datasets are generated based on different models. Namely, IRT means that the ground truth of the generated dataset assumed to be IRT model}} \\
+\begin{tabular}{lcccccccc}
+\cline{1-9}
+  \multicolumn{1}{c}{\multirow{2}{*}{\textbf{Model}}} & \multicolumn{7}{c}{\textbf{Performance prototype }} & \multicolumn{1}{c}{\multirow{2}{*}{\textbf{\textcolor{red}{Target}}}}\\
   \cline{2-8}
-  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{Linear .Conj}} & \multicolumn{1}{c}{{Linear .Comp}} \\ 
-  \hline
-  \textit{Expected} & \textbf{0.75} & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 \\ 
-  POKS & 0.75 & \textbf{0.94} & 0.94 & 0.81 & 0.81 & 0.90 & 0.94 \\ 
-  IRT & 0.75 & 0.91 & \textbf{0.95} & 0.73 & 0.73 & 0.79 & 0.89 \\ 
-  DINA & 0.75 & 0.77 & 0.81 & \textbf{1.00} & 0.65 & \textbf{0.98} & 0.89 \\ 
-  DINO & 0.75 & 0.63 & 0.56 & 0.66 & \textbf{1.00} & 0.68 & 0.91 \\ 
-  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58 \\ 
-  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & \textbf{0.98} \\ 
-  \bottomrule
+  & \multicolumn{1}{c}{{\textit{Random}}} & \multicolumn{1}{c}{{POKS}} & \multicolumn{1}{c}{{IRT}} & \multicolumn{1}{c}{{DINA}} & \multicolumn{1}{c}{{DINO}} & \multicolumn{1}{c}{{L.Conj.}} & \multicolumn{1}{c}{{L.Comp.}} &\\ 
+\cline{1-9}
+  \textit{Expected} & \textbf{0.75} & 0.91 & 0.90 & 0.72 & 0.72 & 0.78 & 0.93 & \textcolor{red}{0.43} \\ 
+  POKS & 0.75 & \textbf{0.94} & 0.94 & 0.81 & 0.81 & 0.90 & 0.94  & \textcolor{red}{0.75}\\ 
+  IRT & 0.75 & 0.91 & \textbf{0.95} & 0.73 & 0.73 & 0.79 & 0.89  & \textcolor{red}{0.68}\\ 
+  DINA & 0.75 & 0.77 & 0.81 & \textbf{1.00} & 0.65 & \textbf{0.98} & 0.89  & \textcolor{red}{0.93}\\ 
+  DINO & 0.75 & 0.63 & 0.56 & 0.66 & \textbf{1.00} & 0.68 & 0.91  & \textcolor{red}{0.60}\\ 
+  NMF.Conj & 0.75& 0.59 & 0.53 & 0.95 & 0.65 & 0.97 & 0.58  & \textcolor{red}{0.80}\\ 
+  NMF.Comp & 0.75 & 0.76 & 0.79 & 0.59 & 0.93 & 0.70 & \textbf{0.98}  & \textcolor{red}{0.70}\\ 
+\cline{1-9}
 \end{tabular}
 \end{table}
 
 
-As we can expect, the diagonal (in bold face, except for one, corresponding to the match between the underlying synthetic model and the model performance) generally displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data. This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth. However, this is not always the case. In this particular example, the DINA model shows a better performance over the Linear Conj.\ data set, whereas this data set's corresponding model is the NMF Conj. 
 
-The principle of the proposed approach is to use the whole column of performance as a vector to determine the closest model to the ground truth. In that respect, if columns are considered as vectors in the space of dimensions created by model performances, we can use a similarity measure to determine the closest ground truth (or a distance measure if we consider the columns as a point in space).
+As we can expect, the diagonal (in bold face, except for one, corresponding to the match between the underlying synthetic model and the model performance) generally displays the best performance since it corresponds to the alignment of the model and the ground truth behind the data. This confirms the intuition behind the usual strategy of assuming the best performer is the model behind the ground truth. However, this is not always the case. In this particular example, the DINA model shows a better performance over the Linear Conj.\ dataset, whereas this dataset's corresponding model is the NMF Conj. 
 
-The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models. The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models. In turn, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single data set at hand.
+The principle of the proposed approach is to use the whole column of performance as a vector to determine the closest model to the ground truth of target performance vector. In that respect, if columns are considered as vectors in the space of dimensions created by model performances, we can use a similarity measure to determine the closest ground truth to the target performance vector (or a distance measure if we consider the columns as a point in space).
+
+The advantage of this approach is that it does not rely on a single performance value to determine the goodness of fit, but instead on a set of performances over different models. The hypothesis is that this set of performances provides a more reliable measure of the goodness of fit of a set of models. In turn, we assume that this measure is more likely to indicate which model will perform better in general, as opposed to which models performs the best in the case of the single dataset at hand.
 
 The approach can be considered as a means to avoid a kind of local minimum, considering the best performer as a good indicator of the ground truth, but not a perfect one. Indeed, table~\ref{tab:vectorspace} suggests that aligning the model with the ground truth does yield the best performance except for one case, but we will show more examples later that there are exceptions and that the proposed approach is better able to avoid these exceptions that would lead to a wrong conclusion if we were to rely on the best performer approach.
 
@@ -51,7 +60,7 @@ Let us get back to the research questions and design implementation of experimen
 \begin{enumerate}
 \item What is the \textit{performance vector} of student skills assessment models over real and over synthetic data created using the same models?
 \begin{itemize}
-\item Experiment 1: Predictive performance of models over real and synthetic data sets: In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real data sets. It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The output of this experiment is the \textit{Performance vector} or the \textit{Performance signature} of a dataset.
+\item Experiment 1: Predictive performance of models over real and synthetic datasets: In a first experiment, we focus on showing the performance of all models described in chapter \ref{sec:RevLitt} over synthetic and real datasets. It provides an overview of the predictive performance of each model across the different synthetic and real datasets. The output of this experiment is the \textit{Performance vector} or the \textit{Performance signature} of a dataset.
 \end{itemize}
 \item Is the \textit{performance vector} unique to each synthetic data type (data from the same ground truth model)?
 \begin{itemize}
@@ -64,14 +73,14 @@ Let us get back to the research questions and design implementation of experimen
 \item How does the method compare with the standard practice of using the model with the best performance?
 \begin{itemize}
 
-\item Experiment 4: Nearest neighbor vs. best performer classification: Assume that the measure for the goodness of fit in experiment 3 is a good indicator of model fit for synthetic data. In a last experiment we want to evaluate the ability of signature approach to identify the ground truth model on synthetic data and also compare the results with the simple best performer approach. In fact, we want to test the generality of the approach by classifying data sets with different data specific parameters in the \textit{performance vector} space. 
+\item Experiment 4: Nearest neighbor vs. best performer classification: Assume that the measure for the goodness of fit in experiment 3 is a good indicator of model fit for synthetic data. In a last experiment we want to evaluate the ability of signature approach to identify the ground truth model on synthetic data and also compare the results with the simple best performer approach. In fact, we want to test the generality of the approach by classifying datasets with different data specific parameters in the \textit{performance vector} space. 
 
-To validate the approach, we need to rely on synthetic data for which we know the underlying ground truth model. A matrix is created with data sets that are generated from the different models, and each model performance is measured through a cross validation process (using experiment 1). This matrix allows us to classify a data set of unknown ground truth according to the nearest neighbor approach (using experiment 3). Finally we compare these results with the best performer classification results.
+To validate the approach, we need to rely on synthetic data for which we know the underlying ground truth model. A matrix is created with datasets that are generated from the different models, and each model performance is measured through a cross validation process (using experiment 1). This matrix allows us to classify a dataset of unknown ground truth according to the nearest neighbor approach (using experiment 3). Finally we compare these results with the best performer classification results.
 
 \end{itemize}
 \end{enumerate}
 
-\subsection{Experiment 1: Predictive performance of models over real and synthetic data sets}
+\subsection{Experiment 1: Predictive performance of models over real and synthetic datasets}
 \label{Exp1:NO}
 The performance of each model is assessed on the basis of 10-folds cross-validation. The training set is used to estimate model parameters that are later used in for the test set. For each test set, a model is fed with a set of item outcomes of a student, called the observed set, and the remaining items are the predicted, or inferred ones. The breakdown of the data for cross-validation is illustrated in figure~\ref{figMethod}. 
 
@@ -85,18 +94,18 @@ The performance of each model is assessed on the basis of 10-folds cross-validat
 
 For each dataset there exists a training set that contains 9 folds and a test set, which represents a single fold. Samples are assigned randomly to each fold and this setting is the same across all predictive models for each run. Since all items are presented in the training set, then we can estimate the parameters that are related to items to be used in the test set. 
 
-For other parameters that are related to students we need to divide the test set into an observed and inferred set. From the observed set we can estimate these parameters. Obviously, the number of observed items is an important factor that can affect the predictive performance and consequently it can change the performance vector. Consider a set of total items for a test outcome, $\mathcal{I}$, and a subset of randomly selected items to be observed which are fed to the model, $\mathcal{I}_o$, consequently the remaining subset are target items to predict, $\mathcal{I}_t = \mathcal{I}\setminus\mathcal{I}_o$. In order to cover different number of observed items in the predictive performance of a model over a dataset, we report the average of performances with four different numbers for observed items:
+For other parameters that are related to students we need to divide the test set into an observed and inferred set. From the observed set we can estimate these parameters. Obviously, the number of observed items is an important factor that can affect the predictive performance and consequently it can change the performance vector. Given a test outcome, $D$, with a set of total items, $\mathcal{I}$, and a subset of randomly selected items to be observed which are fed to the model, $\mathcal{I}_o$, consequently the remaining subset are target items to predict, $\mathcal{I}_t = \mathcal{I}\setminus\mathcal{I}_o$. In order to cover different number of observed items in the predictive performance of a model over a dataset, we report the average of performances with four different numbers for observed items:
 
 \begin{equation}
-P = \frac{\sum_{i = 1}^{4}{P(O_{q_i})}}{4}
+P = \frac{\sum_{i = 1}^{4}{P(D_{q_i})}}{4}
 \label{Eq:Overal-performance}
 \end{equation} 
 
- where $P$ is the average performance of a model over dataset~$O$; and $q_i$ varies between the 3-quantiles (tertiles) of natural numbers in the range of $5$ to $(|\mathcal{I}|-1)$; and $P(O_{q_i})$ is the performance of a model with $q_i$ observed items.
+ where $P$ is the average performance of a model over dataset~$D$; and $q_i$ varies between the 3-quantiles (tertiles) of natural numbers in the range of $5$ to $(|\mathcal{I}|-1)$; and $P(O_{q_i})$ is the performance of a model with $q_i$ observed items.
 
 The observation set, $\mathcal{I}_o$, is chosen to cover all items in the item set $\mathcal{I}$. For example, with $|\mathcal{I}| = 20$ and $|\mathcal{I}_o| = 5$ we randomly divide $\mathcal{I}$ into $4$ subsets of observable items while the union of them recovers all items in $\mathcal{I}$. Consider $\mathcal{I}_o^n$ with $n$ items to be observed, there are ${|\mathcal{I}|\choose n}$ combinations to obtain this subset from $\mathcal{I}$. Let us name $i^{th}$ possibility as $\mathcal{I}_{o_i}^n$. Therefore:
 \begin{equation}
-P(O_n) = \frac{\sum_{j = 1}^{|\mathcal{I}|\choose n}{P(\mathcal{I}_{o_j}^n)}}{{|\mathcal{I}|\choose n}}
+P(D_n) = \frac{\sum_{j = 1}^{|\mathcal{I}|\choose n}{P(D_{\mathcal{I}_{o_j}^n})}}{{|\mathcal{I}|\choose n}}
 \label{Eq:Sub-Performance}
 \end{equation}
 
@@ -149,9 +158,9 @@ In this experiment we want to examine the effect of data specific parameters on 
 
 \subsection{Experiment 3: Model selection based on \textit{performance vector} classification}
 \label{Sigapproach-measure}
-This experiment essentially introduces the ``signature'' approach. By the assumption that previous experiment proves that the uniqueness characteristic of synthetic data signatures makes it easy to identify the ground truth and also there exists some similarity between the pattern of \textit{performance signature} of synthetic and real datasets (chapter \ref{sec:SIGNATURE} explains these results). Hence we can define a measure for the similarity of a synthetic generated dataset and a real one given a set of candidate models. Given that our objective is to determine the ground truth of a given data set, we will borrow data specific parameters from this data set to generate the synthetic data. Further details on data generation are given in chapter~\ref{sec:Syn}. 
+This experiment essentially introduces the ``signature'' approach. By the assumption that previous experiment proves that the uniqueness characteristic of synthetic data signatures makes it easy to identify the ground truth and also that there exists some similarity between the pattern of \textit{performance signature} of synthetic and real datasets (chapter \ref{sec:SIGNATURE} explains these results). Hence we can define a measure for the similarity of a synthetic generated dataset and a real one given a set of candidate models. Given that our objective is to determine the ground truth of a given dataset, we will borrow data specific parameters from this dataset to generate the synthetic data. Further details on data generation are given in chapter~\ref{sec:Syn}. 
 
-As explained before, signature approach search for the nearest neighbor of the target \textit{performance vector} among the \textit{performance prototypes}. The principal of this search is to find the closest \textit{performance prototype} to the \textit{target performance vector} in the performance space. Since this search is in a hyper space we used a linear discriminant approach which is the nearest neighbor classifier. This approach essentially splits the space into sub-spaces with defined surfaces. However, there exist other approaches to define a surface such as SVM \citep{cortes1995support,suykens2002least}, single layer neural network \citep{lippmann1987introduction} or LDA \citep{mclachlan2004discriminant,scholkopft1999fisher}. We do not directly define any surface in the performance space but we just measure the closest neighbor. In this experiment we used Pearson correlation coefficient as a measure of similarity to find the nearest neighbor.
+As explained before, signature approach search for the nearest neighbor of the target \textit{performance vector} among the \textit{performance prototypes}. The principle of this search is to find the closest \textit{performance prototype} to the \textit{target performance vector} in the performance space. Since this search is in a hyper space we used a linear discriminant approach which is the nearest neighbor classifier. This approach essentially splits the space into sub-spaces with defined surfaces. However, there exist other approaches to define a surface such as SVM \citep{cortes1995support,suykens2002least}, single layer neural network \citep{lippmann1987introduction} or LDA \citep{mclachlan2004discriminant,scholkopft1999fisher}. We do not directly define any surface in the performance space but we just measure the closest neighbor. In this experiment we used Pearson correlation coefficient as a measure of similarity to find the nearest neighbor.
 
 There are two approaches to search for the nearest neighbor in this space:
 \begin{itemize}
